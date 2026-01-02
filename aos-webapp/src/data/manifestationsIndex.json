@@ -1,0 +1,114 @@
+{
+  "generics": {
+    "Primal Energy": [
+      "Burning Head",
+      "Icy Shackles",
+      "Emerald Lifeswarm",
+      "Ravenak's Gnashing Jaws"
+    ],
+    "Morbid Conjuration": [
+      "Purple Sun of Shyish",
+      "Suffocating Gravetide",
+      "Lauchon the Soulseeker",
+      "Soulsnare Shackles"
+    ],
+    "Aetherwrought Machineries": [
+      "Chronomantic Cogs",
+      "Quicksilver Swords",
+      "Umbral Spellportal"
+    ],
+    "Twilit Sorceries": [
+      "Geminids of Uhl-Gysh",
+      "Malevolent Maelstrom",
+      "Prismatic Palisade"
+    ],
+    "Forbidden Power": [
+      "Horrorghast",
+      "Lauchon the Soulseeker",
+      "Shards of Valagharr",
+      "Soulsnare Shackles"
+    ],
+    "Krondspine": [
+      "Krondspine Incarnate of Ghur"
+    ]
+  },
+  "factions": {
+    "khorne": [
+      "Hexgorger Skulls",
+      "Wrath-Axe"
+    ],
+    "nurgle": [
+      "Feculent Gnarlmaw"
+    ],
+    "skaven": [
+      "Vermintide"
+    ],
+    "slaanesh": [
+      "Dreadful Visage",
+      "Mesmerising Mirror"
+    ],
+    "slaves": [
+      "Darkfire Daemonrift",
+      "Eightfold Doom-Sigil",
+      "Realmscourge Rupture"
+    ],
+    "tzeentch": [
+      "Daemonic Simulacrum",
+      "Tome of Eyes"
+    ],
+    "flesheater": [
+      "Cadaverous Barricade",
+      "Chalice of Ushoran"
+    ],
+    "nighthaunt": [
+      "Shyish Reaper",
+      "Vault of Souls"
+    ],
+    "ossiarch": [
+      "Bone-tithe Shrieker",
+      "Nightmare Predator"
+    ],
+    "soulblight": [
+      "Cursed Sepulchre",
+      "Hand of Nagash"
+    ],
+    "gloomspite": [
+      "Malevolent Moon",
+      "Mork’s Mighty Mushroom",
+      "Scuttletide"
+    ],
+    "ironjawz": [
+      "Foot of Gork",
+      "Morkspit Marsh"
+    ],
+    "kruleboyz": [
+      "Foot of Gork",
+      "Morkspit Marsh"
+    ],
+    "daughters of khaine": [
+      "Bladewind"
+    ],
+    "fyreslayers": [
+      "Runic Fyrewall",
+      "Zharrgron Flame-spitter"
+    ],
+    "idoneth": [
+      "Abyssal Tendril"
+    ],
+    "kharadron": [
+      "Auto-Endrin"
+    ],
+    "lumineth": [
+      "Hyshian Twinstones",
+      "Sanctum of Amyntok"
+    ],
+    "stormcast": [
+      "Celestian Vortex",
+      "Dais Arcanum"
+    ],
+    "sylvaneth": [
+      "Gladewyrm",
+      "Vengeful Skullroot"
+    ]
+  }
+}

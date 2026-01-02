@@ -1,0 +1,492 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+body {
+  font-size: 16px; /* base comfortable */
+}
+
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-title {
+  font-size: 1.25rem; /* plus lisible sur mobile */
+}
+
+@media (max-width: 768px) {
+  h1, h2, h3 {
+    font-size: 1.2rem;
+  }
+
+  .list-group-item {
+    font-size: 0.9rem;
+  }
+}
+
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+a {
+  color: #9ecbff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #cfe4ff;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.container {
+  max-width: 1100px;
+}
+
+/* =========================================================
+   BOOTSTRAP OVERRIDES (DARK)
+========================================================= */
+
+.list-group-item {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #2c2c2c;
+}
+
+.list-group-item:hover {
+  background-color: #2a2a2a;
+}
+
+.card {
+  background-color: #1c1c1c;
+  border: 1px solid #2c2c2c;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.card-header {
+  background-color: #222;
+  border-bottom: 1px solid #2c2c2c;
+  font-weight: 600;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+/* =========================================================
+   WARSCROLL CONTAINER (EFFET CARTE)
+========================================================= */
+
+.wsBody {
+  background-color: #1b1b1b;
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+.wTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.wTable th,
+.wTable td {
+  border: 1px solid #2f2f2f;
+  padding: 0.5rem;
+  color: #e0e0e0;
+}
+
+/* IMPORTANT :
+   On n’écrase PAS les bgcolor des abilities */
+.wTable td,
+.wTable th {
+  background-color: transparent;
+}
+
+.wsTable tr.wsHeaderRow {
+    background-color: #666 !important;
+}
+
+.wsCell, .wsHeaderCell {text-align: center;}
+
+/* =========================================================
+   ABILITIES (bgcolor RESPECTÉ)
+========================================================= */
+
+.abHeader {
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.abBody {
+  background-color: #1f1f1f;
+  border-radius: 0 0 12px 12px;
+  padding: 1rem;
+  border: 1px solid #2c2c2c;
+  margin-bottom: 1rem;
+  color: #dddddd;
+}
+
+/* =========================================================
+   KEYWORDS
+========================================================= */
+
+.wsKeywordHeader {
+  background-color: #222 !important;
+  color: #ffffff;
+}
+
+.wsKeywordLine1,
+.wsKeywordLine2 {
+  background-color: #1b1b1b;
+  color: #dddddd;
+}
+
+/* =========================================================
+   COLUMNS LAYOUT (AoS)
+========================================================= */
+
+.Columns2_AoS.row {
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+/* uniquement les enfants DIRECTS */
+.Columns2_AoS.row > .BreakInsideAvoid {
+  background-color: #1c1c1c;
+  border: 1px solid #2c2c2c;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+/* =========================================================
+   TEXT & FLUFF
+========================================================= */
+
+.ShowFluff {
+  color: #bbbbbb;
+  font-style: italic;
+}
+
+.redfont {
+  color: #ff6b6b;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-secondary {
+  background-color: #2c2c2c;
+  border-color: #3a3a3a;
+}
+
+.btn-secondary:hover {
+  background-color: #3a3a3a;
+}
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+img {
+  max-width: 100%;
+}
+
+.tooltip,
+.tooltipstered {
+  color: #9ecbff;
+}
+
+/* =========================================================
+   SCROLLBAR (OPTIONNEL)
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.wsDataCell_short {display: none !important;}
+
+.wsKeywordLine1, .wsKeywordLine2 {
+    background-color: #666666;
+    color: #dddddd;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item-action:hover {
+  background-color: #2b2b2b;
+  color: #f5c77a;
+}
+
+.abKeywords {
+    border: 1px solid #666;
+    margin-top: 1rem;
+    color: #FFF;
+}
+.abKeywords td.abHeader {
+    border-radius: 0;
+    width: 130px;
+}
+.abKeywordsBodyText {
+    width: 100%;
+    padding-left: 1rem;
+    background-color: transparent;
+}
+
+.wsDataCell_long.wsBorderN_.dsColorFrOM {
+    width: 100% !important;
+}
+
+/* Par défaut : td normal */
+td[data-colspan-mobile] {
+  /* desktop normal */
+  colspan: auto;
+}
+
+/* Mobile / tablette */
+@media (max-width: 992px) {
+  td[data-colspan-mobile] {
+    display: table-cell; /* s'assure que c'est visible */
+    colspan: 6; /* pour indiquer qu'il doit prendre toute la largeur */
+    width: 100%;
+  }
+  .wTable th, .wTable td {
+    border: 1px solid #2f2f2f;
+    padding: 0.22rem;
+    color: #e0e0e0;
+    }
+    li.nav-item .d-block {
+    width: 60px !important;
+    height: 60px !important;
+    }
+}
+
+.abBody .kwb {
+    font-weight: bold;
+    border-bottom: 1px dashed;
+}
+
+li.nav-item .d-block {
+    width: 80px;
+    height: 80px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex !important;
+    text-align: center;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #666;
+    margin-bottom: .5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+li.nav-item .d-block.save {
+    background-color: rgb(40, 127, 66);
+    border: 2px dashed rgb(33, 255, 33);
+    color: white !important;
+}
+
+li.nav-item .d-block.ward {
+    background-color: rgb(127, 40, 40);
+    border: 2px dashed rgb(255, 33, 33);
+    color: white !important;
+}
+
+.abBody:has(+ .abKeywords) {
+  margin-bottom: 0 !important;
+  border-radius: 0 !important;
+}
+
+.abKeywords {margin-top: 0 !important;}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.breadcrumb-item.active {
+    color: #666;
+}
+
+.wsDescription {
+    font-size: 0.825rem;
+    color: #888;
+    font-weight: 500 !important;
+}
+.btn:hover {text-decoration: none !important;}
+.btn-primary {
+    background-color: blueviolet;
+    border-color: blueviolet;
+}
+.btn-primary:hover {
+    background-color: rgb(162, 72, 246);
+    border-color: blueviolet;
+    text-decoration: none;
+}
+.btn-outline-primary {
+    border-color: blueviolet;
+    color: white;
+}
+.btn-outline-primary:hover {
+    background-color: rgb(162, 72, 246);
+    border-color: blueviolet;
+    text-decoration: none;
+}
+.text-primary {color: blueviolet;}
+.btn-warning {
+    background-color: rgb(226, 119, 43);
+    border-color: rgb(226, 119, 43);
+}
+.btn-warning:hover {
+    background-color: rgb(255, 139, 57);
+    border-color: rgb(226, 119, 43);
+    text-decoration: none;
+}
+.accordion {
+    --bs-accordion-color: #f7f7f7;
+    --bs-accordion-bg: #2a2a2a;
+}
+.accordion-button {color: #f7f7f7;}
+.accordion-item {border-color: #2a2a2a;}
+
+.abCommandPoints {
+    position: relative;
+    left: -43px;
+    top: -13px;
+    height: 56px;
+    width: 47px;
+    background-image: url(/img/abCommandPoints1.png)
+}
+
+.abCommandPointsN {
+    text-align: center;
+    position: relative;
+    left: 0px;
+    top: 7px;
+    font-size: 1.95em;
+    font-weight: bold;
+    color: #101010;
+}
+
+.abPrayerPoints {
+    position: relative;
+    left: -46px;
+    top: -7px;
+    height: 61px;
+    width: 55px;
+    background-image: url(/img/abPrayerPoints.png)
+}
+
+.abPrayerPointsN {
+    text-align: center;
+    position: relative;
+    left: -2px;
+    top: 9px;
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #dadada;
+}
+
+.abSpellPoints {
+    position: relative;
+    left: -47px;
+    top: -4px;
+    height: 57px;
+    width: 57px;
+    background-image: url(/img/abSpellPoints1.png)
+}
+
+.abSpellPointsN {
+     text-align: center;
+    position: relative;
+    left: 0px;
+    top: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #dadada;
+}
+
+.abCommandPoints {
+    position: relative;
+    left: -41px;
+    top: -2px;
+    height: 56px;
+    width: 47px;
+    background-image: url(/img/abCommandPoints1.png)
+}
+
+.abCommandPointsN {
+    text-align: center;
+    position: relative;
+    left: -1px;
+    top: 7px;
+    font-size: 1.65em;
+    font-weight: bold;
+    color: #101010;
+}
+
+.badge.bg-primary {
+    background-color: blueviolet !important;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-color: black;
+    border-radius: 5px;
+    width: 22px;
+}
+.carousel-control-next, .carousel-control-prev {
+    opacity: 1 !important;
+}
+
+@media (max-width: 768px) {
+  .wsKeywordHeader {
+    display: none !important;
+  }
+}

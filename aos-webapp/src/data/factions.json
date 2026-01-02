@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Lumineth",
+    "category": "Order"
+  },
+  {
+    "name": "Stormcast Eternal",
+    "category": "Order"
+  },
+  {
+    "name": "Sylvaneth",
+    "category": "Order"
+  },
+  {
+    "name": "Seraphon",
+    "category": "Order"
+  },
+  {
+    "name": "Kharadron Overlords",
+    "category": "Order"
+  },
+  {
+    "name": "Skaven",
+    "category": "Destruction"
+  },
+  {
+    "name": "Ogor Mawtribes",
+    "category": "Destruction"
+  },
+  {
+    "name": "Gloomspite Gitz",
+    "category": "Destruction"
+  },
+  {
+    "name": "Orruk Warclans",
+    "category": "Destruction"
+  },
+  {
+    "name": "Khorne",
+    "category": "Chaos"
+  },
+  {
+    "name": "Tzeentch",
+    "category": "Chaos"
+  },
+  {
+    "name": "Nurgle",
+    "category": "Chaos"
+  },
+  {
+    "name": "Slaanesh",
+    "category": "Chaos"
+  },
+  {
+    "name": "Nighthaunt",
+    "category": "Death"
+  },
+  {
+    "name": "Ossiarch Bonereapers",
+    "category": "Death"
+  },
+  {
+    "name": "Cities of Sigmar",
+    "category": "Order"
+  },
+  {
+    "name": "Daughters of Khaine",
+    "category": "Order"
+  },
+  {
+    "name": "Sons of Behemat",
+    "category": "Destruction"
+  },
+  {
+    "name": "Skaven",
+    "category": "Chaos"
+  },
+  {
+    "name": "Flesh-eater Courts",
+    "category": "Death"
+  }
+]
