@@ -1,0 +1,77 @@
+{
+  "kharadron": {
+    "all_enhancements": ["SHREWD OPPORTUNIST", "VOIDSTONE ORB", "ENTRENCHMENT EXPERT", "TERRITORIAL TRAILBLAZER", "THORGSSON’S UNIVERSAL AUTOMATON ACTUATOR", "TIRELESS PURPOSE", "MASTER OF DISCIPLINE", "AERODYNAMISM", "ALL-OUT DEFENCE"]
+  },
+  "seraphon": {
+    "all_enhancements": ["BEING OF THE STARS", "COATL FAMILIAR"]
+  },
+  "daughtersofkhaine": {
+    "all_enhancements": ["MASTER OF POISONS", "KHAINITE PENDANT", "PROSELYTE OF MORAI-HEG"]
+  },
+  "citiesofsigmar": {
+    "all_enhancements": ["MASTER OF BALLISTICS", "SACRED TOME", "TIRELESS PURPOSE"]
+  },
+  "lumineth": {
+    "all_enhancements": ["MASTERFUL TACTICIAN", "PHOENIX STONE"]
+  },
+  "sylvaneth": {
+    "all_enhancements": ["RADIANT SPIRIT", "SEED OF REBIRTH", "SAPWOOD LEADER"]
+  },
+  "fyreslayers": {
+    "all_enhancements": ["BLOOD OF THE BERZERKER", "ASH-CLOUD RUNE", "RAISED AROUND BEASTS", "TIRELESS PURPOSE"]
+  },
+  "idoneth": {
+    "all_enhancements": ["FORM OF THE FANGMORA", "ARMOUR OF THE CYTHAI", "PRODIGY OF THE ASYDRZOR", "SERVE THE ENCLAVE"]
+  },
+  "stormcast": {
+    "all_enhancements": ["SHOCK AND AWE", "NULL PENDANT", "CHAMPION OF URSRICHT", "FEARLESS FLIERS", "THEGN OF BELLICOS", "CORVEN LORD"]
+  },
+  "nighthaunt": {
+    "all_enhancements": ["RULER OF THE SPECTRAL HOSTS", "BRAZIER OF NAGASHIZZAR", "SILENT OVERSEER", "DAMNED VESSEL"]
+  },
+  "flesheater": {
+    "all_enhancements": ["STRONGER IN MADNESS", "THE SPLINTERED FEMUR", "LORD OF REVELRIES", "TIP OF THE KING’S LANCE", "MYSTIC SHIELD"]
+  },
+  "ossiarch": {
+    "all_enhancements": ["DIVERSIONARY TACTICS", "MARROWPACT", "PLUNDERER OF PARTS"]
+  },
+  "soulblight": {
+    "all_enhancements": ["LASH OF THE SIRE", "TERMINUS CLOCK", "RESTLESS TYRANT", "RING OF STRICKEN SOULS", "IMMORTAL DEDICATION", "KEEPER OF THE ROYAL MENAGERIE"]
+  },
+  "ironjawz": {
+    "all_enhancements": ["AN EYE FOR DA FIGHT", "TROPHY SKULLS", "TAKIN’ NAMES", "DA SNEAKY STAB-SLAB", "SOULKRUMPA", "TROPHY HUNTA", "OI! BACK TO IT!", "NORMAL MOVE"]
+  },
+  "ogor": {
+    "all_enhancements": ["GREAT GUTLORD", "GRUESOME TROPHIES", "PRIME GUTSERVER", "CHARGE"]
+  },
+  "sonsofbehemat": {
+    "all_enhancements": ["FURIOUS TEMPER", "AMBERBONE TOTEM", "I CAN DO THAT BETTER"]
+  },
+  "gloomspite": {
+    "all_enhancements": ["THE CLAMMY HAND", "THE CLAMMY COWL", "DA KING’S ADJUTANT", "MOONHONED SHIV", "STICK ’EM AND RUN", "GLAREFACE’S GRIN", "LOONSTONE TEEF"]
+  },
+  "kruleboyz": {
+    "all_enhancements": ["BACKSTABBA", "MORK’S EYE PEBBLE", "TAKIN’ NAMES", "DA SNEAKY STAB-SLAB", "GRIM DIET"]
+  },
+  "slaanesh": {
+    "all_enhancements": ["GLORY HOG", "ICON OF INFINITE EXCESS"]
+  },
+  "nurgle": {
+    "all_enhancements": ["GIFT OF FEBRILE FRENZY", "THE WITHERSTAVE"]
+  },
+  "tzeentch": {
+    "all_enhancements": ["ILLUSIONIST", "NINE-EYED TOME", "WYRDFLAME AEGIS"]
+  },
+  "slaves": {
+    "all_enhancements": ["FAVOURED OF THE PANTHEON", "INFERNAL PUPPET", "DREAD MARSHAL", "OATH OF KINSHIP", "CHARGE"]
+  },
+  "khorne": {
+    "all_enhancements": ["MAGICAL SCORN", "COLLAR OF CONTEMPT", "CROWNED IN BUTCHERY", "UNRIVALLED BATTLELUST"]
+  },
+  "skaven": {
+    "all_enhancements": ["SCURRY AWAY", "FOULHIDE", "HARBINGER OF THE GREAT ASCENDANCY", "PACK TACTICS"]
+  },
+  "helsmiths": {
+    "all_enhancements": ["SERVILE AUTOMATON", "SCROLL OF PETRIFICATION", "RUTHLESS OVERSSER", "RAGING ANIMUS"]
+  }
+}

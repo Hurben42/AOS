@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import warscrollsData from "../data/warscrolls.json";
-import Breadcrumb from "../components/Breadcrumb";
 
 export default function WarscrollDetail() {
   const { category, faction, warscrollSlug } = useParams();
@@ -57,6 +56,27 @@ export default function WarscrollDetail() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(foundWs.html, "text/html");
 
+    // 1. Supprime les images dans les tableaux d'armes
+    doc.querySelectorAll(".wsTable img").forEach(img => img.remove());
+
+    // 2. Remplace les liens <a> par des <span> avec bordure pointillée
+    doc.querySelectorAll("a").forEach(a => {
+      const span = doc.createElement("span");
+      span.innerHTML = a.innerHTML;
+      span.style.borderBottom = "1px dotted #666";
+      span.style.cursor = "default";
+      a.parentNode.replaceChild(span, a);
+    });
+
+    // 3. Formatage des aptitudes d'armes (badges jaunes + sauts de ligne)
+    doc.querySelectorAll(".wsWeaponAbility").forEach(el => {
+      el.classList.add("badge", "bg-warning", "text-dark", "me-1", "mb-1", "fw-bold");
+      const content = el.innerHTML;
+      if (content.includes(",")) {
+        el.innerHTML = content.split(",").join(",<br/>");
+      }
+    });
+
     const getTxt = (selector) => {
       const el = doc.querySelector(selector);
       return el ? el.textContent.trim() : null;
@@ -70,6 +90,7 @@ export default function WarscrollDetail() {
       ward: getTxt(".wsWard")
     });
 
+    // 4. Nettoyage des colonnes et éléments superflus
     doc.querySelectorAll(".wsTable tr").forEach((row) => {
       const firstCell = row.querySelector(".wsDataCell_long");
       if (firstCell) firstCell.remove();
@@ -96,7 +117,7 @@ export default function WarscrollDetail() {
       <div 
         className="fixed-top w-100 vh-100" 
         style={{ 
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.9)), url(${backgroundUrl})`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url(${backgroundUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
@@ -105,8 +126,7 @@ export default function WarscrollDetail() {
       />
 
       <div className="container pb-5 position-relative">
-        
-        <div className="mb-4">
+        <div className="mb-4 pt-3">
           <Link to={`/category/${category}/faction/${faction}`} className="btn btn-outline-light btn-sm mb-3 opacity-75 shadow-sm">
             ← Retour
           </Link>
@@ -115,13 +135,12 @@ export default function WarscrollDetail() {
           </h2>
         </div>
 
-        {/* Image de l'unité avec suppression du fond blanc par CSS */}
-        <div className="text-center mb-4 bg-white rounded-3 border border-3 border-warning overflow-hidden">
+        <div className="text-center mb-4 overflow-hidden bg-white border border-3 border-warning rounded-3">
           <img 
             src={`/img/units/${warscrollSlug}.jpg`} 
             alt={warscroll?.name}
-            className="img-fluid"
-            style={{ maxHeight: '180px', objectFit: 'cover', width: 'auto', transform: 'scale(1.7)' }}
+            className="img-fluid unit-image-blend"
+            style={{ maxHeight: '220px', objectFit: 'contain', transform: 'scale(1.2)' }}
             onError={(e) => e.target.style.display = 'none'} 
           />
         </div>
@@ -144,7 +163,7 @@ export default function WarscrollDetail() {
               <span className="d-block fs-4 fw-bold save">{profile.save}</span>
               <small className="text-secondary text-uppercase" style={{fontSize: '0.65rem'}}>Save</small>
             </li>
-            {profile.ward && (
+            {profile.ward && profile.ward !== "-" && (
               <li className="nav-item text-center text-white border-start border-secondary border-opacity-25">
                 <span className="d-block fs-4 fw-bold ward">{profile.ward}</span>
                 <small className="text-secondary text-uppercase" style={{fontSize: '0.65rem'}}>Ward</small>
@@ -153,7 +172,7 @@ export default function WarscrollDetail() {
           </ul>
         )}
 
-        <div className="warscroll-content card p-2 shadow-lg text-dark overflow-hidden rounded-4 border-0">
+        <div className="warscroll-content card p-3 shadow-lg text-dark overflow-hidden rounded-4 border-0">
           <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
         </div>
       </div>
@@ -162,13 +181,14 @@ export default function WarscrollDetail() {
         .blur-bg { backdrop-filter: blur(8px); }
         .save { color: #ffd700; }
         .ward { color: #00d4ff; }
-        .shadow-text { text-shadow: 2px 2px 8px rgba(0,0,0,0.9); }
-        .wsKeywordLine1 { background: black !important; color: white !important; padding: 10px !important; margin: 10px 0; font-weight: bold; text-transform: uppercase; border-radius: 4px; }
+        .shadow-text { text-shadow: 2px 2px 8px rgba(0,0,0,0.9); }        
+        .wsKeywordLine1 { background: black !important; color: white !important; padding: 10px !important; margin: 10px 0; font-weight: bold; text-transform: uppercase; border-radius: 4px; font-size: 0.8rem; }
         .wsAbilityTable { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-        .wsAbilityHeader { background: #444; color: #fff; padding: 5px; font-size: 0.8rem; }
-        .wsAbilityCell { padding: 8px; border: 1px solid #ddd; }
+        .wsAbilityHeader { background: #333; color: #fff; padding: 6px; font-size: 0.8rem; text-transform: uppercase; }
+        .wsAbilityCell { padding: 8px; border: 1px solid #dee2e6; font-size: 0.9rem; }
         .wsTable { width: 100%; margin-bottom: 1rem; }
-        .wsDataCell, .wsDataCell_short { padding: 5px; text-align: center; border: 1px solid #eee; }
+        .wsDataCell, .wsDataCell_short { padding: 8px; text-align: center; border: 1px solid #dee2e6; font-weight: bold; }
+        .abHeader { font-weight: bold; padding-bottom: 3px; display: block; text-transform: uppercase; color: #fff; }
       `}</style>
     </div>
   );

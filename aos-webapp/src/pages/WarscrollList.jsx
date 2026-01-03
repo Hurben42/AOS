@@ -46,7 +46,6 @@ export default function WarscrollList() {
         const kwLine = container.querySelector(".wsKeywordLine1")?.textContent.toUpperCase() || "";
         const primary = KEYWORD_ORDER.find(k => kwLine.includes(k));
         
-        // On n'ajoute QUE si un mot-clé de KEYWORD_ORDER est trouvé
         if (primary) {
           if (!groups[primary]) groups[primary] = [];
           groups[primary].push(ws);
@@ -78,7 +77,9 @@ export default function WarscrollList() {
       <div className="container mt-4 pb-5 position-relative">
         <Breadcrumb factionName={faction} displayFaction={realFactionKey} />
 
-        <h2 className="text-uppercase fw-bold text-white mb-4 shadow-text display-5 mt-3">{realFactionKey || faction}</h2>
+        <h2 className="text-uppercase fw-bold text-white mb-4 shadow-text display-5 mt-3">
+          {realFactionKey || faction}
+        </h2>
 
         <div className="card mb-5 bg-dark bg-opacity-75 border-secondary border-opacity-25 shadow-lg blur-bg">
           <div className="card-header bg-black text-white bg-opacity-50 fw-bold">📜 RÈGLES D'ARMÉE</div>
@@ -98,31 +99,50 @@ export default function WarscrollList() {
         </div>
 
         <div className="accordion" id="warscrollAccordion">
-          {Object.entries(factionInfos).map(([keyword, list]) => (
-            <div className="accordion-item bg-dark bg-opacity-75 border-secondary border-opacity-25 mb-2 blur-bg" key={keyword}>
-              <h2 className="accordion-header">
-                <button className="accordion-button collapsed bg-transparent text-white fw-bold" type="button" data-bs-toggle="collapse" data-bs-target={`#collapse-${keyword}`}>
-                  {keyword} <span className="badge bg-info ms-2 opacity-75">{list.length}</span>
-                </button>
-              </h2>
-              <div id={`collapse-${keyword}`} className="accordion-collapse collapse" data-bs-parent="#warscrollAccordion">
-                <div className="accordion-body p-0">
-                  <ul className="list-group list-group-flush">
-                    {list.map((ws) => (
-                      <li key={ws.slug} className="list-group-item bg-transparent text-white p-3 border-secondary border-opacity-10 position-relative">
-                        <Link to={`/category/${category}/faction/${faction}/warscroll/${ws.slug}`} className="text-white text-decoration-none fw-bold d-block stretched-link">
-                          {ws.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+          {Object.entries(factionInfos).map(([keyword, list]) => {
+            // Création d'un ID sans espace pour Bootstrap (ex: "WAR-MACHINE")
+            const safeId = keyword.replace(/\s+/g, "-");
+            
+            return (
+              <div className="accordion-item bg-dark bg-opacity-75 border-secondary border-opacity-25 mb-2 blur-bg" key={keyword}>
+                <h2 className="accordion-header">
+                  <button 
+                    className="accordion-button collapsed bg-transparent text-white fw-bold" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target={`#collapse-${safeId}`}
+                  >
+                    {keyword} <span className="badge bg-info ms-2 opacity-75">{list.length}</span>
+                  </button>
+                </h2>
+                <div 
+                  id={`collapse-${safeId}`} 
+                  className="accordion-collapse collapse" 
+                  data-bs-parent="#warscrollAccordion"
+                >
+                  <div className="accordion-body p-0">
+                    <ul className="list-group list-group-flush">
+                      {list.map((ws) => (
+                        <li key={ws.slug} className="list-group-item bg-transparent text-white p-3 border-secondary border-opacity-10 position-relative">
+                          <Link to={`/category/${category}/faction/${faction}/warscroll/${ws.slug}`} className="text-white text-decoration-none fw-bold d-block stretched-link">
+                            {ws.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
-      <style>{`.blur-bg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); } .shadow-text { text-shadow: 2px 2px 8px rgba(0,0,0,1); } .accordion-button:not(.collapsed) { background-color: rgba(13, 202, 240, 0.2) !important; color: white !important; } .accordion-button::after { filter: invert(1); }`}</style>
+      <style>{`
+        .blur-bg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); } 
+        .shadow-text { text-shadow: 2px 2px 8px rgba(0,0,0,1); } 
+        .accordion-button:not(.collapsed) { background-color: rgba(13, 202, 240, 0.2) !important; color: white !important; } 
+        .accordion-button::after { filter: invert(1); }
+      `}</style>
     </div>
   );
 }
