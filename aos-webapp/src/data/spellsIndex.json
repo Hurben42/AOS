@@ -1,0 +1,418 @@
+{
+  "factions": {
+    "helsmiths": {
+      "Lore of Infernal Power": [
+        {
+          "name": "HATEFUL FRACTURES",
+          "castingValue": "6"
+        },
+        {
+          "name": "ASHEN SMOG",
+          "castingValue": "7"
+        },
+        {
+          "name": "MOLTEN METAL",
+          "castingValue": "8"
+        }
+      ]
+    },
+    "nurgle": {
+      "Lore of Malignance": [
+        {
+          "name": "FLESHY ABUNDANCE",
+          "castingValue": "7"
+        },
+        {
+          "name": "CLOYING QUAGMIRE",
+          "castingValue": "7"
+        },
+        {
+          "name": "MAGNIFICENT BUBOES",
+          "castingValue": "7"
+        },
+        {
+          "name": "MYSTIC SHIELD",
+          "castingValue": "6"
+        }
+      ]
+    },
+    "skaven": {
+      "Lore of Ruin": [
+        {
+          "name": "SKITTERLEAP",
+          "castingValue": "6"
+        },
+        {
+          "name": "WITHER",
+          "castingValue": "6"
+        },
+        {
+          "name": "WARPGALE",
+          "castingValue": "6"
+        }
+      ]
+    },
+    "slaanesh": {
+      "Lore of Extravagance": [
+        {
+          "name": "SADISTIC SPITE",
+          "castingValue": "6"
+        },
+        {
+          "name": "OVERWHELMING ACQUIESCENCE",
+          "castingValue": "7"
+        },
+        {
+          "name": "PHANTASMAGORIA",
+          "castingValue": "5"
+        }
+      ]
+    },
+    "slaves": {
+      "Lore of the Damned": [
+        {
+          "name": "SPITE-TONGUE CURSE",
+          "castingValue": "5"
+        },
+        {
+          "name": "BINDING DAMNATION",
+          "castingValue": "7"
+        },
+        {
+          "name": "DAEMONIC SPEED",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "tzeentch": {
+      "Lore of Change": [
+        {
+          "name": "BOLT OF TZEENTCH",
+          "castingValue": "6"
+        },
+        {
+          "name": "FOLD REALITY",
+          "castingValue": "7"
+        },
+        {
+          "name": "TRANSFORMED TO SPAWN",
+          "castingValue": "7"
+        }
+      ],
+      "Lore of Fate": [
+        {
+          "name": "GLIMPSE THE FUTURE",
+          "castingValue": "7"
+        },
+        {
+          "name": "INFERNAL GATEWAY",
+          "castingValue": "6"
+        },
+        {
+          "name": "SHIELD OF FATE",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "flesheater": {
+      "Lore of Madness": [
+        {
+          "name": "CHARNEL FEAST",
+          "castingValue": "6"
+        },
+        {
+          "name": "DERANGED TRANSFORMATION",
+          "castingValue": "6"
+        },
+        {
+          "name": "MIASMA OF MADNESS",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "nighthaunt": {
+      "Lore of the Underworlds": [
+        {
+          "name": "FELL BLADES",
+          "castingValue": "6"
+        },
+        {
+          "name": "WRENCH SOULS",
+          "castingValue": "6"
+        },
+        {
+          "name": "CHAINS OF DEATH",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "ossiarch": {
+      "Lore of Ossian Sorcery": [
+        {
+          "name": "EMPOWER NADIRITE WEAPONS",
+          "castingValue": "5"
+        },
+        {
+          "name": "DRAIN VITALITY",
+          "castingValue": "7"
+        },
+        {
+          "name": "SHARD STORM",
+          "castingValue": "7"
+        }
+      ],
+      "Lore of Necrotheurgy": [
+        {
+          "name": "BOLSTER CREATION",
+          "castingValue": "5"
+        },
+        {
+          "name": "INVIGORATE THE RANKS",
+          "castingValue": "5"
+        },
+        {
+          "name": "SOUL-CLAIM",
+          "castingValue": "5"
+        }
+      ]
+    },
+    "soulblight": {
+      "Lore of Undeath": [
+        {
+          "name": "VILE TRANSFERENCE",
+          "castingValue": "7"
+        },
+        {
+          "name": "PRISON OF GRIEF",
+          "castingValue": "7"
+        },
+        {
+          "name": "WASTE AWAY",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "gloomspite": {
+      "Lore of the Clammy Dank": [
+        {
+          "name": "BAD PORTENTS",
+          "castingValue": "6"
+        },
+        {
+          "name": "SPORE MAWS",
+          "castingValue": "7"
+        },
+        {
+          "name": "THE HAND OF GORK",
+          "castingValue": "7"
+        }
+      ],
+      "Lore of Frazzlegit": [
+        {
+          "name": "BRIGHT FRIGHT",
+          "castingValue": "6"
+        },
+        {
+          "name": "GITSPEED",
+          "castingValue": "6"
+        },
+        {
+          "name": "GAZE OF GLAREFACE",
+          "castingValue": "6"
+        }
+      ]
+    },
+    "ironjawz": {
+      "Lore of the Weird": [
+        {
+          "name": "BASH ’EM LADZ!",
+          "castingValue": "6"
+        },
+        {
+          "name": "MIGHTY ’EADBUTT",
+          "castingValue": "6"
+        },
+        {
+          "name": "DA GREAT BIG GREEN HAND OF GORK",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "kruleboyz": {
+      "Lore of the Swamp": [
+        {
+          "name": "DA BLACK PIT",
+          "castingValue": "5"
+        },
+        {
+          "name": "CHOKING MIST",
+          "castingValue": "7"
+        },
+        {
+          "name": "MORK’S KUNNIN’",
+          "castingValue": "6"
+        }
+      ]
+    },
+    "ogor": {
+      "Lore of Maw-magic": [
+        {
+          "name": "TROGGOTH GUTS",
+          "castingValue": "5"
+        },
+        {
+          "name": "GREASY DELUGE",
+          "castingValue": "6"
+        },
+        {
+          "name": "BLOOD FEAST",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "citiesofsigmar": {
+      "Spells of the Collegiate Arcane": [
+        {
+          "name": "ELEMENTAL LIGHTNING",
+          "castingValue": "7"
+        },
+        {
+          "name": "SPEED OF THE TWIN-TAILED COMET",
+          "castingValue": "7"
+        },
+        {
+          "name": "CINDERCLOUD",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "daughtersofkhaine": {
+      "Lore of Shadows": [
+        {
+          "name": "STEED OF SHADOWS",
+          "castingValue": "5"
+        },
+        {
+          "name": "DOOMFIRE",
+          "castingValue": "7"
+        },
+        {
+          "name": "MINDRAZOR",
+          "castingValue": "8"
+        }
+      ]
+    },
+    "idoneth": {
+      "Lore of the Deeps": [
+        {
+          "name": "STEED OF TIDES",
+          "castingValue": "6"
+        },
+        {
+          "name": "COUNTER-CURRENT",
+          "castingValue": "7"
+        },
+        {
+          "name": "PRESSURE OF THE DEEP",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "lumineth": {
+      "Lore of Hysh": [
+        {
+          "name": "SPEED OF HYSH",
+          "castingValue": "5"
+        },
+        {
+          "name": "OVERWHELMING HEAT",
+          "castingValue": "7"
+        },
+        {
+          "name": "PROTECTION OF HYSH",
+          "castingValue": "8"
+        }
+      ],
+      "Lore of Prismatic Resonance": [
+        {
+          "name": "BEAM OF HYSH",
+          "castingValue": "6"
+        },
+        {
+          "name": "UNSEEN FORCE",
+          "castingValue": "6"
+        },
+        {
+          "name": "BEACONS OF PROTECTION",
+          "castingValue": "6"
+        }
+      ]
+    },
+    "seraphon": {
+      "Lore of Celestial Manipulation": [
+        {
+          "name": "MYSTICAL UNFORGING",
+          "castingValue": "6"
+        },
+        {
+          "name": "COMET’S CALL",
+          "castingValue": "7"
+        },
+        {
+          "name": "SPEED OF HUANCHI",
+          "castingValue": "6"
+        }
+      ],
+      "Lore of Primal Jungles": [
+        {
+          "name": "LIGHT OF CHOTEC",
+          "castingValue": "6"
+        },
+        {
+          "name": "THE EARTH TREMBLES",
+          "castingValue": "8"
+        },
+        {
+          "name": "EMPOWERED CELESTITE",
+          "castingValue": "7"
+        },
+        {
+          "name": "MYSTIC SHIELD",
+          "castingValue": "6"
+        }
+      ]
+    },
+    "stormcast": {
+      "Lore of the Storm": [
+        {
+          "name": "LIGHTNING BLAST",
+          "castingValue": "5"
+        },
+        {
+          "name": "THUNDERSHOCK",
+          "castingValue": "6"
+        },
+        {
+          "name": "STARFALL",
+          "castingValue": "7"
+        }
+      ]
+    },
+    "sylvaneth": {
+      "Lore of the Deepwood": [
+        {
+          "name": "TREESONG",
+          "castingValue": "6"
+        },
+        {
+          "name": "WRATHFUL SPIRITS",
+          "castingValue": "6"
+        },
+        {
+          "name": "THE DWELLERS BELOW",
+          "castingValue": "7"
+        }
+      ]
+    }
+  }
+}

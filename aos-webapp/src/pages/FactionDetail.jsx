@@ -3,30 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import Breadcrumb from "../components/Breadcrumb";
 
 const SECTION_CONFIG = {
-  "battle-traits": {
-    title: "Battle Traits",
-    keywords: ["BATTLE TRAITS", "ALLEGIANCE ABILITIES", "BATTLE TRAIT"],
-  },
-  "battle-formations": {
-    title: "Battle Formations",
-    keywords: ["BATTLE FORMATIONS", "BATTLE FORMATION", "TRIBE", "TEMPLE", "CITY"],
-  },
-  "heroic-traits": {
-    title: "Heroic Traits",
-    keywords: ["HEROIC TRAITS", "HEROIC TRAIT", "COMMAND TRAITS"],
-  },
-  "artefacts-of-power": {
-    title: "Artefacts of Power",
-    keywords: ["ARTEFACTS OF POWER", "ARTEFACT", "TREASURES", "RELICS"],
-  },
-  "spell-lore": {
-    title: "Spell Lore",
-    keywords: ["SPELL LORE", "SPELL", "LORE OF"],
-  },
-  "prayer-lore": {
-    title: "Prayer Lore",
-    keywords: ["PRAYER LORE", "PRAYER", "SCRIPTURES"],
-  },
+  "battle-traits": { title: "Battle Traits", keywords: ["BATTLE TRAITS", "ALLEGIANCE ABILITIES"] },
+  "battle-formations": { title: "Battle Formations", keywords: ["BATTLE FORMATIONS", "TRIBE", "TEMPLE"] },
+  "heroic-traits": { title: "Heroic Traits", keywords: ["HEROIC TRAITS", "COMMAND TRAITS"] },
+  "monstrous-traits": { title: "Monstrous Traits", keywords: ["MONSTROUS TRAITS"] },
+  "artefacts-of-power": { title: "Artefacts of Power", keywords: ["ARTEFACTS OF POWER", "ARTEFACT", "RELICS"] },
+  "spell-lore": { title: "Spell Lore", keywords: ["SPELL LORE", "SPELL", "LORE OF"] },
+  "prayer-lore": { title: "Prayer Lore", keywords: ["PRAYER LORE", "PRAYER", "SCRIPTURES"] },
+  "manifestation-lore": { title: "Manifestation Lore", keywords: ["MANIFESTATION LORE"] }
 };
 
 export default function FactionDetail() {
@@ -40,98 +24,97 @@ export default function FactionDetail() {
   useEffect(() => {
     if (!section) return;
 
-    // --- GESTION DES CHEMINS ---
     const getPaths = (f) => {
       const slug = f.toLowerCase();
-      // Cas particuliers basés sur vos fichiers fournis
-      if (slug.includes("cities of sigmar")) {
-        return { folder: "cities of sigmar", file: "citiesofsigmar" };
-      }
-      if (slug.includes("daughters of khaine")) {
-        return { folder: "daughters of khaine", file: "daughtersofkhaine" };
-      }
-      if (slug.includes("sons of behemat")) {
-        return { folder: "sons of behemat", file: "sonsofbehemat" };
-      }
-      // Cas par défaut (ex: skaven)
+      if (slug.includes("cities of sigmar")) return { folder: "cities of sigmar", file: "citiesofsigmar" };
+      if (slug.includes("daughters of khaine")) return { folder: "daughters of khaine", file: "daughtersofkhaine" };
+      if (slug.includes("sons of behemat")) return { folder: "sons of behemat", file: "sonsofbehemat" };
       const normal = slug.replace(/\s+/g, "-");
       return { folder: normal, file: normal };
     };
 
     const paths = getPaths(faction);
     const categoryPath = category.toLowerCase();
-    
-    // Construction du chemin : /factions/order/cities of sigmar/citiesofsigmar.html
     const filePath = `/factions/${categoryPath}/${paths.folder}/${paths.file}.html`;
 
     setLoading(true);
-    setError(null);
-
     fetch(filePath)
       .then((res) => {
-        if (!res.ok) throw new Error(`Fichier introuvable : ${filePath}`);
+        if (!res.ok) throw new Error(`Fichier introuvable.`);
         return res.text();
       })
       .then((html) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
+        
+        doc.querySelectorAll("img.abLogo, .PitchedBattleProfile, script, style, .NoPrint").forEach(el => el.remove());
 
-        // Nettoyage des scripts et logos
-        doc.querySelectorAll("img.abLogo, .PitchedBattleProfile, script, style").forEach(el => el.remove());
-
-        let blocks = [];
-
-        /* 1. Méthode Titre H2 */
+        let rawBlocks = [];
         const headers = [...doc.querySelectorAll("h2")];
+        
         const header = headers.find(h => 
-          h.textContent.trim().toUpperCase() === section.title.toUpperCase()
+            h.textContent.trim().replace(/\s+/g, ' ').toUpperCase() === section.title.toUpperCase()
         );
 
         if (header) {
           let current = header.nextElementSibling;
           while (current && current.tagName !== "H2") {
-            const found = current.querySelectorAll(".BreakInsideAvoid");
-            if (found.length > 0) {
-              blocks = [...found];
-              break;
+            if (current.tagName === "H3") {
+              rawBlocks.push({ type: 'title', element: current.cloneNode(true) });
+            }
+            
+            const cards = current.querySelectorAll(".BreakInsideAvoid");
+            if (cards.length > 0) {
+              cards.forEach(card => {
+                if (card.querySelector("table") || card.classList.contains("abBody")) {
+                  rawBlocks.push({ type: 'card', element: card.cloneNode(true) });
+                }
+              });
+            } else if (current.classList.contains("BreakInsideAvoid")) {
+              rawBlocks.push({ type: 'card', element: current.cloneNode(true) });
             }
             current = current.nextElementSibling;
           }
         }
 
-        /* 2. Méthode Scan de secours (Deep Scan) */
-        if (blocks.length === 0) {
-          const allPotential = [...doc.querySelectorAll(".BreakInsideAvoid")];
-          blocks = allPotential.filter(b => {
-            const text = b.textContent.toUpperCase();
-            return section.keywords.some(kw => text.includes(kw));
-          });
-        }
+        const finalHtml = [];
+        const processedTexts = []; 
 
-        /* 3. Méthode Tables */
-        if (blocks.length === 0) {
-          doc.querySelectorAll("table").forEach(table => {
-            if (section.keywords.some(kw => table.textContent.toUpperCase().includes(kw))) {
-              blocks.push(table);
+        rawBlocks.forEach((item) => {
+          // --- NETTOYAGE DES SPANS DANS LES HEADERS DE CAPACITÉS ---
+          // On cherche les divs avec la classe abHeader (souvent là où se trouvent les spans gênantes)
+          item.element.querySelectorAll(".abHeader, b").forEach(headerPart => {
+            const spans = headerPart.querySelectorAll("span");
+            if (spans.length > 0) {
+              // On remplace le contenu du header par son texte brut (sans les spans)
+              headerPart.textContent = headerPart.textContent.trim();
             }
           });
-        }
 
-        // Déduplication
-        const seen = new Set();
-        const finalHtml = [];
+          const cleanText = item.element.textContent.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+          
+          if (item.type === 'title') {
+            if (cleanText.length > 0 && !processedTexts.includes(cleanText)) {
+              processedTexts.push(cleanText);
+              finalHtml.push(`<div class="lore-title-container"><h3 class="lore-title">${item.element.innerHTML}</h3></div>`);
+            }
+          } else {
+            const isDuplicate = processedTexts.some(existingText => 
+              existingText.includes(cleanText) || cleanText.includes(existingText)
+            );
 
-        blocks.forEach((b) => {
-          const textKey = b.textContent.trim().substring(0, 100);
-          if (!seen.has(textKey) && b.textContent.trim().length > 10) {
-            seen.add(textKey);
-            finalHtml.push(b.outerHTML);
+            if (cleanText.length > 10 && !isDuplicate) {
+              processedTexts.push(cleanText);
+              finalHtml.push(`<div class="custom-spell-card">${item.element.outerHTML}</div>`);
+            }
           }
         });
 
-        if (finalHtml.length === 0) throw new Error("Aucune donnée trouvée dans le fichier.");
-
-        setContent(finalHtml.join("<hr class='my-4' />"));
+        if (finalHtml.length === 0) {
+           setError(`Aucune donnée trouvée pour "${section.title}".`);
+        } else {
+           setContent(finalHtml.join(""));
+        }
         setLoading(false);
       })
       .catch((err) => {
@@ -142,37 +125,55 @@ export default function FactionDetail() {
 
   return (
     <div className="container mt-4">
-    <Breadcrumb 
-        categoryName={category} 
-        factionName={faction} 
-        sectionName={section?.title} 
-    />
-      <Link to={`/category/${category}/faction/${faction}`} className="btn btn-secondary my-3">
-        ← Retour
-      </Link>
-      <h2 className="text-center mb-4">{section?.title}</h2>
+      <style>{`
+        .lore-title-container { margin-top: 3rem; margin-bottom: 1.5rem; text-align: center; }
+        .lore-title { 
+            display: inline-block; color: #0dcaf0; text-transform: uppercase; 
+            font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid #0dcaf0; 
+            padding-bottom: 5px; font-size: 1.5rem; 
+        }
+        .custom-spell-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          padding: 1.2rem;
+          margin-bottom: 1.5rem;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        /* Style renforcé pour les titres de capacités une fois nettoyés */
+        .custom-spell-card .abHeader { 
+          color: #ffc107; 
+          font-weight: bold; 
+          text-transform: uppercase; 
+          display: block;
+          margin-bottom: 5px;
+        }
+        .custom-spell-card b { color: #ffc107; text-transform: uppercase; }
+        .custom-spell-card hr { border-color: rgba(255,255,255,0.1); margin: 10px 0; }
+        .section-content { color: #e0e0e0; line-height: 1.6; }
+        .custom-spell-card div:empty { display: none; }
+        
+        /* Correction pour les tables importées */
+        table { width: 100%; color: inherit; }
+      `}</style>
+
+      <Breadcrumb categoryName={category} factionName={faction} />
       
-      {loading && (
-        <div className="text-center my-5">
-          <div className="spinner-border text-primary" role="status"></div>
-          <p className="mt-2">Chargement des données de faction...</p>
-        </div>
-      )}
-
-      {error && (
-        <div className="alert alert-danger shadow-sm">
-          <h5>Erreur de chargement</h5>
-          <p>{error}</p>
-          <hr />
-          <small>
-            Structure attendue : <br />
-            <code>/factions/{category.toLowerCase()}/[Nom du Dossier]/[NomFichier].html</code>
-          </small>
-        </div>
-      )}
-
-      {!loading && !error && (
-        <div className="section-content animate__animated animate__fadeIn" dangerouslySetInnerHTML={{ __html: content }} />
+      <div className="d-flex justify-content-between align-items-center my-4">
+        <Link to={`/category/${category}/faction/${faction}`} className="btn btn-outline-light btn-sm px-3">
+          ← Retour
+        </Link>
+        <h2 className="text-white text-uppercase m-0 fw-bold" style={{letterSpacing: '3px'}}>{section?.title}</h2>
+        <div style={{width: '85px'}}></div>
+      </div>
+      
+      {loading ? (
+        <div className="text-center my-5"><div className="spinner-border text-info"></div></div>
+      ) : error ? (
+        <div className="alert alert-warning bg-dark text-white border-warning">{error}</div>
+      ) : (
+        <div className="section-content animate__animated animate__fadeIn px-2 pb-5" 
+             dangerouslySetInnerHTML={{ __html: content }} />
       )}
     </div>
   );

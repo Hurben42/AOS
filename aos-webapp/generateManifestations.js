@@ -1,9 +1,10 @@
 const fs = require('fs');
-// Charge ton fichier de données
-const warscrolls = require('./src/data/warscrolls.json');
+const path = require('path');
+
+// Chemin de base vers tes fichiers HTML
+const BASE_PATH = './public/factions/';
 
 const manifestationsIndex = {
-  // Les génériques restent fixes car ils ne sont pas dans les dossiers de faction
   generics: {
     "Primal Energy": ["Burning Head", "Icy Shackles", "Emerald Lifeswarm", "Ravenak's Gnashing Jaws"],
     "Morbid Conjuration": ["Purple Sun of Shyish", "Suffocating Gravetide", "Lauchon the Soulseeker", "Soulsnare Shackles"],
@@ -15,28 +16,76 @@ const manifestationsIndex = {
   factions: {}
 };
 
-console.log("Extraction automatique des manifestations par faction...");
-
-Object.values(warscrolls).forEach(grandAlliance => {
-  Object.entries(grandAlliance).forEach(([factionName, units]) => {
-    if (Array.isArray(units)) {
-      // On filtre les unités qui ont STRICTEMENT le mot-clé MANIFESTATION dans la balise keyword
-      const found = units.filter(u => {
-        if (!u.html) return false;
-        // On cherche la présence du mot-clé dans la structure HTML spécifique aux keywords
-        const hasKeyword = u.html.includes('wsKeywordLine1') && u.html.toUpperCase().includes('MANIFESTATION');
-        // On exclut les unités qui sont aussi des HERO (pour éviter les sorciers)
-        const isHero = u.html.toUpperCase().includes('HERO');
-        return hasKeyword && !isHero;
-      }).map(u => u.name);
-
-      if (found.length > 0) {
-        manifestationsIndex.factions[factionName] = found;
-        console.log(`✅ ${factionName} : ${found.length} manifestations trouvées.`);
-      }
+// Fonction pour parcourir les dossiers récursivement
+function walkSync(dir, filelist = []) {
+  const files = fs.readdirSync(dir);
+  files.forEach(file => {
+    if (fs.statSync(path.join(dir, file)).isDirectory()) {
+      filelist = walkSync(path.join(dir, file), filelist);
+    } else if (file.endsWith('.html')) {
+      filelist.push(path.join(dir, file));
     }
   });
-});
+  return filelist;
+}
 
-fs.writeFileSync('./src/data/manifestationsIndex.json', JSON.stringify(manifestationsIndex, null, 2));
-console.log("✨ Fichier généré : src/data/manifestationsIndex.json");
+console.log("🚀 Recherche des fichiers HTML dans " + BASE_PATH);
+
+try {
+  const allHtmlFiles = walkSync(BASE_PATH);
+
+  allHtmlFiles.forEach(filePath => {
+    // Le nom de la faction est le nom du fichier sans .html (ex: skaven)
+    const factionKey = path.basename(filePath, '.html').toLowerCase();
+    const content = fs.readFileSync(filePath, 'utf8');
+    
+    console.log(`🔎 Scan : ${factionKey} (${filePath})`);
+    
+    const factionResults = [];
+    // On sépare le contenu par boîte d'aptitude (BreakInsideAvoid est le conteneur Wahapedia)
+    const blocks = content.split('BreakInsideAvoid');
+
+    blocks.forEach(block => {
+      // On cherche le bloc qui a le mot-clé SUMMON dans la zone abKeywordsBodyText
+      const isSummonAbility = block.includes('SUMMON') && block.includes('abKeywordsBodyText');
+      
+      if (isSummonAbility) {
+        // 1. Extraction de la Casting Value
+        const cvMatch = block.match(/class=["']abSpellPointsN["'][^>]*>\s*(\d+)\s*</);
+        
+        // 2. Extraction du nom de la manifestation (après SUMMON dans le titre)
+        // On cherche le texte en gras juste après SUMMON
+        const nameMatch = block.match(/<b>SUMMON\s+([^<:]+)/i);
+
+        if (cvMatch && nameMatch) {
+          const name = nameMatch[1].trim();
+          const cv = cvMatch[1];
+          
+          factionResults.push({
+            name: name,
+            castingValue: cv
+          });
+          console.log(`   ✅ Trouvé : ${name} (CV: ${cv})`);
+        }
+      }
+    });
+
+    if (factionResults.length > 0) {
+      manifestationsIndex.factions[factionKey] = factionResults;
+    }
+  });
+
+  // Sauvegarde dans src/data pour que ton application React puisse l'importer
+  const outputPath = './src/data/manifestationsIndex.json';
+  
+  // Créer le dossier data s'il n'existe pas
+  if (!fs.existsSync('./src/data')) {
+    fs.mkdirSync('./src/data', { recursive: true });
+  }
+
+  fs.writeFileSync(outputPath, JSON.stringify(manifestationsIndex, null, 2));
+  console.log(`\n✨ Succès ! Fichier généré : ${outputPath}`);
+
+} catch (error) {
+  console.error("❌ Erreur lors du scan :", error.message);
+}

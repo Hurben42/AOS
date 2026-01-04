@@ -1,0 +1,102 @@
+{
+  "khorne": {
+    "name": "Skull Altar",
+    "slug": "skull-altar",
+    "category": "chaos"
+  },
+  "nurgle": {
+    "name": "Feculent Gnarlmaw",
+    "slug": "feculent-gnarlmaw",
+    "category": "chaos"
+  },
+  "skaven": {
+    "name": "Gnawhole",
+    "slug": "gnawhole",
+    "category": "chaos"
+  },
+  "slaanesh": {
+    "name": "Fane of Slaanesh",
+    "slug": "fane-of-slaanesh",
+    "category": "chaos"
+  },
+  "slaves": {
+    "name": "Nexus Chaotica",
+    "slug": "nexus-chaotica",
+    "category": "chaos"
+  },
+  "flesheater": {
+    "name": "Charnel Throne",
+    "slug": "charnel-throne",
+    "category": "death"
+  },
+  "nighthaunt": {
+    "name": "Nexus of Grief",
+    "slug": "nexus-of-grief",
+    "category": "death"
+  },
+  "ossiarch": {
+    "name": "Bone-tithe Nexus",
+    "slug": "bone-tithe-nexus",
+    "category": "death"
+  },
+  "soulblight": {
+    "name": "Cursed Sepulchre",
+    "slug": "cursed-sepulchre",
+    "category": "death"
+  },
+  "gloomspite": {
+    "name": "Bad Moon Loonshrine",
+    "slug": "bad-moon-loonshrine",
+    "category": "destruction"
+  },
+  "ironjawz": {
+    "name": "Bossrokk Tower",
+    "slug": "bossrokk-tower",
+    "category": "destruction"
+  },
+  "kruleboyz": {
+    "name": "Skaregob Totem",
+    "slug": "skaregob-totem",
+    "category": "destruction"
+  },
+  "ogor": {
+    "name": "Great Mawpot",
+    "slug": "great-mawpot",
+    "category": "destruction"
+  },
+  "fyreslayers": {
+    "name": "Magmic Battleforge",
+    "slug": "magmic-battleforge",
+    "category": "order"
+  },
+  "idoneth": {
+    "name": "Gloomtide Shipwreck",
+    "slug": "gloomtide-shipwreck",
+    "category": "order"
+  },
+  "kharadron": {
+    "name": "Zontari Endrin Dock",
+    "slug": "zontari-endrin-dock",
+    "category": "order"
+  },
+  "lumineth": {
+    "name": "Shrine Luminor",
+    "slug": "shrine-luminor",
+    "category": "order"
+  },
+  "seraphon": {
+    "name": "Realmshaper Engine",
+    "slug": "realmshaper-engine",
+    "category": "order"
+  },
+  "stormcast": {
+    "name": "Stormreach Portal",
+    "slug": "stormreach-portal",
+    "category": "order"
+  },
+  "sylvaneth": {
+    "name": "Awakened Wyldwood",
+    "slug": "awakened-wyldwood",
+    "category": "order"
+  }
+}

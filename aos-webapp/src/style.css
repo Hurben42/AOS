@@ -149,7 +149,7 @@ a:hover {
   border-radius: 0 0 12px 12px;
   padding: 1rem;
   border: 1px solid #2c2c2c;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   color: #dddddd;
 }
 
@@ -378,7 +378,6 @@ li.nav-item .d-block.ward {
     border-color: blueviolet;
     text-decoration: none;
 }
-.text-primary {color: blueviolet;}
 .btn-warning {
     background-color: rgb(226, 119, 43);
     border-color: rgb(226, 119, 43);
@@ -394,6 +393,8 @@ li.nav-item .d-block.ward {
 }
 .accordion-button {color: #f7f7f7;}
 .accordion-item {border-color: #2a2a2a;}
+
+.h2_pge {margin-bottom: 1.5rem; text-transform: uppercase;}
 
 .abCommandPoints {
     position: relative;
@@ -471,10 +472,6 @@ li.nav-item .d-block.ward {
     color: #101010;
 }
 
-.badge.bg-primary {
-    background-color: blueviolet !important;
-}
-
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
     background-color: black;
@@ -489,4 +486,48 @@ li.nav-item .d-block.ward {
   .wsKeywordHeader {
     display: none !important;
   }
+}
+
+.search-bar-hover:hover {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: #0dcaf0 !important;
+  box-shadow: 0 0 20px rgba(13, 202, 240, 0.2);
+}
+
+.search-item-compact:hover {
+  text-decoration: none !important;
+  border-color: var(--bs-accordion-color);
+}
+
+.search-trigger-compact {
+    background: #111;
+    border: 1px solid #0dcaf0 !important;
+    border-radius: 8px;
+    padding: 12px 20px;
+    color: #777;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.form-control::placeholder {
+  color: #bbbbbb;
+  opacity: 1; /* Bootstrap met parfois une opacité réduite, on la force à 1 */
+}
+
+/* Si tu veux cibler uniquement cet input spécifique pour ne pas impacter les autres */
+input.fs-4::placeholder {
+  color: #bbbbbb;
+}
+
+.list-item-hover:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    padding-left: 0;
+    transition: all 0.25s ease;
+}
+
+.custom-spell-card .abHeader {
+  color: white !important;
+      font-size: smaller !important;
 }

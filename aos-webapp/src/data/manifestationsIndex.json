@@ -33,82 +33,323 @@
     ]
   },
   "factions": {
-    "khorne": [
-      "Hexgorger Skulls",
-      "Wrath-Axe"
-    ],
-    "nurgle": [
-      "Feculent Gnarlmaw"
-    ],
     "skaven": [
-      "Vermintide"
+      {
+        "name": "WARP LIGHTNING VORTEX",
+        "castingValue": "7"
+      },
+      {
+        "name": "VERMINTIDE",
+        "castingValue": "7"
+      },
+      {
+        "name": "BELL OF DOOM",
+        "castingValue": "7"
+      },
+      {
+        "name": "VERMINTIDE",
+        "castingValue": "7"
+      },
+      {
+        "name": "WARP LIGHTNING VORTEX",
+        "castingValue": "7"
+      }
     ],
     "slaanesh": [
-      "Dreadful Visage",
-      "Mesmerising Mirror"
+      {
+        "name": "MESMERISING MIRROR",
+        "castingValue": "6"
+      },
+      {
+        "name": "DREADFUL VISAGE",
+        "castingValue": "7"
+      },
+      {
+        "name": "WHEELS OF EXCRUCIATION",
+        "castingValue": "6"
+      }
     ],
     "slaves": [
-      "Darkfire Daemonrift",
-      "Eightfold Doom-Sigil",
-      "Realmscourge Rupture"
+      {
+        "name": "DARKFIRE DAEMONRIFT",
+        "castingValue": "7"
+      },
+      {
+        "name": "EIGHTFOLD DOOM-SIGIL",
+        "castingValue": "7"
+      },
+      {
+        "name": "REALMSCOURGE RUPTURE",
+        "castingValue": "7"
+      },
+      {
+        "name": "EIGHTFOLD DOOM-SIGIL",
+        "castingValue": "7"
+      }
     ],
     "tzeentch": [
-      "Daemonic Simulacrum",
-      "Tome of Eyes"
+      {
+        "name": "TOME OF EYES",
+        "castingValue": "5"
+      },
+      {
+        "name": "DAEMONIC SIMULACRUM",
+        "castingValue": "7"
+      },
+      {
+        "name": "BURNING SIGIL OF TZEENTCH",
+        "castingValue": "5"
+      },
+      {
+        "name": "CULT LEADER",
+        "castingValue": "8"
+      },
+      {
+        "name": "FOOT OF GORK",
+        "castingValue": "7"
+      }
     ],
     "flesheater": [
-      "Cadaverous Barricade",
-      "Chalice of Ushoran"
+      {
+        "name": "CADAVEROUS BARRICADE",
+        "castingValue": "6"
+      },
+      {
+        "name": "CORPSEMARE STAMPEDE",
+        "castingValue": "6"
+      },
+      {
+        "name": "CHALICE OF USHORAN",
+        "castingValue": "6"
+      },
+      {
+        "name": "CHALICE OF USHORAN",
+        "castingValue": "6"
+      },
+      {
+        "name": "CORPSEMARE STAMPEDE",
+        "castingValue": "6"
+      }
     ],
     "nighthaunt": [
-      "Shyish Reaper",
-      "Vault of Souls"
+      {
+        "name": "SHYISH REAPER",
+        "castingValue": "6"
+      },
+      {
+        "name": "MORTALIS TERMINEXUS",
+        "castingValue": "6"
+      },
+      {
+        "name": "VAULT OF SOULS",
+        "castingValue": "6"
+      },
+      {
+        "name": "SHYISH REAPER",
+        "castingValue": "6"
+      },
+      {
+        "name": "SHYISH REAPER",
+        "castingValue": "6"
+      },
+      {
+        "name": "MORTALIS TERMINEXUS",
+        "castingValue": "6"
+      },
+      {
+        "name": "VAULT OF SOULS",
+        "castingValue": "6"
+      }
     ],
     "ossiarch": [
-      "Bone-tithe Shrieker",
-      "Nightmare Predator"
+      {
+        "name": "SOULSTEALER CARRION",
+        "castingValue": "6"
+      },
+      {
+        "name": "NIGHTMARE PREDATOR",
+        "castingValue": "6"
+      },
+      {
+        "name": "BONE-TITHE SHRIEKER",
+        "castingValue": "6"
+      },
+      {
+        "name": "NIGHTMARE PREDATOR",
+        "castingValue": "6"
+      }
     ],
     "soulblight": [
-      "Cursed Sepulchre",
-      "Hand of Nagash"
+      {
+        "name": "HAND OF NAGASH",
+        "castingValue": "7"
+      },
+      {
+        "name": "SANGUINE SWARM",
+        "castingValue": "6"
+      },
+      {
+        "name": "UNHOLY RELIQUARY",
+        "castingValue": "6"
+      },
+      {
+        "name": "UNHOLY RELIQUARY",
+        "castingValue": "6"
+      }
     ],
     "gloomspite": [
-      "Malevolent Moon",
-      "Mork’s Mighty Mushroom",
-      "Scuttletide"
+      {
+        "name": "MORK’S MIGHTY MUSHROOM",
+        "castingValue": "6"
+      },
+      {
+        "name": "SCUTTLETIDE",
+        "castingValue": "6"
+      },
+      {
+        "name": "SCRAPSKUTTLE’S ARACHNACAULDRON",
+        "castingValue": "7"
+      },
+      {
+        "name": "MALEVOLENT MOON",
+        "castingValue": "7"
+      },
+      {
+        "name": "MALEVOLENT MOON",
+        "castingValue": "7"
+      },
+      {
+        "name": "MORK’S MIGHTY MUSHROOM",
+        "castingValue": "6"
+      }
     ],
     "ironjawz": [
-      "Foot of Gork",
-      "Morkspit Marsh"
+      {
+        "name": "FOOT OF GORK",
+        "castingValue": "7"
+      },
+      {
+        "name": "MORKSPIT MARSH",
+        "castingValue": "5"
+      },
+      {
+        "name": "GORK-ROARA",
+        "castingValue": "5"
+      },
+      {
+        "name": "FOOT OF GORK",
+        "castingValue": "7"
+      },
+      {
+        "name": "FOOT OF GORK",
+        "castingValue": "7"
+      },
+      {
+        "name": "GORK-ROARA",
+        "castingValue": "5"
+      }
     ],
     "kruleboyz": [
-      "Foot of Gork",
-      "Morkspit Marsh"
+      {
+        "name": "FOOT OF GORK",
+        "castingValue": "7"
+      },
+      {
+        "name": "GORK-ROARA",
+        "castingValue": "5"
+      },
+      {
+        "name": "MORKSPIT MARSH",
+        "castingValue": "5"
+      },
+      {
+        "name": "FOOT OF GORK",
+        "castingValue": "7"
+      },
+      {
+        "name": "FOOT OF GORK",
+        "castingValue": "7"
+      }
     ],
-    "daughters of khaine": [
-      "Bladewind"
-    ],
-    "fyreslayers": [
-      "Runic Fyrewall",
-      "Zharrgron Flame-spitter"
+    "daughtersofkhaine": [
+      {
+        "name": "BLADEWIND",
+        "castingValue": "6"
+      },
+      {
+        "name": "BLOODWRACK VIPER",
+        "castingValue": "6"
+      }
     ],
     "idoneth": [
-      "Abyssal Tendril"
+      {
+        "name": "INCARNATE OF THE DEEP",
+        "castingValue": "8"
+      },
+      {
+        "name": "INCARNATE OF THE DEEP",
+        "castingValue": "8"
+      }
     ],
-    "kharadron": [
-      "Auto-Endrin"
+    "warscrolls": [
+      {
+        "name": "DAIS ARCANUM",
+        "castingValue": "6"
+      }
     ],
     "lumineth": [
-      "Hyshian Twinstones",
-      "Sanctum of Amyntok"
+      {
+        "name": "SANCTUM OF AMYNTOK",
+        "castingValue": "4"
+      },
+      {
+        "name": "HYSHIAN TWINSTONES",
+        "castingValue": "5"
+      },
+      {
+        "name": "RUNE OF PETRIFICATION",
+        "castingValue": "7"
+      }
     ],
     "stormcast": [
-      "Celestian Vortex",
-      "Dais Arcanum"
+      {
+        "name": "DAIS ARCANUM",
+        "castingValue": "6"
+      },
+      {
+        "name": "CELESTIAN VORTEX",
+        "castingValue": "6"
+      },
+      {
+        "name": "EVERBLAZE COMET",
+        "castingValue": "8"
+      },
+      {
+        "name": "EVERBLAZE COMET",
+        "castingValue": "6"
+      },
+      {
+        "name": "EVERBLAZE COMET",
+        "castingValue": "8"
+      },
+      {
+        "name": "EVERBLAZE COMET",
+        "castingValue": "8"
+      }
     ],
     "sylvaneth": [
-      "Gladewyrm",
-      "Vengeful Skullroot"
+      {
+        "name": "SPITESWARM HIVE",
+        "castingValue": "7"
+      },
+      {
+        "name": "VENGEFUL SKULLROOT",
+        "castingValue": "7"
+      },
+      {
+        "name": "GLADEWYRM",
+        "castingValue": "7"
+      }
     ]
   }
 }

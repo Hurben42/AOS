@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import warscrollsData from "../data/warscrolls.json";
+import manifestationsIndex from "../data/manifestationsIndex.json";
+import spellsIndex from "../data/spellsIndex.json"; // Import de l'index des sorts
 
 export default function ListDetail() {
   const { id } = useParams();
   const [list, setList] = useState(null);
   const [uniqueUnits, setUniqueUnits] = useState([]);
   const [detectedTerrain, setDetectedTerrain] = useState(null);
+  const [factionManifestations, setFactionManifestations] = useState([]);
+  const [factionTerrainWS, setFactionTerrainWS] = useState(null);
+  const [activeSpellLore, setActiveSpellLore] = useState([]); // Nouvel état pour les sorts
 
   const bannerMapping = {
     "Helsmiths": "helsmiths", "Ossiarch Bonereapers": "ossiarch", 
@@ -55,16 +60,58 @@ export default function ListDetail() {
         Object.values(cat).flatMap(faction => faction)
       );
 
+      // CORRECTION : On utilise le mapping pour avoir la clé exacte du JSON (ex: 'soulblight')
+      const cleanFactionKey = bannerMapping[found.faction] || normalize(found.faction);
+
+      // --- Détection des Sorts (Spell Lore) ---
+      const factionSpells = spellsIndex.factions[cleanFactionKey] || {};
+      const matchedLoreName = Object.keys(factionSpells).find(
+        lore => normalize(lore) === normalize(found.spellLore)
+      );
+      if (matchedLoreName) {
+        setActiveSpellLore(factionSpells[matchedLoreName]);
+      } else {
+        setActiveSpellLore([]); // Reset si non trouvé
+      }
+
+      // --- Détection du Terrain et des Manifestations ---
+      const factionCVs = manifestationsIndex.factions[cleanFactionKey] || [];
+      
+      let factionUnits = [];
+      for (const cat of Object.values(warscrollsData)) {
+        for (const [fName, units] of Object.entries(cat)) {
+          // On vérifie le nom de faction normalisé ou via le mapping
+          if (normalize(fName) === cleanFactionKey || bannerMapping[fName] === cleanFactionKey) {
+            factionUnits = units;
+            break;
+          }
+        }
+      }
+
+      const mfs = [];
+      let terr = null;
+
+      factionUnits.forEach(ws => {
+        const kws = getKeywordsFromWS(ws.html);
+        if (kws.includes("MANIFESTATION") && !kws.includes("HERO")) {
+          const cvData = factionCVs.find(m => normalize(m.name) === normalize(ws.name));
+          mfs.push({ ...ws, displayCV: cvData ? cvData.castingValue : null });
+        }
+        if (kws.includes("FACTION TERRAIN") || kws.includes("TERRAIN")) {
+          terr = ws;
+        }
+      });
+      setFactionManifestations(mfs);
+      setFactionTerrainWS(terr);
+
       const rawUnits = found.regiments.flatMap(reg => reg.units || []);
       const seen = new Set();
-      let terrainFound = null;
+      let terrainFoundInList = null;
 
       const filtered = rawUnits.reduce((acc, unitLine) => {
         const trimmed = unitLine.trim();
-        // Filtrage des lignes d'améliorations (•) et techniques
         if (trimmed.startsWith('•') || trimmed.startsWith('·') || trimmed.toLowerCase().includes('reinforced')) return acc;
 
-        // Nettoyage : on enlève (150) mais on garde la virgule pour Katakros, etc.
         let displayName = trimmed.replace(/\s\(\d+\s*pts\)$/i, "").replace(/\s\(\d+\)$/i, "").trim();
         displayName = displayName.replace(/^Legion of the First Prince\s+/i, "").replace(/^Scourge of Ghyran\s+/i, "").trim();
         
@@ -75,7 +122,7 @@ export default function ListDetail() {
         if (wsMatch) {
           kws = getKeywordsFromWS(wsMatch.html);
           if (kws.includes("TERRAIN") || kws.includes("FACTION TERRAIN")) {
-            terrainFound = wsMatch.name;
+            terrainFoundInList = wsMatch.name;
             return acc;
           }
         }
@@ -88,7 +135,7 @@ export default function ListDetail() {
       }, []).sort((a, b) => a.displayName.localeCompare(b.displayName));
 
       setUniqueUnits(filtered);
-      setDetectedTerrain(terrainFound);
+      setDetectedTerrain(terrainFoundInList);
     }
   }, [id]);
 
@@ -117,68 +164,34 @@ export default function ListDetail() {
         <Link to="/my-lists" className="btn btn-sm btn-outline-secondary border-secondary">← Retour</Link>
       </div>
 
-      {/* BANNIÈRE AVEC CAROUSEL COMPLET */}
-      <div className="card bg-dark border-0 shadow-lg mb-4 rounded-4 overflow-hidden position-relative" style={{ minHeight: '300px' }}>
-        <img src={`/img/banner_${bannerMapping[list.faction] || 'default'}.webp`} className="card-img" alt="" style={{ objectFit: 'cover', height: '100%', minHeight: '300px', opacity: '0.4' }} />
-        
+      {/* BANNER CARD */}
+      <div className="card bg-dark border-0 shadow-lg mb-4 rounded-4 overflow-hidden position-relative" style={{ minHeight: '200px' }}>
+        <img src={`/img/banner_${bannerMapping[list.faction] || 'default'}.webp`} className="card-img" alt="" style={{ objectFit: 'cover', height: '100%', minHeight: '200px', opacity: '0.4' }} />
         <div className="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center p-3">
           <h2 className="fw-bold text-white mb-1 text-uppercase shadow-text" style={{ fontSize: 'clamp(1.2rem, 5vw, 2.5rem)' }}>{list.faction}</h2>
-          <div className="badge bg-info mb-4 px-3 py-2 fw-bold text-wrap shadow-sm">{list.subFaction}</div>
-          
-          <div className="w-100 position-relative">
-            {/* CAROUSEL MOBILE */}
-            <div id="infoCarousel" className="carousel slide d-block d-md-none" data-bs-ride="false" data-bs-touch="true">
-              <div className="carousel-indicators mt-2" style={{ marginBottom: '-15px' }}>
-                {infoItems.map((_, idx) => (
-                  <button key={idx} type="button" data-bs-target="#infoCarousel" data-bs-slide-to={idx} className={idx === 0 ? "active" : ""} aria-current={idx === 0} aria-label={`Slide ${idx + 1}`}></button>
-                ))}
-              </div>
-              
-              <div className="carousel-inner">
-                {infoItems.map((item, idx) => (
-                  <div key={idx} className={`carousel-item ${idx === 0 ? 'active' : ''}`}>
-                    <div className="px-2 py-2 rounded bg-dark bg-opacity-50 border border-white border-opacity-10 shadow-sm blur-bg mx-auto mb-3" style={{ maxWidth: '250px' }}>
-                      <small className="text-white-50 d-block text-uppercase mb-1" style={{ fontSize: '0.6rem' }}>{item.label}</small>
-                      <span className="fw-bold text-info" style={{ fontSize: '0.9rem' }}>{item.val}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <button className="carousel-control-prev" type="button" data-bs-target="#infoCarousel" data-bs-slide="prev" style={{ width: '15%' }}>
-                <span className="carousel-control-prev-icon" aria-hidden="true" style={{ width: '1.2rem' }}></span>
-              </button>
-              <button className="carousel-control-next" type="button" data-bs-target="#infoCarousel" data-bs-slide="next" style={{ width: '15%' }}>
-                <span className="carousel-control-next-icon" aria-hidden="true" style={{ width: '1.2rem' }}></span>
-              </button>
-            </div>
-
-            {/* GRILLE DESKTOP */}
-            <div className="d-none d-md-flex flex-wrap justify-content-center gap-2 align-items-center">
+          <div className="badge bg-info mb-4 px-3 py-2 fw-bold text-wrap shadow-sm bg-opacity-25 border-2 border border-info blur-bg">{list.subFaction}</div>
+          <div className="d-md-flex d-none flex-wrap justify-content-center gap-2 align-items-center">
               {infoItems.map((item, idx) => (
                 <div key={idx} className="px-2 py-2 rounded bg-dark bg-opacity-50 border border-white border-opacity-10 shadow-sm blur-bg" style={{ minWidth: '120px', flex: '1 1 auto', maxWidth: '200px' }}>
                   <small className="text-white-50 d-block text-uppercase mb-1" style={{ fontSize: '0.5rem' }}>{item.label}</small>
                   <span className="fw-bold text-info" style={{ fontSize: '0.75rem' }}>{item.val}</span>
                 </div>
               ))}
-            </div>
           </div>
         </div>
       </div>
 
-      {/* LISTE DES UNITÉS */}
+      {/* UNITÉS DE LA LISTE */}
       <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 mb-4 blur-bg">
         <div className="card-header bg-black text-white py-3 px-4">
-          <h5 className="mb-0 fw-bold text-uppercase small text-primary">⚔️ Unités de la liste</h5>
+          <h5 className="mb-0 fw-bold text-uppercase small text-white">⚔️ Unités de la liste</h5>
         </div>
         <div className="list-group list-group-flush bg-transparent">
           {uniqueUnits.map((unit, idx) => (
             <div key={idx} className="list-group-item p-3 bg-transparent text-white border-secondary border-opacity-10 position-relative">
               <div className="d-flex flex-column">
                 <Link to={`/my-lists/${list.id}/warscroll/${formatSlug(unit.displayName)}`} className="text-decoration-none text-white flex-grow-1 stretched-link">
-                  <h6 className="fw-bold mb-0 text-uppercase" style={{ fontSize: '0.9rem' }}>
-                    {unit.displayName} <span className="text-primary ms-1" style={{ fontSize: '0.8rem' }}></span>
-                  </h6>
+                  <h6 className="fw-bold mb-0 text-uppercase" style={{ fontSize: '0.9rem' }}>{unit.displayName}</h6>
                 </Link>
                 <div className="d-flex flex-wrap gap-1 mt-2">
                   {unit.keywords.map((k, i) => (
@@ -191,11 +204,66 @@ export default function ListDetail() {
         </div>
       </div>
 
+      <div className="row g-4">
+        {/* TERRAIN DE FACTION */}
+        {factionTerrainWS && (
+          <div className="col-12">
+            <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 blur-bg h-100">
+              <div className="card-header bg-black text-white py-3 px-4 border-bottom border-warning border-opacity-25">
+                <h5 className="mb-0 fw-bold text-uppercase small text-warning">🏰 Terrain de Faction</h5>
+              </div>
+              <div className="card-body p-0">
+                <Link to={`/my-lists/${list.id}/warscroll/${formatSlug(factionTerrainWS.name)}`} className="text-decoration-none d-flex justify-content-between align-items-center p-3 text-white border-bottom border-secondary border-opacity-10">
+                  <span className="fw-bold text-uppercase" style={{ fontSize: '0.85rem' }}>{factionTerrainWS.name}</span>
+                  <i className="bi bi-chevron-right text-warning"></i>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* MANIFESTATIONS DE FACTION */}
+        {factionManifestations.length > 0 && (
+          <div className="col-12">
+            <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 blur-bg h-100">
+              <div className="card-header bg-black text-white py-3 px-4 border-bottom border-info border-opacity-25">
+                <h5 className="mb-0 fw-bold text-uppercase small text-info">🔥 Manifestations</h5>
+              </div>
+              <div className="list-group list-group-flush bg-transparent">
+                {factionManifestations.map((m, idx) => (
+                  <Link key={idx} to={`/my-lists/${list.id}/warscroll/${formatSlug(m.name)}`} className="list-group-item list-group-item-action bg-transparent text-white border-secondary border-opacity-10 d-flex align-items-center p-3">
+                    <span className="fw-bold text-uppercase" style={{ fontSize: '0.85rem' }}>{m.name}</span>
+                    {m.displayCV && <span className="ms-2 badge bg-success bg-opacity-25 border border-1 border-success rounded-pill px-2">Casting value: {m.displayCV}+</span>}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* SORT DE FACTION (SPELL LORE) */}
+        {activeSpellLore.length > 0 && (
+          <div className="col-12">
+            <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 blur-bg h-100">
+              <div className="card-header bg-black text-white py-3 px-4 border-bottom border-primary border-opacity-25">
+                <h5 className="mb-0 fw-bold text-uppercase small text-primary">🪄 Sorts : {list.spellLore}</h5>
+              </div>
+              <div className="list-group list-group-flush bg-transparent">
+                {activeSpellLore.map((spell, idx) => (
+                  <div key={idx} className="list-group-item bg-transparent text-white border-secondary border-opacity-10 d-flex align-items-center p-3">
+                    <span className="fw-bold text-uppercase" style={{ fontSize: '0.85rem' }}>{spell.name}</span>
+                    <span className="ms-2 badge bg-primary bg-opacity-25 border border-1 border-primary rounded-pill px-2">Casting value: {spell.castingValue}+</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
       <style>{`
         .blur-bg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         .shadow-text { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
-        .carousel-item { transition: transform .5s ease-in-out; }
-        .carousel-indicators [data-bs-target] { width: 10px; height: 10px; border-radius: 50%; margin: 0 5px; }
       `}</style>
     </div>
   );

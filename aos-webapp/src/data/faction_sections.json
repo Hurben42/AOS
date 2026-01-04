@@ -1,0 +1,211 @@
+{
+  "helsmiths": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "ACCURSED DEVICES",
+    "SPELL LORE",
+    "PRAYER LORE"
+  ],
+  "khorne": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "MANIFESTATION LORE",
+    "PRAYER LORE"
+  ],
+  "nurgle": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "PRAYER LORE",
+    "SPELL LORE"
+  ],
+  "skaven": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "PRAYER LORE",
+    "MANIFESTATION LORE"
+  ],
+  "slaanesh": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "slaves": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE",
+    "ENSORCELLED BANNERS"
+  ],
+  "tzeentch": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "flesheater": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "MONSTROUS TRAITS",
+    "SPELL LORE",
+    "PRAYER LORE",
+    "MANIFESTATION LORE"
+  ],
+  "nighthaunt": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "ossiarch": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "soulblight": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "gloomspite": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE"
+  ],
+  "ironjawz": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "MONSTROUS TRAITS",
+    "SPELL LORE",
+    "PRAYER LORE",
+    "MANIFESTATION LORE"
+  ],
+  "kruleboyz": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "MONSTROUS TRAITS",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "ogor": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "BIG NAMES",
+    "SPELL LORE",
+    "PRAYER LORE"
+  ],
+  "sonsofbehemat": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER"
+  ],
+  "citiesofsigmar": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "PRAYER LORE"
+  ],
+  "daughtersofkhaine": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "PRAYER LORE",
+    "MANIFESTATION LORE"
+  ],
+  "fyreslayers": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "MARKS OF VULCATRIX",
+    "PRAYER LORE",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "idoneth": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "kharadron": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "GREAT ENDRINWORKS"
+  ],
+  "lumineth": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ],
+  "seraphon": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "MONSTROUS TRAITS",
+    "SPELL LORE"
+  ],
+  "stormcast": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE",
+    "PRAYER LORE"
+  ],
+  "sylvaneth": [
+    "BATTLE TRAITS",
+    "BATTLE FORMATIONS",
+    "HEROIC TRAITS",
+    "ARTEFACTS OF POWER",
+    "SPELL LORE",
+    "MANIFESTATION LORE"
+  ]
+}
