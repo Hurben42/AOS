@@ -49,10 +49,6 @@
       {
         "name": "VERMINTIDE",
         "castingValue": "7"
-      },
-      {
-        "name": "WARP LIGHTNING VORTEX",
-        "castingValue": "7"
       }
     ],
     "slaanesh": [
@@ -81,10 +77,6 @@
       {
         "name": "REALMSCOURGE RUPTURE",
         "castingValue": "7"
-      },
-      {
-        "name": "EIGHTFOLD DOOM-SIGIL",
-        "castingValue": "7"
       }
     ],
     "tzeentch": [
@@ -99,27 +91,11 @@
       {
         "name": "BURNING SIGIL OF TZEENTCH",
         "castingValue": "5"
-      },
-      {
-        "name": "CULT LEADER",
-        "castingValue": "8"
-      },
-      {
-        "name": "FOOT OF GORK",
-        "castingValue": "7"
       }
     ],
     "flesheater": [
       {
         "name": "CADAVEROUS BARRICADE",
-        "castingValue": "6"
-      },
-      {
-        "name": "CORPSEMARE STAMPEDE",
-        "castingValue": "6"
-      },
-      {
-        "name": "CHALICE OF USHORAN",
         "castingValue": "6"
       },
       {
@@ -133,14 +109,6 @@
     ],
     "nighthaunt": [
       {
-        "name": "SHYISH REAPER",
-        "castingValue": "6"
-      },
-      {
-        "name": "MORTALIS TERMINEXUS",
-        "castingValue": "6"
-      },
-      {
         "name": "VAULT OF SOULS",
         "castingValue": "6"
       },
@@ -149,15 +117,7 @@
         "castingValue": "6"
       },
       {
-        "name": "SHYISH REAPER",
-        "castingValue": "6"
-      },
-      {
         "name": "MORTALIS TERMINEXUS",
-        "castingValue": "6"
-      },
-      {
-        "name": "VAULT OF SOULS",
         "castingValue": "6"
       }
     ],
@@ -173,10 +133,6 @@
       {
         "name": "BONE-TITHE SHRIEKER",
         "castingValue": "6"
-      },
-      {
-        "name": "NIGHTMARE PREDATOR",
-        "castingValue": "6"
       }
     ],
     "soulblight": [
@@ -191,17 +147,9 @@
       {
         "name": "UNHOLY RELIQUARY",
         "castingValue": "6"
-      },
-      {
-        "name": "UNHOLY RELIQUARY",
-        "castingValue": "6"
       }
     ],
     "gloomspite": [
-      {
-        "name": "MORK’S MIGHTY MUSHROOM",
-        "castingValue": "6"
-      },
       {
         "name": "SCUTTLETIDE",
         "castingValue": "6"
@@ -215,19 +163,11 @@
         "castingValue": "7"
       },
       {
-        "name": "MALEVOLENT MOON",
-        "castingValue": "7"
-      },
-      {
         "name": "MORK’S MIGHTY MUSHROOM",
         "castingValue": "6"
       }
     ],
     "ironjawz": [
-      {
-        "name": "FOOT OF GORK",
-        "castingValue": "7"
-      },
       {
         "name": "MORKSPIT MARSH",
         "castingValue": "5"
@@ -239,14 +179,6 @@
       {
         "name": "FOOT OF GORK",
         "castingValue": "7"
-      },
-      {
-        "name": "FOOT OF GORK",
-        "castingValue": "7"
-      },
-      {
-        "name": "GORK-ROARA",
-        "castingValue": "5"
       }
     ],
     "kruleboyz": [
@@ -261,14 +193,6 @@
       {
         "name": "MORKSPIT MARSH",
         "castingValue": "5"
-      },
-      {
-        "name": "FOOT OF GORK",
-        "castingValue": "7"
-      },
-      {
-        "name": "FOOT OF GORK",
-        "castingValue": "7"
       }
     ],
     "daughtersofkhaine": [
@@ -285,16 +209,6 @@
       {
         "name": "INCARNATE OF THE DEEP",
         "castingValue": "8"
-      },
-      {
-        "name": "INCARNATE OF THE DEEP",
-        "castingValue": "8"
-      }
-    ],
-    "warscrolls": [
-      {
-        "name": "DAIS ARCANUM",
-        "castingValue": "6"
       }
     ],
     "lumineth": [
@@ -319,18 +233,6 @@
       {
         "name": "CELESTIAN VORTEX",
         "castingValue": "6"
-      },
-      {
-        "name": "EVERBLAZE COMET",
-        "castingValue": "8"
-      },
-      {
-        "name": "EVERBLAZE COMET",
-        "castingValue": "6"
-      },
-      {
-        "name": "EVERBLAZE COMET",
-        "castingValue": "8"
       },
       {
         "name": "EVERBLAZE COMET",

@@ -1,185 +1,175 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ImportList() {
-  const [loading, setLoading] = useState(false);
-  const [listData, setListData] = useState(null);
-  const [error, setError] = useState(false);
-  const [justSavedId, setJustSavedId] = useState(null);
-  const [manualText, setManualText] = useState("");
-  const [showManualInput, setShowManualInput] = useState(false);
+  const [text, setText] = useState("");
+  const navigate = useNavigate();
 
-  // Utilisation de noms qui matchent tes fichiers banner_X.webp
-  const aosFactions = [
-    "Helsmiths", "Soulblight Gravelords", "Ossiarch Bonereapers", "Nighthaunt", "Flesh-eater Courts",
-    "Stormcast Eternals", "Cities of Sigmar", "Seraphon", "Lumineth Realm-lords",
-    "Sylvaneth", "Kharadron Overlords", "Fyreslayers", "Idoneth Deepkin",
-    "Skaven", "Slaves to Darkness", "Maggotkin of Nurgle", "Blades of Khorne",
-    "Hedonites of Slaanesh", "Disciples of Tzeentch", "Ironjawz", "Kruleboyz",
-    "Gloomspite Gitz", "Ogor Mawtribes", "Sons of Behemat", "Daughters of Khaine"
-  ];
+  const handleImport = () => {
+    if (!text.trim()) return;
 
-  // Mots à ignorer pour ne pas les prendre comme des unités
-  const blacklist = ["GENERAL", "REINFORCED", "ARMY OF RENOWN", "DROPS", "BATTLE TACTICS", "TRAIT", "ARTIFACT"];
+    try {
+      // 1. Nettoyage des lignes (on ignore les tirets et les lignes de version à la fin)
+      const allLines = text.split("\n").map(l => l.trim());
+      const filteredLines = allLines.filter(l => 
+        l !== "" && 
+        !l.startsWith("---") && 
+        !l.toLowerCase().includes("created with") &&
+        !l.toLowerCase().includes("app: v")
+      );
 
-  const processText = (text) => {
-    if (!text || text.length < 20) return;
-    setLoading(true);
-    setError(false);
-    setJustSavedId(null);
+      let listData = {
+        faction: "Générique",
+        subFaction: "Non définie",
+        spellLore: "Non défini",
+        manifestationLore: "Non défini",
+        factionTerrain: "Non défini",
+        regiments: [],
+        points: "0",
+        customTitle: "Ma Liste"
+      };
 
-    setTimeout(() => {
-      const parsed = parseWarhammerList(text);
-      if (parsed.faction !== "Inconnue") {
-        setListData(parsed);
-        setShowManualInput(false);
-      } else {
-        setError(true);
-      }
-      setLoading(false);
-    }, 800);
-  };
-
-  const parseWarhammerList = (text) => {
-    const lines = text.split("\n").map(l => l.trim()).filter(l => l !== "");
-    const data = { 
-      name: "Ma Liste",
-      faction: "Inconnue", subFaction: "Non définie", spellLore: "Non défini",
-      manifestationLore: "Non défini", prayerLore: "Non défini",
-      battleTactics: "Non défini", terrain: "Non défini", regiments: [] 
-    };
-    
-    let currentRegiment = null;
-
-    lines.forEach((line, index) => {
-      const upperLine = line.toUpperCase();
-      
-      // 1. DÉTECTION DU NOM ET DE LA FACTION
-      if (index === 0 && line.includes("—")) {
-        data.name = line.split("—")[0].replace(/\[.*?\]/, "").trim();
-      }
-
-      if (data.faction === "Inconnue") {
-        const found = aosFactions.find(f => upperLine.includes(f.toUpperCase()));
-        if (found) {
-          data.faction = found; // Sera "Helsmiths"
-          if (line.includes("|")) {
-            data.subFaction = line.split("|").pop().trim();
-          }
+      // 2. EXTRACTION DU TITRE (Ligne 1)
+      if (filteredLines.length > 0) {
+        let title = filteredLines[0];
+        // Si War Nexus : on enlève le pseudo "Pseudo - "
+        if (title.includes(" - ")) {
+          title = title.split(" - ").slice(1).join(" - ");
         }
+        // On enlève les points "2000/2000 pts"
+        listData.customTitle = title.replace(/\d+\/\d+\s*(pts|points)/gi, "").trim();
       }
 
-      // 2. MÉDATAONNÉES
-      const extractValue = (l) => l.split(/[:\-]/).slice(1).join("-").trim();
-      if (upperLine.includes("SPELL LORE")) data.spellLore = extractValue(line);
-      if (upperLine.includes("MANIFESTATION LORE")) data.manifestationLore = extractValue(line);
-      if (upperLine.includes("PRAYER LORE")) data.prayerLore = extractValue(line);
-      if (upperLine.includes("BATTLE TACTICS")) data.battleTactics = extractValue(line);
+      let currentRegiment = null;
 
-      // 3. RÉGIMENTS
-      if ((upperLine.includes("REGIMENT") || upperLine.includes("FORGEHOST")) && !line.includes("|")) {
-        if (currentRegiment) data.regiments.push(currentRegiment);
-        currentRegiment = { name: line.trim(), units: [] };
-        return;
-      }
-      
-      // 4. UNITÉS (Correction du scan "General" et "Reinforced")
-      if (currentRegiment) {
-        const hasPoints = /\(\d+.*?\)$/.test(line);
-        // On vérifie que la ligne n'est pas dans la blacklist
-        const isBlacklisted = blacklist.some(word => upperLine.includes(word));
+      filteredLines.forEach((line, index) => {
+        const lowerLine = line.toLowerCase();
 
-        if (hasPoints && !isBlacklisted) {
-          const unitName = line
-            .replace(/\(\d+.*?\)$/, "")     
-            .replace(/^[•\-\*]\s+/, "")  
-            .replace(/^\d+x\s+/, "")     
-            .trim();
+        // 3. DÉTECTION FACTION & SOUS-FACTION (Le coeur du problème)
+        if (line.includes("|")) {
+          const parts = line.split("|").map(p => p.trim());
           
-          if (unitName.length > 2) {
-            currentRegiment.units.push(unitName);
+          if (parts.length >= 3) {
+            // Format App Officielle: Alliance | Faction | Sous-Faction
+            // On vérifie si la première partie est une alliance connue
+            const alliances = ["grand alliance chaos", "grand alliance death", "grand alliance destruction", "grand alliance order"];
+            if (alliances.includes(parts[0].toLowerCase())) {
+              listData.faction = parts[1];
+              listData.subFaction = parts[2];
+            } else {
+              // Sécurité au cas où l'ordre change
+              listData.faction = parts[0];
+              listData.subFaction = parts[1];
+            }
+          } else if (parts.length === 2) {
+            // Format War Nexus: Faction | Sous-Faction
+            listData.faction = parts[0];
+            listData.subFaction = parts[1];
           }
         }
-      }
-    });
 
-    if (currentRegiment) data.regiments.push(currentRegiment);
-    return data;
-  };
+        // 4. LORES (Gère "Lore: " et "Lore - ")
+        if (lowerLine.includes("spell lore") || lowerLine.includes("manifestation lore") || lowerLine.includes("prayer lore")) {
+          const separator = line.includes(":") ? ":" : "-";
+          const value = line.split(separator)[1]?.split("(")[0]?.trim();
+          
+          if (lowerLine.includes("spell lore")) listData.spellLore = value;
+          if (lowerLine.includes("manifestation lore")) listData.manifestationLore = value;
+          // Si c'est un Prayer Lore, on peut le mettre dans spellLore ou créer une clé
+          if (lowerLine.includes("prayer lore")) listData.prayerLore = value; 
+        }
 
-  const handleSave = () => {
-    const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
-    const id = Date.now();
-    const allUnits = listData.regiments.flatMap(r => r.units);
-    const newList = { ...listData, units: allUnits, id, createdAt: id };
-    localStorage.setItem("warhammer_saved_lists", JSON.stringify([newList, ...saved]));
-    setJustSavedId(id);
+        // 5. TERRAIN
+        if (lowerLine.includes("faction terrain")) {
+          // Souvent le terrain est sur la ligne d'après (App) ou après le ":" (Nexus)
+          if (line.includes(":")) {
+            listData.factionTerrain = line.split(":")[1].trim();
+          } else if (filteredLines[index + 1]) {
+            listData.factionTerrain = filteredLines[index + 1];
+          }
+        }
+
+        // 6. POINTS (Extraction du premier nombre)
+        if (lowerLine.includes("points:")) {
+          const match = line.match(/(\d+)/);
+          if (match) listData.points = match[1];
+        }
+
+        // 7. RÉGIMENTS ET UNITÉS
+        if (lowerLine.includes("regiment") || lowerLine.includes("general's")) {
+          if (currentRegiment) listData.regiments.push(currentRegiment);
+          currentRegiment = { hero: null, units: [] };
+        }
+
+        // Regex pour capturer "Nom (Points)"
+        const unitMatch = line.match(/^(.+?)\s\((\d+)\)$/);
+        if (unitMatch) {
+          // On nettoie "5x ", "• ", etc.
+          const unitName = unitMatch[1].replace(/^[•\d+x\s]+/, "").trim();
+          const unitPoints = unitMatch[2];
+
+          if (currentRegiment) {
+            if (!currentRegiment.hero) {
+              currentRegiment.hero = { name: unitName, points: unitPoints };
+            } else {
+              currentRegiment.units.push({ name: unitName, points: unitPoints });
+            }
+          }
+        }
+      });
+
+      // Push du dernier régiment analysé
+      if (currentRegiment) listData.regiments.push(currentRegiment);
+
+      // --- SAUVEGARDE FINALE ---
+      const newId = Date.now().toString();
+      const newList = {
+        id: newId,
+        title: listData.customTitle || "Ma Liste",
+        name: listData.customTitle || "Ma Liste",
+        date: new Date().toLocaleDateString(),
+        faction: listData.faction,
+        subFaction: listData.subFaction,
+        listData: listData // Données complètes pour ListDetail
+      };
+
+      const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
+      localStorage.setItem("warhammer_saved_lists", JSON.stringify([newList, ...saved]));
+
+      // Redirection immédiate
+      window.location.href = `/my-lists/${newId}`;
+
+    } catch (err) {
+      console.error("Erreur critique au parsing:", err);
+      alert("Format de liste non reconnu.");
+    }
   };
 
   return (
-    <div className="container mt-4 pb-5">
-      <h2 className="text-center fw-bold mb-4 text-uppercase">Importateur</h2>
-      
-      {!loading && !listData && (
-        <div className="text-center mb-4 card bg-dark p-4 p-md-5 border-0 shadow rounded-4">
-          <button className="btn btn-primary btn-lg shadow px-5 py-3 fw-bold mb-3 w-100" onClick={async () => {
-            try { 
-              const text = await navigator.clipboard.readText(); 
-              processText(text); 
-            } catch { 
-              setShowManualInput(true); 
-            }
-          }}>📋 COLLER LA LISTE</button>
-          <button className="btn btn-outline-secondary btn-sm border-0" onClick={() => setShowManualInput(!showManualInput)}>
-            {showManualInput ? "Annuler" : "Saisie manuelle"}
+    <div className="container mt-4 pb-5 px-3">
+      <div className="card bg-dark border-secondary shadow-lg rounded-4 overflow-hidden">
+        <div className="card-header bg-black text-white py-3 text-center border-bottom border-secondary">
+          <h5 className="mb-0 fw-bold text-info">IMPORTATEUR AOS 4.0</h5>
+          <small className="text-secondary">App Officielle ou War Nexus</small>
+        </div>
+        <div className="card-body p-4">
+          <textarea
+            className="form-control bg-black text-white border-secondary mb-4 shadow-none"
+            rows="15"
+            style={{ fontSize: '0.85rem', fontFamily: 'monospace', resize: 'none' }}
+            placeholder="Collez votre liste ici..."
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          ></textarea>
+          
+          <button 
+            className="btn btn-info fw-bold w-100 py-3 rounded-pill shadow-sm text-uppercase"
+            onClick={handleImport}
+          >
+            🚀 Analyser et Enregistrer
           </button>
         </div>
-      )}
-
-      {loading && <div className="text-center my-5"><div className="spinner-border text-primary"></div></div>}
-
-      {showManualInput && !listData && !loading && (
-        <div className="card shadow-lg border-0 bg-dark rounded-4 mb-4 p-4">
-          <textarea className="form-control bg-black text-white border-secondary mb-3" rows="10" 
-            value={manualText} onChange={(e) => setManualText(e.target.value)} placeholder="Collez ici..."></textarea>
-          <button className="btn btn-success w-100 py-3 fw-bold" onClick={() => processText(manualText)}>DÉCODER</button>
-        </div>
-      )}
-
-      {listData && !loading && (
-        <div className="card shadow-lg border-0 bg-dark text-white rounded-4 overflow-hidden animate__animated animate__fadeIn">
-          <div className="card-body p-4">
-            <div className="mb-4 text-center">
-              <span className="badge bg-success mb-2">ANALYSE TERMINÉE</span>
-              <h2 className="fw-bold mb-0 text-uppercase">{listData.name}</h2>
-              <p className="text-info fs-5 mb-0 fw-bold">{listData.faction}</p>
-              <small className="text-white-50">{listData.subFaction}</small>
-            </div>
-            
-            <div className="p-3 bg-white bg-opacity-10 rounded border border-white border-opacity-25 mb-4 text-center">
-                <h6 className="mb-0 fw-bold text-white">Composition</h6>
-                <p className="small mb-0 text-white-50">
-                  {listData.regiments.length} Régiment(s) • {listData.regiments.reduce((acc, r) => acc + r.units.length, 0)} Unités
-                </p>
-            </div>
-
-            <div className="pt-3 border-top border-secondary border-opacity-25">
-              {!justSavedId ? (
-                <button className="btn btn-success btn-lg w-100 py-3 fw-bold" onClick={handleSave}>💾 SAUVEGARDER</button>
-              ) : (
-                <div className="row g-2">
-                  <div className="col-12">
-                    <Link to={`/my-lists/${justSavedId}`} className="btn btn-info btn-lg text-white w-100 py-3 fw-bold">👁️ VOIR MA LISTE</Link>
-                  </div>
-                  <div className="col-12">
-                    <button className="btn btn-outline-secondary w-100 py-2 mt-2" onClick={() => setListData(null)}>🔄 AUTRE IMPORT</button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

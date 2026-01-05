@@ -46,7 +46,7 @@ export default function Battleplans() {
 
   const renderAccordion = (plans, idPrefix, title) => (
     <div className="mb-5">
-      <h3 className="text-white fw-bold mb-3 border-bottom border-secondary pb-2 text-uppercase">
+      <h3 className="text-white fw-bold mb-3 pb-2 text-uppercase">
         {title}
       </h3>
       <div className="accordion shadow-lg" id={`accordion${idPrefix}`}>

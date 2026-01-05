@@ -30,6 +30,13 @@ img {
   }
 }
 
+@media (max-width: 968px) {
+  .faction-bg {
+    transform: scale(1.25) !important;
+  }
+}
+
+
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -137,11 +144,13 @@ a:hover {
 .abHeader {
   color: #ffffff;
   font-weight: 600;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem !important;
   border-radius: 8px 8px 0 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: 0 !important;
+  font-size: small !important;
 }
 
 .abBody {
@@ -552,3 +561,55 @@ input.fs-4::placeholder {
 }
 
 .navbar-brand:hover {text-decoration: none !important;}
+
+
+/*  dashboard game  */
+.bg-app { background-color: #0d0d0d; }
+.card-aos { 
+  background-color: #1a1a1a; 
+  border: 1px solid #333; 
+  border-radius: 4px; 
+}
+.btn-aos-outline {
+  border: 1px dashed #444;
+  color: #aaa;
+  background: transparent;
+  transition: all 0.2s;
+}
+.btn-aos-active {
+  border: 1px solid #d4af37 !important; /* Doré AoS */
+  background: rgba(212, 175, 55, 0.1) !important;
+  color: #d4af37 !important;
+}
+.text-gold { color: #d4af37; }
+.badge-underdog {
+  background-color: #8b0000;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+}
+.faction-bg-header {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+/* On crée deux zones de background derrière le score */
+.faction-left, .faction-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 0;
+  opacity: 0.3; /* Très subtil pour ne pas gêner la lecture */
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) brightness(0.6);
+}
+
+.faction-left { left: 0; mask-image: linear-gradient(to right, black, transparent); }
+.faction-right { right: 0; mask-image: linear-gradient(to left, black, transparent); }
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}

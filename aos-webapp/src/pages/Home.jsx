@@ -15,7 +15,6 @@ const CATEGORY_BANNERS = {
 };
 
 export default function Home() {
-  const [openCategories, setOpenCategories] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState(null);
@@ -106,7 +105,8 @@ export default function Home() {
   }, [allResults, activeFilter]);
 
   return (
-    <div className="container mt-4 pb-5">
+    <div className="container mt-4 pb-5 px-3">
+      {/* BARRE DE RECHERCHE */}
       <div className="mb-4 pt-2">
         <div className="search-trigger-compact" onClick={() => setIsModalOpen(true)}>
           <div className="d-flex align-items-center">
@@ -117,47 +117,53 @@ export default function Home() {
         </div>
       </div>
 
-      <h1 className="text-center mb-4 fw-bold text-uppercase" style={{letterSpacing: '2px'}}>Factions</h1>
+      <h1 className="text-white fw-bold mb-4 text-uppercase" style={{ letterSpacing: '3px', fontSize: '1.5rem' }}>
+        Allégeances
+      </h1>
 
-      <div className="row g-3">
-        {Object.keys(warscrollsData).map((category) => (
-          <div key={category} className="col-12 mb-2">
-            <button 
-              className="btn btn-dark w-100 p-0 overflow-hidden border-secondary shadow-sm" 
-              onClick={() => setOpenCategories(p => ({...p, [category]: !p[category]}))}
+      {/* GRILLE DES 4 GRANDS BLOCS D'ALLÉGEANCE */}
+      <div className="row g-3 mb-5">
+        {Object.keys(warscrollsData).map((cat) => (
+          <div key={cat} className="col-12 col-md-6">
+            <Link
+              to={`/category/${cat.toLowerCase()}`}
+              className="card border-0 shadow-lg rounded-4 overflow-hidden position-relative category-card"
+              style={{ height: '140px', transition: 'all 0.3s ease' }}
             >
-              {CATEGORY_BANNERS[category.toLowerCase()] && (
-                <img src={`/img/${CATEGORY_BANNERS[category.toLowerCase()]}`} className="w-100" style={{ maxHeight: "80px", objectFit: "cover", opacity: 0.5 }} alt={category} />
-              )}
-              <div className="p-1 fw-bold text-uppercase small" style={{background: 'rgba(0,0,0,0.4)'}}>{category}</div>
-            </button>
-            <div className={`collapse ${openCategories[category] ? "show" : ""}`}>
-              <div className="list-group mt-1">
-                {Object.keys(warscrollsData[category]).map(f => (
-                  <Link key={f} to={`/category/${category.toLowerCase()}/faction/${cleanForUrl(f)}`} className="list-group-item list-group-item-action bg-black text-white-50 border-secondary py-2 small">
-                    {f}
-                  </Link>
-                ))}
+              <div 
+                className="position-absolute w-100 h-100 banner-img" 
+                style={{ 
+                  backgroundImage: `url(/img/${CATEGORY_BANNERS[cat.toLowerCase()]})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  filter: 'brightness(0.5)'
+                }}
+              />
+              <div className="card-img-overlay d-flex flex-column align-items-center justify-content-center text-center">
+                <h2 className="text-white fw-black text-uppercase m-0 shadow-text" style={{ fontSize: '1.8rem', zIndex: 1 }}>
+                  {cat}
+                </h2>
+                <span className="text-info small fw-bold text-uppercase mt-1" style={{ letterSpacing: '1px', fontSize: '0.65rem', zIndex: 1 }}>
+                  Voir les {Object.keys(warscrollsData[cat]).length} armées →
+                </span>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>
 
-      {/* --- SECTION GENERAL'S HANDBOOK (Battleplans & Tactics) --- */}
+      {/* --- SECTION GENERAL'S HANDBOOK --- */}
       <div className="col-12 mt-5">
-        <h2 className="text-center mb-4 fw-bold text-uppercase" style={{letterSpacing: '2px'}}>General's Handbook</h2>
+        <h2 className="text-white fw-bold mb-4 text-uppercase" style={{ letterSpacing: '3px', fontSize: '1.5rem' }}>
+          General's Handbook
+        </h2>
         <div className="row g-4 justify-content-center">
-          
-          {/* Bloc Battle Plans */}
           <div className="col-12 col-md-6">
             <Link to="/battleplans" className="text-decoration-none">
-              <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card">
+              <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
                 <div className="handbook-banner" style={{
                   backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/battleplans/GeneralHandbook_files/generalhandbook.jpg')`,
-                  height: '140px',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
+                  height: '140px', backgroundSize: 'cover', backgroundPosition: 'center'
                 }}>
                   <div className="d-flex h-100 align-items-center justify-content-center flex-column">
                     <h3 className="fw-bold text-uppercase m-0 shadow-text fs-3">Battle Plans</h3>
@@ -168,15 +174,12 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Bloc Battle Tactics */}
           <div className="col-12 col-md-6">
             <Link to="/battletactics" className="text-decoration-none">
-              <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card">
+              <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
                 <div className="handbook-banner" style={{
                   backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/img/banner_seraphon.webp')`,
-                  height: '140px',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
+                  height: '140px', backgroundSize: 'cover', backgroundPosition: 'center'
                 }}>
                   <div className="d-flex h-100 align-items-center justify-content-center flex-column">
                     <h3 className="fw-bold text-uppercase m-0 shadow-text fs-3">Battle Tactics</h3>
@@ -186,11 +189,10 @@ export default function Home() {
               </div>
             </Link>
           </div>
-
         </div>
       </div>
 
-      {/* MODAL DE RECHERCHE */}
+      {/* MODAL DE RECHERCHE (Inchangé) */}
       {isModalOpen && (
         <div className="search-fullscreen-overlay">
           <div className="container h-100 d-flex flex-column pt-3">
@@ -258,20 +260,17 @@ export default function Home() {
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
         
+        /* Styles Allégeances */
+        .category-card:hover .banner-img { transform: scale(1.05); filter: brightness(0.7) !important; }
+        .banner-img { transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease; }
+        .fw-black { font-weight: 900; }
+        .shadow-text { text-shadow: 0px 4px 15px rgba(0,0,0,1); }
+
         /* Styles Handbook Cards */
-        .handbook-card {
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-            border: 1px solid #444 !important;
-        }
-        .handbook-card:hover {
-            transform: translateY(-5px);
-            border-color: #ffc107 !important;
-        }
-        .shadow-text {
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
-            letter-spacing: 1px;
-        }
+        .handbook-card { transition: transform 0.3s ease, border-color 0.3s ease; cursor: pointer; border: 1px solid #444 !important; }
+        .handbook-card:hover {border-color: #ffc107 !important; }
+        .category-card {border: 1px solid rgba(255,255,255,0.1) !important;}
+        .category-card:hover {border-color: #ffc107 !important; }
       `}</style>
     </div>
   );

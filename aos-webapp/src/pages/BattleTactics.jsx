@@ -50,7 +50,7 @@ export default function BattleTactics() {
 
       <div className="accordion shadow-lg" id="accordionTactics">
         {battletacticsData.map((bt, index) => (
-          <div className="accordion-item bg-dark text-white mb-2 rounded-2 border-secondary" key={bt.id}>
+          <div className="accordion-item bg-dark text-white mb-2 rounded-2" key={bt.id}>
             <h2 className="accordion-header">
               <button 
                 className="accordion-button collapsed bg-dark text-white fw-bold py-3" 
