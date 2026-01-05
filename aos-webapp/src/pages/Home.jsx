@@ -20,7 +20,6 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState(null);
 
-  // CORRECTION : On utilise des tirets pour des URLs propres
   const cleanForUrl = (n) => n.toLowerCase().trim().replace(/\s+/g, "-");
 
   // --- MOTEUR DE RECHERCHE ---
@@ -29,7 +28,6 @@ export default function Home() {
     if (s.length < 2) return [];
 
     let combined = [];
-
     const factionToCategory = {};
     Object.keys(warscrollsData).forEach(cat => {
       Object.keys(warscrollsData[cat]).forEach(fac => {
@@ -37,7 +35,6 @@ export default function Home() {
       });
     });
 
-    // 1. WARSCROLLS
     Object.keys(warscrollsData).forEach(c => {
       Object.keys(warscrollsData[c]).forEach(f => {
         warscrollsData[c][f].forEach(u => {
@@ -51,7 +48,6 @@ export default function Home() {
       });
     });
 
-    // 2. SPELLS & PRAYERS
     if (spellsData.factions) {
       Object.keys(spellsData.factions).forEach(f => {
         const cat = factionToCategory[f] || "order";
@@ -68,7 +64,6 @@ export default function Home() {
       });
     }
 
-    // 3. MANIFESTATIONS
     if (manifestationsData.factions) {
       Object.keys(manifestationsData.factions).forEach(f => {
         const cat = factionToCategory[f] || "order";
@@ -76,7 +71,6 @@ export default function Home() {
           if (m.name.toLowerCase().includes(s)) {
             const unitSlug = m.name.toLowerCase().replace(/\s+/g, "-");
             const hasWarscroll = warscrollsData[cat]?.[f]?.some(u => u.slug === unitSlug);
-
             combined.push({ 
               name: m.name, type: "MANIFESTATION", faction: f, color: "bg-success",
               path: hasWarscroll 
@@ -88,7 +82,6 @@ export default function Home() {
       });
     }
 
-    // 4. ENHANCEMENTS
     Object.keys(enhancementsData).forEach(f => {
       const cat = factionToCategory[f] || "order";
       enhancementsData[f].all_enhancements.forEach(enh => {
@@ -107,7 +100,6 @@ export default function Home() {
   }, [searchTerm]);
 
   const availableTypes = useMemo(() => [...new Set(allResults.map(r => r.type))], [allResults]);
-
   const filteredResults = useMemo(() => {
     const base = activeFilter ? allResults.filter(r => r.type === activeFilter) : allResults;
     return base.slice(0, 40);
@@ -127,28 +119,76 @@ export default function Home() {
 
       <h1 className="text-center mb-4 fw-bold text-uppercase" style={{letterSpacing: '2px'}}>Factions</h1>
 
-      {Object.keys(warscrollsData).map((category) => (
-        <div key={category} className="mb-3">
-          <button 
-            className="btn btn-dark w-100 p-0 overflow-hidden border-secondary shadow-sm" 
-            onClick={() => setOpenCategories(p => ({...p, [category]: !p[category]}))}
-          >
-            {CATEGORY_BANNERS[category.toLowerCase()] && (
-              <img src={`/img/${CATEGORY_BANNERS[category.toLowerCase()]}`} className="w-100" style={{ maxHeight: "80px", objectFit: "cover", opacity: 0.5 }} />
-            )}
-            <div className="p-1 fw-bold text-uppercase small" style={{background: 'rgba(0,0,0,0.4)'}}>{category}</div>
-          </button>
-          <div className={`collapse ${openCategories[category] ? "show" : ""}`}>
-            <div className="list-group mt-1">
-              {Object.keys(warscrollsData[category]).map(f => (
-                <Link key={f} to={`/category/${category.toLowerCase()}/faction/${cleanForUrl(f)}`} className="list-group-item list-group-item-action bg-black text-white-50 border-secondary py-2 small">
-                  {f}
-                </Link>
-              ))}
+      <div className="row g-3">
+        {Object.keys(warscrollsData).map((category) => (
+          <div key={category} className="col-12 mb-2">
+            <button 
+              className="btn btn-dark w-100 p-0 overflow-hidden border-secondary shadow-sm" 
+              onClick={() => setOpenCategories(p => ({...p, [category]: !p[category]}))}
+            >
+              {CATEGORY_BANNERS[category.toLowerCase()] && (
+                <img src={`/img/${CATEGORY_BANNERS[category.toLowerCase()]}`} className="w-100" style={{ maxHeight: "80px", objectFit: "cover", opacity: 0.5 }} alt={category} />
+              )}
+              <div className="p-1 fw-bold text-uppercase small" style={{background: 'rgba(0,0,0,0.4)'}}>{category}</div>
+            </button>
+            <div className={`collapse ${openCategories[category] ? "show" : ""}`}>
+              <div className="list-group mt-1">
+                {Object.keys(warscrollsData[category]).map(f => (
+                  <Link key={f} to={`/category/${category.toLowerCase()}/faction/${cleanForUrl(f)}`} className="list-group-item list-group-item-action bg-black text-white-50 border-secondary py-2 small">
+                    {f}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
+        ))}
+      </div>
+
+      {/* --- SECTION GENERAL'S HANDBOOK (Battleplans & Tactics) --- */}
+      <div className="col-12 mt-5">
+        <h2 className="text-center mb-4 fw-bold text-uppercase" style={{letterSpacing: '2px'}}>General's Handbook</h2>
+        <div className="row g-4 justify-content-center">
+          
+          {/* Bloc Battle Plans */}
+          <div className="col-12 col-md-6">
+            <Link to="/battleplans" className="text-decoration-none">
+              <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card">
+                <div className="handbook-banner" style={{
+                  backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/battleplans/GeneralHandbook_files/generalhandbook.jpg')`,
+                  height: '140px',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}>
+                  <div className="d-flex h-100 align-items-center justify-content-center flex-column">
+                    <h3 className="fw-bold text-uppercase m-0 shadow-text fs-3">Battle Plans</h3>
+                    <span className="badge bg-info text-dark mt-2 px-3">2025 - 2026</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Bloc Battle Tactics */}
+          <div className="col-12 col-md-6">
+            <Link to="/battletactics" className="text-decoration-none">
+              <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card">
+                <div className="handbook-banner" style={{
+                  backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/img/banner_seraphon.webp')`,
+                  height: '140px',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}>
+                  <div className="d-flex h-100 align-items-center justify-content-center flex-column">
+                    <h3 className="fw-bold text-uppercase m-0 shadow-text fs-3">Battle Tactics</h3>
+                    <span className="badge bg-warning text-dark mt-2 px-3">2025 - 2026</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+
         </div>
-      ))}
+      </div>
 
       {/* MODAL DE RECHERCHE */}
       {isModalOpen && (
@@ -217,6 +257,21 @@ export default function Home() {
         .badge-mini { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 3px; font-size: 0.65rem; font-weight: 900; color: #000; flex-shrink: 0; }
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        
+        /* Styles Handbook Cards */
+        .handbook-card {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #444 !important;
+        }
+        .handbook-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffc107 !important;
+        }
+        .shadow-text {
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+            letter-spacing: 1px;
+        }
       `}</style>
     </div>
   );

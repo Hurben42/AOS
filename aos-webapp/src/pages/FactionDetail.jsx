@@ -157,14 +157,12 @@ export default function FactionDetail() {
         table { width: 100%; color: inherit; }
       `}</style>
 
-      <Breadcrumb categoryName={category} factionName={faction} />
-      
-      <div className="d-flex justify-content-between align-items-center my-4">
         <Link to={`/category/${category}/faction/${faction}`} className="btn btn-outline-light btn-sm px-3">
           ← Retour
         </Link>
+      
+      <div className="d-flex justify-content-center align-items-center my-4">
         <h2 className="text-white text-uppercase m-0 fw-bold" style={{letterSpacing: '3px'}}>{section?.title}</h2>
-        <div style={{width: '85px'}}></div>
       </div>
       
       {loading ? (
