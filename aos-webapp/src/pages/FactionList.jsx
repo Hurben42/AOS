@@ -31,7 +31,6 @@ export default function FactionList() {
   const { category, faction } = useParams();
   const navigate = useNavigate();
 
-  // --- FORCE LA TRANSPARENCE DU PARENT ---
   useEffect(() => {
     const parentDiv = document.querySelector('.bg-black.text-light.min-vh-100');
     if (parentDiv) {
@@ -53,7 +52,6 @@ export default function FactionList() {
       .replace(/[^a-z0-9]/g, "")
       .trim() || "";
 
-  // 1. Extraction et Normalisation des clés
   const catKey = Object.keys(warscrollsData).find(k => k.toLowerCase() === category.toLowerCase()) || category;
   const allianceData = warscrollsData[catKey] || {};
   
@@ -71,7 +69,6 @@ export default function FactionList() {
   const cleanFactionKey = realFactionKey ? normalize(realFactionKey) : normalize(faction);
   const factionCVs = manifestationsIndex.factions[cleanFactionKey] || [];
 
-  // 2. CONFIGURATION DES SECTIONS ARMY RULES (Vérification dynamique)
   const sectionsConfig = [
     { id: "battle-traits", label: "BATTLE TRAITS", data: battleTraitsData },
     { id: "battle-formations", label: "BATTLE FORMATIONS", data: formationsData },
@@ -91,7 +88,6 @@ export default function FactionList() {
     return Array.isArray(factionData) && factionData.length > 0;
   });
 
-  // 3. MOTEUR DE TRI DES UNITÉS
   const groupedUnits = allUnits.reduce((acc, unit) => {
     if (terrainEntry && unit.slug === terrainEntry.slug) return acc;
     const rawHtml = unit.html || "";
@@ -123,7 +119,11 @@ export default function FactionList() {
   }, {});
 
   const roleOrder = ["HERO", "INFANTRY", "CAVALRY", "BEAST", "MONSTER", "WAR MACHINE", "ARTILLERY", "MANIFESTATION"];
-  const sortedRoles = Object.keys(groupedUnits).sort((a, b) => (roleOrder.indexOf(a) || 99) - (roleOrder.indexOf(b) || 99));
+  const sortedRoles = Object.keys(groupedUnits).sort((a, b) => {
+    const indexA = roleOrder.indexOf(a);
+    const indexB = roleOrder.indexOf(b);
+    return (indexA === -1 ? 99 : indexA) - (indexB === -1 ? 99 : indexB);
+  });
 
   return (
     <div className="position-relative min-vh-100">
@@ -137,7 +137,6 @@ export default function FactionList() {
 
       <div className="container mt-4 pb-5 position-relative" style={{ zIndex: 1 }}>
         
-        {/* FIL D'ARIANE (BREADCRUMB) */}
         <nav aria-label="breadcrumb" className="mb-4">
           <ol className="breadcrumb bg-dark bg-opacity-50 p-2 px-3 rounded-pill border border-secondary border-opacity-25" style={{ display: 'inline-flex' }}>
             <li className="breadcrumb-item">
@@ -156,15 +155,21 @@ export default function FactionList() {
           {realFactionKey || faction.replace(/-/g, ' ')}
         </h2>
 
-        {/* ACCORDION UNITÉS */}
+        {/* ACCORDION UNITÉS (Tout fermé par défaut) */}
         <div className="accordion shadow-lg mb-4" id="warscrollAccordion">
           {sortedRoles.map((role) => {
             const units = groupedUnits[role];
             const collapseId = `collapse-${role.replace(/\s+/g, '')}`;
+            
             return (
               <div className="accordion-item bg-dark bg-opacity-75 border-secondary border-opacity-25 mb-2 blur-bg overflow-hidden shadow-sm" style={{borderRadius: '10px'}} key={role}>
                 <h2 className="accordion-header">
-                  <button className="accordion-button collapsed bg-transparent text-white fw-bold py-3 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target={`#${collapseId}`}>
+                  <button 
+                    className="accordion-button collapsed bg-transparent text-white fw-bold py-3 shadow-none" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target={`#${collapseId}`}
+                  >
                     <span className="me-3 fs-5">{ROLE_ICONS[role] || '📜'}</span>
                     <span className="text-uppercase" style={{letterSpacing: '1px'}}>{role}</span>
                     <span className="badge bg-info bg-opacity-25 text-info ms-3 px-3">{units.length}</span>
@@ -190,7 +195,6 @@ export default function FactionList() {
           })}
         </div>
 
-        {/* TERRAIN */}
         {terrainEntry && (
           <div className="card my-4 bg-dark bg-opacity-75 border-secondary border-opacity-25 shadow-lg blur-bg">
             <div className="card-body py-3">
@@ -207,7 +211,6 @@ export default function FactionList() {
           </div>
         )}
 
-        {/* SECTION ARMY RULES DYNAMIQUE */}
         <div className="card mb-4 bg-dark bg-opacity-75 border-secondary border-opacity-25 blur-bg shadow-lg">
           <div className="card-header bg-black bg-opacity-50 text-white-50 small fw-bold" style={{letterSpacing: '1px'}}>ARMY RULES</div>
           <div className="card-body p-3">
