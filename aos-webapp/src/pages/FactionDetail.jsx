@@ -1,15 +1,15 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 const SECTION_CONFIG = {
-  "battle-traits": { title: "Battle Traits", keywords: ["BATTLE TRAIT"] },
-  "battle-formations": { title: "Battle Formations", keywords: ["FORMATION", "TRIBE", "TEMPLE"] },
-  "heroic-traits": { title: "Heroic Traits", keywords: ["HEROIC TRAIT", "COMMAND TRAIT"] },
-  "monstrous-traits": { title: "Monstrous Traits", keywords: ["MONSTROUS"] },
-  "artefacts-of-power": { title: "Artefacts of Power", keywords: ["ARTEFACT", "RELIC"] },
-  "spell-lore": { title: "Spell Lore", keywords: ["SPELL", "SORT", "LORE OF"] },
-  "prayer-lore": { title: "Prayer Lore", keywords: ["PRAYER", "PRIÈRE", "SCRIPTURES"] },
-  "manifestation-lore": { title: "Manifestation Lore", keywords: ["MANIFESTATION"] }
+  "battle-traits": { title: "Battle Traits" },
+  "battle-formations": { title: "Battle Formations" },
+  "heroic-traits": { title: "Heroic Traits" },
+  "monstrous-traits": { title: "Monstrous Traits" },
+  "artefacts-of-power": { title: "Artefacts of Power" },
+  "spell-lore": { title: "Spell Lore" },
+  "prayer-lore": { title: "Prayer Lore" },
+  "manifestation-lore": { title: "Manifestation Lore" }
 };
 
 export default function FactionDetail() {
@@ -20,7 +20,7 @@ export default function FactionDetail() {
 
   const section = SECTION_CONFIG[sectionSlug];
 
-  // --- EFFET POUR LE BACKGROUND ET LA TRANSPARENCE ---
+  // Gestion de la transparence du fond parent
   useEffect(() => {
     const parentDiv = document.querySelector('.bg-black.text-light.min-vh-100');
     if (parentDiv) {
@@ -41,6 +41,7 @@ export default function FactionDetail() {
   useEffect(() => {
     if (!section) return;
 
+    // Helper pour matcher la structure de tes dossiers
     const getPaths = (f) => {
       const slug = f.toLowerCase();
       if (slug.includes("cities of sigmar")) return { folder: "cities of sigmar", file: "citiesofsigmar" };
@@ -57,82 +58,66 @@ export default function FactionDetail() {
     setLoading(true);
     fetch(filePath)
       .then((res) => {
-        if (!res.ok) throw new Error(`Fichier introuvable.`);
+        if (!res.ok) throw new Error(`Fichier HTML introuvable pour cette faction.`);
         return res.text();
       })
       .then((html) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
         
+        // Nettoyage immédiat des éléments parasites
         doc.querySelectorAll("img.abLogo, .PitchedBattleProfile, script, style, .NoPrint").forEach(el => el.remove());
 
-        let rawBlocks = [];
+        let finalHtml = [];
         const headers = [...doc.querySelectorAll("h2")];
         
+        // On cible le bon H2
         const header = headers.find(h => 
-            h.textContent.trim().replace(/\s+/g, ' ').toUpperCase() === section.title.toUpperCase()
+            h.textContent.trim().toUpperCase() === section.title.toUpperCase()
         );
 
         if (header) {
           let current = header.nextElementSibling;
+          
+          // --- LOGIQUE DE COLLECTE : TOUT JUSQU'AU PROCHAIN H2 ---
           while (current && current.tagName !== "H2") {
+            
+            // 1. Titres de sous-sections (ex: noms des formations)
             if (current.tagName === "H3") {
-              rawBlocks.push({ type: 'title', element: current.cloneNode(true) });
+              finalHtml.push(`<div class="lore-title-container"><h3 class="lore-title">${current.innerHTML}</h3></div>`);
             }
             
-            const cards = current.querySelectorAll(".BreakInsideAvoid");
+            // 2. Cartes de règles (Format standard Warscrolls)
+            const cards = current.classList.contains("BreakInsideAvoid") 
+                          ? [current] 
+                          : current.querySelectorAll(".BreakInsideAvoid");
+
             if (cards.length > 0) {
               cards.forEach(card => {
-                rawBlocks.push({ type: 'card', element: card.cloneNode(true) });
+                if (card.textContent.trim().length > 5) {
+                  // Nettoyage interne de la carte (spans inutiles)
+                  card.querySelectorAll("span").forEach(span => {
+                    if(!span.classList.length) span.replaceWith(span.textContent);
+                  });
+                  finalHtml.push(`<div class="custom-rule-card">${card.outerHTML}</div>`);
+                }
               });
-            } else if (current.classList.contains("BreakInsideAvoid")) {
-              rawBlocks.push({ type: 'card', element: current.cloneNode(true) });
+            } 
+            // 3. Paragraphes de texte descriptif
+            else if (current.tagName === "P" && current.textContent.trim().length > 5) {
+               finalHtml.push(`<p class="text-description">${current.innerHTML}</p>`);
             }
+            // 4. Listes d'aptitudes
+            else if (current.tagName === "UL" || current.tagName === "OL") {
+               finalHtml.push(`<div class="text-description">${current.outerHTML}</div>`);
+            }
+
             current = current.nextElementSibling;
           }
         }
 
-        const finalHtml = [];
-        const processedTexts = []; 
-
-        rawBlocks.forEach((item) => {
-          // Nettoyage des spans
-          item.element.querySelectorAll(".abHeader, b").forEach(headerPart => {
-            const spans = headerPart.querySelectorAll("span");
-            if (spans.length > 0) headerPart.textContent = headerPart.textContent.trim();
-          });
-
-          const contentText = item.element.textContent.toUpperCase();
-          const cleanText = item.element.textContent.replace(/\s+/g, " ").trim().toLowerCase();
-          
-          if (item.type === 'title') {
-            if (cleanText.length > 0 && !processedTexts.includes(cleanText)) {
-              processedTexts.push(cleanText);
-              finalHtml.push(`<div class="lore-title-container"><h3 class="lore-title">${item.element.innerHTML}</h3></div>`);
-            }
-          } else {
-            // --- FILTRAGE STRICT PAR MOTS-CLÉS ---
-            // On vérifie si la carte contient au moins un des mots-clés de la section
-            const matchesSection = section.keywords.some(kw => contentText.includes(kw));
-            
-            // Sécurité spécifique pour les sorts/prières pour ne pas mélanger les deux
-            let isWrongType = false;
-            if (sectionSlug === "spell-lore" && (contentText.includes("PRAYER") || contentText.includes("PRIÈRE"))) isWrongType = true;
-            if (sectionSlug === "prayer-lore" && (contentText.includes("SPELL") || contentText.includes("SORT"))) isWrongType = true;
-
-            const isDuplicate = processedTexts.some(existingText => 
-              existingText.includes(cleanText) || cleanText.includes(existingText)
-            );
-
-            if (matchesSection && !isWrongType && cleanText.length > 10 && !isDuplicate) {
-              processedTexts.push(cleanText);
-              finalHtml.push(`<div class="custom-spell-card">${item.element.outerHTML}</div>`);
-            }
-          }
-        });
-
         if (finalHtml.length === 0) {
-           setError(`Aucune donnée trouvée pour "${section.title}".`);
+           setError(`Aucune information trouvée dans la section "${section.title}".`);
         } else {
            setContent(finalHtml.join(""));
         }
@@ -150,7 +135,7 @@ export default function FactionDetail() {
       <div 
         className="fixed-top w-100 h-100" 
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url("${backgroundImagePath}")`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url("${backgroundImagePath}")`,
           backgroundSize: 'cover', 
           backgroundPosition: 'center top', 
           backgroundAttachment: 'fixed', 
@@ -160,44 +145,60 @@ export default function FactionDetail() {
 
       <div className="container mt-4 pb-5 position-relative" style={{ zIndex: 1 }}>
         <style>{`
-          .lore-title-container { margin-top: 3rem; margin-bottom: 1.5rem; text-align: center; }
+          .lore-title-container { margin-top: 3.5rem; margin-bottom: 2rem; text-align: center; }
           .lore-title { 
               display: inline-block; color: #0dcaf0; text-transform: uppercase; 
-              font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid #0dcaf0; 
-              padding-bottom: 5px; font-size: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+              font-weight: 800; letter-spacing: 3px; border-bottom: 3px solid #0dcaf0; 
+              padding-bottom: 8px; font-size: 1.6rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
           }
-          .custom-spell-card {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
+          .custom-rule-card {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 1.2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border-left: 4px solid #ffc107;
+            border-radius: 4px 12px 12px 4px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: #efefef;
           }
-          .custom-spell-card .abHeader { color: #ffc107; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 5px; }
-          .custom-spell-card b { color: #ffc107; text-transform: uppercase; }
-          .custom-spell-card hr { border-color: rgba(255,255,255,0.1); margin: 10px 0; }
-          .section-content { color: #e0e0e0; line-height: 1.6; }
-          table { width: 100%; color: inherit; border-collapse: collapse; }
-          td { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+          .custom-rule-card .abHeader, .custom-rule-card b { 
+            color: #ffc107 !important; 
+            text-transform: uppercase; 
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+          }
+          .text-description {
+            color: #bbb;
+            font-style: italic;
+            padding: 0 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+          }
+          .custom-rule-card table { width: 100%; margin-top: 10px; }
+          .custom-rule-card td { padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+          .custom-rule-card hr { border-color: rgba(255,255,255,0.2); }
         `}</style>
 
-        <Link to={`/category/${category}/faction/${faction}`} className="btn btn-outline-light btn-sm px-3 mb-4 bg-dark bg-opacity-50">
-          ← Retour
+        <Link to={`/category/${category}/faction/${faction}`} className="btn btn-outline-warning btn-sm px-4 mb-4 bg-black bg-opacity-50 rounded-pill">
+          ← Retour à la faction
         </Link>
       
-        <div className="text-center my-4">
-          <h2 className="text-white text-uppercase m-0 fw-bold" style={{letterSpacing: '3px', textShadow: '2px 2px 10px rgba(0,0,0,0.8)'}}>{section?.title}</h2>
-          <p className="text-info small text-uppercase mt-2">{faction.replace(/-/g, ' ')}</p>
+        <div className="text-center my-5">
+          <h1 className="text-white text-uppercase m-0 fw-black" style={{letterSpacing: '5px', textShadow: '0 0 20px rgba(13, 202, 240, 0.5)'}}>{section?.title}</h1>
+          <div className="bg-info mx-auto mt-2" style={{height: '2px', width: '50px'}}></div>
+          <p className="text-info small text-uppercase mt-3 fw-bold" style={{letterSpacing: '2px'}}>{faction.replace(/-/g, ' ')}</p>
         </div>
         
         {loading ? (
-          <div className="text-center my-5"><div className="spinner-border text-info"></div></div>
+          <div className="text-center my-5"><div className="spinner-border text-info" style={{width: '3rem', height: '3rem'}}></div><p className="mt-3 text-info">Invoquation des archives...</p></div>
         ) : error ? (
-          <div className="alert alert-warning bg-dark text-white border-warning">{error}</div>
+          <div className="alert alert-danger bg-dark text-white border-danger mx-auto" style={{maxWidth: '600px'}}>
+            <h5 className="text-danger">Oups...</h5>
+            {error}
+          </div>
         ) : (
-          <div className="section-content animate__animated animate__fadeIn" 
+          <div className="section-content animate__animated animate__fadeInUp" 
                dangerouslySetInnerHTML={{ __html: content }} />
         )}
       </div>

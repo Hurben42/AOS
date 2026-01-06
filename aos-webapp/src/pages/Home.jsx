@@ -7,11 +7,12 @@ import spellsData from "../data/spellsIndex.json";
 import manifestationsData from "../data/manifestationsIndex.json";
 import enhancementsData from "../data/enhancements_index.json";
 
+// TA CONSTANTE EXACTE
 const CATEGORY_BANNERS = {
-  chaos: "banner_slaves.webp",
-  death: "banner_flesheater.webp",
-  destruction: "banner_ironjawz.webp",
-  order: "banner_stormcast.webp",
+  ORDER: "/factions/order/order.jpg",
+  CHAOS: "/factions/chaos/chaos.jpg",
+  DEATH: "/factions/death/death.jpg",
+  DESTRUCTION: "/factions/destruction/destruction.jpg"
 };
 
 export default function Home() {
@@ -133,7 +134,7 @@ export default function Home() {
               <div 
                 className="position-absolute w-100 h-100 banner-img" 
                 style={{ 
-                  backgroundImage: `url(/img/${CATEGORY_BANNERS[cat.toLowerCase()]})`,
+                  backgroundImage: `url(${CATEGORY_BANNERS[cat.toUpperCase()]})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   filter: 'brightness(0.5)'
@@ -192,7 +193,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* MODAL DE RECHERCHE (Inchangé) */}
+      {/* MODAL DE RECHERCHE */}
       {isModalOpen && (
         <div className="search-fullscreen-overlay">
           <div className="container h-100 d-flex flex-column pt-3">
@@ -260,13 +261,11 @@ export default function Home() {
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
         
-        /* Styles Allégeances */
         .category-card:hover .banner-img { transform: scale(1.05); filter: brightness(0.7) !important; }
         .banner-img { transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease; }
         .fw-black { font-weight: 900; }
         .shadow-text { text-shadow: 0px 4px 15px rgba(0,0,0,1); }
 
-        /* Styles Handbook Cards */
         .handbook-card { transition: transform 0.3s ease, border-color 0.3s ease; cursor: pointer; border: 1px solid #444 !important; }
         .handbook-card:hover {border-color: #ffc107 !important; }
         .category-card {border: 1px solid rgba(255,255,255,0.1) !important;}

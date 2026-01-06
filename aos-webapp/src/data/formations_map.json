@@ -1,0 +1,192 @@
+{
+  "citiesofsigmar": [
+    "Dawnbringer Crusade",
+    "Fortress-city Defenders",
+    "Ironweld Guild Army",
+    "Collegiate Arcane Expedition",
+    "Veteran Cannoneers",
+    "Fearless Exemplars"
+  ],
+  "daughtersofkhaine": [
+    "Scáthcoven",
+    "Cauldron Guard",
+    "Shadow Patrol",
+    "Slaughter Troupe",
+    "Coven Zealots",
+    "Arena Veterans"
+  ],
+  "fyreslayers": [
+    "Warrior Kinband",
+    "Scales of Vulcatrix",
+    "Forge Brethren",
+    "Lords of the Lodge"
+  ],
+  "idoneth": [
+    "Namarti Corps",
+    "Isharann Council",
+    "Akhelian Beastmasters",
+    "Soul-raid Ambushers",
+    "Deep-sea Stalkers",
+    "Ethersea Predators"
+  ],
+  "kharadron": [
+    "Pioneers and Scavengers",
+    "Veteran Ground Troops",
+    "Rapid Redeployment Squadron",
+    "Endrineers Guild Expeditionary Force"
+  ],
+  "lumineth": [
+    "Vanari Battlehost",
+    "Alarith Temple",
+    "Scinari Council",
+    "Hurakan Temple"
+  ],
+  "seraphon": [
+    "Eternal Starhost",
+    "Sunclaw Starhost",
+    "Shadowstrike Starhost",
+    "Thunderquake Starhost"
+  ],
+  "stormcast": [
+    "Sentinels of the Bleak Citadels",
+    "Vanguard Wing",
+    "Thunderhead Host",
+    "Lightning Echelon",
+    "Sacrosanct Convocation"
+  ],
+  "sylvaneth": [
+    "Lords of the Clan",
+    "Outcasts",
+    "Forest Folk",
+    "Free Spirits",
+    "Wargrove of the Burgeoning",
+    "Wargrove of Everdusk"
+  ],
+  "helsmiths": [
+    "Hashutite Host",
+    "The Bullfather’s Horns",
+    "Castigation Battery",
+    "Daemonsmith Cabal",
+    "Domination Force",
+    "Industrial Polluters"
+  ],
+  "khorne": [
+    "Khornate Legion",
+    "Bloodbound Warhorde",
+    "Brass Stampede",
+    "Murderhost",
+    "Tournament of Skulls",
+    "The Goretide"
+  ],
+  "nurgle": [
+    "Tallyband of Nurgle",
+    "Plague Cyst",
+    "Nurgle’s Menagerie",
+    "Affliction Cyst"
+  ],
+  "skaven": [
+    "Virulent Procession",
+    "Fleshmeld Menagerie",
+    "Claw-horde",
+    "Warpcog Convocation",
+    "Envoys of the Deepengnaw",
+    "Gathering of the Clans"
+  ],
+  "slaanesh": [
+    "Depraved Carnival",
+    "Epicurean Revellers",
+    "Seeker Cavalcade",
+    "Supreme Sybarites",
+    "Pretenders",
+    "Invaders"
+  ],
+  "slaves": [
+    "Legion of Chaos",
+    "Despoilers",
+    "Godswrath Warband",
+    "Darkoath Horde",
+    "Chaos Horde",
+    "Champions of Chaos"
+  ],
+  "tzeentch": [
+    "Arcanite Cabal",
+    "Tzaangor Coven",
+    "Change Host",
+    "Wyrdflame Host",
+    "Masters of Fate",
+    "Spellweaver Coven"
+  ],
+  "flesheater": [
+    "Knightly Echelon",
+    "The Royal Hunt",
+    "Lords of the Manor",
+    "Royal Menagerie",
+    "Impassioned Serfs",
+    "Questing Courtiers"
+  ],
+  "nighthaunt": [
+    "Quicksilver Gheists",
+    "Shrieker Host",
+    "Death Stalkers",
+    "Royal Procession",
+    "Hungry Nexus",
+    "Deathrust Gheists"
+  ],
+  "ossiarch": [
+    "Kavalos Lance",
+    "Mortek Ballistari",
+    "Mortek Phalanx",
+    "Mortisan Council",
+    "Tithe Guards",
+    "Hekatos Drillmasters"
+  ],
+  "soulblight": [
+    "Legion of Shyish",
+    "Deathstench Drove",
+    "Bacchanal of Blood",
+    "Deathmarch",
+    "Legions of Ulfenkarn",
+    "Cryptmasters",
+    "Skinshifters"
+  ],
+  "gloomspite": [
+    "Gloomspite Horde",
+    "Troggherd",
+    "Squigalanche",
+    "Gitmob Pack",
+    "Sunbiter Pack",
+    "Gittish Tide"
+  ],
+  "ironjawz": [
+    "Ironjawz Brawl",
+    "Weirdfist",
+    "Ironfist",
+    "Grunta Stampede",
+    "Brutefist",
+    "Bigsnikkaz"
+  ],
+  "kruleboyz": [
+    "Kruleboyz Klaw",
+    "Light Finga",
+    "Middul Finga",
+    "Trophy Finga",
+    "Swamphorde Bullies",
+    "Badmouthing Baiterz"
+  ],
+  "ogor": [
+    "Prophets of the Gulping God",
+    "Heralds of the Everwinter",
+    "Beast Handlers",
+    "Blackpowder Fanatics",
+    "Mawpath Menaces",
+    "Greedy Eaters"
+  ],
+  "sonsofbehemat": [
+    "Taker Tribe",
+    "Breaker Tribe",
+    "Boss Tribe",
+    "Stomper Tribe",
+    "Manskittle Mob",
+    "Big Toes"
+  ]
+}

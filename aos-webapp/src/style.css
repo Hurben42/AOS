@@ -562,6 +562,16 @@ input.fs-4::placeholder {
 
 .navbar-brand:hover {text-decoration: none !important;}
 
+.btn-qr-pulse i {
+  animation: qr-pulse 2s infinite;
+}
+
+@keyframes qr-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
 
 /*  dashboard game  */
 .bg-app { background-color: #0d0d0d; }
@@ -612,4 +622,62 @@ input.fs-4::placeholder {
 .header-content {
   position: relative;
   z-index: 1;
+}
+
+/* StartGame.css */
+.faction-card {
+  height: 100px;
+  border: 1px solid rgba(255, 215, 0, 0.2) !important;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.faction-card:hover {
+  border-color: #ffd700 !important;
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+.faction-img-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.5);
+  z-index: 1;
+}
+
+.faction-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+  z-index: 2;
+}
+
+.faction-text {
+  position: relative;
+  z-index: 3;
+  padding-left: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+}
+
+/* Style spécifique pour les headers d'accordéon (Alliances) */
+.alliance-header-btn {
+  background-size: cover !important;
+  background-position: center !important;
+  height: 60px;
+  color: white !important;
+  font-weight: bold !important;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
 }

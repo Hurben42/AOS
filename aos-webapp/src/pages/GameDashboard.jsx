@@ -5,244 +5,246 @@ import { battleplansData } from "../data/battleplansData";
 export default function GameDashboard() {
   const navigate = useNavigate();
   
-  // --- ÉTATS DE SESSION & NAVIGATION ---
+  // --- ÉTATS ---
   const [session, setSession] = useState(null);
   const [currentTurn, setCurrentTurn] = useState(1);
   const [firstPlayer, setFirstPlayer] = useState("You");
-  const [tacticModal, setTacticModal] = useState({ show: false, player: null, group: null });
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [historyModal, setHistoryModal] = useState({ show: false, player: null, cardIndex: null });
+  const [quitModal, setQuitModal] = useState(false);
+  
   const [history, setHistory] = useState([]);
+  const [persistedUnderdog, setPersistedUnderdog] = useState(null);
 
-  // --- ÉTATS DU ROUND ---
   const [roundScores, setRoundScores] = useState({
-    You: { obj1: false, obj2: false, objMore: false, objSpecial: false, tacticA: false, tacticB: false },
-    Opponent: { obj1: false, obj2: false, objMore: false, objSpecial: false, tacticA: false, tacticB: false }
+    You: { obj1: false, obj2: false, objMore: false, objSpecial: false, card0: false, card1: false },
+    Opponent: { obj1: false, obj2: false, objMore: false, objSpecial: false, card0: false, card1: false }
   });
 
-  // --- PROGRESSION DES TACTIQUES ---
   const [tacticProgress, setTacticProgress] = useState({
-    You: { groupA: 0, groupB: 0 },
-    Opponent: { groupA: 0, groupB: 0 }
+    You: [0, 0], Opponent: [0, 0]
   });
 
+  // --- INITIALISATION ---
   useEffect(() => {
     const activeSession = JSON.parse(localStorage.getItem("active_game_session"));
-    if (!activeSession) { navigate("/start-game"); return; }
+    if (!activeSession) { navigate("/"); return; }
     setSession(activeSession);
-    
-    // Si on revient sur une partie en cours, on pourrait charger l'historique ici
   }, [navigate]);
 
-  if (!session) return null;
+  if (!session) return <div style={{background:'#000', height:'100vh'}} />;
 
-  const plan = battleplansData["Passing Seasons"][session.battleplan?.name];
-  const myTactics = session.armyList?.selectedTactics || [
-    { name: "Saison Tactic 1", steps: ["Affray", "Strike", "Domination"] },
-    { name: "Saison Tactic 2", steps: ["Affray", "Strike", "Domination"] }
-  ];
+  const plan = battleplansData["Passing Seasons"]?.[session.battleplan?.name] || { customOptions: [], tacticValue: 4 };
+  const tacticNames = ["Affray", "Strike", "Domination"];
+  const tacticVP = plan.tacticValue || 4;
 
-  // --- LOGIQUE DOUBLE TOUR & UNDERDOG ---
-  const lastRound = history.find(h => h.round === currentTurn - 1);
-  const lastPlayerOfPrevRound = lastRound ? (lastRound.youFirst ? "Opponent" : "You") : null;
+  // --- LOGIQUE RÉACTIVE (UNDERDOG / SEIZE) ---
+  const lastRoundEntry = history[history.length - 1];
+  const lastPlayerOfPrevRound = lastRoundEntry ? (lastRoundEntry.youFirst ? "Opponent" : "You") : null;
   const isDoubleTurn = (p) => currentTurn > 1 && firstPlayer === p && lastPlayerOfPrevRound === p;
+  const totalPoints = (p) => history.reduce((acc, r) => acc + (p === "You" ? r.youTotal : r.oppTotal), 0);
 
-  const totalYou = history.reduce((acc, r) => acc + r.you, 0);
-  const totalOpp = history.reduce((acc, r) => acc + r.opp, 0);
+  // Détermination Underdog en temps réel
+  const getUnderdog = () => {
+    if (isDoubleTurn("You") && (totalPoints("Opponent") - totalPoints("You") < 11)) return "Opponent";
+    if (isDoubleTurn("Opponent") && (totalPoints("You") - totalPoints("Opponent") < 11)) return "You";
+    return persistedUnderdog;
+  };
 
-  const calculateVP = (player, data) => {
-    let total = 0;
+  const activeUnderdog = getUnderdog();
+
+  const canScoreTactics = (p) => {
+    if (!isDoubleTurn(p)) return true;
+    const diff = p === "You" ? totalPoints("Opponent") - totalPoints("You") : totalPoints("You") - totalPoints("Opponent");
+    return diff >= 11;
+  };
+
+  const calculateScore = (player, data) => {
     const s = data[player];
-    if (s.obj1) total += plan.customOptions[0].vp;
-    if (s.obj2) total += plan.customOptions[1].vp;
-    if (s.objMore) total += plan.customOptions[2].vp;
-    if (s.objSpecial && plan.customOptions[3]) total += plan.customOptions[3].vp;
-    
-    if (!isDoubleTurn(player)) {
-      if (s.tacticA) total += 5;
-      if (s.tacticB) total += 5;
+    let scVP = 0;
+    if (plan.customOptions) {
+      if (plan.customOptions[0] && s.obj1) scVP += plan.customOptions[0].vp;
+      if (plan.customOptions[1] && s.obj2) scVP += plan.customOptions[1].vp;
+      if (plan.customOptions[2] && s.objMore) scVP += plan.customOptions[2].vp;
+      if (plan.customOptions[3] && s.objSpecial) scVP += plan.customOptions[3].vp;
     }
-    return total;
+    const tAllowed = canScoreTactics(player);
+    const tacVP = tAllowed ? ((s.card0 ? tacticVP : 0) + (s.card1 ? tacticVP : 0)) : 0;
+    return { scenario: scVP, tactics: tacVP, total: scVP + tacVP };
+  };
+
+  // --- ACTIONS ---
+  const toggleTactic = (p, idx) => {
+      const key = `card${idx}`;
+      setRoundScores(prev => ({...prev, [p]: {...prev[p], [key]: !prev[p][key] }}));
+  };
+
+  const handleBack = () => {
+    if (history.length === 0) return;
+    const newHistory = [...history];
+    const lastEntry = newHistory.pop();
+    setHistory(newHistory);
+    setCurrentTurn(lastEntry.round);
+    setFirstPlayer(lastEntry.youFirst ? "You" : "Opponent");
+    setTacticProgress(lastEntry.savedProgress);
+    setRoundScores(lastEntry.savedRoundScores);
+    setPersistedUnderdog(lastEntry.savedUnderdog);
   };
 
   const handleNextRound = () => {
-    const roundSummary = {
-      round: currentTurn,
-      you: calculateVP("You", roundScores),
-      opp: calculateVP("Opponent", roundScores),
-      youFirst: firstPlayer === "You",
-      roundScoresState: { ...roundScores }
-    };
+    const youS = calculateScore("You", roundScores);
+    const oppS = calculateScore("Opponent", roundScores);
 
-    setHistory([...history, roundSummary]);
-    
-    // Update progression
-    setTacticProgress(prev => ({
-      You: { 
-        groupA: roundScores.You.tacticA ? Math.min(3, prev.You.groupA + 1) : prev.You.groupA,
-        groupB: roundScores.You.tacticB ? Math.min(3, prev.You.groupB + 1) : prev.You.groupB
-      },
-      Opponent: {
-        groupA: roundScores.Opponent.tacticA ? Math.min(3, prev.Opponent.groupA + 1) : prev.Opponent.groupA,
-        groupB: roundScores.Opponent.tacticB ? Math.min(3, prev.Opponent.groupB + 1) : prev.Opponent.groupB
-      }
-    }));
+    setHistory([...history, {
+      round: currentTurn,
+      youTotal: youS.total, youScenario: youS.scenario, youTactics: youS.tactics,
+      oppTotal: oppS.total, oppScenario: oppS.scenario, oppTactics: oppS.tactics,
+      youFirst: firstPlayer === "You",
+      savedRoundScores: JSON.parse(JSON.stringify(roundScores)),
+      savedProgress: JSON.parse(JSON.stringify(tacticProgress)),
+      savedUnderdog: activeUnderdog
+    }]);
+
+    setPersistedUnderdog(activeUnderdog);
+
+    const nextProg = {
+      You: [roundScores.You.card0 ? tacticProgress.You[0] + 1 : tacticProgress.You[0], roundScores.You.card1 ? tacticProgress.You[1] + 1 : tacticProgress.You[1]],
+      Opponent: [roundScores.Opponent.card0 ? tacticProgress.Opponent[0] + 1 : tacticProgress.Opponent[0], roundScores.Opponent.card1 ? tacticProgress.Opponent[1] + 1 : tacticProgress.Opponent[1]]
+    };
+    setTacticProgress(nextProg);
 
     if (currentTurn < 5) {
       setCurrentTurn(currentTurn + 1);
       setRoundScores({
-        You: { obj1: false, obj2: false, objMore: false, objSpecial: false, tacticA: false, tacticB: false },
-        Opponent: { obj1: false, obj2: false, objMore: false, objSpecial: false, tacticA: false, tacticB: false }
+        You: { obj1: false, obj2: false, objMore: false, objSpecial: false, card0: false, card1: false },
+        Opponent: { obj1: false, obj2: false, objMore: false, objSpecial: false, card0: false, card1: false }
       });
+    } else {
+      setIsGameOver(true);
     }
   };
 
-  // --- RENDU CARTE JOUEUR ---
-  const renderPlayerCard = (player) => {
-    const isYou = player === "You";
-    const isActiveDT = isDoubleTurn(player);
-    const scoreRound = calculateVP(player, roundScores);
-    const underdog = currentTurn > 1 && (isActiveDT ? (isYou ? false : true) : (isYou ? totalYou < totalOpp : totalOpp < totalYou));
+  if (isGameOver) return <div className="min-vh-100 bg-black text-white p-4 text-center"><h2>BATTLE FINISHED</h2><button className="btn btn-warning mt-4" onClick={() => navigate("/")}>HOME</button></div>;
 
-    return (
-      <div key={player} className={`card-aos mb-3 ${underdog ? 'border-danger shadow-sm' : ''}`}>
-        <div className="d-flex justify-content-between align-items-center p-3 border-bottom border-secondary border-opacity-25 bg-black">
-          <div className="d-flex align-items-center gap-2">
-            <span className="fw-bold small-caps tracking-wider text-white">
-              {isYou ? "MY TURN" : "OPPONENT TURN"}
-            </span>
-            {isActiveDT && <span className="badge border border-danger text-danger bg-transparent" style={{fontSize: '0.6rem'}}>DOUBLE TURN</span>}
-            {underdog && <span className="badge bg-danger text-white border-0" style={{fontSize: '0.6rem'}}>UNDERDOG</span>}
-          </div>
-          <div className="text-gold fw-bold fs-5">{scoreRound} VP</div>
-        </div>
-
-        <div className="p-3 bg-dark bg-opacity-25">
-          <div className="mb-4">
-            <div className="d-flex flex-column gap-2">
-              {plan.customOptions.map((opt, idx) => {
-                const key = ['obj1','obj2','objMore','objSpecial'][idx];
-                const active = roundScores[player][key];
-                return (
-                  <button key={idx} 
-                    className={`btn btn-sm text-start d-flex justify-content-between p-3 ${active ? 'btn-aos-active' : 'btn-aos-outline'}`}
-                    onClick={() => setRoundScores(prev => ({...prev, [player]: {...prev[player], [key]: !prev[player][key] }}))}
-                  >
-                    <span className="small-caps">{active && "✓ "} {opt.label}</span>
-                    <span className="fw-bold">+{opt.vp}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="row g-2">
-            {['tacticA', 'tacticB'].map((tKey, idx) => {
-              const active = roundScores[player][tKey];
-              const group = tKey === 'tacticA' ? 'groupA' : 'groupB';
-              const name = isYou ? myTactics[idx]?.name : `Tactic ${idx+1}`;
-              return (
-                <div className="col-6" key={tKey}>
-                  <button 
-                    className={`btn btn-sm w-100 py-3 ${active ? 'btn-aos-active' : 'btn-aos-outline'} ${isActiveDT ? 'opacity-25' : ''}`}
-                    disabled={isActiveDT}
-                    onClick={() => setTacticModal({ show: true, player, group })}
-                  >
-                    <div className="small-caps" style={{fontSize: '0.7rem'}}>{active ? "✓ " + name : name}</div>
-                    <div className="fw-bold text-success" style={{fontSize: '0.6rem'}}>+5 VP</div>
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const playersOrdered = firstPlayer === "You" ? ["You", "Opponent"] : ["Opponent", "You"];
+  const players = firstPlayer === "You" ? ["You", "Opponent"] : ["Opponent", "You"];
 
   return (
-    <div className="min-vh-100 bg-app text-white p-3 font-monospace">
+    <div className="min-vh-100 bg-black text-white p-2 font-monospace">
       
-      {/* HEADER AVEC FOND DE FACTION */}
-      <div className="faction-bg-header rounded border border-secondary border-opacity-50 mb-4 shadow-lg">
-        <div className="faction-left" style={{ backgroundImage: `url(${session.armyList?.factionImage || ''})` }}></div>
-        <div className="faction-right" style={{ backgroundImage: `url(https://aos-webapp.pages.dev/images/factions/destruction-bg.jpg)` }}></div>
-        
-        <div className="header-content d-flex justify-content-between align-items-center p-3">
-          <div className="text-center">
-            <div className="small-caps text-secondary mb-1" style={{fontSize: '0.7rem'}}>YOU</div>
-            <div className="h2 mb-0 fw-bold text-white tracking-tighter">
-                {totalYou + (currentTurn > history.length ? calculateVP("You", roundScores) : 0)}
-            </div>
-          </div>
-
-          <div className="text-center">
-            <div className="text-warning fw-bold small-caps letter-spacing-2" style={{fontSize: '0.9rem'}}>ROUND {currentTurn}</div>
-          </div>
-
-          <div className="text-center">
-            <div className="small-caps text-secondary mb-1" style={{fontSize: '0.7rem'}}>OPP</div>
-            <div className="h2 mb-0 fw-bold text-white tracking-tighter">
-                {totalOpp + (currentTurn > history.length ? calculateVP("Opponent", roundScores) : 0)}
-            </div>
-          </div>
-        </div>
+      {/* TOP BAR / QUIT */}
+      <div className="d-flex justify-content-end mb-2">
+          <button className="btn btn-sm btn-outline-danger border-opacity-25" onClick={() => setQuitModal(true)}>QUITTER</button>
       </div>
 
-      {/* SÉLECTEUR D'ORDRE */}
-      <div className="card-aos p-2 mb-4 bg-black d-flex justify-content-between align-items-center px-3">
-        <button className={`btn btn-sm text-muted p-0 ${currentTurn === 1 ? 'invisible' : ''}`} onClick={() => setCurrentTurn(currentTurn-1)}>PREV</button>
-        <div className="btn-group border border-secondary p-1 rounded bg-dark" style={{maxWidth: '250px'}}>
-            <button className={`btn btn-xs px-3 py-1 ${firstPlayer === "You" ? 'bg-white text-black' : 'text-muted opacity-50'}`} onClick={() => setFirstPlayer("You")}>YOU START</button>
-            <button className={`btn btn-xs px-3 py-1 ${firstPlayer === "Opponent" ? 'bg-white text-black' : 'text-secondary opacity-30'}`} onClick={() => setFirstPlayer("Opponent")}>OPP START</button>
-        </div>
-        <div style={{width: 30}}></div>
+      {/* HEADER SCORE */}
+      <div className="d-flex justify-content-between p-3 mb-3 bg-dark border border-secondary rounded">
+        <div className="text-center"><small className="text-info d-block">YOU</small><span className="h4 fw-bold">{totalPoints("You") + calculateScore("You", roundScores).total}</span></div>
+        <div className="align-self-center text-warning fw-bold">RD {currentTurn}/5</div>
+        <div className="text-center"><small className="text-danger d-block">OPP</small><span className="h4 fw-bold">{totalPoints("Opponent") + calculateScore("Opponent", roundScores).total}</span></div>
       </div>
 
-      {/* CARDS JOUEURS RÉORDONNÉES */}
-      <div className="d-flex flex-column gap-2">
-        {playersOrdered.map(player => renderPlayerCard(player))}
+      {/* PRIORITY SELECTION */}
+      <div className="btn-group w-100 mb-3 border border-secondary rounded-pill overflow-hidden">
+        <button className={`btn btn-sm py-2 ${firstPlayer === "You" ? "btn-light text-dark fw-bold" : "btn-dark text-white-50"}`} onClick={() => setFirstPlayer("You")}>YOU START</button>
+        <button className={`btn btn-sm py-2 ${firstPlayer === "Opponent" ? "btn-light text-dark fw-bold" : "btn-dark text-white-50"}`} onClick={() => setFirstPlayer("Opponent")}>OPP START</button>
       </div>
 
-      <button className="btn btn-outline-warning w-100 py-3 mt-4 small-caps fw-bold letter-spacing-2" onClick={handleNextRound}>
-        Complete Round {currentTurn}
-      </button>
+      {players.map(p => {
+        const isYou = p === "You";
+        const isUnd = activeUnderdog === p;
+        const dt = isDoubleTurn(p);
+        const tAllowed = canScoreTactics(p);
+        const score = calculateScore(p, roundScores);
 
-      {/* MODALE TACTIQUE */}
-      {tacticModal.show && (
-        <div className="modal show d-block p-3" style={{backgroundColor:'rgba(0,0,0,0.95)', backdropFilter: 'blur(8px)'}}>
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content bg-app border border-secondary shadow-lg">
-              <div className="modal-header border-secondary bg-black">
-                <h6 className="modal-title text-gold small-caps tracking-widest">Select Battle Tactic</h6>
-                <button className="btn-close btn-close-white" onClick={() => setTacticModal({show:false})}></button>
+        return (
+          <div key={p} className={`mb-3 border rounded-3 overflow-hidden ${isUnd ? 'border-warning shadow' : 'border-secondary'}`} style={{background: '#0a0a0a'}}>
+            <div className="d-flex justify-content-between p-2 bg-dark border-bottom border-secondary align-items-center">
+              <div className="d-flex gap-2 align-items-center">
+                <span className={`fw-bold ${isYou ? 'text-info' : 'text-danger'}`}>{isYou ? "YOU" : "OPPONENT"}</span>
+                {dt && <span className="badge border border-danger text-danger" style={{fontSize:'0.6rem'}}>SEIZING INITIATIVE</span>}
+                {isUnd && <span className="badge bg-warning text-dark" style={{fontSize:'0.6rem'}}>UNDERDOG</span>}
               </div>
-              <div className="modal-body p-4">
-                {["I. Affray", "II. Strike", "III. Domination"].map((name, idx) => {
-                   const progress = tacticProgress[tacticModal.player][tacticModal.group];
-                   const isCurrent = idx === progress;
-                   const isDone = idx < progress;
-                   const isSelected = roundScores[tacticModal.player][tacticModal.group === 'groupA' ? 'tacticA' : 'tacticB'];
+              <span className="text-warning fw-bold">{score.total} VP</span>
+            </div>
 
-                   return (
-                     <div key={idx} className={`p-3 mb-3 rounded border ${isCurrent ? (isSelected ? 'border-success bg-success bg-opacity-10' : 'btn-aos-outline') : 'opacity-25 border-secondary'}`}>
-                        <div className="d-flex justify-content-between align-items-center">
-                            <span className={`fw-bold small-caps ${isCurrent ? 'text-gold' : ''}`}>{name}</span>
-                            {isDone && <span className="text-success small">✓ DONE</span>}
-                        </div>
-                        {isCurrent && (
-                            <button className={`btn btn-sm w-100 mt-3 py-2 ${isSelected ? 'btn-success' : 'btn-outline-warning'}`}
-                                onClick={() => {
-                                    const key = tacticModal.group === 'groupA' ? 'tacticA' : 'tacticB';
-                                    setRoundScores(prev => ({...prev, [tacticModal.player]: {...prev[tacticModal.player], [key]: !prev[tacticModal.player][key] }}));
-                                    setTacticModal({show:false});
-                                }}>
-                                {isSelected ? "✓ SELECTED (+5 VP)" : "VALIDATE"}
-                            </button>
-                        )}
-                     </div>
-                   );
+            <div className="p-2">
+              {plan.customOptions?.map((opt, i) => (
+                <button key={i} className={`btn btn-sm w-100 mb-2 text-start d-flex justify-content-between ${roundScores[p][['obj1','obj2','objMore','objSpecial'][i]] ? 'btn-info text-dark fw-bold' : 'btn-outline-secondary text-white border-opacity-25'}`}
+                  onClick={() => setRoundScores(prev => ({...prev, [p]: {...prev[p], [['obj1','obj2','objMore','objSpecial'][i]]: !prev[p][[['obj1','obj2','objMore','objSpecial'][i]]] }}))}>
+                  <span style={{fontSize: '0.75rem'}}>{opt.label}</span><span>+{opt.vp}</span>
+                </button>
+              ))}
+
+              <div className="row g-2 mt-1">
+                {[0, 1].map(idx => {
+                  const prog = tacticProgress[p][idx];
+                  const isActive = roundScores[p][`card${idx}`];
+                  return (
+                    <div className="col-6 d-flex gap-1" key={idx}>
+                      <button className={`btn btn-sm flex-grow-1 py-3 ${isActive ? 'btn-success text-dark fw-bold' : 'btn-outline-warning text-warning border-opacity-25'} ${(!tAllowed || prog > 2) ? 'opacity-25' : ''}`}
+                        disabled={!tAllowed || prog > 2}
+                        onClick={() => toggleTactic(p, idx)}>
+                        <div style={{fontSize: '0.65rem'}}>{prog > 2 ? 'DONE' : tacticNames[prog]}</div>
+                      </button>
+                      <button className="btn btn-dark border-secondary border-opacity-25 px-2" 
+                              onClick={() => setHistoryModal({ show: true, player: p, cardIndex: idx })}>
+                        <small>👁</small>
+                      </button>
+                    </div>
+                  );
                 })}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* FOOTER NAV */}
+      <div className="d-flex gap-2 mt-3 pb-5">
+        {currentTurn > 1 && (
+            <button className="btn btn-outline-secondary px-4 rounded-pill" onClick={handleBack}>RETOUR</button>
+        )}
+        <button className="btn btn-warning flex-grow-1 py-3 fw-bold rounded-pill text-dark shadow" onClick={handleNextRound}>
+          {currentTurn < 5 ? `VALIDER ROUND ${currentTurn}` : "FINIR LA BATAILLE"}
+        </button>
+      </div>
+
+      {/* MODAL QUITTER */}
+      {quitModal && (
+        <div className="modal d-block" style={{backgroundColor:'rgba(0,0,0,0.9)'}}>
+          <div className="modal-dialog modal-dialog-centered p-3">
+            <div className="modal-content bg-dark border border-danger">
+              <div className="modal-body text-center p-4">
+                <h4 className="text-white mb-4">Quitter ?</h4>
+                <button className="btn btn-warning w-100 py-3 mb-2 fw-bold text-dark" onClick={() => navigate("/")}>SAUVEGARDER & QUITTER</button>
+                <button className="btn btn-outline-danger w-100 mb-3" onClick={() => navigate("/")}>SUPPRIMER & QUITTER</button>
+                <button className="btn btn-link text-white-50 text-decoration-none" onClick={() => setQuitModal(false)}>Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL HISTORIQUE TACTIQUE (L'OEIL) */}
+      {historyModal.show && (
+        <div className="modal d-block" style={{backgroundColor:'rgba(0,0,0,0.9)'}}>
+          <div className="modal-dialog modal-dialog-centered p-3">
+            <div className="modal-content bg-dark border border-secondary">
+              <div className="modal-header border-secondary"><h6 className="mb-0">Tactiques validées</h6></div>
+              <div className="modal-body">
+                {history.filter(h => h[`${historyModal.player === 'You' ? 'you' : 'opp'}Tactics`] > 0).length === 0 ? (
+                    <p className="text-muted small">Aucune tactique validée dans ce groupe.</p>
+                ) : (
+                    history.map((h, i) => (
+                        <div key={i} className="d-flex justify-content-between border-bottom border-secondary border-opacity-25 py-2">
+                            <span>Round {h.round}</span>
+                            <span className="text-success">Validée</span>
+                        </div>
+                    ))
+                )}
+              </div>
+              <div className="modal-footer border-0">
+                <button className="btn btn-warning w-100" onClick={() => setHistoryModal({show:false})}>FERMER</button>
               </div>
             </div>
           </div>
