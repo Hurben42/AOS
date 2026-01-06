@@ -1,0 +1,956 @@
+{
+  "citiesofsigmar": {
+    "heroic_traits": [
+      {
+        "name": "MASTER OF BALLISTICS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MASTER OF BALLISTICS:</b> This hero takes great pride in the quality of the firearms forged in their city. Thus, they demand the most from the weapons’ wielders in battle.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If a friendly <span class=\"kwb\">CITIES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SIGMAR</span> unit uses the ‘All-out Attack’ command in the shooting phase while it is within this unit’s combat range, add 1 to wound rolls for that unit’s shooting attacks in that phase. This effect is in addition to the effect of ‘All-out Attack’.</div><div><br></div></div>"
+      },
+      {
+        "name": "GRIZZLED VETERAN",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GRIZZLED VETERAN:</b> This hero has seen countless battles in their time and is able to withstand even the mightiest blows.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If the unmodified wound roll for an attack that targets this unit is a 1-3, the attack fails and the attack sequence ends.</div><div><br></div>"
+      },
+      {
+        "name": "FIERY TEMPER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FIERY TEMPER:</b> While rash and impulsive, this general shows unwavering bravery in the face of the enemy and is often the first to charge into the fray.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit charged this turn, you can re-roll charge rolls for friendly <span class=\"kwb\">CITIES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SIGMAR</span> units while they are wholly within 18\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "ASTUTE TACTICIAN",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ASTUTE TACTICIAN:</b> This Sigmarite has spent as much time with their nose in military tomes as they have knee-deep in the spilled guts of their foes. Their erudition in the subject of battlefield manoeuvres is highly regarded.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">CITIES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SIGMAR</span> unit wholly within 12\" of this unit to be the target.<br><b>Effect:</b> For the rest of the turn, add 1 to charge rolls for the target and add 2 to run rolls for the target.</div><div><br></div></div>"
+      },
+      {
+        "name": "DRAW STEEL!",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DRAW STEEL!:</b> With a bellow, the officar lunges into battle, and their troops follow them with as much steel in their hearts as they wield in their clenched fists.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> If this unit charged this turn, pick a friendly CITIES OF SIGMAR HUMAN unit that charged this turn and is wholly within 12\" of this unit to be the target.<br><b>Effect:</b> Add 1 to the Attacks characteristic of the target’s melee weapons for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "COSMOPOLITAN LEADER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>COSMOPOLITAN LEADER:</b> This officar has trained under and alongside all the myriad factions that dwell within the walls of the Cities of Sigmar. Their knowledge of many different fighting styles and disciplines is a rare quality.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly CITIES OF SIGMAR INFANTRY or CAVALRY unit wholly within 12\" of this unit to be the target. If this unit is HUMAN, pick up to 3 eligible units to be the targets instead.<br><b>Effect:</b> Roll a dice. On a 3+, until the start of your next turn:<br><ul><li>If the target is HUMAN, add 1 to wound rolls for the target’s combat attacks.</li><li>If the target is DUARDIN, add 1 to charge rolls for the target.</li><li>If the target is AELF, add 3 to the target’s control score.</li></ul></div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "SACRED TOME",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SACRED TOME:</b> Upon this ancient parchment of this hallowed tome are the litanies of the Cults Unberogen.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not a PRIEST, it has <span class=\"kwb\">PRIEST</span> (1). If this unit is already a <span class=\"kwb\">PRIEST</span>, add 1 to chanting rolls for this unit.<br>If this unit is a WIZARD, it cannot use <span class=\"kwb\">SPELL</span> abilities and <span class=\"kwb\">PRAYER</span> abilities in the same phase.</div><div><br></div></div>"
+      },
+      {
+        "name": "GLIMMERING",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GLIMMERING:</b> The glinting facets of this tiny fragment of Mallus offer fleeting glimpses of the future.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each phase, you can re-roll 1 hit roll, or 1 wound roll, or 1 save roll for this unit.</div><div><br></div>"
+      },
+      {
+        "name": "BRAZIER OF HOLY FLAME",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BRAZIER OF HOLY FLAME:</b> This torch symbolises the light of civilisation being carried into the darkness, a sacred act that emboldens those who march alongside it.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly non-HERO CITIES OF SIGMAR INFANTRY unit that is not in combat and wholly within 12\" of this unit.<br><b>Effect:</b> You can return up to D3 slain models to that unit.</div><div><br></div>"
+      }
+    ]
+  },
+  "daughtersofkhaine": {
+    "heroic_traits": [
+      {
+        "name": "MASTER OF POISONS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MASTER OF POISONS:</b> This hero has intimate knowledge of all poisons and coats her blades in an elixir that leaves the most hardened warriors weak, debilitated and primed for the killing stroke.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit that had any damage points allocated to it this turn by this unit’s combat attacks to be the target.<br><b>Effect:</b> For the rest of the battle:<br><ul><li>The target cannot be healed.</li><li>Slain models cannot be returned to the target unit.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "BATHED IN BLOOD",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BATHED IN BLOOD:</b> This hero bathes in gore during battle, granting her healing powers.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> <b>Heal (3)</b> this unit if it is in combat.</div><div><br></div>"
+      },
+      {
+        "name": "ZEALOUS ORATOR",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ZEALOUS ORATOR:</b> Your general is a wild demagogue who inspires her followers to fight on in the face of impossible odds.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If a friendly unit wholly within 12\" of this unit uses the ‘Rally’ command, you can make 3 additional rally rolls of D6.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "KHAINITE PENDANT",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>KHAINITE PENDANT:</b> The wearer can call for Khaine’s blessing as easily as drawing breath.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly DAUGHTERS OF KHAINE PRIEST wholly within 12\" of this unit.<br><b>Effect:</b> Give that unit D6 ritual points.</div><div><br></div></div>"
+      },
+      {
+        "name": "CROWN OF WOE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CROWN OF WOE:</b> Forged from the cult of Khaine’s first sacrificial altar, an aura of dread surrounds the wearer of this baleful crown.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 2 from the control scores of enemy units while they are within 9\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "SEVENFOLD SHADOW",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Battle, Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SEVENFOLD SHADOW:</b> This hero possesses a living shadow that can, at a command, envelop them and transport them across the shadow realm.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not in combat, remove it from the battlefield and set it up again on the battlefield more than 9\" from all enemy units.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#606362\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">CORE</span></td></tr></tbody></table></div><div><br></div>"
+      }
+    ]
+  },
+  "fyreslayers": {
+    "heroic_traits": [
+      {
+        "name": "BLOOD OF THE BERZERKER",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BLOOD OF THE BERZERKER:</b> In this noble duardin is fiery aggression given form.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to charge rolls for friendly <span class=\"kwb\">FYRESLAYERS</span> units while they are wholly within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "ASH-BEARD",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ASH-BEARD:</b> So great is this priest’s mastery of magmic energies that they smoulder eternally with Grimnir’s power.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not a PRIEST, they have PRIEST (1). If this unit was already a <span class=\"kwb\">PRIEST</span>, add 1 to this unit’s chanting rolls.</div><div><br></div>"
+      },
+      {
+        "name": "FIERCELY COMPETITIVE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FIERCELY COMPETITIVE:</b> This leader is incredibly stubborn and won’t back down from even the boldest of challenges.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is in combat with an enemy unit that has STRIKE-FIRST, this unit has <span class=\"kwb\">STRIKE-FIRST</span>. If this unit is in combat with an enemy unit that uses the ‘All-out Attack’ command, add 1 to hit rolls for this unit’s attacks for the rest of the turn.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "ASH-CLOUD RUNE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Enemy Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ASH-CLOUD RUNE:</b> The bearer of this rune can call down a column of soot that blankets the battlefield.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Until the start of your next turn, friendly INFANTRY units cannot be targeted by shooting attacks while they are wholly within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "DRAUGHT OF THE FINEST MAGMALT",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DRAUGHT OF THE FINEST MAGMALT:</b> A single draught of this fiery beverage sends shivers of energy surging through a Fyreslayer from toes to crest.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 3 to the Attacks characteristic of this unit’s melee weapons for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "DROTH-HELM",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DROTH-HELM:</b> This ancient helm is said to have been worn by the first Zharrgrim priest to tame a Magmadroth.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to hit rolls for Companion weapons used by friendly <span class=\"kwb\">FYRESLAYERS</span> units while they are wholly within 12\" of this unit.</div><div><br></div>"
+      }
+    ]
+  },
+  "idoneth": {
+    "heroic_traits": [
+      {
+        "name": "FORM OF THE FANGMORA",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FORM OF THE FANGMORA:</b> This champion has mastered a defensive sword-art that mimics the fluid movements of the swift Fangmora Eels.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If the unmodified hit roll for an attack that targets this unit is 1-3, the attack fails and the attack sequence ends.</div><div><br></div></div>"
+      },
+      {
+        "name": "HUNTER OF SOULS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HUNTER OF SOULS:</b> This hero seeks neither glory nor territory; their only interest is the capture of potent soul-stuff.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Pick 1 of the following weapon abilities for this unit’s melee weapons to have this battle:<br><ul><li>Anti-CAVALRY (+1 Rend)</li><li>Anti-INFANTRY (+1 Rend)</li><li>Anti-MONSTER (+1 Rend)</li></ul></div><div><br></div>"
+      },
+      {
+        "name": "NIGHTMARE LEGACY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>NIGHTMARE LEGACY:</b> The repressed horror of the Idoneth’s long incarceration emanates from this dark-visaged warrior in palpable waves of doom.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 3 from the control scores of enemy units while they are within 6\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "MERCILESS RAIDER",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MERCILESS RAIDER:</b> This aelf gives no quarter to the enemies of the Idoneth. When in the vicinity of a wounded foe, they surge forwards to finish the job.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is within 6\" of a damaged enemy unit, this unit can move 6\". It can pass through the combat ranges of enemy units but must end that move in combat with a damaged enemy unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "LORD OF STORM AND SEA",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LORD OF STORM AND SEA:</b> This hero is a living embodiment of the glory of Mathlann and an inspiration to all those who still worship the Lord of the Deep.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each time an ability returns at least 1 slain model to a friendly unit wholly within 12\" of this unit, after that ability has been resolved, you can return 1 additional slain model to it.</div><div><br></div>"
+      },
+      {
+        "name": "ENDLESS SEA-STORM",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ENDLESS SEA-STORM:</b> This hero summons the force of the ethersea to batter their foes with waves of pelagic force.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is a WIZARD, add 1 to its power level for the rest of the turn. If this unit is not a <span class=\"kwb\">WIZARD</span>, it gains WIZARD (1) for the rest of the turn.<br>In addition, add 2 to the next casting roll or banishment roll for this unit this turn.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "ARMOUR OF THE CYTHAI",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ARMOUR OF THE CYTHAI:</b> This gleaming panoply was given by Teclis to the ancestors of the Idoneth. Upon the command of its bearer, it can radiate the power of Hysh – a fitting property for a gift from the Great Illuminator.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit has not charged this turn, subtract 1 from hit rolls for combat attacks made by enemy units while they are in combat with this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "LIFEKELP POD",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Any Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LIFEKELP POD:</b> Radiant with Ghyranite energy, this golden seed pod bursts in a spray of vital power.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> <b>Heal (D3)</b> each friendly IDONETH DEEPKIN CAVALRY unit within this unit’s combat range.</div><div><br></div>"
+      },
+      {
+        "name": "DRITCHLEECH",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DRITCHLEECH:</b> Incredibly rare, these worms feed upon magic and are capable of draining arcane energies.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 1 from casting rolls for enemy <span class=\"kwb\">WIZARDS</span> while they are within 18\" of this unit. In addition, each time an enemy spell fails, after that ability has been resolved, <b>Heal (1)</b> this unit.</div><div><br></div>"
+      }
+    ]
+  },
+  "kharadron": {
+    "heroic_traits": [
+      {
+        "name": "SHREWD OPPORTUNIST",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SHREWD OPPORTUNIST:</b> This duardin’s mind is as sharp as a gem cutter. They are quick to see openings and do not hesitate to seize upon them. Such a quality is, of course, highly conducive to profit!<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick this unit and up to 2 other friendly <span class=\"kwb\">KHARADRON</span> <span class=\"kwb\">OVERLORDS</span> non-HERO INFANTRY units to be the targets.<br><b>Effect:</b> Each target can immediately use the ‘Normal Move’ ability as if it were your movement phase.</div><div><br></div></div>"
+      },
+      {
+        "name": "BOLD AS BRASS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BOLD AS BRASS:</b> Whether their roared oaths ring louder than the summons to Musterpress or the sheer audacity of their actions speaks volumes, this officer is an imposing presence on the battlefield.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 5 to this unit’s control score.</div><div><br></div>"
+      },
+      {
+        "name": "COMBAT GRAFTER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>COMBAT GRAFTER:</b> Knuckling down and cracking skulls is what this officer does best.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit can use 2 FIGHT abilities this phase. After the first is used, however, this unit has STRIKE-LAST for the rest of the phase.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "VOIDSTONE ORB",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Reaction: Opponent declared a <span class=\"kwb\">SPELL</span> ability for a <span class=\"kwb\">WIZARD</span> within 30\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>VOIDSTONE ORB:</b> This small, unassuming black globe contains the power to disrupt enemy spells.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> That spell is unbound.</div><div><br></div></div>"
+      },
+      {
+        "name": "CELESTIUM BURST GRENADE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Once Per Battle, Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CELESTIUM BURST GRENADE:</b> Typically used by the Grundstok ‘black marines’, this specialised anti-ethereal weapon can nullify magical wards.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible enemy unit within 12\" of this unit to be the target.<br><b>Effect:</b> Ward rolls cannot be made for the target for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "BLAZEBEARD AND SONS BAMBOOZLING FLAKGUN",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Once Per Turn, Reaction: Opponent declared a <span class=\"kwb\">CHARGE</span> ability for a unit within 12\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>BLAZEBEARD AND SONS BAMBOOZLING FLAKGUN:</b> This large-barrelled, stumpy weapon fires a mishmash of workshop swarf coated in phosphor-laced aether-gold that produces a blinding, bewildering display when the trigger is pulled – highly effective for stopping an advancing enemy in their tracks.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Pick 1 dice in that charge roll. Then, make a bamboozling flak roll of D6. If the roll equals or exceeds the value on the dice, remove that dice from the charge roll.</div><div><br></div>"
+      },
+      {
+        "name": "SPELL IN A BOTTLE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SPELL IN A BOTTLE:</b> The bearer pops the rune-stamped cork of this bottle and unleashes an arcane manifestation previously sealed up for safekeeping.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit can use a <span class=\"kwb\">SUMMON</span> ability from the manifestation lore you picked during <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Army-Composition-2025-26\">army composition</a> as if it had WIZARD (1). Instead of making a casting roll for that <span class=\"kwb\">SUMMON</span> ability, the casting roll is 7 and cannot be modified. That <span class=\"kwb\">SUMMON</span> ability cannot be unbound.</div><div><br></div></div>"
+      },
+      {
+        "name": "KARST-BANA AETHER-POWERED COMBAT RIG",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>KARST-BANA AETHER-POWERED COMBAT RIG:</b> This pioneer is a firm believer that wealth is be wrested from the Mortal Realms at gunpoint or at the business end of an aether-powered hammer. This has led to a custom-built combat harness, commissioned to provide overwhelming strength and protection in equal measure.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit has WARD (5+). In addition, add 1 to the Attacks characteristic of this unit’s melee weapons.</div><div><br></div>"
+      },
+      {
+        "name": "EMBERSTONE FLARE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Battle, Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EMBERSTONE FLARE:</b> The bearer shoots a flare into the sky, signalling a skyvessel or a group of endrin-borne Kharadron to rapidly relocate.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly KHARADRON OVERLORDS unit that has FLY and is not in combat to be the target.<br><b>Effect:</b> Remove the target from the battlefield and <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Setting-Up-Units\">set it up</a> again wholly within 9\" of this unit and more than 9\" from all enemy units.</div><div><br></div>"
+      }
+    ]
+  },
+  "lumineth": {
+    "heroic_traits": [
+      {
+        "name": "MASTERFUL TACTICIAN",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Reaction: You declared the ‘Redeploy’ command for a friendly <span class=\"kwb\">LUMINETH</span> <span class=\"kwb\">REALM-LORDS</span> unit wholly within 12\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>MASTERFUL TACTICIAN:</b> This hero quickly redirects the warriors under their command to plug a gap or exploit a weakness in the enemy line.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If you roll a 1-3 when determining the distance that unit can move, you can use a value of 4 instead.</div><div><br></div></div>"
+      },
+      {
+        "name": "PERFECT STRIKE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PERFECT STRIKE:</b> This hero can unleash their might in one deadly attack.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Inflict D3+3 mortal damage on the target.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#802022\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">CORE,</span> <span class=\"kwb\">ATTACK,</span> <span class=\"kwb\">FIGHT</span></td></tr></tbody></table></div><div><br></div>"
+      },
+      {
+        "name": "PARAGON OF HYSH",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle, Reaction: You declared the ‘Charge’ ability or a <span class=\"kwb\">SPELL</span> ability for this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>PARAGON OF HYSH:</b> This hero has travelled throughout Hysh and is a scholar of each aspect of Lumineth society.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> You can re-roll the charge roll or casting roll for that ability.</div><div><br></div>"
+      },
+      {
+        "name": "FLAWLESS COMMANDER",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FLAWLESS COMMANDER:</b> Under this aelf’s command, the serried ranks of the Lumineth advance in a perfect march.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 2\" to the Move characteristic of friendly LUMINETH REALM-LORDS INFANTRY units while they are wholly within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "AETHERQUARTZ REQUISITIONER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Reaction: You declared a <span class=\"kwb\">SPELL</span> ability for a LUMINETH REALM-LORDS WIZARD within this unit’s combat range</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>AETHERQUARTZ REQUISITIONER:</b> This aelf keeps an emergency supply of aetherquartz that can be used to enhance a critical spell.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 3 to the casting roll for that spell.</div><div><br></div>"
+      },
+      {
+        "name": "MARTIAL PERFECTIONIST",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MARTIAL PERFECTIONIST:</b> This aelf expects their warriors to commit fully to each and every task; they will accept no half measures.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible enemy unit within 12\" of this unit that is damaged or that had any models slain this turn to be the target.<br><b>Effect:</b> Roll a dice. On a 3+, add 1 to wound rolls for combat attacks made by friendly LUMINETH REALM-LORDS INFANTRY units that target that enemy unit for the rest of the turn.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "PHOENIX STONE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PHOENIX STONE:</b> This ancient crystal shatters when the bearer is slain, surging with healing energy and giving them a second chance.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit would be destroyed, before removing it from play, roll a dice. On a 3+, this unit is not destroyed and any remaining damage points inflicted on it have no effect. Then, <b>Heal (1)</b> this unit. This unit cannot use this ability again for the rest of the battle.</div><div><br></div></div>"
+      },
+      {
+        "name": "SILVER WAND",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SILVER WAND:</b> This slender wand is covered with winding Lumineth runes.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is non-WIZARD, it has WIZARD (1). Otherwise, add 1 to this unit’s power level.</div><div><br></div>"
+      },
+      {
+        "name": "WAYSTONE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Battle, Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>WAYSTONE:</b> This small sliver of dark rock hovers above the bearer’s outstretched palm, leading them along hidden paths towards that which they desire.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Remove this unit from the battlefield and set it up again on the battlefield more than 9\" from all enemy units.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#606362\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">CORE</span></td></tr></tbody></table></div><div><br></div>"
+      }
+    ]
+  },
+  "seraphon": {
+    "heroic_traits": [
+      {
+        "name": "BEING OF THE STARS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BEING OF THE STARS:</b> This hero has a particularly strong connection to their astral heritage, causing their corporeality to wax and wane.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Ignore modifiers to save rolls for this unit (positive and negative).</div><div><br></div></div>"
+      },
+      {
+        "name": "REPTILIAN CUNNING",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>REPTILIAN CUNNING:</b> With cold-blooded calculation, this general looks for opportunities to strike.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit charged this turn, if a friendly unit wholly within 12\" of this unit uses the ‘All-out Attack’ command in the combat phase, no command points are spent.</div><div><br></div>"
+      },
+      {
+        "name": "BEASTMASTER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BEASTMASTER:</b> This mighty leader has a primal dominance over the beasts of the Seraphon hosts, driving them forward to battle.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 2\" to the Move characteristic of friendly SERAPHON CAVALRY and SERAPHON MONSTER units for the rest of the phase if they are wholly within 12\" of this unit at the start of the move.</div><div><br></div>"
+      },
+      {
+        "name": "KEEPER OF THE OLD WAYS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Turn, Reaction: You declared the ‘Further the Great Plan’ ability</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>KEEPER OF THE OLD WAYS:</b> Having spent centuries poring over tablets of the Old Ones or in deep meditation, or perhaps through some primal intuition, this Seraphon possesses knowledge of ancient secrets concerning the workings of the cosmos.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> You can pick 2 different <a href=\"https://wahapedia.ru/aos4/factions/seraphon/#Battle-Traits\"><span class=\"kwb\">ASTERISM</span></a> abilities instead of 1. They are both used in addition to the one you picked in <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#The-Deployment-Phase\">the deployment phase</a>.</div><div><br></div></div>"
+      },
+      {
+        "name": "CHILD OF THE STARS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CHILD OF THE STARS:</b> This warrior is made of pure star-matter, immortal and eternal.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit would be destroyed, before removing it from play, roll a dice. On a 3+, this unit is not destroyed and any remaining damage points inflicted on it have no effect. Then, <b>Heal (D3)</b> this unit. This unit cannot use this ability again for the rest of the battle.</div><div><br></div>"
+      },
+      {
+        "name": "CHOSEN OF QUETZL",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CHOSEN OF QUETZL:</b> This champion of Quetzl the Preserver is a master tactician, coordinating the movement of nimble skinks to outmanoeuvre the foe.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible friendly non-MONSTER SKINK unit that is in combat and is wholly within 12\" of this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 3+, the target can move up to 8\". It can move through the combat ranges of enemy units but cannot end that move in combat.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "COATL FAMILIAR",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Reaction: You declared a <span class=\"kwb\">SPELL</span> ability for a friendly Seraphon Wizard within this unit’s combat range</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>COATL FAMILIAR:</b> Though only a juvenile example of the great feathered serpents, this winged creature is still sacred to the mage-god Tepok.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add D6 to the casting roll for that spell.</div><div><br></div></div>"
+      },
+      {
+        "name": "INCANDESCENT RECTRICES",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>INCANDESCENT RECTRICES:</b> This vibrant plumage imbues the bearer with the restorative power of the heavens.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> <b>Heal (D3)</b> this unit.</div><div><br></div>"
+      },
+      {
+        "name": "BLOODRAGE PENDANT",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BLOODRAGE PENDANT:</b> Carved from the bones of savage reptilian megafauna, the Bloodrage Pendant spurs a warrior’s killing rage – all the more should they themselves shed gore.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to the Attacks characteristic of this unit’s melee weapons. Add 2 instead if the number of damage points allocated to this unit is equal to or greater than half of this unit’s Health characteristic (rounding up).</div><div><br></div>"
+      }
+    ]
+  },
+  "stormcast": {
+    "heroic_traits": [
+      {
+        "name": "SHOCK AND AWE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SHOCK AND AWE:</b> When this warrior and their Stormcasts take to the field, their shining visages strike fear into the foe.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each time this unit is set up using the ’Scions of the Storm’ ability, subtract 1 from hit rolls for attacks that target this unit for the rest of the battle round.<br>In addition, each time a friendly <span class=\"kwb\">STORMCAST</span> <span class=\"kwb\">ETERNALS</span> unit is set up wholly within 12\" of this unit using the ’Scions of the Storm’ ability, subtract 1 from hit rolls for attacks that target that unit for the rest of the battle round.</div><div><br></div></div>"
+      },
+      {
+        "name": "ENVOY OF THE HEAVENS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ENVOY OF THE HEAVENS:</b> When a Stormcast Eternal is laid low, the light that carries the warrior’s soul back to Azyr invigorates those who fight on.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> If a friendly <span class=\"kwb\">STORMCAST</span> <span class=\"kwb\">ETERNALS</span> unit was destroyed in the previous turn, pick a visible friendly <span class=\"kwb\">STORMCAST</span> <span class=\"kwb\">ETERNALS</span> unit wholly within 12\" of this unit to be the target.<br><b>Effect:</b> The target has WARD (5+) until the start of your next turn.</div><div><br></div>"
+      },
+      {
+        "name": "STAUNCH DEFENDER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>STAUNCH DEFENDER:</b> To contest the sacred grounds of Sigmar is to invoke the almighty power of Azyr.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> While this unit is contesting an objective in friendly territory, add 3 to the control scores of all friendly <span class=\"kwb\">STORMCAST</span> <span class=\"kwb\">ETERNALS</span> units contesting that objective.</div><div><br></div>"
+      },
+      {
+        "name": "LEGENDARY TENACITY",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LEGENDARY TENACITY:</b> This hero might well be struck down, but there is little in the Mortal Realms that can stop them from rising again, bloodied but unbowed.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> The first time this unit would be destroyed, before removing it from play, roll a dice. On a 3+, this unit is not destroyed and any remaining damage points inflicted on it have no effect. Then, <b>Heal (D3)</b> this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "HOUR OF GLORY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HOUR OF GLORY:</b> This hero’s hour has come; their deeds will shatter the wicked, deliver the weak and protect the Mortal Realms themselves from any evil that would see them undone.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit can be picked to use the ‘Their Finest Hour’ ability even if it has already used it this battle. In addition, when this unit is picked to use the ‘Their Finest Hour’ ability, add 5 to its control score for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "INTENSE PIETY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>INTENSE PIETY:</b> This hero’s intense and unwavering devotion to the Sigmar’s mission is one of such absolute focus that they can cause the followers of rival gods to hesitate and falter with a few well-chosen words or soul-piercing stare.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible enemy <span class=\"kwb\">PRIEST</span> or <span class=\"kwb\">WIZARD</span> within 18\" of this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 3+, subtract 1 from casting rolls and chanting rolls for the target until the start of your next turn.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "NULL PENDANT",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Battle, End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>NULL PENDANT:</b> This dark amulet holds magic within that can sap the resolve of the enemy.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Subtract 5 from the target’s control score for the rest of the turn.</div><div><br></div></div>"
+      },
+      {
+        "name": "QUICKSILVER DRAUGHT",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>QUICKSILVER DRAUGHT:</b> This potion lends uncanny speed to the one who imbibes it.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit has STRIKE-FIRST for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "MIRRORSHIELD",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MIRRORSHIELD:</b> This shield reflects the rays of Hysh in questing beams that seek out the eyes of enemy marksmen.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit cannot be targeted by shooting attacks unless the attacking model is within 9\" of it.</div><div><br></div>"
+      },
+      {
+        "name": "BANNER OF SIGMAR",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BANNER OF SIGMAR:</b> The hero unfurls a mighty banner and plunges its pommel into the earth with the force of a falling comet, where it stands upright and proud, declaring Sigmar’s reckoning to all who bear witness to its majesty.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an objective within 18\" of this unit to be the target.<br><b>Effect:</b> Until the start of your next turn, your opponent cannot <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Terrain-Control\">control</a> the target objective while they have no units contesting it.</div><div><br></div></div>"
+      },
+      {
+        "name": "SIGIL OF MORRDA",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn, Reaction: Opponent declared a command or a <span class=\"kwb\">RAMPAGE</span> ability for a unit in combat with this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>SIGIL OF MORRDA:</b> This sigil is one of the god Morrda, a death god that escaped Nagash’s purge of Shyish. Their power, perhaps not what it once was, is still potent and to be rightly feared.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Roll a dice. On a 3+, that command or <span class=\"kwb\">RAMPAGE</span> ability has no effect, it still counts as having been used and any command points spent to use that ability are still lost.</div><div><br></div>"
+      },
+      {
+        "name": "BEACON OF AZYR",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BEACON OF AZYR:</b> This beacon is brimming with the magic of the Celestial Realm. When unleashed, holy lightning surges forth, empowering a nearby Stormcast Eternal who is attuned to the tempest.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible friendly STORMCAST ETERNALS WIZARD or PRIEST wholly within 12\" of this unit to be the target.<br><b>Effect:</b> The next time this turn that the target uses a <span class=\"kwb\">PRAYER</span> or <span class=\"kwb\">SPELL</span> ability, instead of making a casting roll or chanting roll for them, you can use a value of 7 for the roll that cannot be modified. After that ability is resolved, if the target has any ritual points, reset their ritual points total to 0.<br><b>Designer’s Note:</b> <i>Ritual points apply modifiers so cannot be used with this ability to increase the chanting roll to more than 7.</i></div><div><br></div>"
+      }
+    ]
+  },
+  "sylvaneth": {
+    "heroic_traits": [
+      {
+        "name": "RADIANT SPIRIT",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Reaction: Opponent declared a Spell or Prayer ability</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>RADIANT SPIRIT:</b> Shielding emerald energy surrounds this hero like a leafy sanctuary.<br><div class=\"spc\"></div><div><br></div><b>Used By:</b> This unit if it is wholly within 12\" of a friendly <span class=\"kwb\">SYLVANETH</span> unit picked to be the target of that spell or prayer.<br><b>Effect:</b> Roll a dice. On a 3+, ignore the effect of that spell or prayer on that unit. This unit can use this ability more than once per phase but only once per <span class=\"kwb\">SPELL</span> or <span class=\"kwb\">PRAYER</span> ability.</div><div><br></div></div>"
+      },
+      {
+        "name": "WARSINGER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>WARSINGER:</b> This general spurs on Alarielle’s children with stirring songs.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">SYLVANETH</span> unit wholly within 12\" of this unit to be the target.<br><b>Effect:</b> Add 2\" to the Move characteristic of the target for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "SPELLSINGER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SPELLSINGER:</b> This hero draws on the magical power of the Awakened Wyldwoods.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> While this unit is within the combat range of an <a href=\"https://wahapedia.ru/aos4/factions/sylvaneth/Awakened-Wyldwood\"><b>Awakened Wyldwood</b></a>:<br>If this unit is a WIZARD, add 1 to casting rolls for this unit.<br>If this unit is not a <span class=\"kwb\">WIZARD</span>, it has WIZARD (1) instead.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "SEED OF REBIRTH",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SEED OF REBIRTH:</b> Should its bearer ever fall, the seed’s rejuvenating energies will pour into its host to grant them new life.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit would be destroyed, before removing it from play, roll a dice. On a 3+, this unit is not destroyed and any remaining damage points inflicted on it have no effect. Then, <b>Heal (1)</b> this unit. This unit cannot use this ability again for the rest of the battle.</div><div><br></div></div>"
+      },
+      {
+        "name": "GREENWOOD GLADIUS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GREENWOOD GLADIUS:</b> This blade strikes with the youthful vigour of springtime.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll.</div><div><br></div>"
+      },
+      {
+        "name": "CROWN OF FELL BOWERS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CROWN OF FELL BOWERS:</b> Rooted in this elegant circlet, a canopy of spectral branches forms above the foe, rendering them strangely vulnerable to the enchanted weapons of the Sylvaneth.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 3+, add 1 to wound rolls for combat attacks made by friendly <span class=\"kwb\">SYLVANETH</span> units that target that enemy unit this phase.</div><div><br></div>"
+      },
+      {
+        "name": "GLAMOURWEAVE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GLAMOURWEAVE:</b> The Glamourweave’s illusory enchantments both enhance the wearer’s forest camouflage and conceal their strikes when battle is joined.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each phase, you can re-roll 1 hit roll, 1 wound roll and 1 save roll for this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "ACORN OF THE AGES",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ACORN OF THE AGES:</b> Within this unassuming acorn lies untold potential for life.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If there are fewer than 3 friendly Awakened Wyldwoods on the battlefield, set up an Awakened Wyldwood wholly within 12\" of this unit, more than 3\" from all objectives and more than 1\" from all enemy units and other terrain features.</div><div><br></div>"
+      },
+      {
+        "name": "RANU’S LAMENTIRI",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Reaction: Opponent declared a <span class=\"kwb\">SPELL</span> ability for a unit within 30\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>RANU’S LAMENTIRI:</b> Even in death, Ranu lends sorcerous strength to their kin.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Make an unbinding roll of 2D6. If the roll exceeds the casting roll for the spell, the spell is unbound and its effect is not resolved. Then, inflict an amount of mortal damage on the caster equal to the difference between the casting roll and the unbinding roll, to a maximum of 6.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#76602b\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abIsReaction\"><span class=\"kwb\">UNBIND</span></td></tr></tbody></table></div><div><br></div>"
+      }
+    ]
+  },
+  "helsmiths": {
+    "heroic_traits": [
+      {
+        "name": "SERVILE AUTOMATON",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SERVILE AUTOMATON:</b> This paranoid overlord shuns traditional bodyguards, instead favouring a looming daemon engine entirely bound to them through burning Zharralid carvings.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly HELSMITHS OF HASHUT AUTOMATON unit within this unit’s combat range to be the target.<br><b>Effect:</b> For the rest of the battle, the target is this unit’s bodyguard and the following effects apply:<br><ul><li>While this unit is in combat and its bodyguard is within its combat range, its bodyguard has STRIKE-FIRST.</li><li>If this unit is INFANTRY, it has WARD (5+) while its bodyguard is within its combat range.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "AN EYE FOR WEAKNESS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AN EYE FOR WEAKNESS:</b> Whether bargaining a Wage of Toil or considering the press of battle, this duardin can readily sense vulnerability.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible enemy unit within 18\" of this unit to be the target.<br><b>Effect:</b> Until the start of your next turn, add 1 to wound rolls for combat attacks made by friendly <span class=\"kwb\">HELSMITHS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">HASHUT</span> units that target that enemy unit.</div><div><br></div>"
+      },
+      {
+        "name": "’FIRE, YOU WORMS!’",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Enemy Charge Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>’FIRE, YOU WORMS!’:</b> A pitiless enforcer of discipline, this duardin expects their underlings to keep firing even as the foe bears down on them.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly HELSMITHS OF HASHUT INFANTRY unit that is not in combat and is wholly within 12\" of this unit to be the target.<br><b>Effect:</b> The target can immediately use the ‘Shoot’ ability as if it were your shooting phase. All attacks must target the same enemy unit, and the enemy unit picked to be the target of the attacks must have charged this phase. If the unmodified hit roll for any of those attacks is 1-5, the attack fails and the attack sequence ends.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "SCROLL OF PETRIFICATION",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SCROLL OF PETRIFICATION:</b> Though they cannot control the stone-flesh curse, the Zharrdron still believe it can be harnessed. This scroll is the result of such a belief. One who reads from it can transform themselves or their minions into stone for a fleeting moment.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">HELSMITHS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">HASHUT</span> unit wholly within 12\" of this unit to be the target.<br><b>Effect:</b> For the rest of the turn:<br><ul><li>The target has WARD (2+).</li><li>Enemy units can ignore the target’s combat range for the purposes of movement and charging.</li><li>Enemy units can ignore the target for the purposes of setting up on the battlefield but cannot be <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Setting-Up-Units\">set up</a> on the target.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "CRUCIBLE OF SPITE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CRUCIBLE OF SPITE:</b> This charm, a hollowed and profane statuette of Grungni, contains raging daemon essences that can be drawn on for strength. Yet such eager blasphemy does not go unpunished…<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Give up to 3 <a href=\"https://wahapedia.ru/aos4/factions/helsmiths-of-hashut/#Battle-Traits\"><b>daemonic power points</b></a> to this unit. However, you cannot allocate or give any more <b>daemonic power points</b> to this unit for the rest of the battle.</div><div><br></div>"
+      },
+      {
+        "name": "GAUNTLETS OF PUNISHMENT",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GAUNTLETS OF PUNISHMENT:</b> Cooled in the blood of duardin who sought to betray their sworn overlords, a spiteful gesture from these gauntlets can wrack a soul with unbearable pain.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible enemy unit within 12\" of this unit to be the target.<br><b>Effect:</b> Roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll.</div><div><br></div>"
+      }
+    ]
+  },
+  "khorne": {
+    "heroic_traits": [
+      {
+        "name": "MAGICAL SCORN",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MAGICAL SCORN:</b> This warrior's loathing of the arcane and esoteric exudes from them in waves.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 1 from casting rolls for <span class=\"kwb\">WIZARDS</span> while they are within 12\" of this unit.<br>Subtract 1 from chanting rolls for enemy <span class=\"kwb\">PRIESTS</span> while they are within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "FRENZIED TASKMASTER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FRENZIED TASKMASTER:</b> This champion does not allow their followers to shirk the slaughter.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly BLADES OF KHORNE INFANTRY or CAVALRY unit within this unit’s combat range that is not in combat to be the target.<br><b>Effect:</b> The target can move D6\" but cannot end that move in combat. If the target ends that move within this unit’s combat range, inflict an amount of mortal damage on the target equal to the roll.</div><div><br></div>"
+      },
+      {
+        "name": "SKULL COLLECTOR",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SKULL COLLECTOR:</b> Even other warriors of Khorne are in awe of this champion's fixation on decapitation.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If any damage points were allocated to an enemy <span class=\"kwb\">HERO</span> by this unit’s combat attacks this turn and that enemy <span class=\"kwb\">HERO</span> has been destroyed, add 1 to the Attacks characteristic of this unit’s melee weapons for the rest of the battle.<br>This unit can be affected by this ability multiple times and the effects are cumulative.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "COLLAR OF CONTEMPT",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>COLLAR OF CONTEMPT:</b> This thrice-damned brass collar is the bane of magical power.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit can use <span class=\"kwb\">UNBIND</span> abilities as if it had WIZARD (1). Each time this unit successfully unbinds a spell, inflict D3 mortal damage on the caster.</div><div><br></div></div>"
+      },
+      {
+        "name": "BUTCHER’S BLADE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Your Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BUTCHER’S BLADE:</b> One cut from this blade can see a target brutally exsanguinated.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick each enemy unit that had any damage points allocated to it this turn by this unit’s combat attacks to be the targets.<br><b>Effect:</b> Roll a D3 for each target. On a 2+, inflict an amount of mortal damage on the target equal to the roll.</div><div><br></div>"
+      },
+      {
+        "name": "AR’GATH, THE KING OF BLADES",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AR’GATH, THE KING OF BLADES:</b> This daemonic blade hungers for the flesh of champions and will not be denied by trickery or magic.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Ward rolls cannot be made for enemy <span class=\"kwb\">HEROES</span> while they are in combat with this unit.</div><div><br></div>"
+      }
+    ]
+  },
+  "nurgle": {
+    "heroic_traits": [
+      {
+        "name": "GIFT OF FEBRILE FRENZY",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GIFT OF FEBRILE FRENZY:</b> This general can invigorate their usually sluggish minions by releasing a fever upon them that drives them into a wild delirium.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1\" to the Move characteristic of friendly <span class=\"kwb\">MAGGOTKIN</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">NURGLE</span> units that do not have non-FLY if they are wholly within 12\" of this unit at the start of the move.</div><div><br></div></div>"
+      },
+      {
+        "name": "GRANDFATHER’S BLESSING",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GRANDFATHER’S BLESSING:</b> This mighty Nurglite is so diseased that they are rejuvenated by decay and plague.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is in combat with a <span class=\"kwb\">DISEASED</span> enemy unit, <b>Heal (D6)</b> this unit.</div><div><br></div>"
+      },
+      {
+        "name": "OVERPOWERING STENCH",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Reaction: Opponent declared a command for a unit in combat with this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>OVERPOWERING STENCH:</b> This general exudes an odour so wretched that even Nurgle’s daemons cannot adequately describe it. Enemies recoil, choking on their own vomit at the slightest whiff and rendered speechless as their senses are overwhelmed.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Roll a dice. On a 5+, that command has no effect. The command still counts as having been used and the command points spent to use the command are still lost.</div><div><br></div>"
+      },
+      {
+        "name": "LIVING PLAGUE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LIVING PLAGUE:</b> As this hero slams into the foe, they spread Nurgle’s potent gifts of contagion.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> If this unit charged this turn, pick an enemy unit in combat with it to be the target.<br><b>Effect:</b> The target has the <a href=\"https://wahapedia.ru/aos4/factions/maggotkin-of-nurgle/#Battle-Traits\"><span class=\"kwb\">DISEASED</span></a> keyword.</div><div><br></div></div>"
+      },
+      {
+        "name": "UNCTUOUS PREACHER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>UNCTUOUS PREACHER:</b> Even this hero’s brethren consider them to be far too enthusiastic in their preachings of Grandfather Nurgle’s blessings.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not a <span class=\"kwb\">PRIEST</span>, it has PRIEST (1). If this unit is already a <a class=\"kwbOne\" href=\"https://wahapedia.ru/aos4/factions/maggotkin-of-nurgle/Harbinger-of-Decay\"><span class=\"kwb kwbo\">PRIEST</span></a>, add 1 to chanting rolls for this unit.</div><div><br></div>"
+      },
+      {
+        "name": "CORPULENT AVALANCHE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Any Charge Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CORPULENT AVALANCHE:</b> As this hulk’s momentum builds, its bulk becomes nothing less than a blubbery, pus-filled battering ram.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> If this unit charged this turn, pick a visible enemy unit within 1\" of it to be the target.<br><b>Effect:</b> Roll a number of dice equal to this unit’s Move characteristic. For each 3+, inflict 1 mortal damage on the target.<br>If any damage points were allocated to the target by this ability, this unit can move 2D3\". It can move through the combat ranges of enemy units but must end that move in combat with the units it was already in combat with at the start of the move.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "THE WITHERSTAVE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE WITHERSTAVE:</b> Carved from the heartwood of a tormented Treelord, the Witherstave thrums with a soured mockery of the Sylvaneth spirit song. Those that hear it feel a terrible weakness shiver their limbs as a jarring dirge of despair clouds their minds.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit that charged this turn and is in combat with this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 4+, the target has STRIKE-LAST for the rest of the turn.</div><div><br></div></div>"
+      },
+      {
+        "name": "RUSTFANG",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>RUSTFANG:</b> Rustfang is a cursed battleaxe whose blade crawls with a thick layer of sentient corrosion. The slightest touch of this blade spreads its ferric blight, chewing away the foe’s armour in moments.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy HERO in combat with this unit to be the target.<br><b>Effect:</b> Subtract 1 from save rolls for the target for the rest of the battle.</div><div><br></div>"
+      },
+      {
+        "name": "THE CARRION DIRGE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE CARRION DIRGE:</b> When blown, this filth-encrusted horn shrieks with the tongue of a thousand carrion crows. Those outside Nurgle’s favour who hear it are struck with a deep despondency. Why stand defiant? Why seek victory? Why do anything at all?<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick up to 3 enemy units within 12\" of this unit to be the targets.<br><b>Effect:</b> Subtract 3 from each target’s control score for the rest of the turn.</div><div><br></div>"
+      }
+    ]
+  },
+  "skaven": {
+    "heroic_traits": [
+      {
+        "name": "SCURRY AWAY",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SCURRY AWAY:</b> This Skaven chief does not think twice about scampering to safety when things look to be going south. Perhaps that’s why they have lived so long.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is in combat, roll a dice. On a 3+, this unit can immediately use the ‘Retreat’ ability as if it were your movement phase.</div><div><br></div></div>"
+      },
+      {
+        "name": "SHORT-TEMPERED",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SHORT-TEMPERED:</b> This twitching and irascible Skaven has succeeded in making their minions more afraid of their displeasure than of the enemy.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to run rolls and charge rolls for friendly <span class=\"kwb\">SKAVEN</span> units while they are wholly within 13\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "SKILLED MANIPULATOR",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SKILLED MANIPULATOR:</b> This Skaven warlord is particularly devious and selfserving, deftly ensuring that their minions are always conveniently positioned between themselves and potential threats.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> While this unit is within the combat range of a friendly non-HERO SKAVEN INFANTRY unit:<br><ul><li>This unit has WARD (4+).</li><li>Each time you make a successful ward roll for this unit, allocate 1 damage point to a friendly non-<span class=\"kwb\">HERO</span> <span class=\"kwb\">SKAVEN</span> <span class=\"kwb\">INFANTRY</span> unit within this unit’s combat range after the damage sequence for this unit has been resolved (ward rolls cannot be made for those damage points).</li></ul></div><div><br></div>"
+      },
+      {
+        "name": "DEVIOUS UNDERLING",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DEVIOUS UNDERLING:</b> Sly in the extreme, this ratman has mastered the art of biding his time, content to wait until his superiors’ demise before violently seizing control for himself.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick another friendly SKAVEN HERO on the battleeld with a Health characteristic that equals or exceeds this unit’s Health characteristic to be the target.<br><b>Effect:</b> For the rest of the battle:<br><ul><li>While the target has not been slain, friendly SKAVEN INFANTRY units have WARD (6+) while they are wholly within 13\" of this unit.</li><li>Once the target has been slain, add 2 to charge rolls for friendly <span class=\"kwb\">SKAVEN</span> <span class=\"kwb\">INFANTRY</span> units while they are wholly within 13\" of this unit.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "FLESHMEDDLER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FLESHMEDDLER:</b> This Skaven carries syringe darts filled with warpstone serum that can be fired into the patchwork hides of nearby Moulder creations to give them a ‘bit of extra bite’.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly MOULDER unit wholly within 13\" of this unit to be the target.<br><b>Effect:</b> Pick 1 of the target’s melee weapons. Add 1 to the Rend characteristic of that weapon for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "PIT TINKERER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PIT TINKERER:</b> This mechanically minded Skaven has a compulsion to make ‘improvements’ to the Skryre devices under his command.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> You can re-roll the random characteristic rolls for the Move characteristic of friendly SKRYRE WAR MACHINES while they are wholly within 13\" of this unit. In addition, each time a friendly <span class=\"kwb\">SKRYRE</span> <span class=\"kwb\">WAR</span> <span class=\"kwb\">MACHINE</span> wholly within 18\" of this unit uses the ‘Rolling Doom’ or ‘Whirling Doom’ ability, add 1 to the amount of mortal damage inflicted, if any.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "FOULHIDE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FOULHIDE:</b> Fashioned from the flensed flesh of Rat Ogors and soaked in cloying alchemical agents, this stinking armour sticks to its wearer like a bloated second skin and regrows as fast as it can be hacked apart.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> <b><b>Heal (D3)</b></b> this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "WARPSTONE CHARM",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>WARPSTONE CHARM:</b> This foul talisman radiates mutating energy that can be directed at an enemy unit to erode their armour.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 3+, subtract 1 from save rolls for the target for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "SKAVENBREW",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SKAVENBREW:</b> This foul concoction, brewed from blood and warpstone, is dispensed to expendable underlings to drive them into a short-lived but devastating killing frenzy.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly non-HERO SKAVEN INFANTRY unit wholly within 13\" of this unit to be the target.<br><b>Effect:</b> Inflict D3 mortal damage on the target. Then, add 1 to the Attacks characteristic of the target’s melee weapons for the rest of the turn.</div><div><br></div>"
+      }
+    ]
+  },
+  "slaanesh": {
+    "heroic_traits": [
+      {
+        "name": "GLORY HOG",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GLORY HOG:</b> This hero wants nothing more than to revel in the defeat of their enemies.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If an enemy <span class=\"kwb\">HERO</span> is destroyed by this unit, this unit has the <span class=\"kwb\">EUPHORIC</span> keyword for the rest of the battle.</div><div><br></div></div>"
+      },
+      {
+        "name": "STRONGEST ALONE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>STRONGEST ALONE:</b> This hero fights most fiercely on their own, lest their followers sully their greatness with their lesser presence.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to hit rolls and wound rolls for this unit’s attacks while it is more than 6\" from all other friendly units.</div><div><br></div>"
+      },
+      {
+        "name": "INTO THE FRAY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>INTO THE FRAY:</b> The first blow struck is the sweetest, and this warlord makes sure they slake their desire for violence with force and skill.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit charged this turn and the unmodified charge roll was 8+, this unit has STRIKE-FIRST for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "CELEBRITY WARLORD",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Battle, Your Movement Phase</td><td></td><td><div class=\"abCommandPoints\"><div class=\"abCommandPointsN\">1</div></div></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CELEBRITY WARLORD:</b> This hero has gained a cult following that seeks them out on the battlefield.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly non-HERO SYBARITE unit that has been destroyed to be the target.<br><b>Effect:</b> <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Setting-Up-Units\">Set up</a> a replacement unit with half the number of models from the target unit (rounding up) wholly within 12\" of this unit and more than 9\" from all enemy units.</div><div><br></div></div>"
+      },
+      {
+        "name": "MASTER OF TEMPTATION",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Enemy Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MASTER OF TEMPTATION:</b> Twisting the old adage, this hero demonstrates that good things do not come to those who wait.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> You can only use this ability if your opponent has any <a href=\"https://wahapedia.ru/aos4/factions/hedonites-of-slaanesh/#Battle-Traits\"><b>temptation dice</b></a>. Pick a visible enemy unit within 18\" of this unit to be the target.<br><b>Effect:</b> For the rest of the turn, while your opponent has not used any of their <b>temptation dice</b> to replace a roll for the target this turn, the target can only use <span class=\"kwb\">CORE</span> abilities.</div><div><br></div>"
+      },
+      {
+        "name": "THE NEED FOR PERFECTION",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE NEED FOR PERFECTION:</b> This hero inspires a compulsive, self‐destructive desire in their allies to push themselves ever further, all thoughts of temperance and restraint dismissed from their minds.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> The first time each turn that an unmodified charge roll, casting roll, unbinding roll or banishment roll for a friendly non-<span class=\"kwb\">EUPHORIC</span> unit wholly within 12\" of this unit is 5 or less, that unit has the <a href=\"https://wahapedia.ru/aos4/factions/hedonites-of-slaanesh/#Battle-Traits\"><span class=\"kwb\">EUPHORIC</span></a> keyword for the rest of the turn.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "ICON OF INFINITE EXCESS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ICON OF INFINITE EXCESS:</b> Slaanesh’s most opulent standard drives both followers and enemies of the Dark Prince into orgiastic fits of violence.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a non-HERO HEDONITES OF SLAANESH unit wholly within 12\" of this unit to be the target.<br><b>Effect:</b> Add 1 to the Attacks characteristic of the target’s melee weapons for the rest of the turn.</div><div><br></div></div>"
+      },
+      {
+        "name": "THRENODY VOICEBOX",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THRENODY VOICEBOX:</b> When swallowed and held in the gullet, this tiny music box allows the bearer to let fly a mournful melody that can lull enemies into a stupor.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> For the rest of the turn, subtract 1 from the Attacks characteristic of melee weapons used by enemy units while they are in combat with this unit.</div><div><br></div>"
+      },
+      {
+        "name": "PENDANT OF SLAANESH",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PENDANT OF SLAANESH:</b> This pendant burrows deep into the owner’s chest and nestles next to their heart, invigorating them whenever they feel pain.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If any damage points were allocated to this unit this turn, <b>Heal (3)</b> this unit.</div><div><br></div>"
+      }
+    ]
+  },
+  "slaves": {
+    "heroic_traits": [
+      {
+        "name": "FAVOURED OF THE PANTHEON",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FAVOURED OF THE PANTHEON:</b> The gods watch this warlord’s deeds particularly closely.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is picked as the target of the ‘Eye of the Gods’ ability, it gains 3 Dark Apotheosis points.</div><div><br></div></div>"
+      },
+      {
+        "name": "DEATHMONGER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DEATHMONGER:</b> Feared across the realms, this hero leaves naught in their wake but a trail of sun-bleached bones.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit can use 2 FIGHT abilities this phase. After the first is used, however, this unit has STRIKE-LAST for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "RADIANCE OF DARK GLORY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>RADIANCE OF DARK GLORY:</b> In the presence of this champion, the mutative energies of Chaos can seal shut even the most grievous of wounds.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick each damaged friendly unit wholly within 12\" of this unit to be the targets.<br><b>Effect:</b> Roll a dice for each target. On a 3+, <b>Heal (1)</b> the target. <b>Heal (3)</b> the target instead if it is a MONSTER.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "INFERNAL PUPPET",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle, Start of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>INFERNAL PUPPET:</b> As it dances upon the aetheric winds, this eldritch marionette violently disrupts the spellcraft of enemy mages.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible enemy <span class=\"kwb\">WIZARD</span> within 24\" of this unit to be the target.<br><b>Effect:</b> For the rest of the turn, each time the target is picked to use a <span class=\"kwb\">SPELL</span> ability, inflict D3 mortal damage on the target as a reaction. If the target is destroyed by this ability, do not resolve the effect of that <span class=\"kwb\">SPELL</span> ability.</div><div><br></div></div>"
+      },
+      {
+        "name": "THE CONQUEROR’S CROWN",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE CONQUEROR’S CROWN:</b> This blasphemous diadem grants the bearer dominion over the minds of lesser mortals.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 5 from the control scores of enemy <span class=\"kwb\">INFANTRY</span> units while they are in combat with this unit.</div><div><br></div>"
+      },
+      {
+        "name": "REALMWARPER’S TWIST-RUNE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>REALMWARPER’S TWIST-RUNE:</b> One who bears this cursed rune can bind warped landscapes to their will. Ruptured chasms open as thick palls of dark energy obscure the favoured and their servants from view.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Terrain-2025-26\">terrain feature</a> within 12\" of this unit to be the target.<br><b>Effect:</b> If the target does not have the ‘Obscuring’ terrain ability, it gains that ability until the start of your next turn. Then, roll a dice for each model (friendly and enemy) within 1\" of the target. For each 5+, inflict 1 mortal damage on that model’s unit.</div><div><br></div>"
+      },
+      {
+        "name": "AMULET OF CHAOS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AMULET OF CHAOS:</b> Life, death, creation, obliteration. Maddening potential swirls within the gemstone set in this talisman. It need only be loosed by belief.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible enemy unit within 12\" of this unit to be the enemy target. Then, you can pick a friendly DARKOATH INFANTRY unit in combat with that enemy unit to be the friendly target.<br><b>Effect:</b> Roll a D3. On a 2+:<ul><li>Inflict an amount of mortal damage on the enemy target equal to the roll.</li><li>If there is a friendly target, return a number of slain models to it equal to the roll.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "THE VARANITE SHACKLE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE VARANITE SHACKLE:</b> This writhing torque radiates an aura that twists reality, aiding those who serve the will of the Dark Gods yet are blind or indifferent to the import of their actions.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Friendly non-WARRIORS OF CHAOS SLAVES TO DARKNESS units have WARD (6+) while they are wholly within 12\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "HEAD OF THE UNWORTHY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HEAD OF THE UNWORTHY:</b> This grim trophy is a bleak reminder that the gods’ favour, even if earned over centuries of battle, can be lost and bestowed on another in a heartbeat.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If a friendly SLAVES TO DARKNESS HERO with any Dark Apotheosis points is destroyed, give this unit 8 <b>Dark Apotheosis</b> points.</div><div><br></div>"
+      }
+    ]
+  },
+  "tzeentch": {
+    "heroic_traits": [
+      {
+        "name": "ILLUSIONIST",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ILLUSIONIST:</b> This warrior uses misdirection and cunning to render their enemies clueless.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 1 from hit rolls for attacks that target friendly units while they are wholly within this unit’s combat range.</div><div><br></div></div>"
+      },
+      {
+        "name": "NEXUS OF FATE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>NEXUS OF FATE:</b> Tzeentch’s favoured servants manipulate what mortals consider ‘destiny’ as if it were a puppet.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Roll a dice. You must replace 1 of your destiny dice with that roll.</div><div><br></div>"
+      },
+      {
+        "name": "CULT DEMAGOGUE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CULT DEMAGOGUE:</b> This cabalist’s resounding spells draw the gaze of their master’s minions quicker than most.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If each dice in a casting roll for this unit has the same value and the spell is not miscast, add 3 to the casting roll.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "NINE-EYED TOME",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>NINE-EYED TOME:</b> Some of the most terrible arcane secrets known to the Change God are contained within this ancient tome, the surface of which is dotted with unblinking eyes.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to casting rolls and banishment rolls for this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "WYRDFLAME BLADE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>WYRDFLAME BLADE:</b> The flames that flicker around the bearer’s blade can ignite the soul of its victim.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If any damage points are allocated to an enemy unit by this unit’s combat attacks, that enemy unit has the <span class=\"kwb\">BURNING</span> keyword.</div><div><br></div>"
+      },
+      {
+        "name": "AMBITION’S END",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AMBITION’S END:</b> Many a sorcerer’s quest to master the magical arts has ended upon this weapon’s blade, for it spills not only blood but knowledge itself.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy WIZARD in combat with this unit to be the target.<br><b>Effect:</b> Inflict D3 mortal damage on the target. In addition, subtract 1 from casting rolls for the target for the rest of the battle.</div><div><br></div>"
+      },
+      {
+        "name": "MUTATING BLADE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MUTATING BLADE:</b> An iridescent flamberge, an axe with nine edges, a lash ending in an eagle’stalon: the form of the bearer’s weapon constantly shifts, making its strikes impossible to predict.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Pick 1 of this unit’s melee weapons. That weapon’s Attacks characteristic is 2D6 for the rest of the battle.</div><div><br></div></div>"
+      },
+      {
+        "name": "ARCANE SIPHON",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ARCANE SIPHON:</b> This enigmatic device can drain the animating force from nearby magical emanations and transmute it into a shimmering, rejuvenating tonic.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a visible MANIFESTATION (friendly or enemy) that was not <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Setting-Up-Units\">set up</a> this turn and is within 12\" of this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 3+:<br><ul><li>The target is banished.</li><li><b>Heal (X)</b> this unit, where <span class=\"kwb\">X</span> is the target’s Health characteristic.</li></ul></div><div><br></div>"
+      },
+      {
+        "name": "SPELL-CATCHER AMULET",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SPELL-CATCHER AMULET:</b> This amulet, in the shape of an unblinking eye, devours the residual energies of arcane manifestations that have been unravelled, re-imagining them in forms more pleasing to the Changer of the Ways.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> This unit can use this ability if any enemy MANIFESTATIONS were banished this phase.<br><b>Effect:</b> This unit can use a <span class=\"kwb\">SUMMON</span> ability from the manifestation lore you picked during <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Army-Composition-2025-26\">army composition</a>. That <span class=\"kwb\">SUMMON</span> ability does not count towards the total number of <span class=\"kwb\">SPELL</span> or <span class=\"kwb\">BANISH</span> abilities this unit can use this phase.</div><div><br></div>"
+      }
+    ]
+  },
+  "flesheater": {
+    "heroic_traits": [
+      {
+        "name": "STRONGER IN MADNESS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>STRONGER IN MADNESS:</b> The Boon of Ushoran has rendered this warrior’s physical form near indestructible.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Ignore the first damage point that would be allocated to this unit each phase.<br>In addition, other than the Companion weapon ability, weapon abilities for combat attacks that target this unit have no effect.</div><div><br></div></div>"
+      },
+      {
+        "name": "SAVAGE BEYOND REASON",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SAVAGE BEYOND REASON:</b> The fury of battle drives this general into an intense rage.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to the Attacks characteristic of this unit’s melee weapons, including Companion weapons, if it did not use a FIGHT ability in the previous turn. Add 2 to the Attacks characteristic of those weapons instead while this unit has no used a <span class=\"kwb\">FIGHT</span> ability this battle.</div><div><br></div>"
+      },
+      {
+        "name": "CRUEL TASKMASTER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Your Charge Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CRUEL TASKMASTER:</b> The warriors under this courtier’s command instantly obey their summons.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly non-HERO FLESH-EATER COURTS unit wholly within 12\" of this unit to be the target.<br><b>Effect:</b> For the rest of the turn, you can re-roll charge rolls for the target.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "THE SPLINTERED FEMUR",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Your Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE SPLINTERED FEMUR:</b> A venerated relic of the infamous Spell-eater Queen, this club can easily break not only limbs but also the arcane.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Roll a D3. On a 2+, pick 1 of the following:<br><ul><li>Inflict an amount of mortal damage on the target equal to the roll.</li><li>Subtract 1 from the target’s power level, to a minimum of 0, until the start of your next turn.</li><li>If the target is a MANIFESTATION, it is banished and removed from play.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "CHARNEL VESTMENTS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CHARNEL VESTMENTS:</b> Strips of flayed skin and crudely stitched sinew form a gruesome parody of priestly robes.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not a <span class=\"kwb\">PRIEST</span>, it has PRIEST (1). If this unit is already a <a class=\"kwbOne\" href=\"https://wahapedia.ru/aos4/factions/flesh-eater-courts/Abhorrant-Cardinal\"><span class=\"kwb kwbo\">PRIEST</span></a>, add 1 to chanting rolls for this unit. If this unit is a WIZARD, it cannot use <span class=\"kwb\">SPELL</span> abilities and <span class=\"kwb\">PRAYER</span> abilities in the same phase.</div><div><br></div>"
+      },
+      {
+        "name": "THE GRISLY PENNANT",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE GRISLY PENNANT:</b> This raggedy flag of flesh, recently torn from an unfortunate victim, is an icon of purity and nobility to the cannibal army but a terrifying spectacle to their enemies.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> If this unit charged this turn, pick an enemy unit in combat with it to be the target.<br><b>Effect:</b> Roll a dice. If the roll is greater than the target’s Control characteristic or is a 6, the following effects apply for the rest of the turn:<br><ul><li>Subtract 1 from hit rolls for the target’s combat attacks.</li><li>Add 1 to hit rolls for combat attacks made by friendly units that target that enemy unit.</li></ul></div><div><br></div>"
+      }
+    ]
+  },
+  "nighthaunt": {
+    "heroic_traits": [
+      {
+        "name": "RULER OF THE SPECTRAL HOSTS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>RULER OF THE SPECTRAL HOSTS:</b> The deathly power of this spirit is like a siren call, an unseen signal that beckons to those who have passed beyond the grave.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick up to 3 friendly non-HERO NIGHTHAUNT units wholly within 12\" of this unit to be the targets.<br><b>Effect:</b> Roll a D3 for each target. On a 2+:<br><ul><li>If the target is damaged, <b>Heal (X)</b> the target, where <span class=\"kwb\">X</span> is an amount equal to the roll.</li><li>If the target is not damaged, return a number of slain models to it with a combined Health characteristic of up to <span class=\"kwb\">X</span>, where <span class=\"kwb\">X</span> is an amount equal to the roll.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "DEATHLY POSSESSOR",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DEATHLY POSSESSOR:</b> In a flash ofbalefire, the Nighthaunt vanishes. An instant later, a nearby foe's eyes glow with spectral power and they lash out at their allies, cackling in a voice not their own.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy <span class=\"kwb\">HERO</span> in combat with this unit to be the target, then pick another enemy unit within the target’s combat range to be the victim.<br><b>Effect:</b> Roll a dice. On a 3+, pick 1 of the target’s melee weapons. Immediately resolve combat attacks for the target with that weapon against the victim.</div><div><br></div>"
+      },
+      {
+        "name": "SHADOWY AURA",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Reaction: You declared the ’Redeploy’ command for a friendly <span class=\"kwb\">NIGHTHAUNT</span> unit wholly within 12\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>SHADOWY AURA:</b> A pall of gloom hangs over this champion, concealing the movements of nearby gheists and allowing them to ambush their victims.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> For the rest of the turn, subtract 1 from hit rolls for attacks that target this unit.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "BRAZIER OF NAGASHIZZAR",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Reaction: You declared the ’Redeploy’ command for a friendly NIGHTHAUNT INFANTRY unit wholly within 12\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BRAZIER OF NAGASHIZZAR:</b> Green flames billow from this brazier, lashing at nearby gheists and ensuring that there is no rest for the wicked.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If you roll a 1-3 when determining the distance that unit can move, you can use a value of 4 instead.</div><div><br></div></div>"
+      },
+      {
+        "name": "LIGHTSHARD OF THE HARVEST MOON",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LIGHTSHARD OF THE HARVEST MOON:</b> This lightshard is filled with a baleful gloom that, upon release, casts the battlefield in an eerie glow, readying the enemy for the reaping.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is in combat, add 1 to the Attacks characteristic of melee weapons used by friendly <span class=\"kwb\">NIGHTHAUNT</span> units while they are wholly within 12\" of this unit for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "MIRROR OF ECHOING FAILURES",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Reaction: Opponent declared a <span class=\"kwb\">SPELL</span> or <span class=\"kwb\">PRAYER</span> ability for a <span class=\"kwb\">WIZARD</span> or <span class=\"kwb\">PRIEST</span> within 12\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MIRROR OF ECHOING FAILURES:</b> To fail in front of this awful artefact is to have those miseries echoed in excruciating detail by a caterwauling reflection of your own face deriding your futile efforts.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick each enemy <span class=\"kwb\">WIZARD</span> and <span class=\"kwb\">PRIEST</span> within 12\" of this unit to be the targets.<br><b>Effect:</b> Roll a D3. On a 2+, for the rest of the phase:<br><ul><li>Subtract 1 from casting rolls and chanting rolls for the targets.</li><li>Each time any of the targets fails to cast a spell or chant a prayer, inflict 1 mortal damage on that target.</li></ul></div><div><br></div>"
+      },
+      {
+        "name": "STAVE OF SUFFERING",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>STAVE OF SUFFERING:</b> This staff drinks in the misery and pain of nearby living things and converts it into powerful magic that can be harnessed by Nighthaunt spellcasters.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> While this unit is within 12\" of any damaged enemy units or enemy units that have had any models slain, add 1 to casting rolls for friendly <span class=\"kwb\">NIGHTHAUNT</span> units while they are wholly within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "TOMBSTONE OF THE PENITENT",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TOMBSTONE OF THE PENITENT:</b> This tombstone, chained to the gheist cursed to bear it, begins to burn with spectral flames as the land around them is suffused with deathly energies.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to the Attacks characteristic of this unit’s melee weapons for each non-<span class=\"kwb\">FACTION</span> <span class=\"kwb\">TERRAIN</span> <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Terrain-2025-26\">terrain feature</a> that is being contested by friendly units, to a maximum of 8.</div><div><br></div>"
+      },
+      {
+        "name": "AMULET OF WAKING NIGHTMARES",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AMULET OF WAKING NIGHTMARES:</b> This loathsome amulet afflicts harrowing visions on a chosen victim, whose subsequent throat- rending screams allow Nighthaunt marksmen to locate their target no matter where they hide.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy <span class=\"kwb\">HERO</span> within 18\" of this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 3+, for the rest of the turn, the target cannot be affected by the ‘Guarded Hero’ ability or the ‘Obscuring’ terrain ability.</div><div><br></div>"
+      }
+    ]
+  },
+  "ossiarch": {
+    "heroic_traits": [
+      {
+        "name": "DIVERSIONARY TACTICS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DIVERSIONARY TACTICS:</b> Infused with especially cunning souls, this hero uses all manner of snares and ruses to hinder a foe’s advance.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 2 from charge rolls for enemy units while they are within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "MIGHTY ARCHAEOSSIAN",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MIGHTY ARCHAEOSSIAN:</b> The fossilised bone from which this hero is formed is supernaturally hard.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If the unmodified hit roll for an attack that targets this unit is 1-3, the attack fails and the attack sequence ends.</div><div><br></div>"
+      },
+      {
+        "name": "AURA OF STERILITY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AURA OF STERILITY:</b> Ending magics shroud this hero, sapping the force from arrows and other projectiles.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 1 from wound rolls for shooting attacks that target friendly <span class=\"kwb\">OSSIARCH</span> <span class=\"kwb\">BONEREAPERS</span> units while they are wholly within 12\" of this unit.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "MARROWPACT",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MARROWPACT:</b> The glyphs borne to war by this champion bind those who view them in arcane pacts that siphon the energy from their bone marrow.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> For the rest of the turn, if the unmodified hit roll for a combat attack that targets this unit is 1-2, inflict 1 mortal damage on the attacking unit after the FIGHT ability has been resolved.</div><div><br></div></div>"
+      },
+      {
+        "name": "LODE OF SATURATION",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LODE OF SATURATION:</b> This ingot of nadirite–iron alloy, when pressed against a bone construct, renders its structure nigh invulnerable.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit has WARD (5+).</div><div><br></div>"
+      },
+      {
+        "name": "HELM OF TYRANNY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HELM OF TYRANNY:</b> This helm radiates the oppressive will of the wearer, filling nearby foes with supernatural dread.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 2 from the control scores of enemy units while they are within 12\" of this unit.</div><div><br></div>"
+      }
+    ]
+  },
+  "soulblight": {
+    "heroic_traits": [
+      {
+        "name": "LASH OF THE SIRE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LASH OF THE SIRE:</b> Such is the domineering force of this undead overlord’s willpower that it can imbue nearby vassals with sudden impetus.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick another friendly SOULBLIGHT GRAVELORDS unit within this unit’s combat range to be the target.<br><b>Effect:</b> Roll a dice. On a 2+:<br><ul><li>If the target is not in combat, it can move D6\" but cannot move into combat during any part of that move.</li><li>If the target is in combat, it can make a pile-in move.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "UNBENDING WILL",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>UNBENDING WILL:</b> This immortal tyrant and their minions are a force of unliving conquest like no other.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick a friendly DEATHRATTLE or DEADWALKERS unit that has 2 or more models and is wholly within 12\" of this unit to be the target.<br><b>Effect:</b> Add D6 to the target’s control score for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "UNHINGED RAMPAGER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>UNHINGED RAMPAGER:</b> This creature’s bestial hunger sees them close on the foe without hesitation.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> You can re-roll charge rolls for this unit in your charge phase.</div><div><br></div>"
+      },
+      {
+        "name": "IMMORTAL EGO",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>IMMORTAL EGO:</b> Few mortals would claim to be the mightiest slayer in the Mortal Realms or to have a peerless mastery of the blade, given the existence of gods, daemons, demigods and more besides.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each phase, you can re-roll 1 hit roll, 1 wound roll and 1 save roll for this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "FRIGHTENING VITALITY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FRIGHTENING VITALITY:</b> This deathless champion is an undead juggernaut, capable of a type of regeneration that is rare even amongst the ranks of the unliving.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each time an ability would heal exactly 1 or 2 of this unit’s damage points, heal 3 damage points instead.</div><div><br></div>"
+      },
+      {
+        "name": "A WASTREL AND A VAGABOND",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>A WASTREL AND A VAGABOND:</b> This spiteful creature is an embarrassment to their undead peers: perhaps a vampire fallen from favour, a wight who failed in their duty to their king, or a Necromancer who pushed their luck one time too many. Regardless of the reason, they seem to have an affinity with the basest undead minions.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> While a friendly <b><a href=\"https://wahapedia.ru/aos4/factions/soulblight-gravelords/Deadwalker-Zombies\">Deadwalker Zombies</a></b> or <b><a href=\"https://wahapedia.ru/aos4/factions/soulblight-gravelords/Deathrattle-Skeletons\">Deathrattle Skeletons</a></b> unit is wholly within 12\" of this unit:<br><ul><li>Add 2 to run rolls for that unit.</li><li>Add 3\" to the distance that unit can move when it piles in.</li></ul></div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "TERMINUS CLOCK",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TERMINUS CLOCK:</b> Created by a mad clockwright of Ulfenkarn, this bizarre cogwork piece ticks without rhyme or reason. Whenever its eclectic count ends, however, the power of magic seems to deaden across the field.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Roll a dice. On a 3+, until the start of your next turn, subtract 1 from casting rolls for enemy WIZARDS while they are within 18\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "SHARD OF NIGHT",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SHARD OF NIGHT:</b> This undead lord’s armour was crafted using elements of an abyssal stalker and grants the bearer that awful creature’s shadowy aura.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Ignore modifiers to save rolls for shooting attacks that target this unit (positive and negative).</div><div><br></div>"
+      },
+      {
+        "name": "AMULET OF GRAVES",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AMULET OF GRAVES:</b> The bearer of this amulet can call upon a long-dead soul in Shyish, manifesting their final resting place onto the battlefield in a storm of necromantic energy.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If there are fewer than 3 friendly <a href=\"https://wahapedia.ru/aos4/factions/soulblight-gravelords/Cursed-Sepulchre\"><b>Cursed</b> <b>Sepulchres</b></a> on the battlefield, set up a <b>Cursed Sepulchre</b> on the battlefield more than 9\" from all enemy units, more than 1\" from all friendly units and more than 3\" from all objectives and other <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Terrain-2025-26\">terrain features</a>.</div><div><br></div>"
+      }
+    ]
+  },
+  "gloomspite": {
+    "heroic_traits": [
+      {
+        "name": "THE CLAMMY HAND",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE CLAMMY HAND:</b> This boss is obviously destined for great things and can call upon vast troglodytic hordes.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each time a friendly <span class=\"kwb\">GLOOMSPITE</span> <span class=\"kwb\">GITZ</span> unit wholly within 12\" of this unit uses the ‘Rally’ command, you can make 3 additional rally rolls of D6.</div><div><br></div></div>"
+      },
+      {
+        "name": "LOONTOUCHED",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LOONTOUCHED:</b> This warlord’s magical prowess is boosted by the Bad Moon’s light.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not a WIZARD, it has <span class=\"kwb\">WIZARD</span> (1). Otherwise, add 1 to casting rolls for this unit.</div><div><br></div>"
+      },
+      {
+        "name": "FIGHT ANOTHER DAY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FIGHT ANOTHER DAY:</b> This warlord has mastered the ignoble art of striking then running away before the enemy can hit back.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is in combat, roll a dice. On a 3+, this unit can immediately use the ‘Retreat’ ability as if it were your movement phase without any mortal damage being inflicted on it.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "THE CLAMMY COWL",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE CLAMMY COWL:</b> This enchanted hood wreathes its wearer in damp gloom, causing enemies to swing wildly at their blurred outline and weapons to slip in suddenly moistened palms.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 1 from hit rolls for attacks that target this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "BACKSTABBER’S BLADE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Battle, End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BACKSTABBER’S BLADE:</b> A slitta made from pure shadow and malice, this blade always finds its victim’s weak spots.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy <span class=\"kwb\">HERO</span> in combat with this unit to be the target.<br><b>Effect:</b> Roll a dice. On a 2+, inflict an amount of mortal damage on the target equal to the roll.</div><div><br></div>"
+      },
+      {
+        "name": "LEERING GITSHIELD",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LEERING GITSHIELD:</b> The spiteful enchantments woven into this hideous shield ensure terrible misfortune falls on any who dare attack its bearer.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each time an unmodified hit roll for an attack that targets this unit is 1, inflict 1 mortal damage on the attacking unit after the <span class=\"kwb\">ATTACK</span> ability has been resolved.</div><div><br></div>"
+      }
+    ]
+  },
+  "ironjawz": {
+    "heroic_traits": [
+      {
+        "name": "AN EYE FOR DA FIGHT",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Reaction: You declared the ‘Redeploy’ command for a friendly IRONJAWZ unit wholly within 12\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>AN EYE FOR DA FIGHT:</b> This orruk is among the most dangerous of their brutal kind: one who instinctively understands the flow of battle and knows just where the best fights are likely to kick off.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If you roll a 1-3 when determining the distance that unit can move, you can use a value of 4 instead.</div><div><br></div></div>"
+      },
+      {
+        "name": "MEGA BOSSY",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MEGA BOSSY:</b> This boss’s booming voice constantly rings out across the battlefield, ‘encouraging’ their ladz to get krumpin’.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit charged this turn, for the rest of the turn, add 1 to charge rolls for friendly <span class=\"kwb\">IRONJAWZ</span> units while they are wholly within 18\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "HULKING BRUTE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Any Charge Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HULKING BRUTE:</b> Even by orruk standards, this boss is huge, and he is ever eager to throw his immense weight around in battle.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> If this unit charged this turn, pick an enemy unit within 1\" of it to be the target.<br><b>Effect:</b> Roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll. If this unit’s unmodified charge roll this turn was 8+, roll a D6 instead of a D3.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "TROPHY SKULLS",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TROPHY SKULLS:</b> Festooned with the skulls of those who crossed them, be they ferocious beast or mighty warrior, there’s no doubt that this orruk means business.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 10 to this unit’s control score.</div><div><br></div></div>"
+      },
+      {
+        "name": "ARMOUR OF GORK",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ARMOUR OF GORK:</b> This bashed-together armour is thick, heavy and possessed of its own fierce fighting spirit.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit has WARD (6+).</div><div><br></div>"
+      },
+      {
+        "name": "AMBERBONE WHETSTONE",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AMBERBONE WHETSTONE:</b> This prized sharpening stone, laced with veins of realmstone, is found deep in the crags of Ghur. It is loved by the Ironjawz for its ability to make a weapon ‘ded sharp’.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Pick 1 of this unit’s weapons. Add 1 to the Rend characteristic of that weapon for the rest of the battle.</div><div><br></div>"
+      }
+    ]
+  },
+  "kruleboyz": {
+    "heroic_traits": [
+      {
+        "name": "BACKSTABBA",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BACKSTABBA:</b> When their enemy’s back is turned, this boss has no qualms about sticking a dagger in it.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy <span class=\"kwb\">HERO</span> in combat with both this unit and another friendly <span class=\"kwb\">KRULEBOYZ</span> unit to be the target.<br><b>Effect:</b> Inflict D3 mortal damage on the target. Add 1 to the mortal damage inflicted for each friendly <span class=\"kwb\">KRULEBOYZ</span> unit in combat with the target in addition to the first two <span class=\"kwb\">KRULEBOYZ</span> units.</div><div><br></div></div>"
+      },
+      {
+        "name": "SLIPPERY SKUMBAG",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SLIPPERY SKUMBAG:</b> This wily boss has mastered the art of the feint, breaking away from fights that aren’t going his way and then coming back for another go when the odds are in his favour.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is in combat, roll a dice. On a 3+, it can immediately use the ‘Retreat’ ability as if it were your movement phase without any mortal damage being inflicted on it.</div><div><br></div>"
+      },
+      {
+        "name": "EGOMANIAK",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EGOMANIAK:</b> This self-important boss is willing to use anyone to protect their own hide.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> While this unit is within the combat range of a friendly non-HERO KRULEBOYZ INFANTRY unit:<br><ul><li>This unit has WARD (4+).</li><li>Each time you make a successful ward roll for this unit, allocate 1 damage point to a friendly non-<span class=\"kwb\">HERO</span> <span class=\"kwb\">KRULEBOYZ</span> <span class=\"kwb\">INFANTRY</span> unit within this unit’s combat range after the damage sequence for this unit has been resolved (ward rolls cannot be made for those damage points).</li></ul></div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "MORK’S EYE PEBBLE",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Once Per Battle, Reaction: Opponent declared an <span class=\"kwb\">ATTACK</span> ability</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>MORK’S EYE PEBBLE:</b> When rubbed, this dark-grey rock produces a swirling bank of thick fog that protects the bearer and their allies from harm.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> For the rest of the turn, friendly <span class=\"kwb\">KRULEBOYZ</span> units have WARD (5+) while they are wholly within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "SWAMP STAFF",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SWAMP STAFF:</b> Hewn from a root of an ancient bogwood, this gnarled staff grants its bearer mastery over the swamps and can be used to ward off enemy magics.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not a non-WIZARD, it can use the ‘Unbind’ ability as if it had WIZARD (1). Otherwise, add 1 to this unit’s power level.</div><div><br></div>"
+      },
+      {
+        "name": "EYE-BITER ASH",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EYE-BITER ASH:</b> Stored in a heatproof pouch, this strange ash never stops smouldering. The bearer can cast it at a foe, creating a blistering ash cloud that blinds the targets and causes them terrible pain.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Subtract 1 from hit rolls and wound rolls for the target’s attacks for the rest of the turn.</div><div><br></div>"
+      }
+    ]
+  },
+  "ogor": {
+    "heroic_traits": [
+      {
+        "name": "GREAT GUTLORD",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GREAT GUTLORD:</b> There are few opponents in the Mortal Realms that can withstand the ravenous power of this ogor.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Ignore negative modifiers to this unit’s control score and to hit rolls and wound rolls for this unit’s attacks.</div><div><br></div></div>"
+      },
+      {
+        "name": "BOOMING ROAR",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BOOMING ROAR:</b> Relishing the fight, this champion roars a challenge to the enemy that makes the very earth beneath their feet tremble.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 5 from the control scores of enemy <span class=\"kwb\">INFANTRY</span> units while they are in combat with this unit.</div><div><br></div>"
+      },
+      {
+        "name": "TOUCHED BY THE EVERWINTER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TOUCHED BY THE EVERWINTER:</b> This warrior strayed close to the heart of the Everwinter and emerged with the power to commune with it.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not a PRIEST, it has PRIEST (1). If this unit is already a <span class=\"kwb\">PRIEST</span>, you can re-roll chanting rolls of 1 for it instead. If this unit is a WIZARD, it cannot use <span class=\"kwb\">SPELL</span> abilities and <span class=\"kwb\">PRAYER</span> abilities in the same phase.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "GRUESOME TROPHIES",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GRUESOME TROPHIES:</b> This collection of skulls, entrails and hides is an inspiring sight to this ogor’s kin, encouraging them to claim trophies of their own.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to hit rolls for combat attacks that target <span class=\"kwb\">HEROES</span> or <span class=\"kwb\">MONSTERS</span> made by friendly OGOR MAWTRIBES units while they are wholly within 12\" of this unit.</div><div><br></div></div>"
+      },
+      {
+        "name": "THE FANG OF GHUR",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE FANG OF GHUR:</b> The amber magic that permeates this weapon grants it the power to bite through arcane wards.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Ward rolls cannot be made for the target for the rest of the turn.</div><div><br></div>"
+      },
+      {
+        "name": "ELIXIR OF THE FROSTWYRM",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Once Per Battle, Any Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ELIXIR OF THE FROSTWYRM:</b> Distilled from the blood of a giant Frostwyrm, this rare elixir temporarily gives the drinker the power of those beasts to vomit forth a torrent of frost magic.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Roll a dice. Inflict an amount of mortal damage on the target equal to the roll. Then, <b>Heal (X)</b> this unit, where <span class=\"kwb\">X</span> is an amount equal to the roll.</div><div><br></div>"
+      }
+    ]
+  },
+  "sonsofbehemat": {
+    "heroic_traits": [
+      {
+        "name": "FURIOUS TEMPER",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FURIOUS TEMPER:</b> Nothing can stop this Mega-Gargant when the rage of battle clouds their mind.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> For the rest of the turn:<br><ul><li>Add 2 to the Attacks characteristic of this unit’s melee weapons.</li><li>Subtract 1 from save rolls for this unit.</li></ul></div><div><br></div></div>"
+      },
+      {
+        "name": "MONSTROUSLY TOUGH",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MONSTROUSLY TOUGH:</b> This MegaGargant is incredibly hard to kill.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit has a Health characteristic of 40 instead of 35.</div><div><br></div>"
+      },
+      {
+        "name": "RABBLE ROUSER",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>RABBLE ROUSER:</b> This Mega-Gargant bellows at their kin to race forward and pummel the enemy into the dust.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to charge rolls for friendly SONS OF BEHEMAT units while they are wholly within 12\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "GRABBY",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GRABBY:</b> If you have something this gargant wants, you won’t have it for long.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to hit rolls for this unit’s combat attacks that target an enemy unit contesting an objective you do not <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Terrain-Control\">control</a>.</div><div><br></div></div>"
+      },
+      {
+        "name": "TERRIFYING HULK",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Once Per Turn, Reaction: Your opponent declared a <span class=\"kwb\">CHARGE</span> ability for a visible non-<span class=\"kwb\">MONSTER</span> enemy unit within 12\" of this unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>TERRIFYING HULK:</b> As the enemy rushes forward, a raised eyebrow and an even bigger raised club causes them to seriously re-think the choices that brought them to confront this notably fierce-looking example of gargant kind.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit is not in combat, roll a dice. On a 3+, you can change one of the dice in that charge roll to a 1.</div><div><br></div>"
+      },
+      {
+        "name": "MEGA-GRUMP",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MEGA-GRUMP:</b> This gargant’s stubbornness and refusal to die in the face of adversity is the subject of local legend.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit has WARD (5+) while it has 25 or more damage points.</div><div><br></div>"
+      }
+    ],
+    "artefacts": [
+      {
+        "name": "AMBERBONE TOTEM",
+        "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Once Per Battle, Your Charge Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AMBERBONE TOTEM:</b> Somewhere along the way, this gargant has picked up a totem of Ghurish realmstone. No matter how long they run for, the urge to hunt burns within them.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> For the rest of the turn, this unit can use <span class=\"kwb\">CHARGE</span> abilities even if it used a <span class=\"kwb\">RUN</span> ability in the same turn.</div><div><br></div></div>"
+      },
+      {
+        "name": "GLOWY LANTERN",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GLOWY LANTERN:</b> Stolen from the aelves of Hysh after a botched alliance, this aetherquartz jar was at first carried around just because it was shiny; however, over time, it has granted this Mega-Gargant an innate power over malign sorceries.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit can use <span class=\"kwb\">SUMMON</span> abilities from the manifestation lore you picked during <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Army-Composition-2025-26\">army composition</a> as if it had WIZARD (1).</div><div><br></div>"
+      },
+      {
+        "name": "MANTLE OF TUSK AND HORNS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Battle, Your Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MANTLE OF TUSK AND HORNS:</b> Trophies taken from slain behemoths adorn the shoulders of this gargant, and through them they can channel the power of the Waaagh!.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> For the rest of the turn, add 1 to hit rolls for combat attacks made by friendly <span class=\"kwb\">SONS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">BEHEMAT</span> units while they are wholly within 12\" of this unit.</div><div><br></div>"
+      },
+      {
+        "name": "EXTRA-CALLOUSED FEET",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EXTRA-CALLOUSED FEET:</b> This gargant has become so used to stomping on even the toughest enemies that their feet are legendary weapons in their own right.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to the Attacks characteristic, Rend characteristic and Damage characteristic of this unit’s <b>Almighty Stomp</b> or <b>Almightier Stomp</b>.</div><div><br></div>"
+      },
+      {
+        "name": "GLOWY SHIELD OF PROTECTINESS",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GLOWY SHIELD OF PROTECTINESS:</b> While raiding a lair belonging to the ratty pipsqueaks, this gargant found a shield studded with sickly green rock – and promptly strapped it to their body. Enemies who get close sometimes have their heads explode, which is always good for a laugh.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Each time you make an unmodified save roll of 6 for a combat attack that targets this unit, inflict 1 mortal damage on the attacking unit after the FIGHT ability has been resolved.</div><div><br></div>"
+      },
+      {
+        "name": "KINGSLAUGHTER COWL",
+        "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>KINGSLAUGHTER COWL:</b> Those who wear this blood-encrusted leather hood make it their business to crush upstart monarchs and warlords across the realms.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to the Attacks characteristic of this unit’s melee weapons while this unit is in combat with an enemy <span class=\"kwb\">HERO</span>.</div><div><br></div>"
+      }
+    ]
+  }
+}

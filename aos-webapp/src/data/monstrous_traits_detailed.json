@@ -1,0 +1,79 @@
+{
+  "citiesofsigmar": [],
+  "daughtersofkhaine": [],
+  "fyreslayers": [],
+  "idoneth": [],
+  "kharadron": [],
+  "lumineth": [],
+  "seraphon": [
+    {
+      "name": "TITAN OF THE LAND",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TITAN OF THE LAND:</b> This warbeast has absorbed so much of its environment’s latent magic that it has become a locus of the natural energies of the Mortal Realms.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit counts as a terrain piece for the purpose of picking targets for the friendly <a href=\"https://wahapedia.ru/aos4/factions/seraphon/Realmshaper-Engine\"><b>Realmshaper Engine</b></a>’s ‘Power Unleashed’ ability. Do not inflict any mortal damage on this unit as part of that ability.</div><div><br></div></div>"
+    },
+    {
+      "name": "ANCIENT DEFENDER",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ANCIENT DEFENDER:</b> This venerable beast has seen countless battles, as evidenced by its heavily scarred hide.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to hit rolls for attacks made by this unit’s Companion weapons.</div><div><br></div>"
+    },
+    {
+      "name": "ARMOUR CRUNCHER",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ARMOUR CRUNCHER:</b> The sheer heft and strength of this beast sees it crush and crumple well-protected foes in their own armour before it even gets around to tearing into them with tooth, horn and claw.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> Pick an enemy unit in combat with this unit to be the target.<br><b>Effect:</b> Roll a dice. If the roll equals or exceeds the target’s Save characteristic, subtract 1 from save rolls for the target for the rest of the turn.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#802022\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">RAMPAGE</span></td></tr></tbody></table></div><div><br></div>"
+    }
+  ],
+  "stormcast": [],
+  "sylvaneth": [],
+  "helsmiths": [],
+  "khorne": [],
+  "nurgle": [],
+  "skaven": [],
+  "slaanesh": [],
+  "slaves": [],
+  "tzeentch": [],
+  "flesheater": [
+    {
+      "name": "REVERED MONSTROSITY",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>REVERED MONSTROSITY:</b> This noble beast has long served the court and exerts a strange dominance<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to hit rolls for combat attacks made with Companion weapons by other friendly non-NON‐UNIQUE FLESH-EATER COURTS MONSTERS while they are wholly within 12\" of this unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "SAVAGE ABOMINATION",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SAVAGE ABOMINATION:</b> Any foe in reach of this beast’s snapping jaws and fearsome claws is unlikely to see another dawn.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to the Attacks characteristic of this unit’s Companion melee weapons.</div><div><br></div>"
+    },
+    {
+      "name": "HORRIBLY RESILIENT",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HORRIBLY RESILIENT:</b> Grown strong on great lakes of death magic that coalesced around the remains of a butchered empire, the desiccated form of this monstrosity is nearly impossible to destroy.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> <b>Heal (D3)</b> this unit. If this unit is not a HERO, <b>Heal (2D3)</b> this unit instead.</div><div><br></div>"
+    }
+  ],
+  "nighthaunt": [],
+  "ossiarch": [],
+  "soulblight": [],
+  "gloomspite": [],
+  "ironjawz": [
+    {
+      "name": "BIG ’UN",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BIG ’UN:</b> This beast is noticeably more muscular and krumpier than others of its kind.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to the Rend characteristic of this unit’s Companion weapons.</div><div><br></div></div>"
+    },
+    {
+      "name": "MAD ’UN",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MAD ’UN:</b> Once this crazed beast starts its rampage, it will keep going until everything nearby has been smashed into a red paste.<br><div class=\"spc\"></div><div><br></div><b>Declare:</b> If this unit charged this turn, pick an enemy unit in combat with it to be the target.<br><b>Effect:</b> Roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll. If any models are slain by this ability, after those models are removed from the battlefield, if this unit is still in combat, this unit can immediately use this ability again.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#802022\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">RAMPAGE</span></td></tr></tbody></table></div><div><br></div>"
+    },
+    {
+      "name": "FAST ’UN",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FAST ’UN:</b> This beast lurches forward at a speed that would take anyone by surprise.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> If this unit was not <a href=\"https://wahapedia.ru/aos4/the-rules/the-core-rules/#Setting-Up-Units\">set up</a> this turn, it can use the ‘Normal Move’ ability as if it were your movement phase.</div><div><br></div>"
+    }
+  ],
+  "kruleboyz": [
+    {
+      "name": "MEAN ’UN",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MEAN ’UN:</b> This beast is a kunnin’ and ruthless predator, targeting vulnerable areas and vital spots with a hunter’s eye.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Add 1 to hit rolls for attacks made with this unit’s Companion weapons.</div><div><br></div></div>"
+    },
+    {
+      "name": "SNEAKY ’UN",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle, Enemy Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SNEAKY ’UN:</b> This beast prefers to sneak up on its prey and skulk off when the going gets tough, traits its Kruleboyz masters darkly approve of.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> This unit can use the ‘Normal Move’ or ‘Retreat’ ability as if it were your movement phase. In addition, no mortal damage is inflicted on this unit by <span class=\"kwb\">RETREAT</span> abilities this phase.</div><div><br></div>"
+    },
+    {
+      "name": "TOUGH ’UN",
+      "html": "<table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TOUGH ’UN:</b> This beast has endured the lash of its cruel masters for many a season, which has inured it to pain.<br><div class=\"spc\"></div><div><br></div><b>Effect:</b> Subtract 1 from the Rend characteristic of weapons used for attacks that target this unit.</div><div><br></div>"
+    }
+  ],
+  "ogor": [],
+  "sonsofbehemat": []
+}

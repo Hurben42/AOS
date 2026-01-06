@@ -1,207 +1,171 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
+// Imports des données
+import battleTraitsData from "../data/battle_traits_detailed.json";
+import formationsData from "../data/formations_detailed.json";
+import enhancementsData from "../data/enhancements_detailed.json";
+import loresData from "../data/lores_detailed.json";
+import manifestationsData from "../data/manifestations_detailed.json";
+import monstrousTraitsData from "../data/monstrous_traits_detailed.json";
+import aorData from "../data/armies_of_renown_detailed.json";
+
 const SECTION_CONFIG = {
-  "battle-traits": { title: "Battle Traits" },
-  "battle-formations": { title: "Battle Formations" },
-  "heroic-traits": { title: "Heroic Traits" },
-  "monstrous-traits": { title: "Monstrous Traits" },
-  "artefacts-of-power": { title: "Artefacts of Power" },
-  "spell-lore": { title: "Spell Lore" },
-  "prayer-lore": { title: "Prayer Lore" },
-  "manifestation-lore": { title: "Manifestation Lore" }
+  "battle-traits": { title: "Battle Traits", data: battleTraitsData },
+  "battle-formations": { title: "Battle Formations", data: formationsData },
+  "heroic-traits": { title: "Heroic Traits", data: enhancementsData, subKey: "heroic_traits" },
+  "monstrous-traits": { title: "Monstrous Traits", data: monstrousTraitsData },
+  "artefacts-of-power": { title: "Artefacts of Power", data: enhancementsData, subKey: "artefacts" },
+  "spell-lore": { title: "Spell Lore", data: loresData, subKey: "spells" },
+  "prayer-lore": { title: "Prayer Lore", data: loresData, subKey: "prayers" },
+  "manifestation-lore": { title: "Manifestation Lore", data: manifestationsData, subKey: "factions" },
+  "army-of-renown": { title: "Army of Renown", data: aorData }
 };
 
 export default function FactionDetail() {
   const { category, faction, sectionSlug } = useParams();
-  const [content, setContent] = useState("");
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const section = SECTION_CONFIG[sectionSlug];
 
-  // Gestion de la transparence du fond parent
   useEffect(() => {
     const parentDiv = document.querySelector('.bg-black.text-light.min-vh-100');
     if (parentDiv) {
       parentDiv.style.backgroundColor = 'transparent';
       parentDiv.classList.remove('bg-black');
     }
+
+    const loadContent = () => {
+      setLoading(true);
+      try {
+        const factionKey = faction.toLowerCase().replace(/-/g, "");
+        let rawData = section.data ? section.data[factionKey] : [];
+
+        if (section.subKey && rawData && !Array.isArray(rawData)) {
+          rawData = rawData[section.subKey] || [];
+        }
+
+        const validItems = (rawData || []).filter(item => {
+          const htmlContent = typeof item === 'string' ? item : item?.html;
+          if (!htmlContent) return false;
+          return htmlContent.replace(/<[^>]*>/g, '').trim().length > 0;
+        }).map(item => {
+          if (typeof item === 'string') {
+            const nameMatch = item.match(/<b>([^<]+)<\/b>/i);
+            return {
+              name: nameMatch ? nameMatch[1].replace(':', '').trim() : "Règle",
+              html: item
+            };
+          }
+          return item;
+        });
+
+        setItems(validItems);
+      } catch (err) {
+        console.error("Erreur de chargement:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadContent();
+
     return () => {
       if (parentDiv) {
         parentDiv.style.backgroundColor = '';
         parentDiv.classList.add('bg-black');
       }
     };
-  }, []);
-
-  const imageFileName = faction.toLowerCase().replace(/\s+/g, "").replace(/-/g, "");
-  const backgroundImagePath = `/img/banner_${imageFileName}.webp`;
-
-  useEffect(() => {
-    if (!section) return;
-
-    // Helper pour matcher la structure de tes dossiers
-    const getPaths = (f) => {
-      const slug = f.toLowerCase();
-      if (slug.includes("cities of sigmar")) return { folder: "cities of sigmar", file: "citiesofsigmar" };
-      if (slug.includes("daughters of khaine")) return { folder: "daughters of khaine", file: "daughtersofkhaine" };
-      if (slug.includes("sons of behemat")) return { folder: "sons of behemat", file: "sonsofbehemat" };
-      const normal = slug.replace(/\s+/g, "-");
-      return { folder: normal, file: normal };
-    };
-
-    const paths = getPaths(faction);
-    const categoryPath = category.toLowerCase();
-    const filePath = `/factions/${categoryPath}/${paths.folder}/${paths.file}.html`;
-
-    setLoading(true);
-    fetch(filePath)
-      .then((res) => {
-        if (!res.ok) throw new Error(`Fichier HTML introuvable pour cette faction.`);
-        return res.text();
-      })
-      .then((html) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        
-        // Nettoyage immédiat des éléments parasites
-        doc.querySelectorAll("img.abLogo, .PitchedBattleProfile, script, style, .NoPrint").forEach(el => el.remove());
-
-        let finalHtml = [];
-        const headers = [...doc.querySelectorAll("h2")];
-        
-        // On cible le bon H2
-        const header = headers.find(h => 
-            h.textContent.trim().toUpperCase() === section.title.toUpperCase()
-        );
-
-        if (header) {
-          let current = header.nextElementSibling;
-          
-          // --- LOGIQUE DE COLLECTE : TOUT JUSQU'AU PROCHAIN H2 ---
-          while (current && current.tagName !== "H2") {
-            
-            // 1. Titres de sous-sections (ex: noms des formations)
-            if (current.tagName === "H3") {
-              finalHtml.push(`<div class="lore-title-container"><h3 class="lore-title">${current.innerHTML}</h3></div>`);
-            }
-            
-            // 2. Cartes de règles (Format standard Warscrolls)
-            const cards = current.classList.contains("BreakInsideAvoid") 
-                          ? [current] 
-                          : current.querySelectorAll(".BreakInsideAvoid");
-
-            if (cards.length > 0) {
-              cards.forEach(card => {
-                if (card.textContent.trim().length > 5) {
-                  // Nettoyage interne de la carte (spans inutiles)
-                  card.querySelectorAll("span").forEach(span => {
-                    if(!span.classList.length) span.replaceWith(span.textContent);
-                  });
-                  finalHtml.push(`<div class="custom-rule-card">${card.outerHTML}</div>`);
-                }
-              });
-            } 
-            // 3. Paragraphes de texte descriptif
-            else if (current.tagName === "P" && current.textContent.trim().length > 5) {
-               finalHtml.push(`<p class="text-description">${current.innerHTML}</p>`);
-            }
-            // 4. Listes d'aptitudes
-            else if (current.tagName === "UL" || current.tagName === "OL") {
-               finalHtml.push(`<div class="text-description">${current.outerHTML}</div>`);
-            }
-
-            current = current.nextElementSibling;
-          }
-        }
-
-        if (finalHtml.length === 0) {
-           setError(`Aucune information trouvée dans la section "${section.title}".`);
-        } else {
-           setContent(finalHtml.join(""));
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [category, faction, sectionSlug, section]);
+  }, [faction, sectionSlug, section]);
 
   return (
-    <div className="position-relative min-vh-100">
-      {/* BACKGROUND IMAGE FIXE */}
-      <div 
-        className="fixed-top w-100 h-100" 
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.95)), url("${backgroundImagePath}")`,
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center top', 
-          backgroundAttachment: 'fixed', 
-          zIndex: '-1'
-        }}
-      ></div>
-
-      <div className="container mt-4 pb-5 position-relative" style={{ zIndex: 1 }}>
-        <style>{`
-          .lore-title-container { margin-top: 3.5rem; margin-bottom: 2rem; text-align: center; }
-          .lore-title { 
-              display: inline-block; color: #0dcaf0; text-transform: uppercase; 
-              font-weight: 800; letter-spacing: 3px; border-bottom: 3px solid #0dcaf0; 
-              padding-bottom: 8px; font-size: 1.6rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-          }
-          .custom-rule-card {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-left: 4px solid #ffc107;
-            border-radius: 4px 12px 12px 4px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            color: #efefef;
-          }
-          .custom-rule-card .abHeader, .custom-rule-card b { 
-            color: #ffc107 !important; 
-            text-transform: uppercase; 
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-          }
-          .text-description {
-            color: #bbb;
-            font-style: italic;
-            padding: 0 1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-          }
-          .custom-rule-card table { width: 100%; margin-top: 10px; }
-          .custom-rule-card td { padding: 5px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-          .custom-rule-card hr { border-color: rgba(255,255,255,0.2); }
-        `}</style>
-
-        <Link to={`/category/${category}/faction/${faction}`} className="btn btn-outline-warning btn-sm px-4 mb-4 bg-black bg-opacity-50 rounded-pill">
-          ← Retour à la faction
-        </Link>
-      
-        <div className="text-center my-5">
-          <h1 className="text-white text-uppercase m-0 fw-black" style={{letterSpacing: '5px', textShadow: '0 0 20px rgba(13, 202, 240, 0.5)'}}>{section?.title}</h1>
-          <div className="bg-info mx-auto mt-2" style={{height: '2px', width: '50px'}}></div>
-          <p className="text-info small text-uppercase mt-3 fw-bold" style={{letterSpacing: '2px'}}>{faction.replace(/-/g, ' ')}</p>
-        </div>
+    <div className="container-fluid min-vh-100 p-4">
+      <style>{`
+        .custom-rule-card {
+          background: rgba(20, 20, 20, 0.9);
+          border: 1px solid rgba(255, 215, 0, 0.2);
+          border-left: 5px solid #d4af37;
+          margin-bottom: 1.5rem;
+        }
+        .ability-header {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 10px;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+          margin-bottom: 15px;
+        }
+        .ability-title {
+          font-family: 'Cinzel', serif;
+          color: #d4af37;
+          text-transform: uppercase;
+          font-size: 1.1rem;
+          margin: 0;
+        }
+        .badge-value {
+          background: #76602b;
+          color: white;
+          padding: 2px 10px;
+          border-radius: 4px;
+          font-size: 0.8rem;
+          height: fit-content;
+        }
+        .rule-html-content { color: #ddd; font-size: 0.95rem; line-height: 1.6; }
+        .rule-html-content b { color: #fff; }
+        .rule-html-content .kwb, .rule-html-content .kwbu { color: #f39c12; font-weight: bold; }
+        .rule-html-content .abHeader { display: block; font-weight: bold; text-transform: uppercase; color: #FFF; margin-bottom: 5px; font-size: 0.85rem; }
+        .rule-html-content table { width: 100%; }
+        .rule-html-content .ShowFluff { display: block; font-style: italic; color: #888; margin: 10px 0; font-size: 0.9rem; }
         
-        {loading ? (
-          <div className="text-center my-5"><div className="spinner-border text-info" style={{width: '3rem', height: '3rem'}}></div><p className="mt-3 text-info">Invoquation des archives...</p></div>
-        ) : error ? (
-          <div className="alert alert-danger bg-dark text-white border-danger mx-auto" style={{maxWidth: '600px'}}>
-            <h5 className="text-danger">Oups...</h5>
-            {error}
-          </div>
-        ) : (
-          <div className="section-content animate__animated animate__fadeInUp" 
-               dangerouslySetInnerHTML={{ __html: content }} />
-        )}
+        /* Breadcrumb Style */
+        .breadcrumb-item + .breadcrumb-item::before { content: "›"; color: rgba(255,255,255,0.3); font-size: 1.2rem; line-height: 1; }
+      `}</style>
+
+      {/* BREADCRUMB (Identique à FactionList) */}
+      <nav aria-label="breadcrumb" className="mb-4">
+        <ol className="breadcrumb bg-dark bg-opacity-50 p-2 px-3 rounded-pill border border-secondary border-opacity-25" style={{ display: 'inline-flex' }}>
+          <li className="breadcrumb-item">
+            <Link to="/" className="text-info text-decoration-none small text-uppercase fw-bold">Grand Alliances</Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link to={`/category/${category}`} className="text-info text-decoration-none small text-uppercase fw-bold">{category}</Link>
+          </li>
+          <li className="breadcrumb-item">
+            <Link to={`/category/${category}/faction/${faction}`} className="text-info text-decoration-none small text-uppercase fw-bold">{faction.replace(/-/g, ' ')}</Link>
+          </li>
+          <li className="breadcrumb-item active text-white-50 small text-uppercase fw-bold" aria-current="page">
+            {section?.title}
+          </li>
+        </ol>
+      </nav>
+    
+      <div className="text-center my-5">
+        <h1 className="text-white text-uppercase fw-bold" style={{letterSpacing: '5px'}}>{section?.title}</h1>
+        <p className="text-info small text-uppercase mt-2">{faction.replace(/-/g, ' ')}</p>
       </div>
+      
+      {loading ? (
+        <div className="text-center my-5"><div className="spinner-border text-warning"></div></div>
+      ) : items.length > 0 ? (
+        <div className="row justify-content-center">
+          {items.map((item, index) => (
+            <div key={index} className="col-12 col-xl-10">
+              <div className="custom-rule-card p-4 rounded-3 shadow">
+                <div className="ability-header">
+                  <h3 className="ability-title">{item.name}</h3>
+                  <div className="d-flex gap-2">
+                    {item.castingValue && <span className="badge-value">CV: {item.castingValue}</span>}
+                    {item.range && <span className="badge-value">Range: {item.range}</span>}
+                  </div>
+                </div>
+                <div className="rule-html-content" dangerouslySetInnerHTML={{ __html: item.html }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-center my-5 text-muted fst-italic">Aucune donnée disponible.</div>
+      )}
     </div>
   );
 }

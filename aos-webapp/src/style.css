@@ -681,3 +681,81 @@ input.fs-4::placeholder {
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
   border-bottom: 1px solid rgba(255,255,255,0.1) !important;
 }
+
+.ability-card {
+  background: #1a1a1a;
+  border-radius: 8px;
+  border-left: 5px solid #444; /* Couleur par défaut */
+  margin-bottom: 15px;
+  overflow: hidden;
+  color: #eee;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+/* Couleurs thématiques par type */
+.ability-card.spell { border-left-color: #3498db; }    /* Bleu */
+.ability-card.prayer { border-left-color: #f1c40f; }   /* Jaune */
+.ability-card.trait { border-left-color: #e67e22; }    /* Orange */
+.ability-card.formation { border-left-color: #95a5a6; } /* Gris */
+
+.ability-header {
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #333;
+}
+
+.ability-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-left: 5px;
+  background: #333;
+}
+
+/* Stylisation du HTML injecté (Classes Wahapedia) */
+.ability-content {
+  padding: 12px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* On masque les headers internes redondants s'il y en a */
+.ability-content .abHeader {
+  display: block;
+  font-size: 0.8rem;
+  color: #bbb;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ability-content b {
+  color: #fff;
+}
+
+.ability-content .kwb, .ability-content .kwbu {
+  color: #f39c12; /* Mise en évidence des KEYWORDS */
+  font-weight: bold;
+}
+
+/* Cache le texte d'ambiance ou le met en retrait */
+.rule-html-content .ShowFluff {
+  display: block;
+  font-style: italic;
+  color: #888;
+  font-size: 0.85rem;
+  margin: 5px 0;
+}
+
+/* Cache les deux points de séparation si nécessaire */
+.rule-html-content span.ShowFluff:first-of-type {
+  display: none;
+}

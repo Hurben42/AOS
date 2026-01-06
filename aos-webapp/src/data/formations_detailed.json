@@ -1,0 +1,612 @@
+{
+  "citiesofsigmar": [
+    {
+      "name": "Dawnbringer Crusade",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>’FORWARDS, DAWNERS!’<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Though the odds of their success have sunk to desperate lows, new Dawnbringer columns plunge into the nightmarish wilds; armed with potent weaponry, ready to drive great spear-like assaults into enemy territory.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 2\" to the Move characteristic of friendly <span class=\"kwb\">CITIES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SIGMAR</span> units in the first battle round.</div><div><br></div></div>"
+    },
+    {
+      "name": "Fortress-city Defenders",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BULWARK ZONE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Each great fortress-city is able to hold back the enemies at the gates through the discipline and vigilance of their standing armies.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly <span class=\"kwb\">CITIES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SIGMAR</span> units that have the ‘Fortify Position’ ability start the first battle round in a fortified position.<br><br>In addition, in the first battle round, subtract 1 from wound rolls for attacks that target friendly <span class=\"kwb\">CITIES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SIGMAR</span> units while they are wholly within friendly territory.</div><div><br></div></div>"
+    },
+    {
+      "name": "Ironweld Guild Army",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FAITH AND FIREPOWER<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The powerful guilds thrive in industrial cities such as Greywater Fastness, leveraging the skill of Ironweld engineers to supply their forces with expertly crafted weapons.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 3\" to the Range characteristic of ranged weapons used by friendly <span class=\"kwb\">CITIES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SIGMAR</span> units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Collegiate Arcane Expedition",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ELDRITCH EXPERTISE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Whether from the famed colleges of Hallowheart or the populace of Settler’s Gain, the Collegiate Arcane often assembles forces to escort mages on their quests to acquire powerful artefacts or drive back the forces of Chaos.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to casting rolls for friendly CITIES OF SIGMAR WIZARDS.</div><div><br></div></div>"
+    },
+    {
+      "name": "Veteran Cannoneers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Once Per Turn (Army), Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CANNY CREWS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The crews of these Great Cannons are so well trained they often fire the perfect shot, blasting off the heads of monsters or mowing down ranks of the enemy.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly Ironweld Great Cannon units to be the targets.<br><br><b>Effect:</b> For the rest of the turn, each time the target uses a <span class=\"kwb\">SHOOT</span> ability, you can re-roll 1 hit roll, or 1 wound roll, or 1 random characteristic roll for the Damage characteristic.</div><div><br></div></div>"
+    },
+    {
+      "name": "Fearless Exemplars",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FRONT-LINE LEADER<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The officars of this army are the stuff of Dawnbringer legend, hard-bitten veterans that stand with the troops through thick and thin. Their exemplary behaviour and courage inspires their soldiers to fight all the harder when the going gets tough.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly CITIES OF SIGMAR HUMAN INFANTRY HERO to use this ability. Then, you can pick up to 1 friendly non-HERO HUMAN INFANTRY unit and up to 1 friendly HUMAN WAR MACHINE unit that are wholly within 12\" of that <span class=\"kwb\">HERO</span> to be the targets.<br><br><b>Effect:</b> While the targets are wholly within 12\" of that <span class=\"kwb\">HERO</span>, add 1 to the Rend characteristic of the target <span class=\"kwb\">INFANTRY</span> unit’s melee weapons and the target <span class=\"kwb\">WAR</span> <span class=\"kwb\">MACHINE</span> unit’s ranged weapons until the start of your next turn.</div><div><br></div></div>"
+    }
+  ],
+  "daughtersofkhaine": [
+    {
+      "name": "Scáthcoven",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SPEED OF THE SCÁTHBORN<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Melusai and Khinerai that make up the Vyperic Guard strike at the heart of their enemies with lethal speed and accuracy.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> If the unmodified charge roll for a friendly MELUSAI or KHINERAI unit is 8+, that unit has STRIKE-FIRST for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Cauldron Guard",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FRENZIED DEVOTEES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Cauldron Guard seek to carve a path for their worshipped engines through enemy defences at the earliest opportunity.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly DAUGHTERS OF KHAINE INFANTRY or WAR MACHINE units that are in combat to be the targets.<br><br><b>Effect:</b> For each target:<br><ul><li>Make a pile-in move.</li><li>Then, pick an enemy unit in combat with the target and roll a D3. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Shadow Patrol",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SHADOWPATHS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Well versed in the secrets of the shadowpaths, these warriors strike where least expected.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly DAUGHTERS OF KHAINE INFANTRY unit that is not in combat to use this ability.<br><br><b>Effect:</b> Roll a dice. On a 3+, remove that unit from the battlefield and set it up again on the battlefield more than 9\" from all enemy units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Slaughter Troupe",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Once Per Turn (Army), Reaction: You declared a <span class=\"kwb\">CHARGE</span> ability for a friendly DAUGHTERS OF KHAINE AELF unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GLADIATORIAL ACROBATICS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The aelves of a Slaughter Troupe perform breathtaking displays of acrobatics as they close the distance to the foe.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Change one of the dice in the charge roll to a 4.</div><div><br></div></div>"
+    },
+    {
+      "name": "Coven Zealots",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HIGHER PURPOSE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These aelves fight with a purity of purpose that sees them fight on even in the face of the most horrendous carnage, heedless of their losses.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Return D3 slain models to each friendly DAUGHTERS OF KHAINE AELF INFANTRY unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Arena Veterans",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GRACEFUL ELUSION<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Years of combat in the gladiatorial arenas of the temple-cities have honed the survival skills of these aelves to near perfection.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> For the rest of the phase, friendly DAUGHTERS OF KHAINE AELF INFANTRY units have WARD (5+) until they have used a FIGHT ability.</div><div><br></div></div>"
+    }
+  ],
+  "fyreslayers": [
+    {
+      "name": "Warrior Kinband",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BERSERK KINDRED<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Filled with the fierce fighting spirit of Grimnir, the Warrior Kinband hurls itself at the foe. In their fury, they wield their glinting fyresteel axes so quickly that they appear as a blazing blur.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to wound rolls for combat attacks made by friendly FYRESLAYERS INFANTRY units that charged in the same turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Scales of Vulcatrix",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ANCIENT BLOODLINES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Among the most elite formations of the Fyreslayers are the mighty Scales of Vulcatrix. The proud and majestic Magmadroths in this formation are as venerated as those of their lodge’s royal family.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 2 to the Health characteristic of friendly MAGMADROTH units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Forge Brethren",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BULWARK OF MOLTEN STONE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Shrouded in the shimmering heat of the forge-temple, the Forge Brethren direct their magmapikes to form blazing barricades of lava with sustained volleys of fire, before returning to blasting their enemies to ash.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to save rolls for friendly FYRESLAYERS INFANTRY units while they are wholly within friendly territory.</div><div><br></div></div>"
+    },
+    {
+      "name": "Lords of the Lodge",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MARTIAL PRIDE AND STUBBORN WILL<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Lords of the Lodge burn with a rage tempered by sacred oaths of war.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 3 to the control scores of friendly FYRESLAYERS HEROES. In addition, the control scores of <span class=\"kwb\">FYRESLAYERS</span> <span class=\"kwb\">HEROES</span> cannot be modified by enemy abilities.</div><div><br></div></div>"
+    }
+  ],
+  "idoneth": [
+    {
+      "name": "Namarti Corps",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SURGE FORWARD<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Namarti are the lowest caste in Idoneth society, but when formed into a Namarti Corps and led to battle by their Akhelian masters, they strike swiftly and with devastating effect.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can re-roll run rolls and charge rolls for friendly NAMARTI units while they are wholly within 12\" of a friendly AKHELIAN unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Isharann Council",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>WISDOM OF THE DEEP<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Isharann are born with a talent for harnessing arcane forces. This power is only amplified when these aelves convene an Isharann Council and head to war.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to casting rolls, Isharann ritual rolls and lurelight rolls for friendly ISHARANN units while they are within the combat ranges of any other friendly <span class=\"kwb\">ISHARANN</span> units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Akhelian Beastmasters",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FEROCIOUS PREDATORS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">With the aid of the Embailors, the Akhelian Beastmasters are able to turn oceanic carnivores into truly terrifying weapons of war.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to hit rolls for combat attacks made with Companion weapons by friendly AKHELIAN units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Soul-raid Ambushers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FADE LIKE MIST<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Soul-raid Ambushers are experts in hit-and-run tactics, riding the currents of the ethersea to strike the foe from new directions.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> When using the ‘Unpredictable Tide’ ability, you can pick up to 2 eligible targets instead of 1.</div><div><br></div></div>"
+    },
+    {
+      "name": "Deep-sea Stalkers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>OUTFLANK THE ENEMY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Used to living on the periphery of society, these Idoneth are expert at blending into the shadows and using hidden paths to traverse the battlefield.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> While a friendly IDONETH DEEPKIN unit is wholly within 9\" of a battlefield edge:<br><ul><li>Subtract 1 from hit rolls for attacks that target that unit if it has not charged this turn.</li><li>Add 2\" to the Move characteristic of that unit.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Ethersea Predators",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Any Turn</td><td></td><td><div class=\"abCommandPoints\"><div class=\"abCommandPointsN\">1</div></div></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BLOOD IN THE WATER<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">As the gore of the slain diffuses through the ethersea, ancient predators are drawn to battle.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> If any friendly or enemy units were destroyed this turn, pick a friendly <b>Akhelian Allopex</b> unit that has been destroyed to be the target.<br><br><b>Effect:</b> Set up a replacement unit identical to the target wholly within 9\" of a battlefield edge and more than 9\" from all enemy units.</div><div><br></div></div>"
+    }
+  ],
+  "kharadron": [
+    {
+      "name": "Pioneers and Scavengers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GRITTY FORTUNE-HUNTERS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Vongrim guilders in this expedition have almost depleted their current reserves of aether-gold. Their very existence depends on the success of this venture, and they’ll be damned if anyone tries to cheat them of their imminent windfall!<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly Vongrim Harpoon Crew and Vongrim Salvagers units have WARD (6+) while they are contesting an objective.</div><div><br></div></div>"
+    },
+    {
+      "name": "Veteran Ground Troops",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Turn (Army), Start of Battle Round</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ENTRENCHED CREWS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Arkanauts in this fleet are no strangers to ground-based combat. Once in position, they will make clever use of the terrain to stymie the attacks of the foe.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly Arkanaut Company units to be the targets.<br><br><b>Effect:</b> For the rest of the battle round, if the target has not been set up this battle round and while it has not moved this turn, subtract 1 from the Rend characteristic of attacks that target that unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Rapid Redeployment Squadron",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EXTRA RAPPEL ANCHORS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Grundstok Gunhaulers in this force have been fitted with extra ports to which privateers can tether themselves in order to hitch a ride in battle.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly Grundstok Gunhaulers can transport up to 2 friendly KHARADRON OVERLORDS INFANTRY units instead of 1 and with a combined model count of up to 6 instead of 5 (see Battle Traits).</div><div><br></div></div>"
+    },
+    {
+      "name": "Endrineers Guild Expeditionary Force",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle (Army), Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SPECIAL PROCUREMENT<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Endrineers Guild often charter expeditionary forces equipped with the most advanced inventions in the realms.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly non-UNIQUE KHARADRON OVERLORDS HERO that does not have an artefact of power. The target can be in reserve.<br><br><b>Effect:</b> Give that Hero 1 artefact of power from the ‘Inventions of the Sky-ports’ or the ‘Ingenious Innovations’.<br><br><b>Designer’s Note:</b> <i>This artefact of power is given to the unit during the deployment phase, not during army composition.</i></div><div><br></div></div>"
+    }
+  ],
+  "lumineth": [
+    {
+      "name": "Vanari Battlehost",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>VANARI BRILLIANCE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When the warriors in a Vanari Battlehost stand together, they radiate a dazzling light that protects them from their foes.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can use the ‘Power of Hysh’ ability in addition to the other FACET OF WAR ability used during the battle round.</div><div><br></div></div>"
+    },
+    {
+      "name": "Alarith Temple",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ALARITH FORTITUDE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Lumineth of an Alarith temple can turn aside enemy blows by making their skin become as hard and unyielding as stone.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can use the ‘Enduring as Rock’ ability in addition to the other FACET OF WAR ability used during the battle round.</div><div><br></div></div>"
+    },
+    {
+      "name": "Scinari Council",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LORE OF THE SCINARI<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">In towering crystal spires, the mages of the Scinari caste seek enlightenment by contemplating the nature of magic itself. When they bring their hard-won learnings to the battlefield, their power is terrifying to behold.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can use the ‘Deep Thinkers’ ability in addition to the other FACET OF WAR ability used during the battle round.</div><div><br></div></div>"
+    },
+    {
+      "name": "Hurakan Temple",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GRACE OF THE HURAKAN<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Swift and deadly are the warriors of the Hurakan temples, supplicants of Hysh’s glorious winds. They move with the speed of a howling gale, long hair whipping in the rushing air currents.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can use the ‘Move Like the Wind’ ability in addition to the other FACET OF WAR ability used during the battle round.</div><div><br></div></div>"
+    }
+  ],
+  "seraphon": [
+    {
+      "name": "Eternal Starhost",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CELESTIAL TRANSLOCATION<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">In a flash of starlight, an Eternal Starhost arrives to enact the will of the Old Ones. Tapping into the celestial power that surrounds the slann, they teleport across the battlefield to catch the foe off guard.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">SERAPHON</span> unit wholly within 12\" of a friendly SERAPHON WIZARD to use this ability.<br><br><b>Effect:</b> Roll a dice. On a 3+, remove that unit from the battlefield and set it up again on the battlefield more than 9\" from all enemy units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Sunclaw Starhost",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>VENGEANCE OF AZYR<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The celestite weapons carried by the warriors of a Sunclaw Starhost are supercharged with the power of Azyr.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly SAURUS or KROXIGOR units that are in combat to be the targets.<br><br><b>Effect:</b> For each target: <br><ul><li>Make a pile-in move.</li> <br><li>Then, pick an enemy unit in combat with the target and roll a D3. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Shadowstrike Starhost",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Once Per Turn (Army), Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>NIMBLE AND QUICK<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The skink warriors of a Shadowstrike Starhost outmanoeuvre their enemies at every turn.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly SKINK INFANTRY or SKINK CAVALRY units that are not in combat to be the targets. <br><br><b>Effect:</b> Each target can move D6\". Each target cannot move into combat during any part of that move.</div><div><br></div></div>"
+    },
+    {
+      "name": "Thunderquake Starhost",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SCALY MONSTROSITIES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The great beasts of the Seraphon are almost invincible when they march forth as a pack.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 2 to the Health characteristic of friendly SERAPHON MONSTER units.</div><div><br></div></div>"
+    }
+  ],
+  "stormcast": [
+    {
+      "name": "Sentinels of the Bleak Citadels",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ANCIENT AURA<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Storm-charged energy ebbs and flows around the warriors of the Ruination chamber, surrounding them in a scouring aura of power. Finding purchase with a weapon on these ancient heroes can be a difficult task for even the mightiest of mortal foes.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly RUINATION CHAMBER unit.<br><br><b>Effect:</b> That unit has WARD (5+) for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Vanguard Wing",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PEERLESS MANOEUVERS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These warriors are the precision weapon of the God-King, skilled at manipulating a battlefield in their favour by feinting from view and reappearing where they are needed most.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly VANGUARD CHAMBER unit that did not use a <span class=\"kwb\">MOVE</span> ability this turn and is not in combat.<br><br><b>Effect:</b> Roll a dice. On a 3+, remove that unit from the battlefield and set it up again anywhere on the battlefield more than 9\" from all enemy units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Thunderhead Host",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SYNCHRONISED STRIKES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The core of a Thunderhead Host is often made up of fighters from the Warrior chambers; having trained relentlessly with the sworn brethren of their Stormhost, they operate like a well-oiled cogfort.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to hit rolls for combat attacks made by friendly WARRIOR CHAMBER units while they are wholly within 12\" of any friendly non-HERO NON-BEAST STORMCAST ETERNALS units that do not have the <span class=\"kwb\">WARRIOR</span> <span class=\"kwb\">CHAMBER</span> keyword.</div><div><br></div></div>"
+    },
+    {
+      "name": "Lightning Echelon",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ONCOMING STORM<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">First to the fight, the Lightning Echelon is akin to a spear-thrust into the heart of the enemy. Deployed only in times of great need, they smash into the foe’s vanguard with the force of an oncoming tempest.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly EXTREMIS CHAMBER unit that charged this turn.<br><br><b>Effect:</b> Roll a dice. On a 3+, that unit has STRIKE-FIRST for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Sacrosanct Convocation",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Your Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CYCLE OF THE STORM<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Masters of the Reforging process, the most experienced members of the Sacrosanct chambers can focus their power to restore mortally wounded comrades before they are called back to Azyr, allowing them to continue the fight at hand.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly SACROSANCT CHAMBER unit that had models slain in this turn to be the target.<br><br><b>Effect:</b> Return 1 slain model to the target unit.</div><div><br></div></div>"
+    }
+  ],
+  "sylvaneth": [
+    {
+      "name": "Lords of the Clan",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HEALING SONG<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The spirit-song surgesthrough the Lords of the Clan like a raging river. As they stride across the battlefield, the Treelords harness that energy to further rejuvenate their forms.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> When using the ‘Endless Growth’ ability, friendly SYLVANETH MONSTERS can <b>Heal (3)</b> instead of <b>Heal (D3)</b>.</div><div><br></div></div>"
+    },
+    {
+      "name": "Outcasts",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE TERROR IN THE EAVES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Outcasts are the terrors that lurk in the shadows, the creeping things beneath the forest eaves. When great masses of them surge into battle, it is all the enemy can do to avoid dying of sheer fright.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Subtract 3 from the control scores of enemy units while they are in combat with friendly <span class=\"kwb\">SYLVANETH</span> units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Forest Folk",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LACERATING STRIKE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Moving quickly through the undergrowth, the Forest Folk plunge into battle. Attacking from every side, multiple bands of infantry lash their victims to bloody tatters.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to the Rend characteristic of melee weapons used by friendly <span class=\"kwb\">SYLVANETH</span> non-KURNOTHI INFANTRY units that charged in the same turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Free Spirits",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Once Per Turn (Army), Your Charge Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FLEET AND SWIFT<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Free Spirits are the instruments of Alarielle’s will, a cadre of elite warriors whose presence hones the Sylvaneth into a weapon of singular purpose that brings swift retribution.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly SYLVANETH CAVALRY unit to use this ability.<br><br><b>Effect:</b> This unit can use <span class=\"kwb\">CHARGE</span> abilities even if it used a <span class=\"kwb\">RUN</span> ability this turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Wargrove of the Burgeoning",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>STIRRING LIFE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The bloom brings a surge of rebirth to the Sylvaneth, invigorating their forms with supple green sapwood.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly non-HERO SYLVANETH unit within 3\" of a terrain feature to be the target.<br><br><b>Effect:</b> If the target has a Health characteristic of 1, return up to 3 slain models to the target. If the target has a Health characteristic of 2 or more, roll a dice, then pick 1 of the following:<br><ul><li><b>Heal (X)</b> the target, where X is equal to the roll.</li><li>Return a number of slain models to the target with a combined Health characteristic that is equal to or less than the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Wargrove of Everdusk",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DUSKWALK<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The creeping darkness of Everdusk provides those Sylvaneth with cold bitterness in their heartwood ample opportunities to set up ambushes.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly SYLVANETH HEROES can use the ‘Walk the Hidden Paths’ ability even if it has been used by another friendly unit in the same phase.</div><div><br></div></div>"
+    }
+  ],
+  "helsmiths": [
+    {
+      "name": "Hashutite Host",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>AMASSED LEGIONS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The hosts of the ziggurats march to conquer and claim, advancing into verdant lands and leaving them barren.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time a friendly HELSMITHS OF HASHUT INFANTRY unit with 3 daemonic power points uses the ‘Rally’ command, you can make 3 additional rally rolls of D6.</div><div><br></div></div>"
+    },
+    {
+      "name": "The Bullfather’s Horns",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BULLS OF THE ZIGGURAT<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When unleashed, those warriors and constructs shaped in Hashut’s image are relentless.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 2\" to the Move characteristic of friendly HELSMITHS OF HASHUT CAVALRY and MONSTER units while they have 3 daemonic power points.</div><div><br></div></div>"
+    },
+    {
+      "name": "Castigation Battery",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EXPERIMENTAL MUNITIONS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">In trying to control Chaos, duardin engineers have crafted all manner of eldritch ammunition for their war machines. In doing so, they have given the power of ruin even more destructive outlets.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to the Attacks characteristic of ranged weapons used by friendly HELSMITHS OF HASHUT WAR MACHINES while they have 3 daemonic power points.</div><div><br></div></div>"
+    },
+    {
+      "name": "Daemonsmith Cabal",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ARCANE DOMINANCE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Despite all that its pursuit costs them, the sorcerers of the ziggurats are ever lusting for greater power.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to casting rolls, unbinding rolls, banishment rolls and chanting rolls for friendly HELSMITHS OF HASHUT WIZARDS and PRIESTS while they have 3 daemonic power points.</div><div><br></div></div>"
+    },
+    {
+      "name": "Domination Force",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DOMINION HEXES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The armour of these Helsmiths has been imbued by the Daemonsmiths with hexes of subjugation that weaken the resolve of those who seek to stand in their way.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Double the Health characteristic of friendly non-HOBGROT HELSMITHS OF HASHUT units for the purposes of the ‘Power Through’ command.<br><br><b>Designer’s Note:</b> <i>The effect of this ability applies both when you use ‘Power Through’ and when your opponent uses ‘Power Through’</i></div><div><br></div></div>"
+    },
+    {
+      "name": "Industrial Polluters",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SMOG AND SMOKE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The heavy exhaust fumes billowing from the Helsmiths’ war machines envelops their warriors in an obscuring, pollutantladen smoke.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Subtract 1 from hit rolls for shooting attacks that target friendly HELSMITHS OF HASHUT INFANTRY or CAVALRY units while they are wholly within 9\" of a friendly HELSMITHS OF HASHUT WAR MACHINE.</div><div><br></div></div>"
+    }
+  ],
+  "khorne": [
+    {
+      "name": "Khornate Legion",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Reaction: You declared a FIGHT ability for a BLADES OF KHORNE DAEMON unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>BUTCHERS OF NATIONS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When the daemonic hosts of Khorne join their Bloodbound followers in battle, they crush all before them in a storm of gore-splattered carnage.<br><div class=\"spc\"></div></span><div><br></div><b>Used By:</b> The unit using that <span class=\"kwb\">FIGHT</span> ability.<br><br><b>Effect:</b> Pick a friendly BLOODBOUND unit that has not used a FIGHT ability this turn and is wholly within 12\" of the unit using this ability to be the target. The target can be picked to use a <span class=\"kwb\">FIGHT</span> ability immediately after the <span class=\"kwb\">FIGHT</span> ability used by this unit has been resolved.</div><div><br></div></div>"
+    },
+    {
+      "name": "Bloodbound Warhorde",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TIRELESS CONQUERORS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Bloodbound surge across the battlefield with blades held high, salivating and baying as they rip the enemy from their strongholds.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to hit rolls for combat attacks made by friendly BLOODBOUND units that target an enemy unit that is contesting an objective you do not control.</div><div><br></div></div>"
+    },
+    {
+      "name": "Brass Stampede",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DRAWN TO CARNAGE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Nothing can stop the thunderous onset of a Brass Stampede once it has begun to gain momentum.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add <span class=\"kwb\">X</span> to charge rolls for friendly <span class=\"kwb\">BLADES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">KHORNE</span> units, where <span class=\"kwb\">X</span> is the number of friendly BLADES OF KHORNE CAVALRY or MONSTER units that have already charged this phase and that are wholly within 12\" of the unit being rolled for.</div><div><br></div></div>"
+    },
+    {
+      "name": "Murderhost",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">End of Your Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EAGER KILLERS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Khorne's daemons care only for violence; any moment spent not slaying is a moment wasted.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each friendly BLADES OF KHORNE DAEMON unit that has used a FIGHT ability this turn and is not in combat can move D6\". It cannot end that move in combat.</div><div><br></div></div>"
+    },
+    {
+      "name": "Tournament of Skulls",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BLOODY COMPETITORS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Where the mortal followers and daemons of Khorne fight next to one another, they compete to reap the most skulls in the name of their grim deity.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly non-HERO BLOODBOUND unit and a friendly non-HERO BLADES OF KHORNE DAEMON unit to be the targets.<br><br><b>Effect:</b> Until the start of your next turn, while the targets are wholly within 12\" of each other, add 1 to wound rolls for the targets’ combat attacks.</div><div><br></div></div>"
+    },
+    {
+      "name": "The Goretide",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TIDE OF SAVAGERY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Since Korghos Khul’s ascension to daemonhood, the Goretide are filled with renewed purpose, rushing into battle with ever greater vigour.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly BLOODBOUND HERO and up to 2 other friendly BLOODBOUND units that are wholly within 12\" of that <span class=\"kwb\">HERO</span> to be the targets.<br><br><b>Effect:</b> Add 2\" to the targets’ Move characteristic for the rest of the turn.</div><div><br></div></div>"
+    }
+  ],
+  "nurgle": [
+    {
+      "name": "Tallyband of Nurgle",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DISEASE AND PESTILENCE PERSONIFIED<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Tallyband is a trudging, lumbering, squirming mass of rancid daemonflesh that rolls across the battlefield like the inexorable approach of death itself.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> From the second battle round onwards, add 1 to the amount of mortal damage inflicted, if any, by the ‘Wracked with Disease’ ability.</div><div><br></div></div>"
+    },
+    {
+      "name": "Plague Cyst",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>VECTORS OF CONTAGION<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The bloated forms of these Nurglites are ever at bursting point, ready to shower attackers with contagious fluid.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time a model in a friendly ROTBRINGERS unit is slain by a combat attack and that model was in combat with the attacking unit, roll a number of dice equal to the slain model’s Health characteristic, to a maximum of 4. For each 5+, inflict 1 mortal damage on the attacking unit after the FIGHT ability has been resolved.</div><div><br></div></div>"
+    },
+    {
+      "name": "Nurgle’s Menagerie",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TENDERS OF THE GARDEN GROTESQUE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The children of Grandfather Nurgle seek any opportunity to rot the veil and let the festering delights of his Garden spill into the realms.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> During army composition, you can include 2 Feculent Gnarlmaws in your army instead of 1.</div><div><br></div></div>"
+    },
+    {
+      "name": "Affliction Cyst",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle (Army), Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FROM NOXIOUS SKIES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The air fills with the thunderous drone of membranous wings as the warriors of the Affliction Cyst ride their bloated Rot Flies into battle.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 2 friendly <span class=\"kwb\">MAGGOTKIN</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">NURGLE</span> units that have FLY.<br><br><b>Effect:</b> Remove the targets from the battlefield and set them up again on the battlefield more than 9\" from all enemy units.</div><div><br></div></div>"
+    }
+  ],
+  "skaven": [
+    {
+      "name": "Virulent Procession",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CORRUPTED EARTH<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Clans Pestilens are relentless in advancing the spread of plague and corruption.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly PESTILENS units that are in combat to be the targets.<br><br><b>Effect:</b> For each target:<br><ul><li>Make a pile-in move.</li><li>Then, pick an enemy unit in combat with the target and roll a D3. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Fleshmeld Menagerie",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PRIZED CREATIONS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Moulder warbeasts are studded with warpstone crystals and pumped full of vile serums that spur their battle-rage – at the occasional cost of overtaxing their forms.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly non-HERO MOULDER units to be the targets.<br><br><b>Effect:</b> Roll a dice for each target and apply the corresponding effect:<br><div class=\"BreakInsideAvoid\" \"=\"\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable\" bordercolor=\"#888\"><tbody><tr><td><b>1-2</b></td><td><i><b>Self-destructive Fury:</b></i> Inflict D3 mortal damage on the target.</td></tr><tr><td><b>3-4</b></td><td><i><b>Rabid Infusion:</b></i> Add 1 to the Attacks characteristic of the target’s melee weapons until the start of your next turn.</td></tr><tr><td><b>5-6</b></td><td><i><b>Blinded by Frenzy:</b></i> In addition to the effect of ‘Rabid Infusion’, the target has WARD (5+) until the start of your next turn.</td></tr></tbody></table></td></tr></tbody></table></div></div><div><br></div></div>"
+    },
+    {
+      "name": "Claw-horde",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Your Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CLAW-PICKED<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Stormvermin and Clanrats of a Verminus Claw‑horde are amongst the most ferocious of all ratmen.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly VERMINUS units that charged this turn to be the targets.<br><br><b>Effect:</b> Add 1 to the Rend characteristic of the targets’ melee weapons for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Warpcog Convocation",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Once Per Turn (Army), Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SKRYRE PROTOTYPES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The fell contraptions wielded by these ratmen were created by the Clans Skryre’s most ingenious weaponsmiths.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly SKRYRE units to be the targets.<br><br><b>Effect:</b> Roll a dice for each target and apply the corresponding effect:<br><div class=\"BreakInsideAvoid\" \"=\"\"><table bordercolor=\"#888\"><tbody><tr><td><table class=\" customTable\" bordercolor=\"#888\"><tbody><tr><td><b>1</b></td><td><i><b>Kaboom!:</b></i> Inflict D3 mortal damage on the target.</td></tr><tr><td><b>2-5</b></td><td><i><b>More Power!:</b></i> Add 1 to wound rolls for the target’s shooting attacks for the rest of the turn.</td></tr><tr><td><b>6</b></td><td><i><b>More-more Power!:</b></i> In addition to the effect of ‘More Power!’, add 1 to the Rend characteristic of the target’s ranged weapons for the rest of the turn.</td></tr></tbody></table></td></tr></tbody></table></div></div><div><br></div></div>"
+    },
+    {
+      "name": "Envoys of the Deepengnaw",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>WILL OF THE HORNED RAT<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Although they tower over the rest of the swarm, Verminlords are as craven and cunning as any Skaven – in truth even more so – and will readily use their underlings as fodder to protect their own hides.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> While a friendly SKAVEN DAEMON is within the combat range of a friendly non-HERO SKAVEN INFANTRY unit:<br><ul><li>That <span class=\"kwb\">SKAVEN</span> <span class=\"kwb\">DAEMON</span> has WARD (4+).</li><li>Each time you make a successful ward roll for that <span class=\"kwb\">SKAVEN</span> <span class=\"kwb\">DAEMON</span>, allocate 1 mortal damage on a friendly non-HERO SKAVEN INFANTRY unit within that unit’s combat range after the damage sequence for that unit has been resolved (ward rolls cannot be made for these damage points).</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Gathering of the Clans",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Reaction: You declared the ‘Redeploy’ command for a friendly SKAVEN unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>BACKSTABBING ALLIES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Skaven often form uneasy alliances between clans, but none of them want to suffer the brunt of the fighting when the enemy draws near.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Pick up to 2 other friendly <span class=\"kwb\">SKAVEN</span> units that are not in combat and are wholly within 13\" of the unit using the ‘Redeploy’ command to be the targets. Each target must have at least one of the following keywords: VERMINUS, SKRYRE, MOULDER, PESTILENS, ESHIN. After that ‘Redeploy’ command has been resolved, each of the targets can immediately use the ‘Redeploy’ command in an order of your choice without any command points being spent.</div><div><br></div></div>"
+    }
+  ],
+  "slaanesh": [
+    {
+      "name": "Depraved Carnival",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE ECSTATIC THRONGS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">To the massed supplicants of Slaanesh, any form of sensation – even the most agonising – is to be embraced as a sacrament to their loathsome god.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to hit rolls for friendly SYBARITE INFANTRY units while they are damaged or if they had any models slain in the same turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Epicurean Revellers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EXQUISITE PALATE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Mortal Realms are vistas of depraved fascination to Slaanesh’s daemons, who will resist banishment with all their might.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time a friendly non-HERO HEDONITES OF SLAANESH DAEMON uses the ‘Rally’ command, you can make 3 additional rally rolls of D6.</div><div><br></div></div>"
+    },
+    {
+      "name": "Seeker Cavalcade",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>RECKLESS HASTE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Whether seeking their lost god or simply chasing new heights of speed, the mounted hosts of Slaanesh make war at a breakneck pace.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly HEDONITES OF SLAANESH CAVALRY units can use a <span class=\"kwb\">RETREAT</span> ability and still use <span class=\"kwb\">CHARGE</span> abilities later in the turn. In addition, no mortal damage is inflicted on <span class=\"kwb\">HEDONITES</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">SLAANESH</span> <span class=\"kwb\">CAVALRY</span> units by <span class=\"kwb\">RETREAT</span> abilities.</div><div><br></div></div>"
+    },
+    {
+      "name": "Supreme Sybarites",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GODLY AMBITIONS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">There are many who would now seek to supplant imprisoned Slaanesh, and their force of personality fills their worshippers with reverent mania.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 3 to the control scores of friendly non-HERO HEDONITES OF SLAANESH units while they are within the combat ranges of any friendly HEDONITES OF SLAANESH HEROES.</div><div><br></div></div>"
+    },
+    {
+      "name": "Pretenders",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle (Army), Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PRODIGY OF EXCESS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">A narcissistic monstrosity, this follower of the Dark Prince possesses a grotesque surfeit of hedonistic qualities that inspire craven envy in their followers.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly HEDONITES OF SLAANESH HERO that has an artefact of power to be the target.<br><br><b>Effect:</b> Give the target a heroic trait from the ‘Figureheads of the Dark Prince’ or ‘Hedonistic Obsessions’ tables.<br><br><b>Designer’s Note:</b> <i>This heroic trait is given to the target during the deployment phase, not during army composition.</i></div><div><br></div></div>"
+    },
+    {
+      "name": "Invaders",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ECSTATIC REVELLERS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The thrill of piercing the lands of their enemies like a hot needle through flesh gives strength to these avaricious revellers.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to the Rend characteristic of melee weapons used by friendly SYBARITE INFANTRY units while they are wholly outside friendly territory.</div><div><br></div></div>"
+    }
+  ],
+  "slaves": [
+    {
+      "name": "Legion of Chaos",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>UNITED IN DARKNESS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The myriad forces of Chaos march to war under a common cause, led by warlords who have put aside their rivalries in the name of laying waste to the lands of a shared foe.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> While there is at least 1 friendly WARRIORS OF CHAOS HERO and 1 other friendly DAEMON HERO or DARKOATH HERO on the battlefield, add 2 to the control scores of friendly <span class=\"kwb\">SLAVES</span> <span class=\"kwb2\">TO</span> <span class=\"kwb\">DARKNESS</span> units while they are contesting an objective that is wholly outside friendly territory.</div><div><br></div></div>"
+    },
+    {
+      "name": "Despoilers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Reaction: You declared a FIGHT ability for a friendly Daemon Prince unit</td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>FERAL RUIN<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">A Daemon Prince’s unholy radiance draws to them the most savage of chaotic creatures, abominations against nature that hunger to spill blood.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Pick a friendly non-HERO SLAVES TO DARKNESS MONSTER or BEAST unit that has not used a FIGHT ability this turn and is wholly within 12\" of this unit to be the target. The target can be picked to use a <span class=\"kwb\">FIGHT</span> ability immediately after the <span class=\"kwb\">FIGHT</span> ability used by this unit has been resolved.</div><div><br></div></div>"
+    },
+    {
+      "name": "Godswrath Warband",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Your Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>IRONCLAD ONSLAUGHT<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When a Chaos horde is on the march, the realms tremble. Hundreds of heavily armoured warriors desecrate all in their path as they roar oaths to the Dark Pantheon.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick an objective that is contested by any friendly units to be the target.<br><br><b>Effect:</b> Place a <b>defiled token</b> next to the target objective. Then, roll a D3 for each enemy unit contesting an objective that has a friendly <b>defiled token</b>. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</div><div><br></div></div>"
+    },
+    {
+      "name": "Darkoath Horde",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>RALLY THE TRIBES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">One of the horde’s commanders looses a terrifying battle cry, calling more of their blade-sworn warriors to their side.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> If there is a friendly DARKOATH HERO on the battlefield, pick a friendly non-HERO non-UNIQUE DARKOATH unit that has been destroyed to be the target.<br><br><b>Effect:</b> Roll a dice. On a 3+, set up a replacement unit with half the number of models from the target unit (rounding up) on the battlefield, wholly within 6\" of a battlefield edge and more than 3\" from all enemy units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Chaos Horde",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DEVOTEES OF RUIN<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Though the Darkoath do not know the true significance of the Dark Gods’ runes, when armour-clad warriors bearing those same sigils arrive in their lands, these visitors are often hailed as divine crusaders sent to save them.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly WARRIORS OF CHAOS unit. Then, pick up to 2 visible friendly DARKOATH units that do not have a Pledge to Chaos keyword and are wholly within 12\" of that <span class=\"kwb\">WARRIORS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">CHAOS</span> unit to be the targets.<br><br><b>Effect:</b> Until the start of your next turn, the targets have the same <b>Pledge to Chaos</b> keyword as that <span class=\"kwb\">WARRIORS</span> <span class=\"kwb2\">OF</span> <span class=\"kwb\">CHAOS</span> unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Champions of Chaos",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PARAGONS OF DARKNESS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Those who have long walked the Path to Glory and bear the scars and mutations to prove it are some of the most dangerous warriors in all the Mortal Realms.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 2 to the Attacks characteristic of melee weapons used by friendly non-MONSTER SLAVES TO DARKNESS HEROES.</div><div><br></div></div>"
+    }
+  ],
+  "tzeentch": [
+    {
+      "name": "Arcanite Cabal",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SINISTER COUNTER-HEXES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Arcanite cultists delight in unravelling the spellcraft of other, less blessed mages.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to unbinding rolls for friendly ARCANITE units. In addition, if a friendly <span class=\"kwb\">ARCANITE</span> unit unbinds a spell, no command points are spent for that unit to use the ‘Magical Intervention’ command in that phase.</div><div><br></div></div>"
+    },
+    {
+      "name": "Tzaangor Coven",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SCREECHING WARFLOCK<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The promise of new-found knowledge or arcane trinkets spurs the bestial Tzaangors into a frenzy.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time a friendly WARFLOCK unit uses the ‘Rally’ command, you can make 3 additional rally rolls of D6.</div><div><br></div></div>"
+    },
+    {
+      "name": "Change Host",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Battle (Army), End of Your Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TWIST OF FATE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">To battle a Change Host is a sanity-warping experience, for the Great Conspirator’s servants make mockery of the laws of nature.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly DISCIPLES OF TZEENTCH DAEMON unit that is in combat to be the target.<br><br><b>Effect:</b> Roll a dice. On a 3+, remove the target from the battlefield and set it up again on the battlefield. Each model in the target unit must be set up in combat with any of the enemy units that the target was in combat with before it was removed from the battlefield.</div><div><br></div></div>"
+    },
+    {
+      "name": "Wyrdflame Host",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MUTAGENIC INFERNO<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Those set ablaze by a Wyrdflame Host find their bodies writhing with possibility, stealing strength and focus from their sword-arms.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Subtract 1 from wound rolls for attacks made by <span class=\"kwb\">BURNING</span> enemy units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Masters of Fate",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SYMBIOTIC MADNESS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Arcanites who battle alongside the daemons of their manipulative deity receive maddening glimpses of the twisting strands of fate, allowing them to take advantage of fleeting gaps in their foes’ defences in the press of combat.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly ARCANITE units’ melee weapons have Crit (2 Hits) while they are wholly within 12\" of a friendly DISCIPLES OF TZEENTCH DAEMON unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Spellweaver Coven",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Your Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SORCERERS OF WAR<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These champions of Tzeentch bring the fires of change directly to their god’s foes, revelling in the infinite fractals of fate that spiral from the madness of a melee.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly DISCIPLES OF TZEENTCH WIZARD that is in combat to be the target.<br><br><b>Effect:</b> The target can use a non-<span class=\"kwb\">SUMMON</span> <span class=\"kwb\">SPELL</span> ability as if it were your hero phase, but only the caster or enemy units in combat with the caster can be picked to be the targets of that <span class=\"kwb\">SPELL</span> ability.</div><div><br></div></div>"
+    }
+  ],
+  "flesheater": [
+    {
+      "name": "Knightly Echelon",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SOUND THE CHARGE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Those foolish enough to stand before the cannibal courts’ knights are inevitably trampled beneath claw and foot.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to the Rend characteristic of melee weapons used by friendly KNIGHTS that charged in the same turn while they are wholly within 12\" of any friendly FLESH-EATER COURTS HEROES.</div><div><br></div></div>"
+    },
+    {
+      "name": "The Royal Hunt",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LIKE SNAPPING HOUNDS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When a noble commences a hunt, packs of serfs are sent ahead of the royal houses to savage prey out of hiding.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick each friendly SERFS unit in combat to be the targets.<br><br><b>Effect:</b> For each target:<br><ul><li>Make a pile-in move.</li><li>Then, pick an enemy unit in combat with the target and roll a D3. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Lords of the Manor",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>RAISE THE BANNERS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When an abhorrant royal family and their courtiers mass, many loyal knights and serfs inevitably follow.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time another ability returns at least 1 slain model to a friendly unit that is not in combat, after that ability has been resolved, if that unit is a SERFS unit, you can return 1 additional slain model to it, and if it is a KNIGHTS unit, roll a dice. On a 4+, you can return 1 additional slain model to it.</div><div><br></div></div>"
+    },
+    {
+      "name": "Royal Menagerie",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>INDULGE, MY PRETTIES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Abhorrants often toss their pet monstrosities choice cuts of flesh, resulting in a burst of strength and ferocity.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> While a friendly non-HERO FLESH-EATER COURTS MONSTER or BEAST is wholly within 12\" of any friendly FLESH-EATER COURTS HEROES:<br><ul><li>That non-<span class=\"kwb\">HERO</span> unit can use a <span class=\"kwb\">RAMPAGE</span> ability on its warscroll even if that ability has already been used by another friendly <span class=\"kwb\">MONSTER</span> in the same turn.</li><li>If that non-HERO unit charged in the same turn and the unmodified charge roll was 9+, it has STRIKE-FIRST for the rest of the turn.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Impassioned Serfs",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Any Combat Phase</td><td></td><td><div class=\"abCommandPoints\"><div class=\"abCommandPointsN\">1</div></div></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>OVERWHELMING HORDES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">As masses of crazed ghouls drag their foes to the ground, the horror and anger of the victims’ allies shifts into a disorienting delusion that leaves them paralysed by indecision.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly SERFS unit that did not charge this turn and is in combat to use this ability, then pick an enemy unit in combat with that <span class=\"kwb\">SERFS</span> unit to be the target.<br><br><b>Effect:</b> The target cannot make pile-in moves for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Questing Courtiers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE BLESSING OF THE CHALICE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Eager to earn favour with their masters, the heroes compete to earn honourable trophies for their court.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly FLESH-EATER COURTS HEROES have WARD (5+) if they have destroyed a unit this battle.</div><div><br></div></div>"
+    }
+  ],
+  "nighthaunt": [
+    {
+      "name": "Quicksilver Gheists",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>VANISH AND REAPPEAR<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These mercurial spirits are feared for their ability to dissolve into nothingness before suddenly reappearing elsewhere - often right behind their next targets' backs.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">NIGHTHAUNT</span> unit that is in combat to use this ability.<br><br><b>Effect:</b> Roll a dice. The unit using this ability can move a distance up to its Move characteristic added to the roll. It can pass through other models and the combat ranges of enemy units, and it can end that move in combat.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#606362\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">CORE,</span> <span class=\"kwb\">MOVE</span></td></tr></tbody></table></div><div><br></div></div>"
+    },
+    {
+      "name": "Shrieker Host",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Enemy Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PETRIFY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The screams and wails of this procession's bloodthirsty champions are so terrifying that their foes often become rooted in place, ripe for the slaughter.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly NIGHTHAUNT HERO to be the target.<br><br><b>Effect:</b> For the rest of the turn, enemy units cannot use <span class=\"kwb\">RETREAT</span> abilities while they are in combat with the target.</div><div><br></div></div>"
+    },
+    {
+      "name": "Death Stalkers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THERE IS NO ESCAPE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Death Stalkers are spectral killers that relentlessly hunt down a chosen enemy. They are constantly on the move in pursuit of their quarry and nigh impossible to pin down.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">NIGHTHAUNT</span> unit to be the target.<br><br><b>Effect:</b> For the rest of the turn:<br><ul><li>The target can use <span class=\"kwb\">CHARGE</span> and <span class=\"kwb\">SHOOT</span> abilities even if it has used a <span class=\"kwb\">RETREAT</span> ability in the same turn.</li><li>The target can use the ’Retreat’ ability without any mortal damage being inflicted on it.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Royal Procession",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Enemy Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LETHAL RANCOUR<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The gheists of this horde are drawn from haughty nobles and obsequious courtiers who refused to admit fault even at the very end. They rail constantly at their kingdom's doom, and their undying bitterness renders their spectral touch even more deadly against those they perceive as interlopers.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 2 friendly <span class=\"kwb\">NIGHTHAUNT</span> units to be the targets.<br><br><b>Effect:</b> The targets’ melee weapons have Anti-charge (+1 Rend) for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Hungry Nexus",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Enemy Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GREEDY FOR SOULS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">A Nexus of Grief’s bricks fly apart and its metal rails extend outwards like a grasping claw, dragging it ever nearer to living, breathing victims.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly <b>Nexus of Grief</b> to be the target.<br><br><b>Effect:</b> For the rest of the turn, the target has a Move characteristic of 3\". It can immediately move up to 3\" and can move into combat but cannot end that move on a terrain feature or within 3\" of an objective.</div><div><br></div></div>"
+    },
+    {
+      "name": "Deathrust Gheists",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Enemy Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BLADES OF ETERNAL RUST<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The weapons of these Nighthaunt constantly shed flakes of spectral rust that cause whatever physical substance they come to rest upon to corrode in moments.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick an enemy unit that is in combat with any friendly <span class=\"kwb\">NIGHTHAUNT</span> units to be the target.<br><br><b>Effect:</b> Subtract 1 from save rolls for the target for the rest of the turn.</div><div><br></div></div>"
+    }
+  ],
+  "ossiarch": [
+    {
+      "name": "Kavalos Lance",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle (Army), Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SWIFT AS DEATH<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Kavalos formations dominate the battlefield with their sheer speed, seeking out the enemy’s weakest point before sending a deadly charge crashing home.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly OSSIARCH BONEREAPERS CAVALRY units to be the targets.<br><br><b>Effect:</b> Each target can move 6\" but cannot end that move in combat.</div><div><br></div></div>"
+    },
+    {
+      "name": "Mortek Ballistari",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>CRAWLING BARRAGE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Ossiarch artillery is best utilised en masse, unleashing their necrotic payload from a secure position behind the Mortek ranks.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly Mortek Crawler units that are wholly within friendly territory and that have not used a <span class=\"kwb\">MOVE</span> ability this turn to be the targets.<br><br><b>Effect:</b> Add 1 to hit rolls for each target’s shooting attacks for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Mortek Phalanx",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Once Per Turn (Army), Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SEND IN THE RESERVE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The Mortek Guard are deployed in deep ranks, with strategic reserves ready to enter the fray whenever the cohesion of the battleline is threatened.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly Mortek Guard unit that has been destroyed to be the target.<br><br><b>Effect:</b> Roll a dice. On a 5+, set up a replacement unit with half the number of models from the target unit (rounding up) on the battlefield more than 9\" from all enemy units.</div><div><br></div></div>"
+    },
+    {
+      "name": "Mortisan Council",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>NECROTIC SYMPHONY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Each Mortisan thrives in the presence of their fellow craftsmen, their arcane might spiralling as the collective magnifies their individual potency.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to casting rolls for friendly OSSIARCH BONEREAPERS INFANTRY WIZARDS.</div><div><br></div></div>"
+    },
+    {
+      "name": "Tithe Guards",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>PLENTIFUL BONE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Guarded supply lines provide this force with near-limitless bone reserves, allowing for swift repair of damaged constructs.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly non-UNIQUE OSSIARCH BONEREAPERS WIZARD to use this ability, then pick up to 3 visible friendly non-FLY OSSIARCH BONEREAPERS units wholly within 12\" of that <span class=\"kwb\">WIZARD</span> to be the targets.<br><br><b>Effect:</b> Roll a D3 for each target. On a 2+:<br><ul><li>If the target is damaged, <b>Heal (X)</b> the target where <span class=\"kwb\">X</span> is an amount equal to the roll.</li><li>If the target is not damaged, return a number of slain models to it with a combined Health characteristic equal to or less than the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Hekatos Drillmasters",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DISCIPLINED HEKATOI<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Crafted with specially selected soul-stuff from skilled officers, the Hekatoi of this legion exhibit an unusual degree of battlefield initiative.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly non-HERO non-FLY OSSIARCH BONEREAPERS INFANTRY unit to be the target.<br><br><b>Effect:</b> Pick 1 of the following effects to apply until the start of your next turn:<br><ul><li>The target has WARD (5+).</li><li>Add 1 to charge rolls for the target.</li><li>Add 1 to wound rolls for the target’s attacks.</li><li>The target’s melee weapons have Anti-charge (+1 Rend).</li></ul></div><div><br></div></div>"
+    }
+  ],
+  "soulblight": [
+    {
+      "name": "Legion of Shyish",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HORROR UNENDING<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The never-ending waves of deathly minions summoned by a Legion of Shyish shatter all hopes of victory for those who stand against them.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can pick 1 additional target when using the ‘Deathly Invocation’ ability.</div><div><br></div></div>"
+    },
+    {
+      "name": "Deathstench Drove",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DRAGGED DOWN AND TORN APART<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Hordes of shambling Deadwalker Zombies flow around and over their victims like a rotten tide, bearing them to the ground through sheer weight of numbers before tearing them limb from limb.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly DEADWALKERS units in combat to be the targets.<br><br><b>Effect:</b> For each target:<br><ul><li>Make a pile-in move.</li><li>Then, pick an enemy unit in combat with the target and roll a D3. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Bacchanal of Blood",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>ARISTOCRACY OF THE NIGHT<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These vampires are expected to excel in all martial and mystical disciplines.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to casting rolls for friendly VAMPIRE units that are not in combat and add 1 to wound rolls for combat attacks made by friendly <span class=\"kwb\">VAMPIRE</span> units that charged in the same turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Deathmarch",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>TIDE OF BONES AND BLADES<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The relentless advance of these skeletal undead can overwhelm even the most tenacious resistance.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to the Rend characteristic of melee weapons used by friendly DEATHRATTLE units that charged in the same turn for attacks that target a unit that has fewer models than the attacking unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Legions of Ulfenkarn",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>WARDENS OF THE WOLF<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The might of Ulfenkarn marches forth from the shattered city, its graves emptied to bolster the tides of endless dead, as the howls of feral vampires echo across the battlefield.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time 1 or more slain models are returned to a friendly SOULBLIGHT GRAVELORDS INFANTRY or BEASTS unit wholly within 12\" of a friendly Belladamma Volga, Radukar the Wolf, Radukar the Beast, Ivya Volga, Lady Annika, Kritza, Torgillius the Chamberlain, Gorslav the Gravekeeper or Watch Captain Halgrim, add 1 to the number of slain models returned to that unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Cryptmasters",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>UNHOLY SITE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Some gravesites have witnessed such horrors that the death magic suffusing them makes them even more difficult to cleanse of the undead’s influence.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly Cursed Sepulchre to be the target.<br><br><b>Effect:</b> The target has WARD (4+) until the start of your next turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Skinshifters",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Turn (Army), Your Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>THE SPEED OF DEATH<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Many vampires are capable of swiftly traversing nearly any terrain by assuming a different form or through the application of the sheer bestial strength and agility granted them by their curse.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly INFANTRY VAMPIRE HERO to be the target.<br><br><b>Effect:</b> The target can move up to 12\" and has FLY when it does so. It cannot end that move in combat.</div><div><br></div></div>"
+    }
+  ],
+  "gloomspite": [
+    {
+      "name": "Gloomspite Horde",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Your Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SPREADING LOONACY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When the worshippers of the Bad Moon gather, the energies of the Gloomspite surge through them like a tide, sending them frothing mad.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly non-SQUIG MOONCLAN or SPIDERFANG units in combat to be the targets.<br><br><b>Effect:</b> For each target:<br><ul><li>Make a pile-in move with the target.</li><li>Then, pick an enemy unit in combat with the target and roll a D3. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</li></ul></div><div><br></div></div>"
+    },
+    {
+      "name": "Troggherd",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>HERD HEALING<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When troggoths gather in larger numbers, the sheer troggness of the herd serves as a catalyst for their regenerative abilities.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time a friendly TROGGOTH unit uses a FIGHT ability, after that ability has been resolved, <b>Heal (D3)</b> that unit.</div><div><br></div></div>"
+    },
+    {
+      "name": "Squigalanche",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BOUNCING FURY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">A veritable tide of vicious, impossibly hungry, fang-toothed monsters boing into enemy lines, biting, chewing and swallowing their victims whole.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time a friendly SQUIG unit charges, add 1 to the Attacks characteristic of its <b>Fang-filled Gobs</b>, <b>Massive Fang-filled Gobs</b> or Huge <b>Fang-filled Gobs</b> for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Gitmob Pack",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Your Movement Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GIT AND RUN<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Even as Gitmob grots flee, they won’t turn down a prime opportunity for a stabbing.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly GITMOB unit that is in combat to use this ability. Then, you can pick an enemy unit in combat with that <span class=\"kwb\">GITMOB</span> unit to be the target. The same enemy unit cannot be picked to be the target of this ability more than once per phase.<br><br><b>Effect:</b> If you picked a target, roll a D3. On a 2+, inflict an amount of mortal damage on the target equal to the roll. Then, the unit using this ability can move a distance up to its Move characteristic. It can move through the combat ranges of enemy units but cannot end that move in combat.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#606362\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">CORE,</span> <span class=\"kwb\">MOVE,</span> <span class=\"kwb\">RETREAT</span></td></tr></tbody></table></div><div><br></div></div>"
+    },
+    {
+      "name": "Sunbiter Pack",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EXTRA SNAPPY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The enterprising Gitmob grots of this tribe have equipped their Snarlfangs with sunmetal tooth-caps that absorb Hyshian magic as they pelt towards the foe, giving them a nasty bite indeed.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly GITMOB units that charged this turn to be the targets.<br><br><b>Effect:</b> Add 1 to the Rend characteristic of Companion weapons used by the targets for the rest of turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Gittish Tide",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GROTS UPON GROTS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The lurking presence of the Moonclans and their constant, nerve-fraying cackling makes it difficult for the enemy to focus on their battle plans.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly non-SQUIG MOONCLAN unit that is contesting an objective to be the target.<br><br><b>Effect:</b> Add 1 to the control score of the target unit for each model in that unit that is not contesting any objectives.</div><div><br></div></div>"
+    }
+  ],
+  "ironjawz": [
+    {
+      "name": "Ironjawz Brawl",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>NATURAL DISASTER<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">A mass of heavily armoured orruks and their bulky beasts of war, an Ironjawz Brawl hits the enemy line like a landslide if it gains enough momentum, leaving a trail of carnage and blazing ruin in its wake.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> If you make an unmodified charge roll of 8+ for a friendly non-HERO IRONJAWZ unit, add 1 to the Attacks characteristic of that unit’s melee weapons for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Weirdfist",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SPIRIT OF GORK<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The roiling Waaagh! energy that emanates from the Weirdfist shamans fills nearby Ironjawz with the fighting spirit and hardiness of Gork.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly IRONJAWZ INFANTRY units have WARD (6+) while they are wholly within 12\" of any friendly IRONJAWZ WIZARDS or PRIESTS.</div><div><br></div></div>"
+    },
+    {
+      "name": "Ironfist",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SMASHIN’ AND BASHIN’<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The orruks of an Ironfist won’t be outdone by each other – when one mob duffs up the enemy, it inspires others to show them how to do it properly!<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> The first time each turn that an enemy unit is destroyed by a FIGHT ability used by a friendly IRONJAWZ unit, add 1 to hit rolls for combat attacks made by the next friendly <span class=\"kwb\">IRONJAWZ</span> unit that is picked to use a <span class=\"kwb\">FIGHT</span> ability for the rest of the turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Grunta Stampede",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>’ERE WE COME!<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Once a grunta stampede gets going and the hogs are all riled up, there are few forces in the realms with the power to halt its momentum.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add the number of enemy units that have been destroyed this battle to the Move characteristic of friendly Gore-gruntas and MAW-GRUNTA units, to a maximum of +4.</div><div><br></div></div>"
+    },
+    {
+      "name": "Brutefist",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Once Per Battle Round (Army), Any Hero Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MIGHTIEST DESTROYERS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Wherever the Megabosses lead from the front lines, the Ironjawz surge forward as an unstoppable tide of green muscle and heavy armour plates.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> If there are any friendly Megabosses on the battlefield, for the rest of the turn, you can pick another eligible unit to be a second target when using the ‘Mighty Destroyers’ ability.<br><br>If there are no friendly <b>Megabosses</b> on the battlefield, roll a dice. On a 3+, for the rest of the turn, you can pick another eligible unit to be a second target when using the ‘Mighty Destroyers’ ability.</div><div><br></div></div>"
+    },
+    {
+      "name": "Bigsnikkaz",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DUFF UP DA BIG THING<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The ladz get ready to bash some uppity git who thinks that being bigger than an orruk gives them some kind of advantage.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly IRONJAWZ unit to be the target.<br><br><b>Effect:</b> For the rest of the turn, add 1 to wound rolls for the target’s combat attacks that target an enemy unit that has a Health characteristic greater than its own.</div><div><br></div></div>"
+    }
+  ],
+  "kruleboyz": [
+    {
+      "name": "Kruleboyz Klaw",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>SWAMP SHROUD<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Before the warriors of a Kruleboyz Klaw strike, the shamans enact a mighty ritual to smother the battlefield in a thick, stinky mist that conceals them from the enemy.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly <span class=\"kwb\">KRULEBOYZ</span> units that are wholly within 3\" of a terrain feature are not visible to enemy units that are more than 12\" away from them.</div><div><br></div></div>"
+    },
+    {
+      "name": "Light Finga",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#606362\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>DED SNEAKY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Comprised of hobgrots and ‘yoofs’, the ladz of the Light Finga are in charge of ‘nikkin’ stuff and are skilled at sneaking up on the enemy.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can use the ‘Sneaky Sneakin’’ <span class=\"kwb\">DIRTY</span> <span class=\"kwb\">TRICK</span> ability twice per turn instead of only once per turn.</div><div><br></div></div>"
+    },
+    {
+      "name": "Middul Finga",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FAR-KILLA BOLTS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The many Deffspikerz of the Middul Finger often keep a limited supply of bolts fletched with bog-shryke feathers, which give their shots that extra bit of distance when needed.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 3 friendly Man-skewer Boltboyz or Beast-skewer Killbow units to be the targets.<br><br><b>Effect:</b> For the rest of the turn, add 3\" to the Range characteristic of the targets’ ranged weapons.</div><div><br></div></div>"
+    },
+    {
+      "name": "Trophy Finga",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MEANEST BEASTS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The warbeasts ridden by the orruks of the Trophy Finga are particularly foul and belligerent specimens of their kind.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Companion weapons used by friendly <span class=\"kwb\">KRULEBOYZ</span> units have Crit (2 Hits).</div><div><br></div></div>"
+    },
+    {
+      "name": "Swamphorde Bullies",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Any Combat Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>GANGIN’ UP<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These orruks like to overwhelm their enemies with a flurry of strikes from all directions interspersed with sneaky stabs and low blows.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">KRULEBOYZ</span> unit to be the target. That unit must be in combat with an enemy unit that is in combat with another friendly <span class=\"kwb\">KRULEBOYZ</span> unit. Kragnos cannot be picked to be the target.<br><br><b>Effect:</b> For the rest of the turn, add 1 to the Attacks characteristic of the target’s melee weapons.</div><div><br></div></div>"
+    },
+    {
+      "name": "Badmouthing Baiterz",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Once Per Turn (Army), Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>KRULE MOCKERY<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These orruks have perfected the art of hurling biting insults at the enemy to taunt them and lure them into hidden traps.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly <span class=\"kwb\">KRULEBOYZ</span> unit to be the <b>Insult Hurla</b>, pick a visible enemy unit within 18\" of it to be the target, then make a dirty trick roll.<br><br><b>Effect:</b> Until the start of your next turn, each time the target uses a <span class=\"kwb\">MOVE</span> ability and does not end that move closer to the <b>Insult Hurla</b> than it was at the start of that move, inflict D6 mortal damage on the target after that <span class=\"kwb\">MOVE</span> ability has been resolved.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#28435c\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">DIRTY</span> <span class=\"kwb\">TRICK</span></td></tr></tbody></table></div><div><br></div></div>"
+    }
+  ],
+  "ogor": [
+    {
+      "name": "Prophets of the Gulping God",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#76602b\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MASTER BUTCHERS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These ogor shamans know many gruesome secrets of gastromantic magic.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Add 1 to casting rolls for friendly OGOR MAWTRIBES WIZARDS.</div><div><br></div></div>"
+    },
+    {
+      "name": "Heralds of the Everwinter",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>EYES OF THE STORM<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The members of this tribe are masked by frosty squalls and freezing mists as they follow their champions into battle.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Subtract 1 from hit rolls for shooting attacks that target friendly OGOR MAWTRIBES INFANTRY units while they are wholly within 12\" of any friendly BEASTCLAW RAIDERS HEROES.</div><div><br></div></div>"
+    },
+    {
+      "name": "Beast Handlers",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BRUTAL STOCK<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">The beasts of this tribe are said to be the most belligerent and tenacious of all their kind.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Each time a friendly BEASTCLAW RAIDERS MONSTER uses the ‘Trampling Charge’ ability, add 1 to the amount of mortal damage inflicted, if any.</div><div><br></div></div>"
+    },
+    {
+      "name": "Blackpowder Fanatics",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FEED YER CANNONS!<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These artillery-ogors don’t need to be told twice to blast the foe into tiny bits.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Ranged weapons used by friendly <b>Leadbelchers</b> and <b>Ironblaster</b> units have Shoot in Combat while they are within the combat range of a friendly OGOR MAWTRIBES HERO.</div><div><br></div></div>"
+    },
+    {
+      "name": "Mawpath Menaces",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#a34d14\">Once Per Turn (Army), Enemy Charge Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>FIXATED ON FEEDING<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Once they have sighted a potential meal, it is nigh impossible to stop these ever-ravenous ogors from consuming their prize.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly OGOR INFANTRY unit that is not in combat to be the target.<br><br><b>Effect:</b> Roll a dice. On a 3+, the target can move a number of inches equal to the roll. It can move through the combat ranges of enemy units and can end that move in combat. If it ended that move in combat, the target has charged.</div><div class=\"abKeywords\"><table><tbody><tr><td bgcolor=\"#a34d14\" class=\"abHeader abKeywordsBody\"><span class=\"kwb\">KEYWORDS</span></td><td class=\"abKeywordsBodyText abNoReaction\"><span class=\"kwb\">CORE,</span> <span class=\"kwb\">MOVE,</span> <span class=\"kwb\">CHARGE</span></td></tr></tbody></table></div><div><br></div></div>"
+    },
+    {
+      "name": "Greedy Eaters",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#5e4a79\">Once Per Turn (Army), End of Any Turn</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>POSTPRANDIAL WARFARE<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Having slurped up their fallen enemies’ innards and picked their bones clean, these ogors rejoin the battle in search of their next repast.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to D3 friendly OGOR INFANTRY units that were in combat this turn with an enemy unit that was destroyed this turn to be the targets.<br><br><b>Effect:</b> Return 1 slain model to each target unit.</div><div><br></div></div>"
+    }
+  ],
+  "sonsofbehemat": [
+    {
+      "name": "Taker Tribe",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle, Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>MORE STUFF FOR ME COLLECTION<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These gargants are avaricious hoarders who love collecting all kinds of baubles and artefacts – even ones that are too small for them to use.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly non-UNIQUE SONS OF BEHEMAT HERO that does not have an artefact of power.<br><br><b>Effect:</b> Give that <span class=\"kwb\">HERO</span> 1 artefact of power from ‘Titanic Trophies’.<br><br><b>Designer’s Note:</b> <i>This artefact of power is given to the unit during the deployment phase, not during army composition.</i></div><div><br></div></div>"
+    },
+    {
+      "name": "Breaker Tribe",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#3d5b26\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>BESIEGING BULK<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">When a group of Mega-Gargants take to battle together, they are able to use each other’s enormous bulk to shelter themselves from harm.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> Friendly MEGA-GARGANTS have WARD (6+) while they are within the combat ranges of any other friendly <span class=\"kwb\">MEGA-GARGANTS</span>.</div><div><br></div></div>"
+    },
+    {
+      "name": "Boss Tribe",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Once Per Turn (Army), Reaction: You declared a <span class=\"kwb\">FIGHT</span> ability for a friendly <span class=\"kwb\">MEGA-GARGANT</span></td><td></td><td></td></tr></tbody></table><div class=\"abBody abIsReaction\"><b>BIG MOUTH<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Mancrusher Gargants are used to being bossed around by the colossal Mega-Gargants. The orders they are given usually boil down to ‘hit that thing’ or ‘squish them ones there’.<br><div class=\"spc\"></div></span><div><br></div><b>Used By:</b> MEGA-GARGANT using that <span class=\"kwb\">FIGHT</span> ability.<br><br><b>Effect:</b> Pick a friendly GARGANT unit that has not used a FIGHT ability this turn and is wholly within 12\" of this unit to be the target. The target can be picked to use a <span class=\"kwb\">FIGHT</span> ability immediately after the <span class=\"kwb\">FIGHT</span> ability used by this unit has been resolved.</div><div><br></div></div>"
+    },
+    {
+      "name": "Stomper Tribe",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#802022\">Passive</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>REVEL IN WAR<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These boisterous gargants launch themselves into enemy lines, revelling in crushing the puny pipsqueaks below their feet.<br><div class=\"spc\"></div></span><div><br></div><b>Effect:</b> You can pick 2 friendly MEGA-GARGANTS or GARGANT units that have not used a <span class=\"kwb\">RAMPAGE</span> ability this turn to use the ‘Jump Up and Down’ ability instead of 1.</div><div><br></div></div>"
+    },
+    {
+      "name": "Manskittle Mob",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#28435c\">Once Per Turn (Army), Your Shooting Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>STRIKE! HUR HUR!<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">These gargants are particularly enthusiastic participants of the game of Manskittles: seeing how many pipsqueaks they can knock down or squish by hurling bits of the landscape... or its inhabitants.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick up to 2 friendly MEGA-GARGANT units within 3\" of any terrain features and pick any friendly GARGANT units within 3\" of any terrain features to be the targets.<br><br><b>Effect:</b> Double the Attacks characteristic of each target’s ranged weapons for the rest of the turn. If the target has no ranged weapons, pick an enemy unit within 12\" of the target instead and roll a D3. On a 2+, inflict an amount of mortal damage on that enemy unit equal to the roll.</div><div><br></div></div>"
+    },
+    {
+      "name": "Big Toes",
+      "html": "<div class=\"BreakInsideAvoid\"><table><tbody><tr><td></td><td class=\"abHeader\" bgcolor=\"#000000\">Once Per Battle, Deployment Phase</td><td></td><td></td></tr></tbody></table><div class=\"abBody abNoReaction\"><b>LOFTY LOUTS<span class=\"ShowFluff\">:</span></b> <span class=\"ShowFluff legend4\">Whether because they insist that they are ‘just a bit taller’ or because they are simply insufferable bullies, these Mancrusher Gargants have an authority over the other Footsloggas that is close to absolute. So long as no one bigger is around, of course.<br><div class=\"spc\"></div></span><div><br></div><b>Declare:</b> Pick a friendly Mancrusher Gargant unit to be the target.<br><br><b>Effect:</b> For the rest of the battle, add 1 to hit rolls for combat attacks made by friendly GARGANT units while they are wholly within 12\" of the target and not wholly within 12\" of any friendly MEGA-GARGANT units.</div><div><br></div></div>"
+    }
+  ]
+}
