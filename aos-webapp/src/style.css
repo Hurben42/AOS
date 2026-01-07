@@ -101,9 +101,9 @@ a:hover {
 ========================================================= */
 
 .wsBody {
-  background-color: #1b1b1b;
+  background-color: rgba(0, 0, 0, 0.0) !important;
   border-radius: 16px;
-  padding: 1rem;
+  padding: 0;
   margin-bottom: 2rem;
 }
 

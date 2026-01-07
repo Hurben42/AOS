@@ -152,7 +152,7 @@ export default function WarscrollDetail() {
           </ul>
         )}
 
-        <div className="warscroll-content card p-3 shadow-lg text-dark overflow-hidden rounded-4 border-0 mb-5">
+        <div className="warscroll-content card shadow-lg text-dark overflow-hidden bg-transparent rounded-4 border-0 mb-5">
           <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
         </div>
       </div>

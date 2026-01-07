@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // --- IMPORTS DES DONNÉES ---
 import warscrollsData from "../data/warscrolls.json";
@@ -21,6 +21,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState(null);
+  const navigate = useNavigate();
 
   // Utilitaires de formatage
   const cleanForUrl = (n) => n.toLowerCase().trim().replace(/\s+/g, "-");
@@ -33,7 +34,6 @@ export default function Home() {
 
     let combined = [];
     
-    // Mapping Faction -> Catégorie (Grand Alliance) via warscrolls.json
     const factionToCategory = {};
     Object.keys(warscrollsData).forEach(cat => {
       Object.keys(warscrollsData[cat]).forEach(fac => {
@@ -41,7 +41,7 @@ export default function Home() {
       });
     });
 
-    // 1. RECHERCHE UNITÉS (WARSCROLLS)
+    // 1. UNITÉS
     Object.keys(warscrollsData).forEach(c => {
       Object.keys(warscrollsData[c]).forEach(f => {
         warscrollsData[c][f].forEach(u => {
@@ -55,29 +55,24 @@ export default function Home() {
       });
     });
 
-    // 2. RECHERCHE AMÉLIORATIONS (Heroic Traits, Artefacts, Lores...)
+    // 2. AMÉLIORATIONS
     Object.keys(enhancementsData).forEach(fKey => {
       const factionContent = enhancementsData[fKey];
       const cat = factionToCategory[normalizeKey(fKey)] || "order";
-
       const mapping = [
         { jsonKey: 'heroic_traits', label: 'HEROIC TRAIT', route: 'heroic-traits' },
         { jsonKey: 'artefacts_of_power', label: 'ARTEFACT', route: 'artefacts-of-power' },
         { jsonKey: 'spell_lores', label: 'SPELL LORE', route: 'spell-lore' },
         { jsonKey: 'prayer_lores', label: 'PRAYER LORE', route: 'prayer-lore' }
       ];
-
       mapping.forEach(sec => {
         const list = factionContent[sec.jsonKey];
         if (list && Array.isArray(list)) {
           list.forEach(item => {
             if (item.name && item.name.toLowerCase().includes(s)) {
               combined.push({
-                name: item.name,
-                type: sec.label,
-                faction: fKey.replace(/([A-Z])/g, ' $1').trim(),
-                color: "bg-warning",
-                path: `/category/${cat}/faction/${cleanForUrl(fKey)}/section/${sec.route}`
+                name: item.name, type: sec.label, faction: fKey.replace(/([A-Z])/g, ' $1').trim(),
+                color: "bg-warning", path: `/category/${cat}/faction/${cleanForUrl(fKey)}/section/${sec.route}`
               });
             }
           });
@@ -85,7 +80,7 @@ export default function Home() {
       });
     });
 
-    // 3. RECHERCHE BATTLE TACTICS (Handbook)
+    // 3. BATTLE TACTICS
     if (battleTacticsData) {
       battleTacticsData.forEach(bt => {
         if (bt.name.toLowerCase().includes(s)) {
@@ -110,7 +105,7 @@ export default function Home() {
 
   return (
     <div className="container mt-4 pb-5 px-3">
-      {/* BARRE DE RECHERCHE DÉCLENCHEUR */}
+      {/* BARRE DE RECHERCHE */}
       <div className="mb-4 pt-2">
         <div className="search-trigger-compact" onClick={() => setIsModalOpen(true)}>
           <div className="d-flex align-items-center">
@@ -123,7 +118,7 @@ export default function Home() {
 
       <h1 className="text-white fw-bold mb-4 text-uppercase" style={{ letterSpacing: '3px', fontSize: '1.5rem' }}>Allégeances</h1>
 
-      {/* GRILLE DES GRANDES ALLIANCES */}
+      {/* GRANDES ALLIANCES */}
       <div className="row g-3 mb-5">
         {Object.keys(warscrollsData).map((cat) => (
           <div key={cat} className="col-12 col-md-6">
@@ -143,54 +138,50 @@ export default function Home() {
         ))}
       </div>
 
-      {/* SECTION GENERAL HANDBOOK */}
+      {/* SECTION HANDBOOK */}
       <h2 className="text-white fw-bold mb-4 text-uppercase" style={{ letterSpacing: '3px', fontSize: '1.2rem' }}>General's Handbook</h2>
       <div className="row g-3 mb-5">
         <div className="col-12 col-md-4">
-          <Link to="/battleplans" className="text-decoration-none">
+          <Link to="/battleplans" className="text-decoration-none d-block">
             <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
               <div className="handbook-banner" style={{ 
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/battleplans/GeneralHandbook_files/generalhandbook.jpg')`,
-                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center' 
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('/battleplans/GeneralHandbook_files/generalhandbook.jpg')`,
+                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <div className="d-flex h-100 align-items-center justify-content-center flex-column">
-                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5">Battle Plans</h3>
-                </div>
+                <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5">Battle Plans</h3>
               </div>
             </div>
           </Link>
         </div>
+        
         <div className="col-12 col-md-4">
-          <Link to="/battletactics" className="text-decoration-none">
+          <Link to="/battletactics" className="text-decoration-none d-block">
             <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
               <div className="handbook-banner" style={{ 
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/img/banner_seraphon.webp')`,
-                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center' 
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('/img/banner_seraphon.webp')`,
+                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <div className="d-flex h-100 align-items-center justify-content-center flex-column">
-                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5">Battle Tactics</h3>
-                </div>
+                <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5">Battle Tactics</h3>
               </div>
             </div>
           </Link>
         </div>
+
         <div className="col-12 col-md-4">
-          <Link to="/history" className="text-decoration-none">
+          <Link to="/history" className="text-decoration-none d-block">
             <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
               <div className="handbook-banner" style={{ 
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/img/banner_khorne.webp')`,
-                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center' 
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('/img/banner_khorne.webp')`,
+                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <div className="d-flex h-100 align-items-center justify-content-center flex-column">
-                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5 text-warning">History</h3>
-                </div>
+                <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5 text-warning">Mes parties</h3>
               </div>
             </div>
           </Link>
         </div>
       </div>
 
-      {/* MODAL DE RECHERCHE PLEIN ÉCRAN */}
+      {/* MODAL DE RECHERCHE */}
       {isModalOpen && (
         <div className="search-fullscreen-overlay">
           <div className="container h-100 d-flex flex-column pt-3">
@@ -244,14 +235,10 @@ export default function Home() {
         .name-mini { color: #eee; font-weight: 600; font-size: 0.95rem; }
         .faction-mini { font-size: 0.75rem; color: #0dcaf0; text-transform: uppercase; margin-top: 2px; }
         .badge-mini { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.75rem; font-weight: 900; color: #000; }
-        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #333 #050505; }
         .category-card { border: 1px solid rgba(255,255,255,0.05) !important; transition: all 0.3s ease; }
         .category-card:hover { border-color: #ffc107 !important; transform: translateY(-3px); }
-        .category-card:hover .banner-img { transform: scale(1.05); filter: brightness(0.7) !important; }
-        .banner-img { transition: transform 0.6s ease, filter 0.3s ease; }
         .shadow-text { text-shadow: 2px 2px 10px rgba(0,0,0,1); }
-        .fw-black { font-weight: 900; }
         .handbook-card { transition: all 0.3s ease; border: 1px solid #333 !important; }
         .handbook-card:hover { border-color: #ffc107 !important; }
       `}</style>

@@ -101,7 +101,7 @@ function NavbarContent() {
             </li>
             {/* --- AJOUT DU LIEN HISTORIQUE ICI --- */}
             <li className="nav-item">
-              <Link className="nav-link" to="/history">Historique</Link>
+              <Link className="nav-link" to="/history">Mes Parties</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link text-warning" to="/start-game">Lancer une partie</Link>
@@ -129,11 +129,17 @@ function App() {
             <Route path="/my-lists/:id/warscroll/:unitSlug" element={<MyListWarscroll />} />
             
             <Route path="/start-game" element={<StartGame />} />
+            
+            {/* Dashboard de la partie en cours */}
             <Route path="/game" element={<GameDashboard />} />
             <Route path="/game/:gameId" element={<GameDashboard />} />
+            
             <Route path="/history" element={<HistoryPage />} /> 
             
-            <Route path="/battleplans" element={<Battleplans />} />
+            {/* Liste des plans de bataille (Handbook) */}
+            {/* Assurez-vous que le fichier importé en tant que Battleplans est bien la LISTE des plans */}
+            <Route path="/battleplans" element={<Battleplans />} /> 
+            
             <Route path="/battletactics" element={<BattleTactics />} />
             
             <Route path="/category/:category/faction/:faction/section/:sectionSlug" element={<FactionDetail />} />

@@ -38,37 +38,40 @@ export default function ListDetail() {
   };
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
-    // CORRECTION : Comparaison plus souple sur l'ID (toString)
-    const found = saved.find(l => l.id?.toString() === id?.toString());
+    // 1. RÉCUPÉRATION (Le tri pour l'affichage global doit se faire dans le composant MyLists)
+    const savedRaw = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
+    
+    // Pour garantir qu'on trouve la bonne liste même si l'ID est un nombre ou une string
+    const found = savedRaw.find(l => l.id?.toString() === id?.toString());
     
     if (found) {
       setList(found);
-      const data = found.listData || found; // Gère les deux types de structures
+      const data = found.listData || found; 
       
-      // On aplatit tous les warscrolls pour la recherche
       const allWarscrolls = Object.values(warscrollsData).flatMap(cat => 
         Object.values(cat).flatMap(f => f)
       );
 
-      // 1. GESTION DES SORTS
+      // --- 1. GESTION DES SORTS ---
       const cleanFactionKey = bannerMapping[data.faction] || normalize(data.faction);
       const factionSpells = spellsIndex.factions[cleanFactionKey] || {};
       const loreName = data.spellLore;
       const matchedLore = Object.keys(factionSpells).find(l => normalize(l) === normalize(loreName));
-      if (matchedLore) setActiveSpellLore(factionSpells[matchedLore]);
-      else if (Object.keys(factionSpells).length > 0 && loreName !== "Non défini") {
-          setActiveSpellLore(Object.values(factionSpells)[0]);
+      
+      if (matchedLore) {
+        setActiveSpellLore(factionSpells[matchedLore]);
+      } else if (Object.keys(factionSpells).length > 0 && loreName !== "Non défini") {
+        setActiveSpellLore(Object.values(factionSpells)[0]);
       }
 
-      // 2. TERRAIN DE FACTION
+      // --- 2. TERRAIN DE FACTION ---
       const terrainInfo = factionTerrainIndex[cleanFactionKey];
       if (terrainInfo) {
         const terrainWS = allWarscrolls.find(ws => normalize(ws.name) === normalize(terrainInfo.name));
         if (terrainWS) setFactionTerrainWS(terrainWS);
       }
 
-      // 3. MANIFESTATIONS
+      // --- 3. MANIFESTATIONS ---
       const manifestationLoreName = data.manifestationLore;
       const mfs = [];
       const seenMfs = new Set();
@@ -90,13 +93,12 @@ export default function ListDetail() {
       });
       setFactionManifestations(mfs);
 
-      // 4. UNITÉS (Correction de la logique de boucle)
+      // --- 4. UNITÉS DU RÉGIMENT ---
       const regs = data.regiments || [];
       const seenUnits = new Set();
       const finalUnits = [];
       
       regs.forEach(reg => {
-        // On récupère le héros ET les unités du régiment
         const items = [];
         if (reg.hero) items.push(reg.hero);
         if (reg.units) items.push(...reg.units);
@@ -114,18 +116,18 @@ export default function ListDetail() {
           let kws = [];
           if (match) {
             kws = getKeywordsFromWS(match.html);
-            cleanName = match.name; // On utilise le nom propre du JSON
+            cleanName = match.name; 
           }
           
           seenUnits.add(norm);
           finalUnits.push({ displayName: cleanName, keywords: kws });
         });
       });
+      
       setUniqueUnits(finalUnits.sort((a,b) => a.displayName.localeCompare(b.displayName)));
     }
   }, [id]);
 
-  // TACTIQUES
   const detectedTactics = useMemo(() => {
     if (!list || !battleTacticsData) return [];
     const data = list.listData || list;
@@ -167,7 +169,6 @@ export default function ListDetail() {
         </Link>
       </div>
 
-      {/* HEADER CARD */}
       <div className="card bg-dark border-0 shadow-lg mb-4 rounded-4 overflow-hidden position-relative" style={{ minHeight: '180px' }}>
         <img 
             src={`/img/banner_${bannerMapping[displayData.faction] || 'default'}.webp`} 
@@ -201,7 +202,6 @@ export default function ListDetail() {
         </div>
       </div>
 
-      {/* UNITÉS SECTION */}
       <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 mb-4 blur-bg">
         <div className="card-header bg-black text-white py-3 px-3">
           <h6 className="mb-0 fw-bold text-uppercase small"><i className="bi bi-shield-shaded me-2 text-info"></i>Unités de Guerre</h6>
@@ -222,7 +222,6 @@ export default function ListDetail() {
         </div>
       </div>
 
-      {/* AUTRES SECTIONS (TERRAIN, SORT, MANIF) */}
       <div className="row g-3">
         {factionTerrainWS && (
           <div className="col-12">

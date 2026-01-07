@@ -62,7 +62,7 @@ export default function BattleTactics() {
                     { label: 'DOMINATION', title: bt.domination, rules: bt.domination_rules, color: '#ff4444' }
                   ].map((step, i) => (
                     <div className="col-12" key={i}>
-                      <div className="p-3 border border-secondary bg-dark bg-opacity-10 rounded-0 h-100">
+                      <div className="p-3 bg-white bg-opacity-10 rounded-0 h-100">
                         <div className="d-flex justify-content-between align-items-center border-bottom border-secondary border-opacity-50 pb-2 mb-2">
                            <small style={{ color: step.color, fontWeight: 'bold', letterSpacing: '1px' }}>{step.label}</small>
                            <span className="badge bg-warning text-dark fw-bold">+5 PTS</span>
@@ -96,7 +96,7 @@ export default function BattleTactics() {
         }
 
         .rule-content {
-            line-height: 1.6;
+            line-height: 1.2;
             color: #ddd;
         }
 
@@ -105,7 +105,6 @@ export default function BattleTactics() {
             color: #888;
             margin-bottom: 8px;
             border-bottom: 1px solid #333;
-            padding-bottom: 4px;
         }
 
         .rule-content b {
