@@ -42,12 +42,9 @@ export default function ImportList() {
       filteredLines.forEach((line, index) => {
         const lowerLine = line.toLowerCase();
 
-        // --- NOUVELLE LOGIQUE TACTIQUES ---
         if (lowerLine.includes("battle tactics") || lowerLine.includes("tactiques de bataille")) {
-          // On extrait ce qu'il y a après les ":" (ex: "Master The Paths and Wrathful Cycles")
           const content = line.split(/cards:|tactics:|tactique:/i)[1];
           if (content) {
-            // On sépare par "and", "et" ou virgule
             const tactics = content.split(/\s+and\s+|\s+et\s+|,/i);
             tactics.forEach(t => {
               const cleanTactic = t.trim();
@@ -102,19 +99,20 @@ export default function ImportList() {
       if (currentRegiment) listData.regiments.push(currentRegiment);
 
       const newId = Date.now().toString();
+      
+      // CORRECTION : On enregistre un objet plat pour que MyListWarscroll le lise facilement
       const newList = {
         id: newId,
         title: listData.customTitle,
-        faction: listData.faction,
-        subFaction: listData.subFaction,
-        battle_tactics: listData.battle_tactics, 
-        listData: listData 
+        ...listData, // On "étale" les données (regiments, faction, etc.)
+        listData: listData // On garde quand même listData pour SavedLists.jsx
       };
 
       const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
       localStorage.setItem("warhammer_saved_lists", JSON.stringify([newList, ...saved]));
 
-      window.location.href = `/my-lists/${newId}`;
+      // Navigation fluide vers le détail
+      navigate(`/my-lists/${newId}`);
 
     } catch (err) {
       console.error(err);
@@ -126,7 +124,7 @@ export default function ImportList() {
     <div className="container mt-4 pb-5 px-3">
       <div className="card bg-dark border-secondary shadow-lg rounded-4 overflow-hidden">
         <div className="card-header bg-black text-white py-3 text-center border-bottom border-secondary">
-          <h5 className="mb-0 fw-bold text-info">IMPORTATEUR AOS 4.0</h5>
+          <h5 className="mb-0 fw-bold text-info text-uppercase">Importateur AOS 4.0</h5>
         </div>
         <div className="card-body p-4">
           <textarea

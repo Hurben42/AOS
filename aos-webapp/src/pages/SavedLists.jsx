@@ -29,14 +29,12 @@ export default function SavedLists() {
     if (sharedData) {
       try {
         const decodedList = JSON.parse(decodeURIComponent(sharedData));
-        console.log("Données importées :", decodedList); // Debug pour voir les tactiques
-
         const currentSaved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
         
-        // FIX : On s'assure que les tactiques sont bien présentes au premier niveau
+        // On s'assure que les données essentielles sont au premier niveau
         const newListEntry = { 
           ...decodedList, 
-          id: Date.now(),
+          id: Date.now().toString(), // String pour cohérence
           battle_tactics: decodedList.battle_tactics || decodedList.listData?.battle_tactics || []
         };
         
@@ -46,6 +44,7 @@ export default function SavedLists() {
         setImportSuccess(newListEntry);
         setSavedLists(updatedSaved);
         
+        // Nettoyage de l'URL
         window.history.replaceState({}, document.title, window.location.pathname);
       } catch (e) {
         console.error("Erreur importation QR :", e);
@@ -58,7 +57,8 @@ export default function SavedLists() {
   const loadLists = () => {
     try {
       const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
-      setSavedLists(Array.isArray(saved) ? saved.sort((a, b) => b.id - a.id) : []);
+      // Tri par ID décroissant (plus récent en premier)
+      setSavedLists(Array.isArray(saved) ? saved.sort((a, b) => b.id < a.id ? 1 : -1) : []);
     } catch (e) {
       setSavedLists([]);
     }
@@ -66,6 +66,7 @@ export default function SavedLists() {
 
   const deleteList = (e, id) => {
     e.preventDefault();
+    e.stopPropagation();
     if (window.confirm("Supprimer cet Ost ?")) {
       const updated = savedLists.filter(l => l.id !== id);
       localStorage.setItem("warhammer_saved_lists", JSON.stringify(updated));
@@ -74,8 +75,11 @@ export default function SavedLists() {
   };
 
   const countTotalUnits = (data) => {
-    if (!data?.regiments) return 0;
-    return data.regiments.reduce((acc, r) => {
+    // On regarde soit à la racine, soit dans listData
+    const regiments = data?.regiments || data?.listData?.regiments;
+    if (!regiments || !Array.isArray(regiments)) return 0;
+    
+    return regiments.reduce((acc, r) => {
       const heroCount = r?.hero ? 1 : 0;
       const unitsCount = Array.isArray(r?.units) ? r.units.length : 0;
       return acc + heroCount + unitsCount;
@@ -89,66 +93,32 @@ export default function SavedLists() {
   };
 
   return (
-    <div className="container mt-4 pb-5 px-3">
+    <div className="container mt-4 pb-5 px-3 font-monospace">
       
       <style>{`
         .modal-overlay-custom {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(0, 0, 0, 0.9);
-          backdrop-filter: blur(15px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 10000;
-          padding: 20px;
+          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+          background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+          display: flex; align-items: center; justify-content: center;
+          z-index: 10000; padding: 20px;
         }
         .import-card {
-          background: #1a1a1a;
-          border-radius: 30px;
-          overflow: hidden;
-          width: 100%;
-          max-width: 500px;
-          border: 1px solid rgba(13, 202, 240, 0.2);
+          background: #1a1a1a; border-radius: 30px; overflow: hidden;
+          width: 100%; max-width: 500px; border: 1px solid rgba(13, 202, 240, 0.2);
           box-shadow: 0 0 50px rgba(0,0,0,0.8);
         }
-        .banner-header {
-          height: 200px;
-          position: relative;
-        }
-        .banner-header img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          opacity: 0.6;
-        }
+        .banner-header { height: 200px; position: relative; }
+        .banner-header img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
         .banner-overlay {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          padding: 20px;
-          background: linear-gradient(transparent, #1a1a1a);
-          text-align: center;
+          position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px;
+          background: linear-gradient(transparent, #1a1a1a); text-align: center;
         }
         .btn-war-pulse {
-          background-color: #0dcaf0;
-          color: black;
-          border: none;
-          padding: 18px;
-          border-radius: 50px;
-          font-weight: 900;
-          letter-spacing: 2px;
-          transition: 0.3s;
-          box-shadow: 0 0 20px rgba(13, 202, 240, 0.4);
+          background-color: #0dcaf0; color: black; border: none; padding: 18px;
+          border-radius: 50px; font-weight: 900; letter-spacing: 2px;
+          transition: 0.3s; box-shadow: 0 0 20px rgba(13, 202, 240, 0.4);
         }
-        .btn-war-pulse:hover {
-          transform: scale(1.02);
-          box-shadow: 0 0 30px rgba(13, 202, 240, 0.6);
-        }
+        .btn-war-pulse:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(13, 202, 240, 0.6); }
       `}</style>
       
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -163,6 +133,7 @@ export default function SavedLists() {
       ) : (
         <div className="row g-4">
           {savedLists.map((list) => {
+            // On cherche la faction à la racine ou dans listData
             const data = list.listData || list;
             const factionName = data?.faction || "Inconnue";
             const banner = bannerMapping[factionName.toLowerCase().trim()] || "default";
@@ -170,14 +141,28 @@ export default function SavedLists() {
             return (
               <div key={list.id} className="col-12 col-md-6 col-lg-4">
                 <div className="card h-100 bg-dark border-0 shadow-lg rounded-4 overflow-hidden position-relative border border-secondary border-opacity-10">
-                  <img src={`/img/banner_${banner}.webp`} className="card-img-top" style={{ height: '140px', objectFit: 'cover', opacity: '0.4' }} onError={(e) => e.target.src="/img/banner_default.webp"} />
-                  <button onClick={(e) => deleteList(e, list.id)} className="btn btn-danger btn-sm position-absolute top-0 end-0 m-3 rounded-circle opacity-75" style={{zIndex: 10, width: '30px', height: '30px'}}>
-                    <i className="bi bi-x"></i>
+                  <img 
+                    src={`/img/banner_${banner}.webp`} 
+                    className="card-img-top" 
+                    style={{ height: '140px', objectFit: 'cover', opacity: '0.4' }} 
+                    onError={(e) => e.target.src="/img/banner_default.webp"} 
+                  />
+                  <button 
+                    onClick={(e) => deleteList(e, list.id)} 
+                    className="btn btn-danger btn-sm position-absolute top-0 end-0 m-3 rounded-circle opacity-75" 
+                    style={{zIndex: 10, width: '30px', height: '30px'}}
+                  >
+                    ×
                   </button>
                   <div className="card-body p-4 d-flex flex-column">
                     <small className="text-info fw-bold text-uppercase d-block mb-1" style={{fontSize: '0.7rem'}}>{factionName}</small>
                     <h5 className="text-white fw-bold text-truncate mb-3">{list.title || "Sans nom"}</h5>
-                    <Link to={`/my-lists/${list.id}`} className="btn btn-outline-light w-100 rounded-pill mt-auto fw-bold py-2">Consulter</Link>
+                    <button 
+                        onClick={() => navigate(`/my-lists/${list.id}`)} 
+                        className="btn btn-outline-light w-100 rounded-pill mt-auto fw-bold py-2"
+                    >
+                        Consulter
+                    </button>
                   </div>
                   <button onClick={() => setShowQR(list)} className="btn btn-dark btn-sm position-absolute top-0 start-0 m-3 border border-secondary" style={{zIndex: 10, borderRadius: '10px'}}><i className="bi bi-qr-code-scan text-info"></i></button>
                 </div>
@@ -193,7 +178,7 @@ export default function SavedLists() {
           <div className="import-card animate__animated animate__zoomIn">
             <div className="banner-header">
               <img 
-                src={`/img/banner_${bannerMapping[(importSuccess.listData?.faction || importSuccess.faction || "").toLowerCase().trim()] || "default"}.webp`} 
+                src={`/img/banner_${bannerMapping[(importSuccess.faction || importSuccess.listData?.faction || "").toLowerCase().trim()] || "default"}.webp`} 
                 onError={(e) => e.target.src="/img/banner_default.webp"}
                 alt="Banner"
               />
@@ -214,11 +199,11 @@ export default function SavedLists() {
                 <div className="row">
                   <div className="col-6 border-end border-secondary border-opacity-20 text-center">
                     <small className="text-secondary text-uppercase d-block" style={{fontSize: '0.6rem'}}>Faction</small>
-                    <span className="text-info fw-bold">{importSuccess.listData?.faction || importSuccess.faction}</span>
+                    <span className="text-info fw-bold">{importSuccess.faction || importSuccess.listData?.faction}</span>
                   </div>
                   <div className="col-6 text-center">
                     <small className="text-secondary text-uppercase d-block" style={{fontSize: '0.6rem'}}>Unités</small>
-                    <span className="text-info fw-bold">{countTotalUnits(importSuccess.listData || importSuccess)}</span>
+                    <span className="text-info fw-bold">{countTotalUnits(importSuccess)}</span>
                   </div>
                 </div>
               </div>

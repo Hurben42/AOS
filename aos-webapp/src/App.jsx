@@ -99,6 +99,10 @@ function NavbarContent() {
             <li className="nav-item">
               <Link className="nav-link" to="/my-lists">Mes Listes</Link>
             </li>
+            {/* --- AJOUT DU LIEN HISTORIQUE ICI --- */}
+            <li className="nav-item">
+              <Link className="nav-link" to="/history">Historique</Link>
+            </li>
             <li className="nav-item">
               <Link className="nav-link text-warning" to="/start-game">Lancer une partie</Link>
             </li>
@@ -127,7 +131,7 @@ function App() {
             <Route path="/start-game" element={<StartGame />} />
             <Route path="/game" element={<GameDashboard />} />
             <Route path="/game/:gameId" element={<GameDashboard />} />
-            <Route path="/history" element={<HistoryPage />} /> {/* <--- AJOUT ICI */}
+            <Route path="/history" element={<HistoryPage />} /> 
             
             <Route path="/battleplans" element={<Battleplans />} />
             <Route path="/battletactics" element={<BattleTactics />} />
