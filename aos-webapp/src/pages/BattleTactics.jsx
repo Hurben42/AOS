@@ -4,87 +4,81 @@ import battletacticsData from '../data/battletactics.json';
 
 export default function BattleTactics() {
   
+  // Nettoie les liens Wahapedia et autres balises inutiles pour l'affichage
   const cleanHtml = (html) => {
     if (!html) return "";
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
-
-    // 1. Reconstruction des tableaux customTable pour le look AoS
-    const tables = doc.querySelectorAll('table.customTable');
-    tables.forEach(table => {
-      // On force le style pour qu'il match le design sombre
-      table.setAttribute('width', '100%');
-      table.style.borderCollapse = 'collapse';
-      table.style.margin = '10px 0';
-      
-      const tds = table.querySelectorAll('td');
-      tds.forEach(td => {
-        td.style.padding = '12px';
-        td.style.border = '1px solid #444';
-        td.style.backgroundColor = 'rgba(0,0,0,0.2)';
-        td.style.color = '#eee';
-      });
-    });
-
-    return doc.body.innerHTML;
+    return html
+      .replace(/<a href=".*?">(.*?)<\/a>/g, '$1') // Enlève les liens mais garde le texte
+      .replace(/<span class="tooltip.*?">(.*?)<\/span>/g, '$1'); // Enlève les spans de tooltip
   };
 
   return (
-    <div className="container py-4 min-vh-100">
+    <div className="container py-4 min-vh-100 font-monospace bg-black text-white">
       <div className="mb-5">
-        <Link to="/" className="btn btn-outline-light btn-sm mb-4 px-3">← Retour Accueil</Link>
+        <Link to="/" className="btn btn-outline-warning btn-sm mb-4 px-3 rounded-0">← RETOUR ACCUEIL</Link>
         
-        {/* Header - Utilisation d'une bannière appropriée */}
         <div 
-          className="p-5 rounded-3 shadow text-center text-md-start battletactic-header"
+          className="p-5 rounded-0 shadow text-center text-md-start border border-warning border-opacity-25"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url('/img/banner_seraphon.webp')`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9)), url('/img/banner_seraphon.webp')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center'
           }}
         >
           <h1 className="text-white fw-bold display-4 mb-0 shadow-text">BATTLE TACTICS</h1>
-          <p className="text-warning fs-4 mb-0 text-uppercase fw-light">Saison 2025-2026</p>
+          <p className="text-warning fs-5 mb-0 text-uppercase fw-light">Saison 2025-2026</p>
         </div>
       </div>
 
-      <div className="accordion shadow-lg" id="accordionTactics">
+      <div className="accordion" id="accordionTactics">
         {battletacticsData.map((bt, index) => (
-          <div className="accordion-item bg-dark text-white mb-2 rounded-2" key={bt.id}>
+          <div className="accordion-item bg-black text-white mb-3 rounded-0 border-secondary" key={bt.id}>
             <h2 className="accordion-header">
               <button 
-                className="accordion-button collapsed bg-dark text-white fw-bold py-3" 
+                className="accordion-button collapsed bg-dark text-white fw-bold py-3 px-4 shadow-none" 
                 type="button" 
                 data-bs-toggle="collapse" 
                 data-bs-target={`#collapse${index}`}
               >
                 <div className="d-flex align-items-center">
-                  <span className="badge bg-warning fs-small text-dark me-3">TACTIC {index + 1}</span>
-                  <span className="fs-5">{bt.name}</span>
+                  <span className="badge border border-warning text-warning me-3" style={{fontSize: '0.7rem'}}>CARTE {index + 1}</span>
+                  <span className="fs-5 text-uppercase">{bt.name}</span>
                 </div>
               </button>
             </h2>
             <div id={`collapse${index}`} className="accordion-collapse collapse" data-bs-parent="#accordionTactics">
-              <div className="accordion-body bg-dark text-light p-4">
-                <div className="row">
-                  <div className="col-12">
-                    <h4 className="fw-bold text-white text-uppercase pb-2 mb-3">
-                      {bt.name}
-                    </h4>
-                    
-                    {/* Description de la tactique */}
-                    <div className="battletactic-content mb-4">
-                      <div dangerouslySetInnerHTML={{ __html: cleanHtml(bt.description) }} />
-                    </div>
-
-                    {/* Tableau des règles (Rules Table) */}
-                    {bt.rulesTable && (
-                      <div className="battletactic-rules-table mt-3">
-                        <div dangerouslySetInnerHTML={{ __html: cleanHtml(bt.rulesTable) }} />
-                      </div>
-                    )}
-                  </div>
+              <div className="accordion-body bg-black text-light p-4 pt-0">
+                
+                {/* Description d'ambiance de la carte */}
+                <div className="battletactic-intro mb-4 p-3 border-start border-warning bg-dark bg-opacity-25">
+                  <div dangerouslySetInnerHTML={{ __html: bt.description }} />
                 </div>
+
+                {/* Grille des 3 étapes détaillées */}
+                <div className="row g-3">
+                  {[
+                    { label: 'AFFRAY', title: bt.affray, rules: bt.affray_rules, color: '#0dcaf0' },
+                    { label: 'STRIKE', title: bt.strike, rules: bt.strike_rules, color: '#ffc107' },
+                    { label: 'DOMINATION', title: bt.domination, rules: bt.domination_rules, color: '#ff4444' }
+                  ].map((step, i) => (
+                    <div className="col-12" key={i}>
+                      <div className="p-3 border border-secondary bg-dark bg-opacity-10 rounded-0 h-100">
+                        <div className="d-flex justify-content-between align-items-center border-bottom border-secondary border-opacity-50 pb-2 mb-2">
+                           <small style={{ color: step.color, fontWeight: 'bold', letterSpacing: '1px' }}>{step.label}</small>
+                           <span className="badge bg-warning text-dark fw-bold">+5 PTS</span>
+                        </div>
+                        <div className="fw-bold text-white text-uppercase mb-2" style={{ fontSize: '1.1rem', letterSpacing: '0.5px' }}>
+                            {step.title || "---"}
+                        </div>
+                        <div 
+                          className="rule-content small" 
+                          dangerouslySetInnerHTML={{ __html: cleanHtml(step.rules) }} 
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
               </div>
             </div>
           </div>
@@ -92,31 +86,58 @@ export default function BattleTactics() {
       </div>
 
       <style>{`
-        .shadow-text {
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        .shadow-text { text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); }
+        
+        .battletactic-intro { 
+            font-size: 0.9rem; 
+            line-height: 1.4; 
+            font-style: italic;
+            color: #aaa;
         }
-        .battletactic-content {
-          color: #ccc;
-          line-height: 1.6;
-          font-size: 1.05rem;
+
+        .rule-content {
+            line-height: 1.6;
+            color: #ddd;
         }
-        .battletactic-content p {
-          margin-bottom: 1rem;
+
+        .rule-content i {
+            display: block;
+            color: #888;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 4px;
         }
+
+        .rule-content b {
+            color: #ffc107;
+        }
+
+        .rule-content .kwb {
+            color: #0dcaf0;
+            font-weight: bold;
+        }
+
         .accordion-button:not(.collapsed) {
-          background-color: #212529 !important;
+          background-color: #111 !important;
           color: #ffc107 !important;
         }
-        .accordion-button::after { filter: invert(1); }
-        .accordion-item:first-of-type>.accordion-header .accordion-button {
-          border:0 !important;
+
+        .accordion-button::after { 
+            filter: invert(1); 
         }
-        .battletactic-rules-table table {
-          border: none !important;
+
+        .accordion-item { 
+            border: 1px solid #333 !important; 
         }
-        /* Effet au survol de l'item */
-        .accordion-item {
-          transition: border-color 0.3s ease;
+
+        .accordion-button { 
+            border-radius: 0 !important; 
+        }
+
+        /* Style pour les listes dans les règles */
+        .rule-content ul {
+            padding-left: 1.2rem;
+            margin-top: 10px;
         }
       `}</style>
     </div>

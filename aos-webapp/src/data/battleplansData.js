@@ -1,162 +1,105 @@
 export const battleplansData = {
-  "Passing Seasons": {
+  "General's Handbook 2024-25": {
     "Passing Seasons": {
-      "scoringType": "per_objective",
-      "vpPerObj": 5,
-      "scoringDesc": "5 VP par objectif contrôlé",
-      "twist": {
-        "name": "Burgeoning / Powerful Resurgence",
-        "effect": (round) => {
-          if (round === 2 || round === 4) return "Burgeoning Rejuvenation : Soin (D3) TOUTES les unités amies sur obj. OU Ward (6+) sur obj.";
-          if (round === 3 || round === 5) return "Powerful Resurgence : +1 pour Blesser (Wound) pour les unités amies sur obj.";
-          return "Pas de bonus spécifique ce round.";
-        }
+      scoringType: "dynamic",
+      customOptions: (round) => {
+        const type = (round === 1 || round === 3 || round === 5) ? "Gnarlroot" : "Oakenbrow";
+        return [
+          { id: 'obj_1', label: `Contrôler 1 obj. ${type}`, vp: 5 },
+          { id: 'obj_2', label: `Contrôler 2 obj. ${type}`, vp: 5 },
+          { id: 'obj_3', label: `Contrôler 3 obj. ${type}`, vp: 5 },
+          { id: 'obj_4', label: `Contrôler 4 obj. ${type}`, vp: 5 }
+        ];
       }
     },
     "Paths of the Fey": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'obj2', label: "Au moins 2 objectifs", vp: 3 },
-        { id: 'more', label: "Plus d'objectifs que l'ennemi", vp: 2 }
-      ],
-      "twist": {
-        "name": "The Spirit Paths Open",
-        "effect": (round) => "Underdog obligatoire : Choisissez 2 objectifs. Les unités à 6\" sont retirées et replacées à 6\" de l'autre objectif (plus de 3\" de l'ennemi)."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'obj_2', label: "Contrôler 2 objectifs ou plus", vp: 3 },
+        { id: 'more', label: "Plus d'objectifs que l'adversaire", vp: 2 }
+      ]
     },
     "Roiling Roots": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'pair', label: "Paire d'objectifs (Même couleur)", vp: 3 },
-        { id: 'more', label: "Plus d'objectifs que l'ennemi", vp: 2 }
-      ],
-      "twist": {
-        "name": "Tangling Tendrils",
-        "effect": (round) => "Underdog : Choisissez une paire d'obj (Rouges ou Verts). Les unités ennemies qui les contestent ont Strike-last ce round."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'pairs', label: "Contrôler des paires d'objectifs", vp: 3 },
+        { id: 'more', label: "Plus d'objectifs que l'adversaire", vp: 2 }
+      ]
     },
     "Cyclic Shifts": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'two', label: "Au moins 2 objectifs", vp: 3 },
-        { id: 'more', label: "Plus d'objectifs que l'ennemi", vp: 2 }
-      ],
-      "twist": {
-        "name": "Unpredictable Evolution",
-        "effect": (round) => "Underdog : Choisissez une paire d'objectifs. Ils ne peuvent pas être contrôlés ce round."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'obj_2', label: "Contrôler 2 objectifs ou plus", vp: 3 },
+        { id: 'more', label: "Plus d'objectifs que l'adversaire", vp: 2 }
+      ]
     },
     "Surge of Slaughter": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP (+ Bonus R5)",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'two', label: "Au moins 2 objectifs", vp: 3 },
-        { id: 'more', label: "Plus d'objectifs que l'ennemi", vp: 2 },
-        { id: 'bonusR5', label: "Contrôle Obj. Spécifique (R5 uniquement)", vp: 10 }
-      ],
-      "twist": {
-        "name": "Caustic Sap",
-        "effect": (round) => "Underdog : Choisissez un objectif. Jetez un dé pour chaque unité ennemie à 6\" : 1-2 = 1 mortelle, 3+ = D3 mortelles."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'pairs', label: "Contrôler des paires d'objectifs", vp: 3 },
+        { id: 'more', label: "Plus d'objectifs que l'adversaire", vp: 2 }
+      ]
     },
     "Linked Ley Lines": {
-      "scoringType": "custom",
-      "scoringDesc": "3 / 3 / 2 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 3 },
-        { id: 'two', label: "Au moins 2 objectifs", vp: 3 },
-        { id: 'pair', label: "Paire connectée (Horiz/Vert)", vp: 2 },
-        { id: 'line', label: "Ligne complète (3 obj.)", vp: 2 }
-      ],
-      "twist": {
-        "name": "Rooted in the Realm",
-        "effect": (round) => "Underdog (Passif) : +1 Rend contre les Manifestations. Les Manifestations amies ont Strike-first ce round."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 3 },
+        { id: 'obj_2', label: "Contrôler 2 objectifs ou plus", vp: 3 },
+        { id: 'pairs', label: "Contrôler des paires d'objectifs", vp: 2 },
+        { id: 'ley_line', label: "Tous les obj. d'une ligne de Ley", vp: 2 }
+      ]
     },
     "Noxious Nexus": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'pair', label: "Paire d'objectifs contrôlée", vp: 3 },
-        { id: 'more', label: "Plus d'objectifs que l'ennemi", vp: 2 }
+      noScoringRound: 1,
+      customOptions: [
+        { id: 'oakenbrow', label: "Contrôler l'obj. Oakenbrow", vp: 5 },
+        { id: 'gnarlroot', label: "Contrôler l'obj. Gnarlroot", vp: 3 },
+        { id: 'heartwood', label: "Contrôler l'obj. Heartwood", vp: 2 }
       ],
-      "twist": {
-        "name": "Defense of the Realm",
-        "effect": (round) => "Underdog : Choisissez une paire d'obj. Les unités amies qui les contestent ont +1 Rend."
-      }
+      endOfGameBonus: { id: 'heartwood_final', label: "Contrôle Heartwood (Fin de partie)", vp: 10 }
     },
     "The Liferoots": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'two', label: "Les deux objectifs", vp: 3 },
-        { id: 'moreLiferoot', label: "Plus de points de Liferoot (Décors)", vp: 2 }
-      ],
-      "twist": {
-        "name": "Life Begets Life",
-        "effect": (round) => "Underdog : Choisissez une unité amie à 6\" d'un décor. Redonnez-lui 1 figurine (max 3 PV)."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'both', label: "Contrôler les 2 objectifs", vp: 3 },
+        { id: 'liferoot_more', label: "Plus de liferoot points que l'adv.", vp: 2 }
+      ]
     },
     "Bountiful Equinox": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'two', label: "Au moins 2 objectifs", vp: 3 },
-        { id: 'equinox', label: "1 Obj 'Aube' + 1 Obj 'Crépuscule'", vp: 2 }
-      ],
-      "twist": {
-        "name": "Rejuvenating Bloom",
-        "effect": (round) => "Underdog : Choisissez un objectif. Soignez (3) toutes les unités (amies et ennemies) à 6\"."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'obj_2', label: "Contrôler 2 objectifs ou plus", vp: 3 },
+        { id: 'trio', label: "Contrôler 1 Oaken, 1 Gnarl et 1 Heart", vp: 2 }
+      ]
     },
     "Lifecycle": {
-      "scoringType": "custom",
-      "scoringDesc": "Variable (Cycle)",
-      "customOptions": [
-        { id: 'primary', label: "Objectif Primaire (Cycle)", vp: 2 },
-        { id: 'secondary', label: "Chaque Obj. Secondaire", vp: 1 },
-        { id: 'all', label: "Contrôle de tous les objectifs", vp: 4 }
-      ],
-      "twist": {
-        "name": "Cycle of Life",
-        "effect": (round) => "Round 2 : L'Underdog choisit l'objectif primaire de départ. Le cycle tourne ensuite à chaque round."
+      scoringType: "dynamic",
+      customOptions: (round) => {
+        const options = [
+          { id: 'at_least_1', label: "Contrôler au moins 1 objectif", vp: 4 },
+          { id: 'more', label: "Plus d'objectifs que l'adversaire", vp: 2 },
+          { id: 'primary', label: "Contrôler l'objectif Primaire", vp: 2 },
+          { id: 'secondary_1', label: "Contrôler 1 objectif Secondaire", vp: 1 },
+          { id: 'secondary_2', label: "Contrôler 2 objectifs Secondaires", vp: 1 }
+        ];
+        if (round === 1) {
+          options.push({ id: 'r1_bonus', label: "Contrôler Oakenbrow + Gnarlroot (R1)", vp: 4 });
+        }
+        return options;
       }
     },
     "Creeping Corruption": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'two', label: "Au moins 2 objectifs", vp: 3 },
-        { id: 'more', label: "Plus d'objectifs que l'ennemi", vp: 2 }
-      ],
-      "twist": {
-        "name": "Pulsing Life Energies",
-        "effect": (round) => "Underdog : Tracez une ligne entre 2 obj. Amis sur la ligne : +1 Cast/Chant. Ennemis sur la ligne : D3 mortelles (sur 3+)."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'obj_2', label: "Contrôler 2 objectifs ou plus", vp: 3 },
+        { id: 'more', label: "Plus d'objectifs que l'adversaire", vp: 2 }
+      ]
     },
     "Grasp of Thorns": {
-      "scoringType": "custom",
-      "scoringDesc": "5 / 3 / 2 VP",
-      "customOptions": [
-        { id: 'obj1', label: "Au moins 1 objectif", vp: 5 },
-        { id: 'two', label: "Au moins 2 objectifs", vp: 3 },
-        { id: 'more', label: "Plus d'objectifs que l'ennemi", vp: 2 }
-      ],
-      "twist": {
-        "name": "Carnivorous Flora",
-        "effect": (round) => "Underdog : Choisissez un objectif. Ennemis à 6\" : jet de dé, sur 3+ l'unité est Entangled (Impossible de bouger/TP)."
-      }
+      customOptions: [
+        { id: 'obj_1', label: "Contrôler au moins 1 objectif", vp: 5 },
+        { id: 'obj_2', label: "Contrôler 2 objectifs ou plus", vp: 3 },
+        { id: 'more', label: "Plus d'objectifs que l'adversaire", vp: 2 }
+      ]
     }
   }
 };

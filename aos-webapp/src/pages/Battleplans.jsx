@@ -1,210 +1,240 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import battleplansData from '../data/battleplans.json';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { battleplansData } from "../data/battleplansData"; 
+import battleTacticsData from "../data/battletactics.json";
 
-export default function Battleplans() {
-  // État pour gérer l'affichage du PDF dans la modal
-  const [selectedPdf, setSelectedPdf] = useState(null);
+export default function GameDashboard() {
+  const navigate = useNavigate();
+  
+  // --- ÉTATS ---
+  const [session, setSession] = useState(null);
+  const [currentTurn, setCurrentTurn] = useState(1);
+  const [firstPlayer, setFirstPlayer] = useState("You"); 
+  const [priorityWinner, setPriorityWinner] = useState("You");
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [history, setHistory] = useState([]);
+  const [roundScores, setRoundScores] = useState({ You: {}, Opponent: {} });
 
-  const table1 = battleplansData.filter(bp => bp.info.toLowerCase().includes('table 1'));
-  const table2 = battleplansData.filter(bp => bp.info.toLowerCase().includes('table 2'));
+  // --- CHARGEMENT ---
+  useEffect(() => {
+    const activeSession = JSON.parse(localStorage.getItem("active_game_session"));
+    if (!activeSession) { navigate("/"); return; }
+    setSession(activeSession);
+  }, [navigate]);
 
-  const cleanHtml = (html) => {
-    if (!html) return "";
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+  if (!session) return <div className="bg-black vh-100" />;
 
-    // 1. Supprimer les balises <a> mais garder leur texte
-    const links = doc.querySelectorAll('a');
-    links.forEach(a => {
-      const textNode = doc.createTextNode(a.textContent);
-      a.parentNode.replaceChild(textNode, a);
-    });
+  // --- CALCULS DE SCORE ---
+  const totalPoints = (p) => history.reduce((acc, r) => acc + (p === "You" ? r.youTotal : r.oppTotal), 0);
 
-    // 2. Reconstruction des tableaux .abHeader
-    const tables = doc.querySelectorAll('table');
-    tables.forEach(table => {
-      const header = table.querySelector('.abHeader');
-      if (header) {
-        header.querySelectorAll('img').forEach(img => img.remove());
-        const cleanContent = header.innerHTML;
-        table.innerHTML = `<tbody><tr><td class="abHeader" bgcolor="#000000" style="padding:10px; color:#ffc107; font-weight:bold; text-transform:uppercase;">${cleanContent}</td></tr></tbody>`;
-      }
-    });
-
-    // 3. Nettoyage des résidus de mise en page
-    const allTds = doc.querySelectorAll('td');
-    allTds.forEach(td => {
-        td.removeAttribute('background');
-        if (td.style.width === "10px" || td.getAttribute('width') === "10px") {
-            td.remove();
-        }
-    });
-
-    return doc.body.innerHTML;
+  const getPlanLogic = () => {
+    const name = session.battleplan?.name;
+    for (const s in battleplansData) {
+      if (battleplansData[s][name]) return battleplansData[s][name];
+    }
+    return null;
   };
 
-  const renderAccordion = (plans, idPrefix, title) => (
-    <div className="mb-5">
-      <h3 className="text-white fw-bold mb-3 pb-2 text-uppercase">
-        {title}
-      </h3>
-      <div className="accordion shadow-lg" id={`accordion${idPrefix}`}>
-        {plans.map((bp, index) => (
-          <div className="accordion-item bg-dark text-white mb-2 rounded-2" key={bp.id}>
-            <h2 className="accordion-header">
-              <button 
-                className="accordion-button collapsed bg-dark text-white fw-bold py-3" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                data-bs-target={`#collapse${idPrefix}${index}`}
-              >
-                <div className="d-flex align-items-center">
-                  <span className="badge bg-info text-dark me-3">{bp.info.split('(')[0].trim()}</span>
-                  <span className="fs-5">{bp.name}</span>
-                </div>
-              </button>
-            </h2>
-            <div id={`collapse${idPrefix}${index}`} className="accordion-collapse collapse" data-bs-parent={`#accordion${idPrefix}`}>
-              <div className="accordion-body bg-dark text-light p-0">
-                <div className="row g-0">
-                  <div className="col-12 p-4">
-                    <h4 className="fw-bold text-white text-uppercase pb-2 mb-3">{bp.name}</h4>
-                    <div className="battleplan-original-html">
-                      <div dangerouslySetInnerHTML={{ __html: cleanHtml(bp.description) }} />
-                    </div>
-                  </div>
-                  
-                  {/* Section Image + Bouton Layout */}
-                  <div className="col-12 p-3 bg-black border-top border-secondary">
-                    <div className="d-flex flex-column align-items-center">
-                        <img 
-                          src={bp.image} 
-                          alt={bp.name} 
-                          className="img-fluid rounded shadow-sm border mb-3" 
-                          style={{ maxHeight: '600px', objectFit: 'contain' }} 
-                        />
-                        
-                        {/* Carte cliquable pour le Layout */}
-                        <div 
-                            className="layout-card"
-                            onClick={() => window.open(`/battleplans/layouts/${bp.id}.pdf`, '_blank')}
-                        >
-                          <div className="d-flex align-items-center justify-content-center py-2 px-4">
-                             <span className="me-2 text-info">📄</span>
-                             <span className="fw-bold text-uppercase" style={{fontSize: '0.85rem'}}>Consulter le Layout AOSFF</span>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+  const planLogic = getPlanLogic();
+  
+  // LOGIQUE DE FILTRAGE DES SCORES
+  const scenarioOptions = (planLogic?.scoringType === "per_objective" 
+    ? [1,2,3,4,5].map(n => ({id: `obj_${n}`, label: `Objectif ${n}`, vp: planLogic.vpPerObj}))
+    : planLogic?.customOptions || []
+  ).filter(opt => {
+    const rule = planLogic?.scoringRules?.find(r => r.id === opt.id);
+    if (rule && rule.startRound && currentTurn < rule.startRound) return false;
+    if (opt.label.includes("R5") && currentTurn < 5) return false;
+    return true;
+  });
+
+  const calculateTurnScore = (player) => {
+    const s = roundScores[player] || {};
+    let pts = 0;
+    scenarioOptions.forEach(opt => { if (s[opt.id]) pts += opt.vp; });
+    if (s.card0) pts += 5;
+    if (s.card1) pts += 5;
+    return pts;
+  };
+
+  // --- LOGIQUE INITIATIVE / UNDERDOG ---
+  const checkSeize = (p) => {
+    if (currentTurn === 1 || history.length === 0) return false;
+    const last = history[history.length - 1];
+    const wasSecond = last.youFirst ? (p === "Opponent") : (p === "You");
+    const diff = Math.abs(totalPoints("You") - totalPoints("Opponent"));
+    return wasSecond && priorityWinner === p && firstPlayer === p && diff < 11;
+  };
+
+  const getUnderdog = () => {
+    if (checkSeize("You")) return "Opponent";
+    if (checkSeize("Opponent")) return "You";
+    const pY = totalPoints("You"), pO = totalPoints("Opponent");
+    return pY < pO ? "You" : pO < pY ? "Opponent" : null;
+  };
+
+  // --- ACTIONS ---
+  const handleNextRound = () => {
+    const entry = {
+      round: currentTurn,
+      youTotal: calculateTurnScore("You"),
+      oppTotal: calculateTurnScore("Opponent"),
+      youFirst: firstPlayer === "You",
+      successTacticsYou: [roundScores.You?.card0 ? session.you?.tactics?.[0] : null, roundScores.You?.card1 ? session.you?.tactics?.[1] : null].filter(Boolean),
+      successTacticsOpp: [roundScores.Opponent?.card0 ? session.opp?.tactics?.[0] : null, roundScores.Opponent?.card1 ? session.opp?.tactics?.[1] : null].filter(Boolean)
+    };
+    setHistory([...history, entry]);
+    if (currentTurn < 5) {
+      setCurrentTurn(currentTurn + 1);
+      setRoundScores({ You: {}, Opponent: {} });
+    } else setIsGameOver(true);
+  };
+
+  const getTacticLabels = (groupSlug, player) => {
+    const group = battleTacticsData.find(t => t.id === groupSlug);
+    if (!group) return { group: "Tactic", step: "Unknown", count: 0 };
+    const count = history.filter(h => player === "You" ? h.successTacticsYou?.includes(groupSlug) : h.successTacticsOpp?.includes(groupSlug)).length;
+    const steps = [group.affray, group.strike, group.domination];
+    return { group: group.name, step: steps[count] || "MAX ATTAINED", count: count + 1 };
+  };
+
+  // --- RENDU ---
+  const displayOrder = firstPlayer === "You" ? ["You", "Opponent"] : ["Opponent", "You"];
+
+  if (isGameOver) return (
+    <div className="min-vh-100 bg-black text-white p-4 font-monospace text-center d-flex flex-column justify-content-center">
+      <h1 className="text-warning display-4 fw-bold mb-5">VICTOIRE FINALE</h1>
+      <div className="d-flex justify-content-around mb-5">
+        <div><div className="h4 text-info">{session.you?.name}</div><div className="display-1 fw-bold">{totalPoints("You")}</div></div>
+        <div className="display-4 text-secondary">VS</div>
+        <div><div className="h4 text-danger">{session.opp?.name}</div><div className="display-1 fw-bold">{totalPoints("Opponent")}</div></div>
       </div>
+      <button className="btn btn-warning btn-lg rounded-0 fw-bold py-3" onClick={() => navigate("/")}>RETOUR AU MENU</button>
     </div>
   );
 
   return (
-    <div className="container py-4 min-vh-100">
-      <div className="mb-5">
-        <Link to="/" className="btn btn-outline-light btn-sm mb-4 px-3">← Retour Accueil</Link>
+    <div className="min-vh-100 bg-black text-white font-monospace pb-5">
+      <style>{`
+        .game-header { position: relative; height: 180px; display: flex; border-bottom: 2px solid #444; overflow: hidden; }
+        .faction-banner { width: 50%; height: 100%; background-size: cover; background-position: center; opacity: 0.4; }
+        .banner-you { border-left: 8px solid #0dcaf0; border-right: 1px solid #333; }
+        .banner-opp { border-right: 8px solid #dc3545; border-left: 1px solid #333; transform: scaleX(-1); }
+        .rd-badge { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border: 3px solid #ffc107; background: #000; width: 60px; height: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 0 15px rgba(0,0,0,0.8); }
+        .score-box { position: absolute; inset: 0; display: flex; justify-content: space-between; align-items: flex-end; padding: 20px; z-index: 11; pointer-events: none; }
+        .tactic-btn { height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 15px !important; border-radius: 0 !important; margin-bottom: 8px; border: 1px solid #333 !important; }
         
-        <div 
-          className="p-5 rounded-3 shadow text-center text-md-start battleplan-header"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url('/battleplans/GeneralHandbook_files/generalhandbook.jpg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        >
-          <h1 className="text-white fw-bold display-4 mb-0 shadow-text">GENERAL'S HANDBOOK</h1>
-          <p className="text-info fs-4 mb-0 text-uppercase fw-light">Battleplans 2025-2026</p>
+        .btn-tactic-idle { background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 100%); border-color: #444 !important; }
+        .btn-tactic-active { background: #198754 !important; border-color: #198754 !important; }
+        
+        .underdog-label { font-size: 0.65rem; color: #ffc107; border: 1px solid #ffc107; padding: 2px 6px; font-weight: bold; margin-top: 5px; display: inline-block; }
+        
+        .tactic-count-badge { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); padding: 1px 6px; border-radius: 4px; font-size: 0.55rem; color: #ffc107; margin-left: 6px; display: inline-flex; align-items: center; gap: 4px; }
+        .dot-indicator { width: 4px; height: 4px; background: #ffc107; border-radius: 50%; box-shadow: 0 0 4px #ffc107; }
+      `}</style>
+
+      {/* HEADER VISUEL */}
+      <div className="game-header">
+        <div className="faction-banner banner-you" style={{ backgroundImage: `url(/img/banner_${session.you?.slug}.webp)` }}></div>
+        <div className="faction-banner banner-opp" style={{ backgroundImage: `url(/img/banner_${session.opp?.slug}.webp)` }}></div>
+        <div className="rd-badge text-warning shadow">
+          <small className="fw-bold">RD</small>
+          <div className="h3 fw-bold m-0">{currentTurn}</div>
+        </div>
+        <div className="score-box">
+          <div className="text-center">
+            <div className="display-4 fw-bold m-0" style={{lineHeight: 0.9, textShadow: '2px 2px 4px #000'}}>{totalPoints("You") + calculateTurnScore("You")}</div>
+            <div className="text-info fw-bold small mt-1">{session.you?.name}</div>
+            {getUnderdog() === "You" && <span className="underdog-label">UNDERDOG</span>}
+          </div>
+          <div className="text-center">
+            <div className="display-4 fw-bold m-0" style={{lineHeight: 0.9, textShadow: '2px 2px 4px #000'}}>{totalPoints("Opponent") + calculateTurnScore("Opponent")}</div>
+            <div className="text-danger fw-bold small mt-1">{session.opp?.name}</div>
+            {getUnderdog() === "Opponent" && <span className="underdog-label">UNDERDOG</span>}
+          </div>
         </div>
       </div>
 
-      {table1.length > 0 && renderAccordion(table1, "Table1", "First Selection (Table 1)")}
-      {table2.length > 0 && renderAccordion(table2, "Table2", "Second Selection (Table 2)")}
-
-      {/* --- MODAL PDF --- */}
-      {selectedPdf && (
-        <div className="pdf-modal-overlay" onClick={() => setSelectedPdf(null)}>
-          <div className="pdf-modal-container" onClick={e => e.stopPropagation()}>
-            <div className="pdf-modal-header">
-              <span className="fw-bold">LAYOUT AOSFF</span>
-              <button className="btn-close btn-close-white" onClick={() => setSelectedPdf(null)}></button>
+      <div className="p-3">
+        {/* ORDRE DU TOUR ET PRIORITÉ */}
+        <div className="bg-dark bg-opacity-50 p-2 mb-4 border border-secondary border-opacity-25">
+          <div className="row g-1">
+            <div className="col-6">
+                <button className={`btn btn-sm w-100 rounded-0 ${priorityWinner === "You" ? "btn-info text-dark fw-bold" : "btn-dark text-white"}`} onClick={() => setPriorityWinner("You")}>PRIO: YOU</button>
             </div>
-            <div className="pdf-modal-body">
-              <iframe 
-                src={selectedPdf} 
-                width="100%" 
-                height="100%" 
-                title="Layout PDF"
-              />
+            <div className="col-6">
+                <button className={`btn btn-sm w-100 rounded-0 ${priorityWinner === "Opponent" ? "btn-danger text-white fw-bold" : "btn-dark text-white"}`} onClick={() => setPriorityWinner("Opponent")}>PRIO: OPP</button>
+            </div>
+            <div className="col-6 mt-1">
+                <button className={`btn btn-sm w-100 rounded-0 ${firstPlayer === "You" ? "btn-info text-dark fw-bold" : "btn-dark text-white"}`} onClick={() => setFirstPlayer("You")}>1ST: YOU</button>
+                {checkSeize("You") && <div className="text-danger text-center fw-bold mt-1" style={{fontSize: '0.5rem'}}>SEIZING INITIATIVE</div>}
+            </div>
+            <div className="col-6 mt-1">
+                <button className={`btn btn-sm w-100 rounded-0 ${firstPlayer === "Opponent" ? "btn-danger text-white fw-bold" : "btn-dark text-white"}`} onClick={() => setFirstPlayer("Opponent")}>1ST: OPP</button>
+                {checkSeize("Opponent") && <div className="text-danger text-center fw-bold mt-1" style={{fontSize: '0.5rem'}}>SEIZING INITIATIVE</div>}
             </div>
           </div>
         </div>
-      )}
 
-      <style>{`
-        .shadow-text {
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-        }
-        .battleplan-original-html table {
-          width: 100% !important;
-          border-collapse: collapse !important;
-          margin: 0 !important;
-        }
-        .battleplan-original-html .abHeader {
-          border: none !important;
-        }
-        .battleplan-original-html p {
-          margin-top: 10px;
-          line-height: 1.6;
-        }
-        .accordion-button:not(.collapsed) {
-          background-color: #212529 !important;
-          color: #ffc107 !important;
-        }
-        .accordion-button::after { filter: invert(1); }
-        .battleplan-original-html { color: #ccc; }
-        .accordion-item:first-of-type>.accordion-header .accordion-button {
-          border:0 !important;
-        }
-        /* Style de la Modal PDF */
-        .pdf-modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .pdf-modal-container {
-            width: 100%;
-            max-width: 1000px;
-            height: 90vh;
-            background: #222;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        .pdf-modal-header {
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #111;
-            border-bottom: 1px solid #333;
-        }
-        .pdf-modal-body {
-            flex-grow: 1;
-        }
-      `}</style>
+        {/* BLOCS JOUEURS DYNAMIQUES */}
+        {displayOrder.map(p => {
+          const isYou = (p === "You");
+          const blocked = checkSeize(p);
+          const pInfo = isYou ? session.you : session.opp;
+          const score = calculateTurnScore(p);
+
+          return (
+            <div key={p} className="mb-5">
+              <div className={`d-flex justify-content-between border-bottom pb-1 mb-3 ${isYou ? 'border-info' : 'border-danger'}`}>
+                <span className={`fw-bold ${isYou ? 'text-info' : 'text-danger'}`}>{pInfo?.name?.toUpperCase()}</span>
+                <span className="text-warning fw-bold">{score} PTS</span>
+              </div>
+
+              {/* SCÉNARIO (FILTRAGE ACTIF) */}
+              {scenarioOptions.map(opt => (
+                <button key={opt.id} className={`btn btn-sm w-100 tactic-btn ${roundScores[p]?.[opt.id] ? (isYou ? 'btn-info text-dark fw-bold' : 'btn-danger text-white fw-bold') : 'btn-dark text-white'}`}
+                  onClick={() => setRoundScores(prev => ({...prev, [p]: {...prev[p], [opt.id]: !prev[p][opt.id]}}))}>
+                  <span className="fw-bold">{opt.label}</span>
+                  <span className="badge bg-black text-white border border-secondary">+{opt.vp}</span>
+                </button>
+              ))}
+
+              {/* TACTIQUES */}
+              <div className="mt-2">
+                {[0, 1].map(idx => {
+                  const tData = getTacticLabels(pInfo?.tactics?.[idx], p);
+                  const active = roundScores[p]?.[`card${idx}`];
+                  return (
+                    <button key={idx} disabled={blocked} 
+                      className={`btn btn-sm w-100 tactic-btn ${blocked ? 'opacity-25' : active ? 'btn-tactic-active text-white fw-bold' : 'btn-tactic-idle text-white'}`}
+                      style={{ height: '70px' }}
+                      onClick={() => setRoundScores(prev => ({...prev, [p]: {...prev[p], [`card${idx}`]: !prev[p][`card${idx}`]}}))}>
+                      <div className="text-start">
+                        <div className="d-flex align-items-center mb-1">
+                            <small className="text-white opacity-50" style={{fontSize: '0.6rem'}}>{tData.group}</small>
+                            <span className="tactic-count-badge">
+                                <span className="dot-indicator"></span>
+                                {tData.count}/3
+                            </span>
+                        </div>
+                        <div className="text-uppercase fw-bold text-white" style={{fontSize: '0.9rem', letterSpacing: '0.5px'}}>{tData.step}</div>
+                      </div>
+                      <div className="fw-bold text-white">{blocked ? 'BLOCKED' : '+5 PTS'}</div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="fixed-bottom p-3 bg-black border-top border-secondary d-flex gap-2">
+        <button className="btn btn-outline-light rounded-0 px-4" onClick={() => navigate("/")}>QUITTER</button>
+        <button className="btn btn-warning flex-grow-1 py-3 fw-bold rounded-0" onClick={handleNextRound}>
+          {currentTurn < 5 ? `TERMINER ROUND ${currentTurn}` : "VOIR LE RÉSULTAT"}
+        </button>
+      </div>
     </div>
   );
 }

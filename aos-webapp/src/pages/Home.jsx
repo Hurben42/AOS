@@ -60,7 +60,6 @@ export default function Home() {
       const factionContent = enhancementsData[fKey];
       const cat = factionToCategory[normalizeKey(fKey)] || "order";
 
-      // CONFIGURATION SYNCHRONISÉE AVEC FactionDetail.jsx
       const mapping = [
         { jsonKey: 'heroic_traits', label: 'HEROIC TRAIT', route: 'heroic-traits' },
         { jsonKey: 'artefacts_of_power', label: 'ARTEFACT', route: 'artefacts-of-power' },
@@ -76,7 +75,7 @@ export default function Home() {
               combined.push({
                 name: item.name,
                 type: sec.label,
-                faction: fKey.replace(/([A-Z])/g, ' $1').trim(), // Embellit le camelCase
+                faction: fKey.replace(/([A-Z])/g, ' $1').trim(),
                 color: "bg-warning",
                 path: `/category/${cat}/faction/${cleanForUrl(fKey)}/section/${sec.route}`
               });
@@ -116,7 +115,7 @@ export default function Home() {
         <div className="search-trigger-compact" onClick={() => setIsModalOpen(true)}>
           <div className="d-flex align-items-center">
             <span className="me-2">🔍</span>
-            <span>Unité, artefact, trait héroïque...</span>
+            <span>Rechercher...</span>
           </div>
           <span className="badge bg-dark border border-info text-info">SEARCH</span>
         </div>
@@ -146,30 +145,44 @@ export default function Home() {
 
       {/* SECTION GENERAL HANDBOOK */}
       <h2 className="text-white fw-bold mb-4 text-uppercase" style={{ letterSpacing: '3px', fontSize: '1.2rem' }}>General's Handbook</h2>
-      <div className="row g-4 mb-5">
-        <div className="col-12 col-md-6">
+      <div className="row g-3 mb-5">
+        <div className="col-12 col-md-4">
           <Link to="/battleplans" className="text-decoration-none">
             <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
               <div className="handbook-banner" style={{ 
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/battleplans/GeneralHandbook_files/generalhandbook.jpg')`,
-                height: '120px', backgroundSize: 'cover', backgroundPosition: 'center' 
+                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center' 
               }}>
                 <div className="d-flex h-100 align-items-center justify-content-center flex-column">
-                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-4">Battle Plans</h3>
+                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5">Battle Plans</h3>
                 </div>
               </div>
             </div>
           </Link>
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-4">
           <Link to="/battletactics" className="text-decoration-none">
             <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
               <div className="handbook-banner" style={{ 
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/img/banner_seraphon.webp')`,
-                height: '120px', backgroundSize: 'cover', backgroundPosition: 'center' 
+                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center' 
               }}>
                 <div className="d-flex h-100 align-items-center justify-content-center flex-column">
-                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-4">Battle Tactics</h3>
+                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5">Battle Tactics</h3>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div className="col-12 col-md-4">
+          <Link to="/history" className="text-decoration-none">
+            <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
+              <div className="handbook-banner" style={{ 
+                backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.8)), url('/img/banner_khorne.webp')`,
+                height: '100px', backgroundSize: 'cover', backgroundPosition: 'center' 
+              }}>
+                <div className="d-flex h-100 align-items-center justify-content-center flex-column">
+                  <h3 className="fw-bold text-uppercase m-0 shadow-text fs-5 text-warning">History</h3>
                 </div>
               </div>
             </div>
