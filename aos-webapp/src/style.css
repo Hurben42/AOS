@@ -317,6 +317,8 @@ td[data-colspan-mobile] {
 .abBody .kwb {
     font-weight: bold;
     border-bottom: 1px dashed;
+    color: #d4af37;
+    border-color: #d4af37;
 }
 
 li.nav-item .d-block {
@@ -838,3 +840,5 @@ input.fs-4::placeholder {
     padding: 15px;
     margin-top: 10px;
 }
+
+.history-card:hover {cursor: pointer !important; border-color: #ffc107;}

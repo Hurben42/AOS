@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 // --- IMPORTS DES DONNÉES ---
 import warscrollsData from "../data/warscrolls.json";
@@ -21,7 +21,16 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState(null);
+  
   const navigate = useNavigate();
+  const location = useLocation(); // Détecte les changements d'URL
+
+  // --- OPTION 2 : FERMETURE AUTOMATIQUE ---
+  // Dès que l'utilisateur change de page (URL), on ferme la modale de recherche
+  useEffect(() => {
+    setIsModalOpen(false);
+    setSearchTerm(""); // Optionnel : réinitialise la recherche
+  }, [location.pathname]);
 
   // Utilitaires de formatage
   const cleanForUrl = (n) => n.toLowerCase().trim().replace(/\s+/g, "-");
@@ -205,7 +214,7 @@ export default function Home() {
               <div className="row g-2 pb-5">
                 {filteredResults.map((res, i) => (
                   <div key={i} className="col-12">
-                    <Link to={res.path} className="search-item-compact" onClick={() => setIsModalOpen(false)}>
+                    <Link to={res.path} className="search-item-compact">
                       <div className="d-flex align-items-center justify-content-between">
                         <div className="d-flex align-items-center overflow-hidden">
                           <span className={`badge-mini ${res.color}`}>{res.type[0]}</span>

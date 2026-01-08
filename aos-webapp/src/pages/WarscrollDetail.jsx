@@ -48,7 +48,7 @@ export default function WarscrollDetail() {
     // Nettoyage des éléments indésirables
     doc.querySelectorAll(".wsTable img, .abLogo, .ShowFluff.legend4, .wsDataRow.wsDataRow_short, .BreakInsideAvoid.PitchedBattleProfile").forEach(img => img.remove());
     
-    // Remplacement des liens par des spans pour éviter les redirections mortes
+    // Remplacement des liens par des spans
     doc.querySelectorAll("a").forEach(a => {
       const span = doc.createElement("span");
       span.innerHTML = a.innerHTML;
@@ -56,15 +56,29 @@ export default function WarscrollDetail() {
       a.parentNode.replaceChild(span, a);
     });
 
-    // Style des mots clés de capacité (badges)
+    // Style des badges d'habilité d'arme (RÉDUIT)
     doc.querySelectorAll(".wsWeaponAbility").forEach(el => {
       el.classList.add("badge", "bg-warning", "text-dark", "me-1", "mb-1", "fw-bold");
+      el.style.fontSize = "0.6rem"; 
       el.innerHTML = el.innerHTML.split(",").join(",<br/>");
+    });
+
+    // Truncate sur wsDataCell_long & Remplacement Melee/Ranged
+    doc.querySelectorAll(".wsDataCell_long").forEach(el => {
+      const text = el.textContent.trim().toUpperCase();
+      if (text === "MELEE WEAPONS") {
+        el.innerHTML = 'MELEE ⚔️';
+      } else if (text === "RANGED WEAPONS") {
+        el.innerHTML = 'RANGED 🏹';
+      }
+      el.style.maxWidth = "110px";
+      el.style.overflow = "hidden";
+      el.style.textOverflow = "ellipsis";
+      el.style.whiteSpace = "nowrap";
     });
 
     const getTxt = (selector) => doc.querySelector(selector)?.textContent.trim() || null;
 
-    // Extraction du profil de l'unité
     setProfile({
       move: getTxt(".wsMove") || "-",
       health: getTxt(".wsWounds") || "-",
@@ -73,19 +87,16 @@ export default function WarscrollDetail() {
       ward: getTxt(".wsWard")
     });
 
-    // Nettoyage spécifique de la table de caractéristiques
     doc.querySelectorAll(".wsTable tr").forEach((row) => {
       const firstCell = row.querySelector(".wsDataCell_long");
       if (firstCell) firstCell.remove();
     });
 
-    // Nettoyage des spans à l'intérieur des headers (abHeader) pour éviter les sauts de ligne
     doc.querySelectorAll(".abHeader").forEach((header) => {
       const text = header.textContent.trim();
       header.innerHTML = text; 
     });
 
-    // Nettoyage des headers de profil
     doc.querySelectorAll(".AoS_profile, .wsHeader_short, .wsHeader_long").forEach((el) => el.remove());
 
     setCleanHTML(doc.body.innerHTML);
@@ -95,7 +106,6 @@ export default function WarscrollDetail() {
 
   return (
     <div className="min-vh-100">
-      {/* Background Banner */}
       <div className="fixed-top w-100 vh-100" style={{ 
           backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url(/img/banner_${bannerMapping[realFactionName] || 'default'}.webp)`,
           backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed', zIndex: -1
@@ -105,41 +115,28 @@ export default function WarscrollDetail() {
         <div className="mb-4 pt-3">
           <Link to={-1} className="btn btn-outline-light btn-sm mb-3 opacity-75 shadow-sm">← Retour</Link>
           <h2 className="text-white fw-bold text-uppercase shadow-text display-6">
-            {/* On affiche le nom complet tel quel pour garder les mentions d'Armées de Renom */}
             {warscroll.name}
           </h2>
         </div>
 
-        {/* Image de l'unité avec fallback Scourge of Ghyran et Multi-extension */}
         <div className="text-center mb-4 overflow-hidden bg-white border border-3 border-warning rounded-3 shadow-lg">
           {(() => {
-            // Suppression du préfixe uniquement pour l'image (pour utiliser l'image de l'unité de base)
             const displayImageSlug = warscrollSlug.replace(/^scourge-of-ghyran-/, "");
-            
             return (
                 <img 
                   src={`/img/units/${displayImageSlug}.webp`} 
                   alt="" 
                   className="img-fluid unit-image-blend" 
-                  style={{ 
-                    maxHeight: '220px', 
-                    objectFit: 'contain', 
-                    transform: 'scale(1.1)' 
-                  }} 
+                  style={{ maxHeight: '220px', objectFit: 'contain', transform: 'scale(1.1)' }} 
                   onError={(e) => {
-                    if (e.target.src.endsWith('.webp')) {
-                      e.target.src = `/img/units/${displayImageSlug}.jpg`;
-                    } 
-                    else {
-                      e.target.style.display = 'none';
-                    }
+                    if (e.target.src.endsWith('.webp')) { e.target.src = `/img/units/${displayImageSlug}.jpg`; } 
+                    else { e.target.style.display = 'none'; }
                   }} 
                 />
               );
           })()}       
         </div>
 
-        {/* Barre de caractéristiques (Nav Pills) */}
         {profile && (
           <ul className="nav nav-pills nav-justified bg-dark bg-opacity-75 rounded-4 p-2 mb-4 shadow border border-secondary border-opacity-25 blur-bg">
             <li className="nav-item text-center text-white"><span className="d-block fs-4 fw-bold">{profile.move}</span><small className="text-secondary text-uppercase" style={{fontSize: '0.6rem'}}>Move</small></li>
@@ -153,20 +150,25 @@ export default function WarscrollDetail() {
         )}
 
         <div className="warscroll-content card shadow-lg text-dark overflow-hidden bg-transparent rounded-4 border-0 mb-5">
-          <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
+          <div className="table-responsive">
+            <div dangerouslySetInnerHTML={{ __html: cleanHTML }} />
+          </div>
         </div>
       </div>
 
       <style>{`
         .blur-bg { backdrop-filter: blur(8px); }
         .shadow-text { text-shadow: 2px 2px 8px rgba(0,0,0,0.9); }        
-        .wsKeywordLine1 { background: black !important; color: white !important; padding: 10px !important; margin: 10px 0; font-weight: bold; text-transform: uppercase; border-radius: 4px; font-size: 0.8rem; }
+        .wsKeywordLine1 { background: black !important; color: white !important; padding: 10px !important; margin: 10px 0; font-weight: bold; text-transform: uppercase; border-radius: 4px; font-size: 0.75rem; }
         .wsAbilityTable { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-        .wsAbilityHeader { background: #333; color: #fff; padding: 6px; font-size: 0.8rem; text-transform: uppercase; }
-        .wsAbilityCell { padding: 8px; border: 1px solid #dee2e6; font-size: 0.9rem; }
+        .wsAbilityHeader { background: #333; color: #fff; padding: 5px; font-size: 0.7rem; text-transform: uppercase; }
+        .wsAbilityCell { padding: 6px; border: 1px solid #dee2e6; font-size: 0.75rem; }
         .wsTable { width: 100%; margin-bottom: 1rem; }
-        .wsDataCell { padding: 8px; text-align: center; border: 1px solid #dee2e6; font-weight: bold; }
-        .abHeader { font-weight: bold; padding: 5px 0; display: block; text-transform: uppercase; border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 5px; }
+        /* Réduction globale de la taille des polices du tableau */
+        .wsDataCell { padding: 6px 4px; text-align: center; border: 1px solid #dee2e6; font-weight: bold; font-size: 0.7rem !important; }
+        .wsHeaderCell { font-size: 0.6rem !important; background: #f8f9fa; text-transform: uppercase; padding: 6px 4px; border: 1px solid #dee2e6; color: #666; }
+        .abHeader { font-weight: bold; padding: 5px 0; display: block; text-transform: uppercase; border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 5px; font-size: 0.8rem; }
+        .table-responsive { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
       `}</style>
     </div>
   );

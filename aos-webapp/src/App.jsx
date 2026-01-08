@@ -75,10 +75,16 @@ function NavbarContent() {
 
   useEffect(() => {
     setSessionActive(!!localStorage.getItem("active_game_session") && !location.pathname.startsWith("/game"));
+    
+    // --- FIX PAGE BLANCHE MOBILE ---
     const menu = document.getElementById("navbarNav");
+    const toggler = document.querySelector(".navbar-toggler");
+    
+    // Si le menu est ouvert (Bootstrap ajoute 'show')
     if (menu && menu.classList.contains("show")) {
-      const bsCollapse = window.bootstrap?.Collapse.getInstance(menu);
-      if (bsCollapse) bsCollapse.hide();
+      // On simule un clic sur le bouton pour refermer
+      // C'est la méthode la plus compatible qui ne fait pas planter le mobile
+      if (toggler) toggler.click();
     }
   }, [location]);
 
@@ -99,7 +105,6 @@ function NavbarContent() {
             <li className="nav-item">
               <Link className="nav-link" to="/my-lists">Mes Listes</Link>
             </li>
-            {/* --- AJOUT DU LIEN HISTORIQUE ICI --- */}
             <li className="nav-item">
               <Link className="nav-link" to="/history">Mes Parties</Link>
             </li>
@@ -130,16 +135,12 @@ function App() {
             
             <Route path="/start-game" element={<StartGame />} />
             
-            {/* Dashboard de la partie en cours */}
             <Route path="/game" element={<GameDashboard />} />
             <Route path="/game/:gameId" element={<GameDashboard />} />
             
             <Route path="/history" element={<HistoryPage />} /> 
             
-            {/* Liste des plans de bataille (Handbook) */}
-            {/* Assurez-vous que le fichier importé en tant que Battleplans est bien la LISTE des plans */}
             <Route path="/battleplans" element={<Battleplans />} /> 
-            
             <Route path="/battletactics" element={<BattleTactics />} />
             
             <Route path="/category/:category/faction/:faction/section/:sectionSlug" element={<FactionDetail />} />
