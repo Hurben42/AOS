@@ -31,10 +31,9 @@ export default function SavedLists() {
         const decodedList = JSON.parse(decodeURIComponent(sharedData));
         const currentSaved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
         
-        // On s'assure que les données essentielles sont au premier niveau
         const newListEntry = { 
           ...decodedList, 
-          id: Date.now().toString(), // String pour cohérence
+          id: Date.now().toString(),
           battle_tactics: decodedList.battle_tactics || decodedList.listData?.battle_tactics || []
         };
         
@@ -44,7 +43,6 @@ export default function SavedLists() {
         setImportSuccess(newListEntry);
         setSavedLists(updatedSaved);
         
-        // Nettoyage de l'URL
         window.history.replaceState({}, document.title, window.location.pathname);
       } catch (e) {
         console.error("Erreur importation QR :", e);
@@ -57,8 +55,9 @@ export default function SavedLists() {
   const loadLists = () => {
     try {
       const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
-      // Tri par ID décroissant (plus récent en premier)
-      setSavedLists(Array.isArray(saved) ? saved.sort((a, b) => b.id < a.id ? 1 : -1) : []);
+      // Tri par ID décroissant (le plus grand ID/plus récent en haut)
+      const sorted = Array.isArray(saved) ? saved.sort((a, b) => b.id - a.id) : [];
+      setSavedLists(sorted);
     } catch (e) {
       setSavedLists([]);
     }
@@ -75,7 +74,6 @@ export default function SavedLists() {
   };
 
   const countTotalUnits = (data) => {
-    // On regarde soit à la racine, soit dans listData
     const regiments = data?.regiments || data?.listData?.regiments;
     if (!regiments || !Array.isArray(regiments)) return 0;
     
@@ -87,8 +85,16 @@ export default function SavedLists() {
   };
 
   const getShareUrl = (list) => {
-    const baseUrl = window.location.origin + window.location.pathname;
-    const data = encodeURIComponent(JSON.stringify(list));
+    const baseUrl = window.location.origin + "/"; 
+    // On crée un objet "propre" pour le QR Code pour éviter les bugs de taille d'URL
+    const cleanData = {
+        title: list.title,
+        faction: list.faction || list.listData?.faction,
+        regiments: list.regiments || list.listData?.regiments,
+        army_rules: list.army_rules || list.listData?.army_rules,
+        grand_strategy: list.grand_strategy || list.listData?.grand_strategy
+    };
+    const data = encodeURIComponent(JSON.stringify(cleanData));
     return `${baseUrl}?share=${data}`;
   };
 
@@ -133,7 +139,6 @@ export default function SavedLists() {
       ) : (
         <div className="row g-4">
           {savedLists.map((list) => {
-            // On cherche la faction à la racine ou dans listData
             const data = list.listData || list;
             const factionName = data?.faction || "Inconnue";
             const banner = bannerMapping[factionName.toLowerCase().trim()] || "default";
@@ -164,7 +169,14 @@ export default function SavedLists() {
                         Consulter
                     </button>
                   </div>
-                  <button onClick={() => setShowQR(list)} className="btn btn-dark btn-sm position-absolute top-0 start-0 m-3 border border-secondary" style={{zIndex: 10, borderRadius: '10px'}}><i className="bi bi-qr-code-scan text-info"></i></button>
+                  {/* Bouton QR Code : On utilise e.stopPropagation pour éviter de déclencher d'autres clics */}
+                  <button 
+                    onClick={(e) => { e.stopPropagation(); setShowQR(list); }} 
+                    className="btn btn-dark btn-sm position-absolute top-0 start-0 m-3 border border-secondary shadow" 
+                    style={{zIndex: 10, borderRadius: '10px'}}
+                  >
+                    <i className="bi bi-qr-code-scan text-info"></i>
+                  </button>
                 </div>
               </div>
             );
@@ -213,9 +225,9 @@ export default function SavedLists() {
         </div>
       )}
 
-      {/* MODALE QR CODE */}
+      {/* MODALE QR CODE (FIXED Z-INDEX) */}
       {showQR && (
-        <div className="modal show d-block" style={{backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 1050}}>
+        <div className="modal show d-block" style={{backgroundColor: 'rgba(0,0,0,0.9)', zIndex: 10000}}>
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content bg-dark border-secondary shadow-lg">
               <div className="modal-header border-0 pb-0">
@@ -226,8 +238,9 @@ export default function SavedLists() {
                 <div className="bg-white p-3 d-inline-block rounded-4 mb-3">
                   <QRCodeSVG value={getShareUrl(showQR)} size={220} level="M" />
                 </div>
-                <div className="text-info fw-bold">{showQR.title}</div>
+                <div className="text-info fw-bold h5 mb-1">{showQR.title}</div>
                 <p className="text-white-50 small mt-2">Scannez ce code pour importer la liste</p>
+                <button className="btn btn-outline-info w-100 mt-3 rounded-pill" onClick={() => setShowQR(null)}>FERMER</button>
               </div>
             </div>
           </div>

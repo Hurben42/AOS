@@ -10,6 +10,8 @@ export default function ImportList() {
 
     try {
       const allLines = text.split("\n").map(l => l.trim());
+      
+      // Nettoyage strict des lignes inutiles
       const filteredLines = allLines.filter(l => 
         l !== "" && 
         !l.startsWith("---") && 
@@ -29,12 +31,9 @@ export default function ImportList() {
         customTitle: "Ma Liste"
       };
 
+      // 1. Titre et Points Totaux
       if (filteredLines.length > 0) {
-        let title = filteredLines[0];
-        if (title.includes(" - ")) {
-          title = title.split(" - ").slice(1).join(" - ");
-        }
-        listData.customTitle = title.replace(/\d+\/\d+\s*(pts|points)/gi, "").trim();
+        listData.customTitle = filteredLines[0].replace(/\d+\/\d+\s*(pts|points)/gi, "").trim();
       }
 
       let currentRegiment = null;
@@ -42,76 +41,103 @@ export default function ImportList() {
       filteredLines.forEach((line, index) => {
         const lowerLine = line.toLowerCase();
 
-        if (lowerLine.includes("battle tactics") || lowerLine.includes("tactiques de bataille")) {
-          const content = line.split(/cards:|tactics:|tactique:/i)[1];
-          if (content) {
-            const tactics = content.split(/\s+and\s+|\s+et\s+|,/i);
-            tactics.forEach(t => {
-              const cleanTactic = t.trim();
-              if (cleanTactic) listData.battle_tactics.push(cleanTactic);
-            });
+        // 2. Points (détection sur n'importe quelle ligne)
+        const ptsMatch = line.match(/(\d+)\/(\d+)\s*(pts|points)/i);
+        if (ptsMatch) {
+          listData.points = ptsMatch[1];
+          return;
+        }
+
+        // 3. Faction | Subfaction (format: GA | Faction | Sub)
+        if (line.includes("|")) {
+          const parts = line.split("|").map(p => p.trim());
+          if (parts.length >= 3) {
+            listData.faction = parts[1];
+            listData.subFaction = parts[2];
+          } else if (parts.length === 2) {
+            listData.faction = parts[0];
+            listData.subFaction = parts[1];
           }
           return;
         }
 
-        if (line.includes("|")) {
-          const parts = line.split("|").map(p => p.trim());
-          if (parts.length >= 2) {
-            const alliances = ["grand alliance chaos", "grand alliance death", "grand alliance destruction", "grand alliance order"];
-            if (alliances.includes(parts[0].toLowerCase()) && parts.length >= 3) {
-              listData.faction = parts[1];
-              listData.subFaction = parts[2];
-            } else {
-              listData.faction = parts[0];
-              listData.subFaction = parts[1];
-            }
+        // 4. Lores
+        if (lowerLine.includes("spell lore")) {
+          listData.spellLore = line.split(/[-:]/)[1]?.split("(")[0]?.trim();
+          return;
+        }
+        if (lowerLine.includes("manifestation lore")) {
+          listData.manifestationLore = line.split(/[-:]/)[1]?.split("(")[0]?.trim();
+          return;
+        }
+
+        // 5. Battle Tactics
+        if (lowerLine.includes("battle tactics")) {
+          const content = line.split(/cards:|tactics:|tactique:/i)[1];
+          if (content) {
+            listData.battle_tactics = content.split(/, | and | et /i).map(t => t.trim()).filter(Boolean);
           }
+          return;
         }
 
-        if (lowerLine.includes("spell lore") || lowerLine.includes("manifestation lore") || lowerLine.includes("prayer lore")) {
-          const separator = line.includes(":") ? ":" : "-";
-          const value = line.split(separator)[1]?.split("(")[0]?.trim();
-          if (lowerLine.includes("spell lore")) listData.spellLore = value;
-          if (lowerLine.includes("manifestation lore")) listData.manifestationLore = value;
-        }
-
+        // 6. Terrain
         if (lowerLine.includes("faction terrain")) {
           const terrainName = filteredLines[index + 1];
           if (terrainName) listData.factionTerrain = terrainName;
+          return;
         }
 
-        if (lowerLine.includes("regiment") || lowerLine.includes("general's")) {
+        // 7. DÉTECTION DES RÉGIMENTS (LA LOGIQUE FIXÉE ICI)
+        // On détecte "General's Regiment" OU "Regiment X"
+        const isNewRegiment = lowerLine.includes("general's regiment") || 
+                             (lowerLine.includes("regiment") && !lowerLine.includes("battle tactics") && !lowerLine.includes("renown"));
+
+        if (isNewRegiment) {
           if (currentRegiment) listData.regiments.push(currentRegiment);
-          currentRegiment = { hero: null, units: [] };
+          currentRegiment = { hero: null, heroOptions: [], units: [] };
+          return;
         }
 
+        // 8. Unités (Nom + Points entre parenthèses)
         const unitMatch = line.match(/^(.+?)\s\((\d+)\)$/);
-        if (unitMatch) {
+        if (unitMatch && currentRegiment) {
           const unitName = unitMatch[1].replace(/^[•\d+x\s]+/, "").trim();
-          const unitPoints = unitMatch[2];
-          if (currentRegiment) {
-            if (!currentRegiment.hero) currentRegiment.hero = { name: unitName, points: unitPoints };
-            else currentRegiment.units.push({ name: unitName, points: unitPoints });
+          if (!currentRegiment.hero) {
+            currentRegiment.hero = unitName;
+          } else {
+            currentRegiment.units.push(unitName);
           }
+          return;
+        }
+
+        // 9. Options (Traits, Artefacts)
+        if (line.startsWith("•") && currentRegiment && currentRegiment.hero) {
+          const opt = line.replace("•", "").trim();
+          // On ignore les tags de structure
+          if (!["reinforced", "general"].includes(opt.toLowerCase())) {
+            currentRegiment.heroOptions.push(opt);
+          }
+          return;
         }
       });
 
+      // Dernier régiment
       if (currentRegiment) listData.regiments.push(currentRegiment);
 
+      // Nettoyage final : suppression des régiments vides (ex: si "Regiment" est lu en doublon)
+      listData.regiments = listData.regiments.filter(r => r.hero !== null);
+
       const newId = Date.now().toString();
-      
-      // CORRECTION : On enregistre un objet plat pour que MyListWarscroll le lise facilement
       const newList = {
         id: newId,
         title: listData.customTitle,
-        ...listData, // On "étale" les données (regiments, faction, etc.)
-        listData: listData // On garde quand même listData pour SavedLists.jsx
+        ...listData,
+        listData: listData 
       };
 
       const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
       localStorage.setItem("warhammer_saved_lists", JSON.stringify([newList, ...saved]));
 
-      // Navigation fluide vers le détail
       navigate(`/my-lists/${newId}`);
 
     } catch (err) {
@@ -123,7 +149,7 @@ export default function ImportList() {
   return (
     <div className="container mt-4 pb-5 px-3">
       <div className="card bg-dark border-secondary shadow-lg rounded-4 overflow-hidden">
-        <div className="card-header bg-black text-white py-3 text-center border-bottom border-secondary">
+        <div className="card-header bg-black py-3 text-center border-bottom border-secondary">
           <h5 className="mb-0 fw-bold text-info text-uppercase">Importateur AOS 4.0</h5>
         </div>
         <div className="card-body p-4">

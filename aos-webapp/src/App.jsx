@@ -72,20 +72,13 @@ function ScrollToTop() {
 function NavbarContent() {
   const location = useLocation();
   const [sessionActive, setSessionActive] = useState(false);
+  const [expanded, setExpanded] = useState(false); // Ajout de l'état pour le menu
 
   useEffect(() => {
     setSessionActive(!!localStorage.getItem("active_game_session") && !location.pathname.startsWith("/game"));
     
-    // --- FIX PAGE BLANCHE MOBILE ---
-    const menu = document.getElementById("navbarNav");
-    const toggler = document.querySelector(".navbar-toggler");
-    
-    // Si le menu est ouvert (Bootstrap ajoute 'show')
-    if (menu && menu.classList.contains("show")) {
-      // On simule un clic sur le bouton pour refermer
-      // C'est la méthode la plus compatible qui ne fait pas planter le mobile
-      if (toggler) toggler.click();
-    }
+    // Ferme le menu mobile quand l'URL change
+    setExpanded(false);
   }, [location]);
 
   return (
@@ -97,10 +90,16 @@ function NavbarContent() {
         <Link className="navbar-brand fw-bold text-uppercase tracking-tighter" to="/">
           <span className="text-warning">AOS</span> V4 HELPER
         </Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        {/* On lie le bouton à l'état React */}
+        <button 
+          className="navbar-toggler" 
+          type="button" 
+          onClick={() => setExpanded(!expanded)}
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        {/* On utilise la classe Bootstrap 'show' conditionnellement */}
+        <div className={`collapse navbar-collapse ${expanded ? 'show' : ''}`} id="navbarNav">
           <ul className="navbar-nav ms-auto text-uppercase fw-bold" style={{ fontSize: '0.8rem' }}>
             <li className="nav-item">
               <Link className="nav-link" to="/my-lists">Mes Listes</Link>
