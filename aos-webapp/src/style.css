@@ -842,3 +842,135 @@ input.fs-4::placeholder {
 }
 
 .history-card:hover {cursor: pointer !important; border-color: #ffc107;}
+
+.card-war-tactical {
+  position: relative;
+  background: #111;
+  height: 110px;
+  border-radius: 12px;
+  overflow: visible; /* Important pour laisser dépasser le badge points */
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-war-tactical:hover {
+  transform: scale(1.02);
+  border-color: #0dcaf0;
+}
+
+.card-bg-wrapper {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.card-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  transition: transform 0.5s;
+}
+
+.card-war-tactical:hover .card-bg-img {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #111 20%, transparent 100%);
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding-left: 0;
+}
+
+.faction-ribbon {
+  width: 5px;
+  height: 60%;
+  background: #0dcaf0;
+  box-shadow: 0 0 15px #0dcaf0;
+  border-radius: 0 5px 5px 0;
+  margin-right: 20px;
+}
+
+.info-block {
+  flex-grow: 1;
+  overflow: hidden;
+  padding-right: 10px;
+}
+
+.faction-name {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #0dcaf0;
+  letter-spacing: 2px;
+}
+
+.army-title {
+  color: white;
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: -0.5px;
+}
+
+.meta-info {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Badge Points Flottant */
+.points-pill {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #0dcaf0;
+  color: #000;
+  padding: 5px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  font-family: 'Arial Black', sans-serif;
+}
+
+.pts-value { font-size: 0.9rem; font-weight: 900; }
+.pts-label { font-size: 0.5rem; font-weight: 900; opacity: 0.8; }
+
+.action-buttons {
+  display: flex;
+  gap: 5px;
+  padding-right: 15px;
+}
+
+.btn-action {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-action:hover { background: #0dcaf0; color: #000; border-color: #0dcaf0; }
+.btn-action.del:hover { background: #ff4757; color: white; border-color: #ff4757; }

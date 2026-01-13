@@ -138,7 +138,7 @@ export default function FactionList() {
       <div className="container mt-4 pb-5 position-relative" style={{ zIndex: 1 }}>
         
         <nav aria-label="breadcrumb" className="mb-4">
-          <ol className="breadcrumb bg-dark bg-opacity-50 p-2 px-3 rounded-pill border border-secondary border-opacity-25" style={{ display: 'inline-flex' }}>
+          <ol className="breadcrumb bg-dark bg-opacity-50 p-2 px-3 border border-secondary border-opacity-25" style={{ display: 'inline-flex' }}>
             <li className="breadcrumb-item">
               <Link to="/" className="text-info text-decoration-none small text-uppercase fw-bold">Grand Alliances</Link>
             </li>
@@ -162,7 +162,7 @@ export default function FactionList() {
             const collapseId = `collapse-${role.replace(/\s+/g, '')}`;
             
             return (
-              <div className="accordion-item bg-dark bg-opacity-75 border-secondary border-opacity-25 mb-2 blur-bg overflow-hidden shadow-sm" style={{borderRadius: '10px'}} key={role}>
+              <div className="accordion-item bg-dark bg-opacity-75 border-secondary border-opacity-25 mb-2 blur-bg overflow-hidden shadow-sm" key={role}>
                 <h2 className="accordion-header">
                   <button 
                     className="accordion-button collapsed bg-transparent text-white fw-bold py-3 shadow-none" 
@@ -182,7 +182,7 @@ export default function FactionList() {
                         <Link key={unit.slug} className="list-group-item bg-transparent text-white border-secondary border-opacity-10 d-flex justify-content-between align-items-center p-3 text-decoration-none list-item-hover" to={`/category/${category}/faction/${faction}/warscroll/${unit.slug}`}>
                           <div className="d-flex align-items-center">
                             <span className="fw-medium">{unit.name}</span>
-                            {unit.displayCV && <span className="ms-2 badge bg-success bg-opacity-25 border border-success rounded-pill px-2" style={{fontSize: '0.65rem'}}>Casting: {unit.displayCV}+</span>}
+                            {unit.displayCV && <span className="ms-2 badge bg-success bg-opacity-25 border border-success px-2" style={{fontSize: '0.65rem'}}>Casting: {unit.displayCV}+</span>}
                           </div>
                           <i className="bi bi-chevron-right small text-primary opacity-50"></i>
                         </Link>

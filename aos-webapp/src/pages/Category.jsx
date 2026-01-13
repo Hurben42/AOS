@@ -68,7 +68,7 @@ export default function Category() {
             <div key={faction} className="col-6 col-lg-4">
               <Link
                 to={`/category/${categoryKey}/faction/${cleanForUrl(faction)}`}
-                className="card border shadow-lg rounded-4 overflow-hidden position-relative faction-card"
+                className="card border shadow-lg overflow-hidden position-relative faction-card"
                 style={{ height: '150px', transition: 'all 0.3s ease', textDecoration: 'none' }}
               >
                 {/* Background Image avec Overlay */}
@@ -98,6 +98,7 @@ export default function Category() {
       <style>{`
         .faction-card {
           border: 1px solid rgba(255,255,255,0.1) !important;
+          border-radius: 0 !important;
         }
         .faction-card:hover {
           border-color: #ffc107 !important;

@@ -47,9 +47,11 @@ export default function HistoryPage() {
     <div className="container mt-4 pb-5 px-3 font-monospace">
       <style>{`
         .history-card { 
-            background: #111; border-radius: 15px; overflow: hidden; 
+            background: #111; overflow: hidden; 
             border: 1px solid rgba(255,255,255,0.1); transition: transform 0.2s;
         }
+                    .history-card:hover {border-color: #ffc107; }
+
         .history-card:active { transform: scale(0.98); }
         .history-banner-box { height: 75px; display: flex; position: relative; }
         .banner-half { width: 50%; height: 100%; background-size: cover; background-position: center; opacity: 0.5; }

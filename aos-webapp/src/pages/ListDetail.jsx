@@ -13,7 +13,7 @@ export default function ListDetail() {
   const [factionManifestations, setFactionManifestations] = useState([]);
   const [factionTerrainWS, setFactionTerrainWS] = useState(null);
   const [activeSpellLore, setActiveSpellLore] = useState([]);
-  const [viewMode, setViewMode] = useState("regiments"); // "regiments" par défaut comme demandé
+  const [viewMode, setViewMode] = useState("regiments");
 
   const bannerMapping = {
     "Helsmiths": "helsmiths", "Ossiarch Bonereapers": "ossiarch", "Soulblight Gravelords": "soulblight",
@@ -26,6 +26,7 @@ export default function ListDetail() {
     "Seraphon": "seraphon", "Stormcast Eternals": "stormcast", "Maggotkin of Nurgle": "nurgle", "Ogor Mawtribes": "ogor"
   };
 
+  // LOGIQUE DE TRAITEMENT DES DONNÉES CONSERVÉE
   const normalize = (str) => 
     str?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "").trim() || "";
 
@@ -60,21 +61,18 @@ export default function ListDetail() {
       const data = found.listData || found; 
       const allWarscrolls = Object.values(warscrollsData).flatMap(cat => Object.values(cat).flatMap(f => f));
 
-      // 1. SORTS
       const cleanFactionKey = bannerMapping[data.faction] || normalize(data.faction);
       const factionSpells = spellsIndex.factions[cleanFactionKey] || {};
       const loreName = data.spellLore;
       const matchedLore = Object.keys(factionSpells).find(l => normalize(l) === normalize(loreName));
       if (matchedLore) setActiveSpellLore(factionSpells[matchedLore]);
 
-      // 2. TERRAIN
       const terrainInfo = factionTerrainIndex[cleanFactionKey];
       if (terrainInfo) {
         const terrainWS = allWarscrolls.find(ws => normalize(ws.name) === normalize(terrainInfo.name));
         if (terrainWS) setFactionTerrainWS(terrainWS);
       }
 
-      // 3. MANIFESTATIONS
       const manifestationLoreName = data.manifestationLore;
       const mfs = [];
       const seenMfs = new Set();
@@ -94,7 +92,6 @@ export default function ListDetail() {
       });
       setFactionManifestations(mfs);
 
-      // 4. UNITÉS (POUR VUE COMPILÉE)
       const regs = data.regiments || [];
       const compiledUnits = new Map();
       regs.forEach(reg => {
@@ -126,146 +123,154 @@ export default function ListDetail() {
     return "bg-dark text-white-50 border border-secondary border-opacity-50";
   };
 
-  if (!list) return <div className="container mt-5 text-center text-white"><div className="spinner-border text-info mb-3"></div><p>Chargement...</p></div>;
+  if (!list) return <div className="container mt-5 text-center text-white font-monospace"><div className="spinner-border text-info mb-3"></div><p>SYNCHRONISATION...</p></div>;
 
   const displayData = list.listData || list;
   const allWarscrolls = Object.values(warscrollsData).flatMap(cat => Object.values(cat).flatMap(f => f));
+  const banner = bannerMapping[displayData.faction] || "default";
 
   return (
-    <div className="container mt-4 pb-5 px-2 font-monospace">
-      <div className="mb-3">
-        <Link className="btn btn-sm btn-outline-secondary border-secondary text-uppercase fw-bold" style={{fontSize: '0.7rem'}} to="/my-lists">← Retour</Link>
-      </div>
-
-      {/* BANNER HEADER */}
-      <div className="card bg-dark border-0 shadow-lg mb-4 rounded-4 overflow-hidden position-relative" style={{ minHeight: '180px' }}>
-        <img src={`/img/banner_${bannerMapping[displayData.faction] || 'default'}.webp`} className="card-img" alt="" style={{ objectFit: 'cover', height: '100%', minHeight: '180px', opacity: '0.35' }} onError={(e) => e.target.src = "/img/banner_default.webp"} />
-        <div className="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center p-2">
-          <h2 className="fw-bold text-white mb-1 text-uppercase shadow-text" style={{ fontSize: 'clamp(1.2rem, 5vw, 2.2rem)' }}>{list.title || displayData.customTitle}</h2>
-          <div className="badge bg-info mb-3 px-3 py-1 fw-bold shadow-sm bg-opacity-25 border border-info blur-bg text-uppercase" style={{ fontSize: '0.7rem' }}>{displayData.faction} • {displayData.subFaction}</div>
-          <div className="d-flex flex-wrap justify-content-center gap-2 align-items-center w-100">
-            {detectedTactics.length > 0 && (
-              <div className="px-3 py-2 rounded bg-danger bg-opacity-25 border border-danger border-opacity-25 shadow-sm blur-bg">
-                <small className="text-white-50 d-block text-uppercase mb-1" style={{ fontSize: '0.5rem' }}>Tactiques de Bataille</small>
-                <span className="fw-bold text-white d-block" style={{ fontSize: '0.7rem' }}>{detectedTactics.map(bt => bt.name).join(' • ')}</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* TABS SÉLECTEUR */}
-      <div className="d-flex mb-3 bg-black bg-opacity-50 rounded-2 p-1 border border-secondary border-opacity-25 shadow-sm">
-        <button onClick={() => setViewMode("regiments")} className={`btn btn-sm flex-fill rounded-2 fw-bold text-uppercase ${viewMode === 'regiments' ? 'btn-info text-dark shadow' : 'text-white-50'}`} style={{ fontSize: '0.65rem', transition: '0.3s' }}>
-          Vue Régiments
-        </button>
-        <button onClick={() => setViewMode("compiled")} className={`btn btn-sm flex-fill rounded-2 fw-bold text-uppercase ${viewMode === 'compiled' ? 'btn-info text-dark shadow' : 'text-white-50'}`} style={{ fontSize: '0.65rem', transition: '0.3s' }}>
-          Vue Compilée
-        </button>
-      </div>
-
-      {/* UNITÉS CARD */}
-      <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 mb-4 blur-bg">
-        <div className="card-header bg-black text-white py-3 px-3 d-flex justify-content-between align-items-center">
-          <h6 className="mb-0 fw-bold text-uppercase small"><i className="bi bi-shield-shaded me-2 text-info"></i>Unités de Guerre</h6>
-          <span className="badge bg-dark border border-secondary text-white-50" style={{fontSize: '0.6rem'}}>{displayData.points} PTS</span>
+    <div className="container mt-4 pb-5 px-3 font-monospace">
+      {/* HEADER STYLE COMMAND TABLET */}
+      <div className="data-card mb-4 shadow-lg border-info border-opacity-25" style={{ height: 'auto', minHeight: '120px' }}>
+        <div className="card-points-sidebar">
+          <div className="points-label">TOTAL</div>
+          <div className="points-val">{displayData.points || "0"}</div>
+          <div className="points-label mt-1">PTS</div>
         </div>
 
-        {viewMode === "regiments" ? (
-          // VUE COMPLÈTE (PAR RÉGIMENT)
-          <div className="p-0">
-            {(displayData.regiments || []).map((reg, rIdx) => (
-              <div key={rIdx} className="border-bottom border-secondary border-opacity-10">
-                <div className="bg-white bg-opacity-75 px-3 py-2 small fw-bold text-dark text-uppercase border-bottom border-secondary border-opacity-10" style={{fontSize: '0.65rem'}}>
-                  Régiment {rIdx + 1} {rIdx === 0 ? "— Général" : ""}
-                </div>
-                {[reg.hero, ...(reg.units || [])].filter(Boolean).map((u, uIdx) => {
-                  const uInfo = getUnitData(u.name || u.unitName || u, allWarscrolls);
-                  if (!uInfo) return null;
-                  return (
-                    <div key={uIdx} className="list-group-item p-3 bg-transparent text-white border-0 position-relative border-bottom border-secondary border-opacity-10 last-child-border-0">
-                      <Link className="text-decoration-none text-white stretched-link" to={`/my-lists/${list.id}/warscroll/${uInfo.slug}`}>
-                        <h6 className={`fw-bold mb-1 text-uppercase ${uIdx === 0 ? 'text-warning' : ''}`} style={{ fontSize: '0.85rem' }}>
-                          {uInfo.displayName}
-                        </h6>
-                      </Link>
-                      <div className="d-flex flex-wrap gap-1 mt-1">
-                        {uIdx === 0 && <span className="badge bg-warning text-dark fw-bold" style={{fontSize: '0.5rem'}}>HERO</span>}
-                        {uInfo.keywords.map((k, i) => (
-                          <span key={i} className={`badge ${getBadgeColor(k)}`} style={{ fontSize: '0.5rem' }}>{k}</span>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
-        ) : (
-          // VUE COMPILÉE (LISTE UNIQUE)
-          <div className="list-group list-group-flush">
-            {uniqueUnits.map((unit, idx) => (
-              <div key={idx} className="list-group-item p-3 bg-transparent text-white border-secondary border-opacity-10 position-relative">
-                <Link className="text-decoration-none text-white stretched-link" to={`/my-lists/${list.id}/warscroll/${unit.slug}`}>
-                  <h6 className="fw-bold mb-1 text-uppercase" style={{ fontSize: '0.9rem' }}>{unit.displayName}</h6>
-                </Link>
-                <div className="d-flex flex-wrap gap-1 mt-1">
-                  {unit.keywords.map((k, i) => (
-                    <span key={i} className={`badge ${getBadgeColor(k)}`} style={{ fontSize: '0.55rem', zIndex: 2 }}>{k}</span>
-                  ))}
+        <div className="card-main">
+          <div className="card-image-bg" style={{ backgroundImage: `url(/img/banner_${banner}.webp)`, opacity: '0.4' }}></div>
+          <div className="card-content-overlay py-3">
+            <div className="d-flex justify-content-between align-items-start">
+              <div>
+                <span className="faction-pill">{displayData.faction}</span>
+                <h3 className="army-name-display text-uppercase mt-2 mb-1 shadow-text">{list.title || displayData.customTitle}</h3>
+                <div className="bottom-meta">
+                  <span className="text-info">SUBFACTION:</span> {displayData.subFaction}
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* AUTRES RESSOURCES */}
-      <div className="row g-3">
-        {factionTerrainWS && (
-          <div className="col-12">
-            <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 blur-bg">
-              <div className="card-header bg-black py-2 px-3 border-bottom border-warning border-opacity-25">
-                <h6 className="mb-0 fw-bold text-uppercase small text-warning">🏰 Elément de Terrain</h6>
-              </div>
-              <Link className="text-decoration-none d-flex justify-content-between align-items-center p-3 text-white" to={`/my-lists/${list.id}/warscroll/${formatSlug(factionTerrainWS.name)}`}>
-                <span className="fw-bold text-uppercase" style={{ fontSize: '0.8rem' }}>{factionTerrainWS.name}</span>
-                <i className="bi bi-chevron-right text-warning"></i>
+              <Link to="/my-lists" className="dock-btn text-decoration-none">
+                <i className="bi bi-arrow-left me-1"></i> BACK
               </Link>
             </div>
           </div>
-        )}
+        </div>
+      </div>
 
-        {factionManifestations.length > 0 && (
-          <div className="col-12 col-md-6">
-            <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 blur-bg h-100">
-              <div className="card-header bg-black py-2 px-3 border-bottom border-info border-opacity-25">
-                <h6 className="mb-0 fw-bold text-uppercase small text-info">🔥 Manifestations</h6>
+      {/* SELECTEUR DE VUE STYLE TERMINAL */}
+      <div className="d-flex gap-2 mb-4">
+        <button 
+          className={`flex-fill btn btn-sm rounded-0 fw-bold text-uppercase ${viewMode === 'regiments' ? 'btn-info text-black' : 'btn-outline-secondary text-white'}`}
+          onClick={() => setViewMode("regiments")}
+        >
+          [ Vue Régiments ]
+        </button>
+        <button 
+          className={`flex-fill btn btn-sm rounded-0 fw-bold text-uppercase ${viewMode === 'compiled' ? 'btn-info text-black' : 'btn-outline-secondary text-white'}`}
+          onClick={() => setViewMode("compiled")}
+        >
+          [ Vue Compilée ]
+        </button>
+      </div>
+
+      {/* UNITÉS DE GUERRE */}
+      <div className="row g-3">
+        {viewMode === "regiments" ? (
+          (displayData.regiments || []).map((reg, rIdx) => (
+            <div key={rIdx} className="col-12">
+              <div className="bg-black border border-secondary border-opacity-25 p-3 position-relative">
+                <div className="position-absolute top-0 start-0 bg-white text-black px-2 fw-bold" style={{ fontSize: '0.6rem' }}>
+                  REGIMENT #{rIdx + 1} {rIdx === 0 ? "— GÉNÉRAL" : ""}
+                </div>
+                <div className="mt-2">
+                  {[reg.hero, ...(reg.units || [])].filter(Boolean).map((u, uIdx) => {
+                    const uInfo = getUnitData(u.name || u.unitName || u, allWarscrolls);
+                    if (!uInfo) return null;
+                    return (
+                      <div key={uIdx} className="d-flex flex-column py-2 border-bottom border-secondary border-opacity-10 position-relative">
+                        <Link className="text-decoration-none text-white d-flex justify-content-between align-items-center" to={`/my-lists/${list.id}/warscroll/${uInfo.slug}`}>
+                          <span className={`fw-bold text-uppercase ${uIdx === 0 ? 'text-info' : ''}`} style={{ fontSize: '0.85rem' }}>
+                             {uIdx === 0 ? <i className="bi bi-star-fill me-2" style={{fontSize: '0.7rem'}}></i> : "-- "}{uInfo.displayName}
+                          </span>
+                          <i className="bi bi-chevron-right text-secondary" style={{fontSize: '0.7rem'}}></i>
+                        </Link>
+                        <div className="d-flex flex-wrap gap-1 mt-1">
+                          {uIdx === 0 && <span className="badge bg-warning text-dark fw-bold" style={{fontSize: '0.45rem'}}>HERO</span>}
+                          {uInfo.keywords.map((k, i) => (
+                            <span key={i} className={`badge ${getBadgeColor(k)}`} style={{ fontSize: '0.45rem' }}>{k}</span>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="list-group list-group-flush">
-                {factionManifestations.map((m, idx) => (
-                  <Link key={idx} className="list-group-item list-group-item-action bg-transparent text-white border-secondary border-opacity-10 d-flex align-items-center p-3" to={`/my-lists/${list.id}/warscroll/${formatSlug(m.name)}`}>
-                    <span className="fw-bold text-uppercase" style={{ fontSize: '0.8rem' }}>{m.name}</span>
-                    <span className="ms-auto badge bg-success bg-opacity-25 border border-success rounded-pill" style={{ fontSize: '0.6rem' }}>CV: {m.displayCV}+</span>
-                  </Link>
+            </div>
+          ))
+        ) : (
+          uniqueUnits.map((unit, idx) => (
+            <div key={idx} className="col-12 col-md-6">
+              <div className="bg-black border border-secondary border-opacity-25 p-3">
+                <Link className="text-decoration-none text-white d-flex justify-content-between align-items-center" to={`/my-lists/${list.id}/warscroll/${unit.slug}`}>
+                  <span className="fw-bold text-uppercase text-info" style={{ fontSize: '0.85rem' }}>{unit.displayName}</span>
+                  <i className="bi bi-chevron-right text-secondary"></i>
+                </Link>
+                <div className="d-flex flex-wrap gap-1 mt-1">
+                  {unit.keywords.map((k, i) => (
+                    <span key={i} className={`badge ${getBadgeColor(k)}`} style={{ fontSize: '0.45rem' }}>{k}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* RESSOURCES SECONDAIRES */}
+      <div className="row g-3 mt-4">
+        {/* TACTIQUES */}
+        <div className="col-12 col-md-4">
+           <div className="bg-black border border-danger border-opacity-25 h-100">
+            <div className="bg-danger text-white p-1 px-3 fw-bold text-uppercase small">Battle Tactics</div>
+            <div className="p-3">
+              {detectedTactics.length > 0 ? detectedTactics.map((bt, idx) => (
+                <div key={idx} className="text-white-50 small mb-2 text-uppercase">
+                  <i className="bi bi-chevron-right text-danger me-2"></i>{bt.name}
+                </div>
+              )) : <small className="text-muted">AUCUNE TACTIQUE SÉLECTIONNÉE</small>}
+            </div>
+          </div>
+        </div>
+
+        {/* SORTS */}
+        {activeSpellLore.length > 0 && (
+          <div className="col-12 col-md-4">
+            <div className="bg-black border border-primary border-opacity-25 h-100">
+              <div className="bg-primary text-white p-1 px-3 fw-bold text-uppercase small">Lore: {displayData.spellLore}</div>
+              <div className="p-0">
+                {activeSpellLore.map((spell, idx) => (
+                  <div key={idx} className="d-flex justify-content-between p-2 px-3 border-bottom border-secondary border-opacity-10">
+                    <span className="text-white small text-uppercase" style={{fontSize: '0.7rem'}}>{spell.name}</span>
+                    <span className="text-primary fw-bold small" style={{fontSize: '0.6rem'}}>CV: {spell.castingValue}+</span>
+                  </div>
                 ))}
               </div>
             </div>
           </div>
         )}
 
-        {activeSpellLore.length > 0 && (
-          <div className="col-12 col-md-6">
-            <div className="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark border border-secondary border-opacity-25 blur-bg h-100">
-              <div className="card-header bg-black py-2 px-3 border-bottom border-primary border-opacity-25">
-                <h6 className="mb-0 fw-bold text-uppercase small text-primary">🪄 Sorts ({displayData.spellLore})</h6>
-              </div>
-              <div className="list-group list-group-flush">
-                {activeSpellLore.map((spell, idx) => (
-                  <div key={idx} className="list-group-item bg-transparent text-white border-secondary border-opacity-10 d-flex align-items-center p-3">
-                    <span className="fw-bold text-uppercase" style={{ fontSize: '0.8rem' }}>{spell.name}</span>
-                    <span className="ms-auto badge bg-primary bg-opacity-25 border border-primary rounded-pill" style={{ fontSize: '0.6rem' }}>CV: {spell.castingValue}+</span>
-                  </div>
+        {/* MANIFESTATIONS */}
+        {factionManifestations.length > 0 && (
+          <div className="col-12 col-md-4">
+             <div className="bg-black border border-info border-opacity-25 h-100">
+              <div className="bg-info text-black p-1 px-3 fw-bold text-uppercase small">Manifestations</div>
+              <div className="p-0">
+                {factionManifestations.map((m, idx) => (
+                  <Link key={idx} className="text-decoration-none d-flex justify-content-between p-2 px-3 border-bottom border-secondary border-opacity-10" to={`/my-lists/${list.id}/warscroll/${formatSlug(m.name)}`}>
+                    <span className="text-white small text-uppercase" style={{fontSize: '0.7rem'}}>{m.name}</span>
+                    <span className="text-info fw-bold small" style={{fontSize: '0.6rem'}}>CV: {m.displayCV}+</span>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -274,10 +279,19 @@ export default function ListDetail() {
       </div>
 
       <style>{`
+        .data-card { display: flex; background: #050505; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+        .card-points-sidebar { width: 65px; min-width: 65px; background: #0dcaf0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; font-weight: 900; }
+        .points-label { font-size: 0.5rem; line-height: 1; opacity: 0.8; }
+        .points-val { font-size: 1rem; line-height: 1.1; }
+        .card-main { flex-grow: 1; position: relative; display: flex; align-items: center; padding: 0 15px; overflow: hidden; }
+        .card-image-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+        .card-content-overlay { position: relative; z-index: 2; flex-grow: 1; }
+        .faction-pill { font-size: 0.55rem; background: rgba(0, 0, 0, 0.7); color: #ffc107; padding: 2px 8px; border: 1px solid #ffc107; text-transform: uppercase; font-weight: bold; }
+        .army-name-display { color: #fff; font-weight: 800; letter-spacing: 1px; }
+        .bottom-meta { font-size: 0.65rem; color: rgba(255,255,255,0.6); font-weight: bold; }
+        .dock-btn { background: rgba(0,0,0,0.5); border: 1px solid #0dcaf0; color: #0dcaf0; width: auto; padding: 0.5rem 1rem; height: 35px; display: flex; align-items: center; justify-content: center; }
+        .shadow-text { text-shadow: 2px 2px 4px #000; }
         .blur-bg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .shadow-text { text-shadow: 2px 2px 8px rgba(0,0,0,0.8); }
-        .list-group-item-action:hover { background-color: rgba(255,255,255,0.05) !important; }
-        .last-child-border-0:last-child { border-bottom: 0 !important; }
       `}</style>
     </div>
   );

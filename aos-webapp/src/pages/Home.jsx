@@ -131,7 +131,7 @@ export default function Home() {
       <div className="row g-3 mb-5">
         {Object.keys(warscrollsData).map((cat) => (
           <div key={cat} className="col-12 col-md-6">
-            <Link to={`/category/${cat.toLowerCase()}`} className="card border-0 shadow-lg rounded-4 overflow-hidden position-relative category-card" style={{ height: '140px' }}>
+            <Link to={`/category/${cat.toLowerCase()}`} className="card border-0 shadow-lg overflow-hidden position-relative category-card" style={{ height: '140px' }}>
               <div className="position-absolute w-100 h-100 banner-img" style={{ 
                 backgroundImage: `url(${CATEGORY_BANNERS[cat.toUpperCase()]})`, 
                 backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.5)' 
@@ -152,7 +152,7 @@ export default function Home() {
       <div className="row g-3 mb-5">
         <div className="col-12 col-md-4">
           <Link to="/battleplans" className="text-decoration-none d-block">
-            <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
+            <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card">
               <div className="handbook-banner" style={{ 
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('/battleplans/GeneralHandbook_files/generalhandbook.jpg')`,
                 height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'
@@ -165,7 +165,7 @@ export default function Home() {
         
         <div className="col-12 col-md-4">
           <Link to="/battletactics" className="text-decoration-none d-block">
-            <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
+            <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card">
               <div className="handbook-banner" style={{ 
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('/img/banner_seraphon.webp')`,
                 height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'
@@ -178,7 +178,7 @@ export default function Home() {
 
         <div className="col-12 col-md-4">
           <Link to="/history" className="text-decoration-none d-block">
-            <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card rounded-4">
+            <div className="card bg-dark text-white border-secondary shadow-lg overflow-hidden handbook-card">
               <div className="handbook-banner" style={{ 
                 backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('/img/banner_khorne.webp')`,
                 height: '100px', backgroundSize: 'cover', backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'
@@ -235,17 +235,17 @@ export default function Home() {
       )}
 
       <style>{`
-        .search-trigger-compact { background: #111; border: 1px solid #333; border-radius: 8px; padding: 12px 20px; color: #777; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .search-trigger-compact { background: #111; border: 1px solid #333; border-radius: 0; padding: 12px 20px; color: #777; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .search-fullscreen-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #050505; z-index: 10000; }
-        .search-item-compact { background: #111; border: 1px solid #222; border-radius: 6px; padding: 12px; display: block; text-decoration: none; transition: 0.2s; }
+        .search-item-compact { background: #111; border: 1px solid #222; border-radius: 0; padding: 12px; display: block; text-decoration: none; transition: 0.2s; }
         .search-item-compact:hover { background: #1a1a1a; border-color: #444; }
-        .btn-filter-mini { background: #1a1a1a; border: 1px solid #333; color: #888; font-size: 0.7rem; padding: 4px 12px; border-radius: 4px; border: 1px solid transparent; cursor: pointer; }
+        .btn-filter-mini { background: #1a1a1a; border: 1px solid #333; color: #888; font-size: 0.7rem; padding: 4px 12px; border-radius: 0; border: 1px solid transparent; cursor: pointer; }
         .btn-filter-mini.active { background: #0dcaf0; color: #000; border-color: #0dcaf0; }
         .name-mini { color: #eee; font-weight: 600; font-size: 0.95rem; }
         .faction-mini { font-size: 0.75rem; color: #0dcaf0; text-transform: uppercase; margin-top: 2px; }
-        .badge-mini { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 0.75rem; font-weight: 900; color: #000; }
+        .badge-mini { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 0; font-size: 0.75rem; font-weight: 900; color: #000; }
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #333 #050505; }
-        .category-card { border: 1px solid rgba(255,255,255,0.05) !important; transition: all 0.3s ease; }
+        .category-card {transition: all 0.3s ease; border-radius: 0 !important; transition: all 0.3s ease; }
         .category-card:hover { border-color: #ffc107 !important; transform: translateY(-3px); }
         .shadow-text { text-shadow: 2px 2px 10px rgba(0,0,0,1); }
         .handbook-card { transition: all 0.3s ease; border: 1px solid #333 !important; }

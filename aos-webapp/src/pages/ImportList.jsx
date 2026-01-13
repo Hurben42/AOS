@@ -148,7 +148,7 @@ export default function ImportList() {
 
   return (
     <div className="container mt-4 pb-5 px-3">
-      <div className="card bg-dark border-secondary shadow-lg rounded-4 overflow-hidden">
+      <div className="card bg-dark border-secondary shadow-lg overflow-hidden">
         <div className="card-header bg-black py-3 text-center border-bottom border-secondary">
           <h5 className="mb-0 fw-bold text-info text-uppercase">Importateur AOS 4.0</h5>
         </div>
@@ -161,7 +161,7 @@ export default function ImportList() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           ></textarea>
-          <button className="btn btn-info fw-bold w-100 py-3 rounded-pill shadow-sm" onClick={handleImport}>
+          <button className="btn btn-info fw-bold w-100 py-3 shadow-sm" onClick={handleImport}>
             🚀 Analyser et Enregistrer
           </button>
         </div>
