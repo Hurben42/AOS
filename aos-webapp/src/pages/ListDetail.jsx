@@ -141,7 +141,7 @@ export default function ListDetail() {
             <span className="badge border border-warning text-warning align-self-center mb-2" style={{ fontSize: '0.7rem' }}>
               {displayData.faction?.toUpperCase()}
             </span>
-                        <h2 className="text-white fw-900 text-uppercase mb-1 shadow-text">{list.title || displayData.customTitle}</h2>
+                        <h2 className="text-white fw-900 text-uppercase mb-1 shadow-text">{list.title}</h2>
 
             <div className="text-primary small fw-bold">SUBFACTION: {displayData.subFaction}</div>
           </div>
