@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import warscrollsData from "../data/warscrolls.json";
 import manifestationsIndex from "../data/manifestationsIndex.json";
 import spellsIndex from "../data/spellsIndex.json";
-import factionTerrainIndex from "../data/factionTerrainIndex.json";
 import battleTacticsData from "../data/battletactics.json";
 
 export default function ListDetail() {
@@ -11,43 +10,47 @@ export default function ListDetail() {
   const [list, setList] = useState(null);
   const [uniqueUnits, setUniqueUnits] = useState([]);
   const [factionManifestations, setFactionManifestations] = useState([]);
-  const [factionTerrainWS, setFactionTerrainWS] = useState(null);
   const [activeSpellLore, setActiveSpellLore] = useState([]);
   const [viewMode, setViewMode] = useState("regiments");
 
   const bannerMapping = {
-    "Helsmiths": "helsmiths", "Ossiarch Bonereapers": "ossiarch", "Soulblight Gravelords": "soulblight",
-    "Nighthaunt": "nighthaunt", "Flesh-eater Courts": "flesheater", "Sons of Behemat": "sonsofbehemat",
-    "Idoneth Deepkin": "idoneth", "Blades of Khorne": "khorne", "Sylvaneth": "sylvaneth",
-    "Disciples of Tzeentch": "tzeentch", "Ironjawz": "ironjawz", "Gloomspite Gitz": "gloomspite",
-    "Slaves to Darkness": "slaves", "Lumineth Realm-lords": "lumineth", "Hedonites of Slaanesh": "slaanesh",
-    "Skaven": "skaven", "Daughters of Khaine": "daughtersofkhaine", "Kruleboyz": "kruleboyz",
-    "Kharadron Overlords": "kharadron", "Cities of Sigmar": "citiesofsigmar", "Fyreslayers": "fyreslayers",
-    "Seraphon": "seraphon", "Stormcast Eternals": "stormcast", "Maggotkin of Nurgle": "nurgle", "Ogor Mawtribes": "ogor"
+    "cities of sigmar": "citiesofsigmar",
+    "daughters of khaine": "daughtersofkhaine",
+    "flesh-eater courts": "flesheater",
+    "fyreslayers": "fyreslayers",
+    "gloomspite gitz": "gloomspite",
+    "helsmiths": "helsmiths",
+    "idoneth deepkin": "idoneth",
+    "ironjawz": "ironjawz",
+    "kharadron overlords": "kharadron",
+    "blades of khorne": "khorne",
+    "kruleboyz": "kruleboyz",
+    "lumineth realm-lords": "lumineth",
+    "nighthaunt": "nighthaunt",
+    "maggotkin of nurgle": "nurgle",
+    "ogor mawtribes": "ogor",
+    "ossiarch bonereapers": "ossiarch",
+    "seraphon": "seraphon",
+    "skaven": "skaven",
+    "hedonites of slaanesh": "slaanesh",
+    "slaves to darkness": "slaves",
+    "sons of behemat": "sonsofbehemat",
+    "soulblight gravelords": "soulblight",
+    "stormcast eternals": "stormcast",
+    "sylvaneth": "sylvaneth",
+    "disciples of tzeentch": "tzeentch"
   };
 
-  // LOGIQUE DE TRAITEMENT DES DONNÉES CONSERVÉE
-  const normalize = (str) => 
-    str?.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "").trim() || "";
-
-  const getKeywordsFromWS = (html) => {
-    if (!html) return [];
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-    const keywordElement = doc.querySelector(".wsKeywordLine1");
-    if (!keywordElement) return [];
-    return keywordElement.textContent.replace(/(KEYWORDS|MOTS-CLÉS)\s*:/i, "").toUpperCase().split(/[,•]/).map(k => k.trim()).filter(k => k !== "");
-  };
+  const normalize = (str) => str?.toLowerCase().trim() || "";
+  const formatSlug = (name) => name.toLowerCase().replace(/['’]/g, '-').replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
 
   const getUnitData = (rawName, allWarscrolls) => {
-    if (!rawName || rawName.trim().startsWith('•')) return null;
-    let cleanName = rawName.replace(/\s\(\d+.*pts\)$/i, "").replace(/\s\(\d+\)$/i, "").trim();
+    if (!rawName || typeof rawName !== 'string') return null;
+    let cleanName = rawName.replace(/\s\(\d+.*pts\)$/i, "").trim();
     const norm = normalize(cleanName);
     const match = allWarscrolls.find(ws => normalize(ws.name) === norm || normalize(ws.slug) === norm);
-    
     return {
       displayName: match ? match.name : cleanName,
-      keywords: match ? getKeywordsFromWS(match.html) : [],
       slug: match ? formatSlug(match.name) : formatSlug(cleanName)
     };
   };
@@ -61,43 +64,39 @@ export default function ListDetail() {
       const data = found.listData || found; 
       const allWarscrolls = Object.values(warscrollsData).flatMap(cat => Object.values(cat).flatMap(f => f));
 
-      const cleanFactionKey = bannerMapping[data.faction] || normalize(data.faction);
-      const factionSpells = spellsIndex.factions[cleanFactionKey] || {};
-      const loreName = data.spellLore;
-      const matchedLore = Object.keys(factionSpells).find(l => normalize(l) === normalize(loreName));
+      const factionNorm = normalize(data.faction);
+      const matchedKey = Object.keys(bannerMapping).find(key => factionNorm.includes(key)) || "slaves";
+      const bannerFile = bannerMapping[matchedKey];
+
+      // Spell Lore
+      const factionSpells = spellsIndex.factions?.[bannerFile] || {};
+      const matchedLore = Object.keys(factionSpells).find(l => normalize(l) === normalize(data.spellLore));
       if (matchedLore) setActiveSpellLore(factionSpells[matchedLore]);
 
-      const terrainInfo = factionTerrainIndex[cleanFactionKey];
-      if (terrainInfo) {
-        const terrainWS = allWarscrolls.find(ws => normalize(ws.name) === normalize(terrainInfo.name));
-        if (terrainWS) setFactionTerrainWS(terrainWS);
-      }
-
+      // Manifestations
       const manifestationLoreName = data.manifestationLore;
       const mfs = [];
-      const seenMfs = new Set();
-      const allowedGenericNames = (manifestationsIndex.generics[manifestationLoreName] || []).map(n => normalize(n));
-      const factionMfsData = manifestationsIndex.factions[cleanFactionKey] || [];
+      const allowedGenericNames = (manifestationsIndex.generics?.[manifestationLoreName] || []).map(n => normalize(n));
+      const factionMfsData = manifestationsIndex.factions?.[bannerFile] || [];
       const allowedFactionNames = factionMfsData.map(m => normalize(m.name));
 
       allWarscrolls.forEach(ws => {
         const normWSName = normalize(ws.name);
-        if (getKeywordsFromWS(ws.html).includes("MANIFESTATION")) {
-          if ((allowedGenericNames.includes(normWSName) || allowedFactionNames.includes(normWSName)) && !seenMfs.has(normWSName)) {
-            seenMfs.add(normWSName);
-            const cvMatch = [...factionMfsData, ...(manifestationsIndex.warscrolls || [])].find(m => normalize(m.name) === normWSName);
-            mfs.push({ ...ws, displayCV: cvMatch ? cvMatch.castingValue : "7" });
+        if (ws.html?.toUpperCase().includes("MANIFESTATION")) {
+          if (allowedGenericNames.includes(normWSName) || allowedFactionNames.includes(normWSName)) {
+            mfs.push({ ...ws });
           }
         }
       });
       setFactionManifestations(mfs);
 
+      // Compiled Units
       const regs = data.regiments || [];
       const compiledUnits = new Map();
       regs.forEach(reg => {
         const items = [reg.hero, ...(reg.units || [])].filter(Boolean);
-        items.forEach(item => {
-          const uInfo = getUnitData(item.name || item.unitName || item, allWarscrolls);
+        items.forEach(uName => {
+          const uInfo = getUnitData(uName, allWarscrolls);
           if (uInfo && !compiledUnits.has(normalize(uInfo.displayName))) {
             compiledUnits.set(normalize(uInfo.displayName), uInfo);
           }
@@ -108,99 +107,113 @@ export default function ListDetail() {
   }, [id]);
 
   const detectedTactics = useMemo(() => {
-    if (!list || !battleTacticsData) return [];
+    if (!list) return [];
     const data = list.listData || list;
-    const savedTacticIdentifiers = data.battle_tactics || [];
-    return battleTacticsData.filter(bt => savedTacticIdentifiers.some(identifier => normalize(bt.id) === normalize(identifier) || normalize(bt.name) === normalize(identifier)));
+    return (battleTacticsData || []).filter(bt => 
+      (data.battle_tactics || []).some(tName => normalize(tName) === normalize(bt.name))
+    );
   }, [list]);
 
-  const formatSlug = (name) => name.toLowerCase().replace(/['’]/g, '-').replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
-  
-  const getBadgeColor = (k) => {
-    if (k.includes("HERO")) return "bg-warning text-dark fw-bold";
-    if (k.includes("WIZARD")) return "bg-primary text-white";
-    if (k.includes("MONSTER")) return "bg-danger text-white";
-    return "bg-dark text-white-50 border border-secondary border-opacity-50";
-  };
-
-  if (!list) return <div className="container mt-5 text-center text-white font-monospace"><div className="spinner-border text-info mb-3"></div><p>SYNCHRONISATION...</p></div>;
+  if (!list) return <div className="p-5 text-center text-info font-monospace">CHARGEMENT DES DONNÉES...</div>;
 
   const displayData = list.listData || list;
   const allWarscrolls = Object.values(warscrollsData).flatMap(cat => Object.values(cat).flatMap(f => f));
-  const banner = bannerMapping[displayData.faction] || "default";
+  const factionNorm = normalize(displayData.faction);
+  const matchedKey = Object.keys(bannerMapping).find(key => factionNorm.includes(key)) || "slaves";
+  const banner = bannerMapping[matchedKey];
 
   return (
-    <div className="container mt-4 pb-5 px-3 font-monospace">
-      {/* HEADER STYLE COMMAND TABLET */}
-      <div className="data-card mb-4 shadow-lg border-info border-opacity-25" style={{ height: 'auto', minHeight: '120px' }}>
-        <div className="card-points-sidebar">
-          <div className="points-label">TOTAL</div>
-          <div className="points-val">{displayData.points || "0"}</div>
-          <div className="points-label mt-1">PTS</div>
-        </div>
+    <div className="container mt-3 pb-5 px-3 font-monospace">
+      <div className="mb-3">
+        <Link to="/my-lists" className="btn btn-sm btn-outline-secondary text-uppercase fw-bold border-opacity-25 py-1 rounded-0">
+          <i className="bi bi-chevron-left me-1"></i> Retour
+        </Link>
+      </div>
 
-        <div className="card-main">
-          <div className="card-image-bg" style={{ backgroundImage: `url(/img/banner_${banner}.webp)`, opacity: '0.4' }}></div>
-          <div className="card-content-overlay py-3">
-            <div className="d-flex justify-content-between align-items-start">
-              <div>
-                <span className="faction-pill">{displayData.faction}</span>
-                <h3 className="army-name-display text-uppercase mt-2 mb-1 shadow-text">{list.title || displayData.customTitle}</h3>
-                <div className="bottom-meta">
-                  <span className="text-info">SUBFACTION:</span> {displayData.subFaction}
-                </div>
-              </div>
-              <Link to="/my-lists" className="dock-btn text-decoration-none">
-                <i className="bi bi-arrow-left me-1"></i> BACK
-              </Link>
-            </div>
+      {/* HEADER */}
+      <div className="bg-black border border-secondary border-opacity-25 mb-4 shadow-lg overflow-hidden">
+        <div className="position-relative" style={{ height: '140px' }}>
+          <div className="card-image-bg" style={{ 
+            backgroundImage: `url("/img/banner_${banner}.webp")`, 
+            position: 'absolute', inset: 0, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.5 
+          }}></div>
+          <div className="position-relative z-2 p-2 d-flex flex-column h-100 justify-content-center align-items-center">
+            <span className="badge border border-warning text-warning align-self-center mb-2" style={{ fontSize: '0.7rem' }}>
+              {displayData.faction?.toUpperCase()}
+            </span>
+                        <h2 className="text-white fw-900 text-uppercase mb-1 shadow-text">{list.title || displayData.customTitle}</h2>
+
+            <div className="text-primary small fw-bold">SUBFACTION: {displayData.subFaction}</div>
+          </div>
+        </div>
+        <div className="bg-black text-warning py-1 px-3 d-flex justify-content-center align-items-center">
+          <div className="d-flex align-items-baseline">
+            <span className="fw-900 me-1">{displayData.points || "0"}</span>
+            <span className="fw-bold small">PTS</span>
           </div>
         </div>
       </div>
 
-      {/* SELECTEUR DE VUE STYLE TERMINAL */}
+      {/* NAVIGATION VUES */}
       <div className="d-flex gap-2 mb-4">
-        <button 
-          className={`flex-fill btn btn-sm rounded-0 fw-bold text-uppercase ${viewMode === 'regiments' ? 'btn-info text-black' : 'btn-outline-secondary text-white'}`}
-          onClick={() => setViewMode("regiments")}
-        >
-          [ Vue Régiments ]
+        <button className={`flex-fill btn btn-sm rounded-0 fw-bold ${viewMode === 'regiments' ? 'btn-info text-black' : 'btn-outline-secondary text-white'}`} onClick={() => setViewMode("regiments")}>
+          [ RÉGIMENTS ]
         </button>
-        <button 
-          className={`flex-fill btn btn-sm rounded-0 fw-bold text-uppercase ${viewMode === 'compiled' ? 'btn-info text-black' : 'btn-outline-secondary text-white'}`}
-          onClick={() => setViewMode("compiled")}
-        >
-          [ Vue Compilée ]
+        <button className={`flex-fill btn btn-sm rounded-0 fw-bold ${viewMode === 'compiled' ? 'btn-info text-black' : 'btn-outline-secondary text-white'}`} onClick={() => setViewMode("compiled")}>
+          [ UNITÉS ]
         </button>
       </div>
 
-      {/* UNITÉS DE GUERRE */}
+      {/* VUE RÉGIMENTS AVEC ICÔNES SPÉCIFIQUES */}
       <div className="row g-3">
         {viewMode === "regiments" ? (
           (displayData.regiments || []).map((reg, rIdx) => (
             <div key={rIdx} className="col-12">
-              <div className="bg-black border border-secondary border-opacity-25 p-3 position-relative">
-                <div className="position-absolute top-0 start-0 bg-white text-black px-2 fw-bold" style={{ fontSize: '0.6rem' }}>
-                  REGIMENT #{rIdx + 1} {rIdx === 0 ? "— GÉNÉRAL" : ""}
+              <div className="bg-black border border-secondary border-opacity-25 p-3 position-relative shadow-sm">
+                <div className="position-absolute top-0 start-0 bg-white text-black px-2 fw-bold" style={{ fontSize: '0.6rem', letterSpacing: '1px' }}>
+                  RÉGIMENT #{rIdx + 1}
                 </div>
+                
                 <div className="mt-2">
                   {[reg.hero, ...(reg.units || [])].filter(Boolean).map((u, uIdx) => {
-                    const uInfo = getUnitData(u.name || u.unitName || u, allWarscrolls);
+                    const uName = u.name || u.unitName || (typeof u === 'string' ? u : "");
+                    const uInfo = getUnitData(uName, allWarscrolls);
                     if (!uInfo) return null;
+
+                    const isHero = uIdx === 0;
+
                     return (
-                      <div key={uIdx} className="d-flex flex-column py-2 border-bottom border-secondary border-opacity-10 position-relative">
-                        <Link className="text-decoration-none text-white d-flex justify-content-between align-items-center" to={`/my-lists/${list.id}/warscroll/${uInfo.slug}`}>
-                          <span className={`fw-bold text-uppercase ${uIdx === 0 ? 'text-info' : ''}`} style={{ fontSize: '0.85rem' }}>
-                             {uIdx === 0 ? <i className="bi bi-star-fill me-2" style={{fontSize: '0.7rem'}}></i> : "-- "}{uInfo.displayName}
+                      <div key={uIdx} className="py-2 border-bottom border-secondary border-opacity-10">
+                        <Link to={`/my-lists/${list.id}/warscroll/${uInfo.slug}`} className="text-decoration-none d-flex justify-content-between align-items-center">
+                          <span className={`fw-bold text-uppercase ${isHero ? 'text-warning' : 'text-white-50'}`} style={{ fontSize: '0.85rem' }}>
+                            {isHero ? <i className="bi bi-star-fill me-2"></i> : "-- "}{uInfo.displayName}
                           </span>
-                          <i className="bi bi-chevron-right text-secondary" style={{fontSize: '0.7rem'}}></i>
+                          <i className="bi bi-chevron-right text-info small"></i>
                         </Link>
-                        <div className="d-flex flex-wrap gap-1 mt-1">
-                          {uIdx === 0 && <span className="badge bg-warning text-dark fw-bold" style={{fontSize: '0.45rem'}}>HERO</span>}
-                          {uInfo.keywords.map((k, i) => (
-                            <span key={i} className={`badge ${getBadgeColor(k)}`} style={{ fontSize: '0.45rem' }}>{k}</span>
-                          ))}
-                        </div>
+
+                        {/* AFFICHAGE DES OPTIMISATIONS AVEC ICÔNES DISTINCTES */}
+                        {isHero && reg.heroOptions && reg.heroOptions.length > 0 && (
+                          <div className="ms-3 mt-1 d-flex flex-wrap gap-3">
+                            {reg.heroOptions.map((opt, oIdx) => {
+                              // On détermine l'icône : si c'est un trait (souvent en haut de liste) ou artefact
+                              // Pour faire simple, on alterne ou on check si le nom est connu
+                              const isTrait = oIdx === 0; // Souvent le premier importé est le trait
+
+                              return (
+                                <div key={oIdx} className="d-flex align-items-center text-info" style={{ fontSize: '0.75rem' }}>
+                                  {isTrait ? (
+                                    <i className="bi bi-patch-check-fill me-1" title="Trait Héroïque"></i> // Icône Couronne/Badge
+                                  ) : (
+                                    <i className="bi bi-gem me-1" title="Artefact de Pouvoir"></i> // Icône Artefact/Gemme
+                                  )}
+                                  <span className="text-uppercase fw-bold" style={{ fontStyle: 'italic', letterSpacing: '0.5px' }}>
+                                    {opt}
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -209,50 +222,40 @@ export default function ListDetail() {
             </div>
           ))
         ) : (
+          /* VUE UNITÉS COMPILÉES */
           uniqueUnits.map((unit, idx) => (
             <div key={idx} className="col-12 col-md-6">
-              <div className="bg-black border border-secondary border-opacity-25 p-3">
-                <Link className="text-decoration-none text-white d-flex justify-content-between align-items-center" to={`/my-lists/${list.id}/warscroll/${unit.slug}`}>
-                  <span className="fw-bold text-uppercase text-info" style={{ fontSize: '0.85rem' }}>{unit.displayName}</span>
-                  <i className="bi bi-chevron-right text-secondary"></i>
-                </Link>
-                <div className="d-flex flex-wrap gap-1 mt-1">
-                  {unit.keywords.map((k, i) => (
-                    <span key={i} className={`badge ${getBadgeColor(k)}`} style={{ fontSize: '0.45rem' }}>{k}</span>
-                  ))}
-                </div>
-              </div>
+              <Link to={`/my-lists/${list.id}/warscroll/${unit.slug}`} className="text-decoration-none bg-black border border-secondary border-opacity-25 p-2 d-flex justify-content-between align-items-center">
+                <span className="fw-bold text-uppercase text-white" style={{ fontSize: '0.85rem' }}>{unit.displayName}</span>
+                <i className="bi bi-chevron-right text-secondary small"></i>
+              </Link>
             </div>
           ))
         )}
       </div>
 
-      {/* RESSOURCES SECONDAIRES */}
+      {/* RESSOURCES (TACTIQUES, SORTS, MFS) */}
       <div className="row g-3 mt-4">
-        {/* TACTIQUES */}
         <div className="col-12 col-md-4">
            <div className="bg-black border border-danger border-opacity-25 h-100">
             <div className="bg-danger text-white p-1 px-3 fw-bold text-uppercase small">Battle Tactics</div>
             <div className="p-3">
-              {detectedTactics.length > 0 ? detectedTactics.map((bt, idx) => (
-                <div key={idx} className="text-white-50 small mb-2 text-uppercase">
-                  <i className="bi bi-chevron-right text-danger me-2"></i>{bt.name}
-                </div>
-              )) : <small className="text-muted">AUCUNE TACTIQUE SÉLECTIONNÉE</small>}
+              {detectedTactics.map((bt, idx) => (
+                <div key={idx} className="text-white-50 small mb-2"><i className="bi bi-caret-right-fill text-danger me-2"></i>{bt.name}</div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* SORTS */}
         {activeSpellLore.length > 0 && (
           <div className="col-12 col-md-4">
             <div className="bg-black border border-primary border-opacity-25 h-100">
-              <div className="bg-primary text-white p-1 px-3 fw-bold text-uppercase small">Lore: {displayData.spellLore}</div>
+              <div className="bg-primary text-white p-1 px-3 fw-bold text-uppercase small">Spell Lore: {displayData.spellLore}</div>
               <div className="p-0">
                 {activeSpellLore.map((spell, idx) => (
                   <div key={idx} className="d-flex justify-content-between p-2 px-3 border-bottom border-secondary border-opacity-10">
                     <span className="text-white small text-uppercase" style={{fontSize: '0.7rem'}}>{spell.name}</span>
-                    <span className="text-primary fw-bold small" style={{fontSize: '0.6rem'}}>CV: {spell.castingValue}+</span>
+                    <span className="text-primary fw-bold small">CV: {spell.castingValue}+</span>
                   </div>
                 ))}
               </div>
@@ -260,16 +263,15 @@ export default function ListDetail() {
           </div>
         )}
 
-        {/* MANIFESTATIONS */}
         {factionManifestations.length > 0 && (
           <div className="col-12 col-md-4">
              <div className="bg-black border border-info border-opacity-25 h-100">
-              <div className="bg-info text-black p-1 px-3 fw-bold text-uppercase small">Manifestations</div>
+              <div className="bg-info text-black p-1 px-3 fw-bold text-uppercase small">Manifestations: {displayData.manifestationLore}</div>
               <div className="p-0">
                 {factionManifestations.map((m, idx) => (
                   <Link key={idx} className="text-decoration-none d-flex justify-content-between p-2 px-3 border-bottom border-secondary border-opacity-10" to={`/my-lists/${list.id}/warscroll/${formatSlug(m.name)}`}>
                     <span className="text-white small text-uppercase" style={{fontSize: '0.7rem'}}>{m.name}</span>
-                    <span className="text-info fw-bold small" style={{fontSize: '0.6rem'}}>CV: {m.displayCV}+</span>
+                    <span className="text-info fw-bold small">CV: 7+</span>
                   </Link>
                 ))}
               </div>
@@ -279,19 +281,9 @@ export default function ListDetail() {
       </div>
 
       <style>{`
-        .data-card { display: flex; background: #050505; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
-        .card-points-sidebar { width: 65px; min-width: 65px; background: #0dcaf0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; font-weight: 900; }
-        .points-label { font-size: 0.5rem; line-height: 1; opacity: 0.8; }
-        .points-val { font-size: 1rem; line-height: 1.1; }
-        .card-main { flex-grow: 1; position: relative; display: flex; align-items: center; padding: 0 15px; overflow: hidden; }
-        .card-image-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
-        .card-content-overlay { position: relative; z-index: 2; flex-grow: 1; }
-        .faction-pill { font-size: 0.55rem; background: rgba(0, 0, 0, 0.7); color: #ffc107; padding: 2px 8px; border: 1px solid #ffc107; text-transform: uppercase; font-weight: bold; }
-        .army-name-display { color: #fff; font-weight: 800; letter-spacing: 1px; }
-        .bottom-meta { font-size: 0.65rem; color: rgba(255,255,255,0.6); font-weight: bold; }
-        .dock-btn { background: rgba(0,0,0,0.5); border: 1px solid #0dcaf0; color: #0dcaf0; width: auto; padding: 0.5rem 1rem; height: 35px; display: flex; align-items: center; justify-content: center; }
+        .fw-900 { font-weight: 900; }
         .shadow-text { text-shadow: 2px 2px 4px #000; }
-        .blur-bg { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .tracking-tighter { letter-spacing: -1px; }
       `}</style>
     </div>
   );

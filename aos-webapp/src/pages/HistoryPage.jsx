@@ -90,7 +90,7 @@ export default function HistoryPage() {
 
       {/* HEADER PAGE */}
       <div className="d-flex justify-content-between align-items-center mb-4 pt-2">
-        <button onClick={() => navigate("/")} className="btn btn-outline-secondary btn-sm px-3 text-white border-secondary"><span className="me-2">←</span>Retour</button>
+        <button onClick={() => navigate("/")} className="btn btn-outline-secondary btn-sm px-3 text-white border-secondary rounded-0"><span className="me-2">←</span>Retour</button>
         <h2 className="fw-bold text-white mb-0 text-uppercase tracking-tighter">Historique</h2>
       </div>
 
