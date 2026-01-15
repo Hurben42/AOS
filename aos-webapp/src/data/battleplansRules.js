@@ -1,8 +1,7 @@
 export const battleplansData = {
   "Passing Seasons": {
     "Passing Seasons": {
-      "scoring": "5 VP par objectif contrôlé",
-      "twist": "Rounds 2 et 4 : L'outsider peut utiliser 'Burgeoning Rejuvenation' (Soin D3 ou Ward 6+). Rounds 3 et 5 : L'outsider a 'Powerful Resurgence' (+1 Wound en combat).",
+      "scoring": "• Rounds 1, 3 et 5 : Marquez 5 VP pour chaque objectif Gnarlroot que vous contrôlez.\n \n• Rounds 2 et 4 : Marquez 5 VP pour chaque objectif Oakenbrow que vous contrôlez.",      "twist": "Rounds 2 et 4 : L'outsider peut utiliser 'Burgeoning Rejuvenation' (Soin D3 ou Ward 6+). Rounds 3 et 5 : L'outsider a 'Powerful Resurgence' (+1 Wound en combat).",
       "details": "Rounds 1, 3, 5 : 5VP par objectif. Rounds 2, 4 : 5VP par objectif."
     },
     "Paths of the Fey": {
@@ -31,7 +30,7 @@ export const battleplansData = {
       "details": "Une ligne de flux est formée si un joueur contrôle tous les objectifs d'une ligne horizontale ou verticale."
     },
     "Noxious Nexus": {
-      "scoring": "5VP (1 obj) | 3VP (paire d'obj) | 2VP (Plus d'obj)",
+      "scoring": "• Premier Round : Les objectifs ne peuvent être ni contrôlés ni marqués.\n• 5 VP si vous contrôlez l'objectif Oakenbrow.\n• 3 VP si vous contrôlez l'objectif Gnarlroot.\n• 2 VP si vous contrôlez l'objectif Heartwood.\n• Fin de bataille : 10 VP bonus si vous contrôlez l'objectif Heartwood.",
       "twist": "L'outsider peut utiliser 'Defense of the Realm' : donne +1 Rend aux armes de mêlée sur une paire d'objectifs choisie.",
       "details": "Le scoring par paire encourage une occupation symétrique de la table."
     },
@@ -46,7 +45,7 @@ export const battleplansData = {
       "details": "Chaque joueur gagne 1 point de 'liferoot' par décor contrôlé à la fin de son tour."
     },
     "Lifecycle": {
-      "scoring": "2VP (Obj Primaire) | 1VP (Chaque Obj Secondaire) | 4VP (Contrôle total)",
+      "scoring": "• 4 VP si vous contrôlez au moins 1 objectif.\n• 2 VP si vous contrôlez plus d'objectifs que l'adversaire.\n• 4 VP si vous contrôlez à la fois Oakenbrow et Gnarlroot (Round 1 uniquement).\n• 2 VP si vous contrôlez l'objectif primaire.\n• 1 VP pour chaque objectif secondaire contrôlé.",
       "twist": "L'outsider (ou gagnant du roll-off au Round 2) lance le 'Lifecycle' en choisissant l'objectif primaire. Le cycle tourne à chaque round.",
       "details": "Le score dépend de la position de l'objectif dans le cycle horaire."
     },
