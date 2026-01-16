@@ -127,24 +127,26 @@ export default function Home() {
 
       <h1 className="text-white fw-bold mb-4 text-uppercase" style={{ letterSpacing: '3px', fontSize: '1.5rem' }}>Allégeances</h1>
 
-      {/* GRANDES ALLIANCES */}
+     {/* GRANDES ALLIANCES */}
       <div className="row g-3 mb-5">
-        {Object.keys(warscrollsData).map((cat) => (
-          <div key={cat} className="col-12 col-md-6">
-            <Link to={`/category/${cat.toLowerCase()}`} className="card border-0 shadow-lg overflow-hidden position-relative category-card" style={{ height: '140px' }}>
-              <div className="position-absolute w-100 h-100 banner-img" style={{ 
-                backgroundImage: `url(${CATEGORY_BANNERS[cat.toUpperCase()]})`, 
-                backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.5)' 
-              }} />
-              <div className="card-img-overlay d-flex flex-column align-items-center justify-content-center text-center">
-                <h2 className="text-white fw-black text-uppercase m-0 shadow-text" style={{ fontSize: '1.8rem', zIndex: 1 }}>{cat}</h2>
-                <span className="text-info small fw-bold text-uppercase mt-1" style={{ letterSpacing: '1px', zIndex: 1 }}>
-                  Voir les {Object.keys(warscrollsData[cat]).length} armées →
-                </span>
-              </div>
-            </Link>
-          </div>
-        ))}
+        {Object.keys(warscrollsData)
+          .filter(cat => cat.toLowerCase() !== "images") // On exclut "images" ici
+          .map((cat) => (
+            <div key={cat} className="col-12 col-md-6">
+              <Link to={`/category/${cat.toLowerCase()}`} className="card border-0 shadow-lg overflow-hidden position-relative category-card" style={{ height: '140px' }}>
+                <div className="position-absolute w-100 h-100 banner-img" style={{ 
+                  backgroundImage: `url(${CATEGORY_BANNERS[cat.toUpperCase()]})`, 
+                  backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.5)' 
+                }} />
+                <div className="card-img-overlay d-flex flex-column align-items-center justify-content-center text-center">
+                  <h2 className="text-white fw-black text-uppercase m-0 shadow-text" style={{ fontSize: '1.8rem', zIndex: 1 }}>{cat}</h2>
+                  <span className="text-info small fw-bold text-uppercase mt-1" style={{ letterSpacing: '1px', zIndex: 1 }}>
+                    Voir les {Object.keys(warscrollsData[cat]).length} armées →
+                  </span>
+                </div>
+              </Link>
+            </div>
+          ))}
       </div>
 
       {/* SECTION HANDBOOK */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import warscrollsData from "../data/warscrolls.json";
 import manifestationsIndex from "../data/manifestationsIndex.json";
+import manifestationsData from "../data/manifestations_detailed.json"; // TON NOUVEAU FICHIER
 import spellsIndex from "../data/spellsIndex.json";
 import battleTacticsData from "../data/battletactics.json";
 
@@ -42,11 +43,11 @@ export default function ListDetail() {
   };
 
   const normalize = (str) => str?.toLowerCase().trim() || "";
-  const formatSlug = (name) => name.toLowerCase().replace(/['’]/g, '-').replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
+  const formatSlug = (name) => name?.toLowerCase().replace(/['’]/g, '-').replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-') || "";
 
   const getUnitData = (rawName, allWarscrolls) => {
-    if (!rawName || typeof rawName !== 'string') return null;
-    let cleanName = rawName.replace(/\s\(\d+.*pts\)$/i, "").trim();
+    if (!rawName) return null;
+    let cleanName = typeof rawName === 'string' ? rawName.replace(/\s\(\d+.*pts\)$/i, "").trim() : rawName.name;
     const norm = normalize(cleanName);
     const match = allWarscrolls.find(ws => normalize(ws.name) === norm || normalize(ws.slug) === norm);
     return {
@@ -68,29 +69,41 @@ export default function ListDetail() {
       const matchedKey = Object.keys(bannerMapping).find(key => factionNorm.includes(key)) || "slaves";
       const bannerFile = bannerMapping[matchedKey];
 
-      // Spell Lore
+      // 1. Spell Lore
       const factionSpells = spellsIndex.factions?.[bannerFile] || {};
       const matchedLore = Object.keys(factionSpells).find(l => normalize(l) === normalize(data.spellLore));
       if (matchedLore) setActiveSpellLore(factionSpells[matchedLore]);
 
-      // Manifestations
+      // 2. Manifestations (LOGIQUE CORRIGÉE AVEC VALEURS DU JSON)
       const manifestationLoreName = data.manifestationLore;
       const mfs = [];
-      const allowedGenericNames = (manifestationsIndex.generics?.[manifestationLoreName] || []).map(n => normalize(n));
-      const factionMfsData = manifestationsIndex.factions?.[bannerFile] || [];
-      const allowedFactionNames = factionMfsData.map(m => normalize(m.name));
+      
+      // On prépare une liste plate de toutes les manifestations détaillées pour le lookup
+      const allDetailed = [
+        ...Object.values(manifestationsData.factions).flat(),
+        // Pour les generics, on crée des objets simples si c'est juste une liste de noms
+        ...Object.values(manifestationsData.generics).flat().map(n => typeof n === 'string' ? { name: n, castingValue: "7" } : n)
+      ];
+
+      const allowedNames = (manifestationsIndex.generics?.[manifestationLoreName] || []).map(n => normalize(n));
+      const factionMfsNames = (manifestationsIndex.factions?.[bannerFile] || []).map(m => normalize(m.name || m));
 
       allWarscrolls.forEach(ws => {
         const normWSName = normalize(ws.name);
         if (ws.html?.toUpperCase().includes("MANIFESTATION")) {
-          if (allowedGenericNames.includes(normWSName) || allowedFactionNames.includes(normWSName)) {
-            mfs.push({ ...ws });
+          if (allowedNames.includes(normWSName) || factionMfsNames.includes(normWSName)) {
+            // On cherche la castingValue dans le JSON détaillé
+            const detail = allDetailed.find(d => normalize(d.name) === normWSName);
+            mfs.push({ 
+              ...ws, 
+              castingValue: detail ? detail.castingValue : "7" 
+            });
           }
         }
       });
       setFactionManifestations(mfs);
 
-      // Compiled Units
+      // 3. Unités compilées
       const regs = data.regiments || [];
       const compiledUnits = new Map();
       regs.forEach(reg => {
@@ -125,7 +138,7 @@ export default function ListDetail() {
   return (
     <div className="container mt-3 pb-5 px-3 font-monospace">
       <div className="mb-3">
-        <Link to="/my-lists" className="btn btn-sm btn-outline-secondary text-uppercase fw-bold border-opacity-25 py-1 rounded-0">
+        <Link to="/my-lists" className="btn btn-sm btn-outline-secondary text-uppercase fw-bold border-opacity-25 py-1">
           <i className="bi bi-chevron-left me-1"></i> Retour
         </Link>
       </div>
@@ -137,24 +150,24 @@ export default function ListDetail() {
             backgroundImage: `url("/img/banner_${banner}.webp")`, 
             position: 'absolute', inset: 0, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.5 
           }}></div>
-          <div className="position-relative z-2 p-2 d-flex flex-column h-100 justify-content-center align-items-center">
-            <span className="badge border border-warning text-warning align-self-center mb-2" style={{ fontSize: '0.7rem' }}>
+          <div className="position-relative z-2 p-3 d-flex flex-column h-100 justify-content-center">
+            <span className="badge border border-warning text-warning align-self-start mb-2" style={{ fontSize: '0.6rem' }}>
               {displayData.faction?.toUpperCase()}
             </span>
-                        <h2 className="text-white fw-900 text-uppercase mb-1 shadow-text">{list.title || displayData.customTitle}</h2>
-
-            <div className="text-primary small fw-bold">SUBFACTION: {displayData.subFaction}</div>
+            <h2 className="text-white fw-900 text-uppercase mb-1 shadow-text">{list.title || displayData.customTitle}</h2>
+            <div className="text-white-50 small fw-bold">SUBFACTION: {displayData.subFaction}</div>
           </div>
         </div>
-        <div className="bg-black text-warning py-1 px-3 d-flex justify-content-center align-items-center">
+        <div className="bg-info text-black px-3 py-2 d-flex justify-content-between align-items-center">
+          <span className="fw-900 small">ORDRE DE BATAILLE</span>
           <div className="d-flex align-items-baseline">
-            <span className="fw-900 me-1">{displayData.points || "0"}</span>
+            <span className="fw-900 fs-4 me-1">{displayData.points || "0"}</span>
             <span className="fw-bold small">PTS</span>
           </div>
         </div>
       </div>
 
-      {/* NAVIGATION VUES */}
+      {/* TABS */}
       <div className="d-flex gap-2 mb-4">
         <button className={`flex-fill btn btn-sm rounded-0 fw-bold ${viewMode === 'regiments' ? 'btn-info text-black' : 'btn-outline-secondary text-white'}`} onClick={() => setViewMode("regiments")}>
           [ RÉGIMENTS ]
@@ -164,54 +177,38 @@ export default function ListDetail() {
         </button>
       </div>
 
-      {/* VUE RÉGIMENTS AVEC ICÔNES SPÉCIFIQUES */}
+      {/* LISTE RÉGIMENTS */}
       <div className="row g-3">
         {viewMode === "regiments" ? (
           (displayData.regiments || []).map((reg, rIdx) => (
             <div key={rIdx} className="col-12">
               <div className="bg-black border border-secondary border-opacity-25 p-3 position-relative shadow-sm">
-                <div className="position-absolute top-0 start-0 bg-white text-black px-2 fw-bold" style={{ fontSize: '0.6rem', letterSpacing: '1px' }}>
+                <div className="position-absolute top-0 start-0 bg-white text-black px-2 fw-bold" style={{ fontSize: '0.6rem' }}>
                   RÉGIMENT #{rIdx + 1}
                 </div>
-                
                 <div className="mt-2">
                   {[reg.hero, ...(reg.units || [])].filter(Boolean).map((u, uIdx) => {
-                    const uName = u.name || u.unitName || (typeof u === 'string' ? u : "");
-                    const uInfo = getUnitData(uName, allWarscrolls);
+                    const uInfo = getUnitData(u, allWarscrolls);
                     if (!uInfo) return null;
-
                     const isHero = uIdx === 0;
 
                     return (
                       <div key={uIdx} className="py-2 border-bottom border-secondary border-opacity-10">
                         <Link to={`/my-lists/${list.id}/warscroll/${uInfo.slug}`} className="text-decoration-none d-flex justify-content-between align-items-center">
-                          <span className={`fw-bold text-uppercase ${isHero ? 'text-warning' : 'text-white-50'}`} style={{ fontSize: '0.85rem' }}>
+                          <span className={`fw-bold text-uppercase ${isHero ? 'text-info' : 'text-white-50'}`} style={{ fontSize: '0.85rem' }}>
                             {isHero ? <i className="bi bi-star-fill me-2"></i> : "-- "}{uInfo.displayName}
                           </span>
                           <i className="bi bi-chevron-right text-info small"></i>
                         </Link>
-
-                        {/* AFFICHAGE DES OPTIMISATIONS AVEC ICÔNES DISTINCTES */}
+                        
                         {isHero && reg.heroOptions && reg.heroOptions.length > 0 && (
                           <div className="ms-3 mt-1 d-flex flex-wrap gap-3">
-                            {reg.heroOptions.map((opt, oIdx) => {
-                              // On détermine l'icône : si c'est un trait (souvent en haut de liste) ou artefact
-                              // Pour faire simple, on alterne ou on check si le nom est connu
-                              const isTrait = oIdx === 0; // Souvent le premier importé est le trait
-
-                              return (
-                                <div key={oIdx} className="d-flex align-items-center text-info" style={{ fontSize: '0.75rem' }}>
-                                  {isTrait ? (
-                                    <i className="bi bi-patch-check-fill me-1" title="Trait Héroïque"></i> // Icône Couronne/Badge
-                                  ) : (
-                                    <i className="bi bi-gem me-1" title="Artefact de Pouvoir"></i> // Icône Artefact/Gemme
-                                  )}
-                                  <span className="text-uppercase fw-bold" style={{ fontStyle: 'italic', letterSpacing: '0.5px' }}>
-                                    {opt}
-                                  </span>
-                                </div>
-                              );
-                            })}
+                            {reg.heroOptions.map((opt, oIdx) => (
+                              <div key={oIdx} className="d-flex align-items-center text-warning" style={{ fontSize: '0.75rem' }}>
+                                <i className={oIdx === 0 ? "bi bi-patch-check-fill me-1" : "bi bi-gem me-1"}></i>
+                                <span className="text-uppercase fw-bold" style={{ fontStyle: 'italic' }}>{opt}</span>
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
@@ -222,20 +219,20 @@ export default function ListDetail() {
             </div>
           ))
         ) : (
-          /* VUE UNITÉS COMPILÉES */
           uniqueUnits.map((unit, idx) => (
             <div key={idx} className="col-12 col-md-6">
-              <Link to={`/my-lists/${list.id}/warscroll/${unit.slug}`} className="text-decoration-none bg-black border border-secondary border-opacity-25 p-2 d-flex justify-content-between align-items-center">
-                <span className="fw-bold text-uppercase text-white" style={{ fontSize: '0.85rem' }}>{unit.displayName}</span>
-                <i className="bi bi-chevron-right text-secondary small"></i>
+              <Link to={`/my-lists/${list.id}/warscroll/${unit.slug}`} className="text-decoration-none bg-black border border-secondary border-opacity-25 p-3 d-flex justify-content-between align-items-center">
+                <span className="fw-bold text-uppercase text-info" style={{ fontSize: '0.85rem' }}>{unit.displayName}</span>
+                <i className="bi bi-chevron-right text-info small"></i>
               </Link>
             </div>
           ))
         )}
       </div>
 
-      {/* RESSOURCES (TACTIQUES, SORTS, MFS) */}
+      {/* INFOS ADDITIONNELLES */}
       <div className="row g-3 mt-4">
+        {/* TACTIQUES */}
         <div className="col-12 col-md-4">
            <div className="bg-black border border-danger border-opacity-25 h-100">
             <div className="bg-danger text-white p-1 px-3 fw-bold text-uppercase small">Battle Tactics</div>
@@ -247,6 +244,7 @@ export default function ListDetail() {
           </div>
         </div>
 
+        {/* SORTS */}
         {activeSpellLore.length > 0 && (
           <div className="col-12 col-md-4">
             <div className="bg-black border border-primary border-opacity-25 h-100">
@@ -263,15 +261,16 @@ export default function ListDetail() {
           </div>
         )}
 
+        {/* MANIFESTATIONS (CV DYNAMIQUE ICI) */}
         {factionManifestations.length > 0 && (
           <div className="col-12 col-md-4">
              <div className="bg-black border border-info border-opacity-25 h-100">
-              <div className="bg-info text-black p-1 px-3 fw-bold text-uppercase small">Manifestations: {displayData.manifestationLore}</div>
+              <div className="bg-info text-black p-1 px-3 fw-bold text-uppercase small">Manifestations</div>
               <div className="p-0">
                 {factionManifestations.map((m, idx) => (
                   <Link key={idx} className="text-decoration-none d-flex justify-content-between p-2 px-3 border-bottom border-secondary border-opacity-10" to={`/my-lists/${list.id}/warscroll/${formatSlug(m.name)}`}>
                     <span className="text-white small text-uppercase" style={{fontSize: '0.7rem'}}>{m.name}</span>
-                    <span className="text-info fw-bold small">CV: 7+</span>
+                    <span className="text-info fw-bold small">CV: {m.castingValue}+</span>
                   </Link>
                 ))}
               </div>
@@ -283,7 +282,6 @@ export default function ListDetail() {
       <style>{`
         .fw-900 { font-weight: 900; }
         .shadow-text { text-shadow: 2px 2px 4px #000; }
-        .tracking-tighter { letter-spacing: -1px; }
       `}</style>
     </div>
   );

@@ -3,11 +3,9 @@ export const battleplansData = {
     "Passing Seasons": {
       scoringType: "dynamic",
       customOptions: (round) => {
-        // Détermination de la saison selon le round
         const isGnarlroot = (round === 1 || round === 3 || round === 5);
         const type = isGnarlroot ? "Gnarlroot" : "Oakenbrow";
         
-        // Il n'y a que 2 objectifs Gnarlroot et 2 Oakenbrow sur la carte
         return [
           { id: 'obj_alpha', label: `Contrôler ${type} Alpha`, vp: 5 },
           { id: 'obj_beta', label: `Contrôler ${type} Beta`, vp: 5 }
