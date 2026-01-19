@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import warscrollsData from "../data/warscrolls.json";
+import manifestationsData from "../data/manifestations_detailed.json"; // Importation du JSON
 
 export default function WarscrollDetail() {
   const { category, faction, warscrollSlug } = useParams();
@@ -30,16 +31,32 @@ export default function WarscrollDetail() {
     const allianceData = warscrollsData[catKey] || {};
     
     const factionKey = Object.keys(allianceData).find(
-      (key) => key.toLowerCase().replace(/[\s-]/g, "") === faction.toLowerCase().replace(/[\s-]/g, "")
+      (key) => key.toLowerCase().replace(/[\s-]/g, "") === faction?.toLowerCase().replace(/[\s-]/g, "")
     );
 
-    if (!factionKey) return;
-    setRealFactionName(factionKey);
+    // Recherche de secours si les paramètres URL ne matchent pas
+    let foundWs = null;
+    let actualFactionKey = factionKey;
 
-    const factionUnits = allianceData[factionKey] || [];
-    const foundWs = factionUnits.find((ws) => ws.slug === warscrollSlug);
-    
+    if (factionKey) {
+      foundWs = (allianceData[factionKey] || []).find((ws) => ws.slug === warscrollSlug);
+    }
+
+    if (!foundWs) {
+      Object.keys(warscrollsData).forEach(cat => {
+        if (cat.toLowerCase() === "images") return;
+        Object.keys(warscrollsData[cat]).forEach(fac => {
+          const res = warscrollsData[cat][fac].find(ws => ws.slug === warscrollSlug);
+          if (res) {
+            foundWs = res;
+            actualFactionKey = fac;
+          }
+        });
+      });
+    }
+
     if (!foundWs) return;
+    setRealFactionName(actualFactionKey);
     setWarscroll(foundWs);
 
     const parser = new DOMParser();
@@ -56,7 +73,7 @@ export default function WarscrollDetail() {
       a.parentNode.replaceChild(span, a);
     });
 
-    // Style des badges d'habilité d'arme (RÉDUIT)
+    // Style des badges d'habilité d'arme
     doc.querySelectorAll(".wsWeaponAbility").forEach(el => {
       el.classList.add("badge", "bg-warning", "text-dark", "me-1", "mb-1", "fw-bold");
       el.style.fontSize = "0.6rem"; 
@@ -102,10 +119,18 @@ export default function WarscrollDetail() {
     setCleanHTML(doc.body.innerHTML);
   }, [category, faction, warscrollSlug]);
 
-  if (!warscroll) return <div className="text-white p-5 text-center">Chargement...</div>;
+  if (!warscroll) return <div className="text-white p-5 text-center font-monospace">Chargement...</div>;
+
+  // LOGIQUE BANISH
+  const isManifestation = (() => {
+    const wsName = warscroll.name.toLowerCase();
+    const isGeneric = Object.values(manifestationsData.generics).flat().some(m => m.toLowerCase() === wsName);
+    const isFaction = Object.values(manifestationsData.factions).flat().some(m => m.name.toLowerCase() === wsName);
+    return isGeneric || isFaction;
+  })();
 
   return (
-    <div className="min-vh-100">
+    <div className="min-vh-100 font-monospace">
       <div className="fixed-top w-100 vh-100" style={{ 
           backgroundImage: `linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)), url(/img/banner_${bannerMapping[realFactionName] || 'default'}.webp)`,
           backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed', zIndex: -1
@@ -141,7 +166,12 @@ export default function WarscrollDetail() {
           <ul className="nav nav-pills nav-justified bg-dark bg-opacity-75 rounded-4 p-2 mb-4 shadow border border-secondary border-opacity-25 blur-bg">
             <li className="nav-item text-center text-white"><span className="d-block fs-4 fw-bold">{profile.move}</span><small className="text-secondary text-uppercase" style={{fontSize: '0.6rem'}}>Move</small></li>
             <li className="nav-item text-center text-white border-start border-secondary border-opacity-25"><span className="d-block fs-4 fw-bold">{profile.health}</span><small className="text-secondary text-uppercase" style={{fontSize: '0.6rem'}}>Health</small></li>
-            <li className="nav-item text-center text-white border-start border-secondary border-opacity-25"><span className="d-block fs-4 fw-bold">{profile.control}</span><small className="text-secondary text-uppercase" style={{fontSize: '0.6rem'}}>Control</small></li>
+            <li className="nav-item text-center text-white border-start border-secondary border-opacity-25">
+              <span className="d-block fs-4 fw-bold">{profile.control}</span>
+              <small className="text-secondary text-uppercase" style={{fontSize: '0.6rem'}}>
+                {isManifestation ? "Banish" : "Control"}
+              </small>
+            </li>
             <li className="nav-item text-center text-white border-start border-secondary border-opacity-25"><span className="d-block fs-4 fw-bold save">{profile.save}</span><small className="text-secondary text-uppercase" style={{fontSize: '0.6rem'}}>Save</small></li>
             {profile.ward && profile.ward !== "-" && (
               <li className="nav-item text-center text-white border-start border-secondary border-opacity-25"><span className="d-block fs-4 fw-bold ward">{profile.ward}</span><small className="text-secondary text-uppercase" style={{fontSize: '0.6rem'}}>Ward</small></li>
@@ -164,7 +194,6 @@ export default function WarscrollDetail() {
         .wsAbilityHeader { background: #333; color: #fff; padding: 5px; font-size: 0.7rem; text-transform: uppercase; }
         .wsAbilityCell { padding: 6px; border: 1px solid #dee2e6; font-size: 0.75rem; }
         .wsTable { width: 100%; margin-bottom: 1rem; }
-        /* Réduction globale de la taille des polices du tableau */
         .wsDataCell { padding: 6px 4px; text-align: center; border: 1px solid #dee2e6; font-weight: bold; font-size: 0.7rem !important; }
         .wsHeaderCell { font-size: 0.6rem !important; background: #f8f9fa; text-transform: uppercase; padding: 6px 4px; border: 1px solid #dee2e6; color: #666; }
         .abHeader { font-weight: bold; padding: 5px 0; display: block; text-transform: uppercase; border-bottom: 1px solid rgba(0,0,0,0.1); margin-bottom: 5px; font-size: 0.8rem; }
