@@ -1,164 +1,121 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-// IMPORT DES RÉFÉRENTIELS JSON
-import battleTacticsData from "../data/battletactics.json";
-import enhancementsData from "../data/enhancements_detailed.json";
-import spellsIndex from "../data/spellsIndex.json";
-import manifestationsIndex from "../data/manifestationsIndex.json";
+import lexicon from "../data/lexique_aoe.json";
+import manifestationsDetailed from "../data/manifestations_detailed.json";
 
 export default function ImportList() {
   const [text, setText] = useState("");
+  const [detectedFaction, setDetectedFaction] = useState(null);
   const navigate = useNavigate();
+
+  const clean = (str) => str?.toLowerCase().replace(/[^a-z0-9]/g, "").trim() || "";
+
+  useEffect(() => {
+    if (!text.trim()) {
+      setDetectedFaction(null);
+      return;
+    }
+    const fullClean = clean(text);
+    const found = lexicon.factions.find(f => fullClean.includes(clean(f)));
+    setDetectedFaction(found || null);
+  }, [text]);
 
   const handleImport = () => {
     if (!text.trim()) return;
 
     try {
-      const rawText = text;
-      const lines = text.split("\n").map(l => l.trim());
+      const lines = text.split("\n").map(l => l.trim()).filter(l => l !== "");
+      const fullClean = clean(text);
       
-      let listData = {
-        faction: "Générique",
-        subFaction: "Non définie",
-        spellLore: "Non défini",
-        manifestationLore: "Non défini",
-        battle_tactics: [],
-        regiments: [],
-        points: "0",
-        customTitle: "Ma Liste"
-      };
-
-      // --- 1. DÉTECTION FACTION & SUBFACTION (Via le pipe |) ---
-      const factionLine = lines.find(l => l.includes("|"));
-      if (factionLine) {
-        const parts = factionLine.split("|").map(p => p.trim());
-        // Format: Grand Alliance | Faction | Subfaction
-        if (parts.length >= 3) {
-          listData.faction = parts[1];
-          listData.subFaction = parts[2];
-        } else {
-          listData.faction = parts[0];
-          listData.subFaction = parts[1];
-        }
+      // Extraction intelligente des Battle Tactics via le lexique
+      const tacticsMatch = text.match(/Battle Tactics Cards:\s*(.*)/i);
+      let extractedTactics = [];
+      if (tacticsMatch && tacticsMatch[1]) {
+        const rawLine = tacticsMatch[1].toLowerCase();
+        extractedTactics = (lexicon.battletactics || []).filter(t => 
+          rawLine.includes(t.toLowerCase())
+        );
       }
 
-      // --- 2. DÉTECTION DES BATTLE TACTICS (Scan intégral via JSON) ---
-      battleTacticsData.forEach(tactic => {
-        const regex = new RegExp(`\\b${tactic.name}\\b`, "i");
-        if (regex.test(rawText)) {
-          if (!listData.battle_tactics.includes(tactic.name)) {
-            listData.battle_tactics.push(tactic.name);
-          }
-        }
-      });
+      const allPossibleManifestations = [
+        ...Object.keys(manifestationsDetailed.generics || {}),
+        ...(lexicon.manifestations || [])
+      ];
 
-      // --- 3. DÉTECTION DES LORES (Scan intégral via JSON) ---
-      // Scan des Spell Lores
-      Object.keys(spellsIndex.factions || {}).forEach(fKey => {
-        Object.keys(spellsIndex.factions[fKey]).forEach(loreName => {
-          if (rawText.toLowerCase().includes(loreName.toLowerCase())) {
-            listData.spellLore = loreName;
-          }
-        });
-      });
-      // Scan des Manifestations
-      Object.keys(manifestationsIndex.generics || {}).forEach(mng => {
-        if (rawText.toLowerCase().includes(mng.toLowerCase())) {
-          listData.manifestationLore = mng;
-        }
-      });
+      let listData = {
+        faction: lexicon.factions.find(f => fullClean.includes(clean(f))) || "Inconnue",
+        subFaction: lexicon.sub_factions.find(sf => fullClean.includes(clean(sf))) || "Non définie",
+        spellLore: lexicon.spell_lores.find(sl => fullClean.includes(clean(sl))) || "Non défini",
+        manifestationLore: allPossibleManifestations.find(m => fullClean.includes(clean(m))) || "Non défini",
+        factionTerrain: lexicon.terrains.find(t => fullClean.includes(clean(t))) || "Non défini",
+        battletactics: extractedTactics,
+        regiments: [],
+        points: text.match(/(\d+)\s*\/\s*2000/)?.[1] || "0"
+      };
 
-      // --- 4. ANALYSE DES RÉGIMENTS & OPTIMISATIONS ---
-      let currentRegiment = null;
+      let currentReg = null;
+      let isFirstInReg = false;
 
       lines.forEach((line) => {
         const lowerLine = line.toLowerCase();
+        const cleanLine = clean(line);
 
-        // Points
-        const ptsMatch = line.match(/(\d+)\/(\d+)\s*(pts|points)/i);
-        if (ptsMatch) listData.points = ptsMatch[1];
-
-        // Nouveau Régiment
-        if (lowerLine.includes("regiment") && !lowerLine.includes("battle tactics")) {
-          if (currentRegiment) listData.regiments.push(currentRegiment);
-          currentRegiment = { hero: null, heroOptions: [], units: [] };
+        if (lowerLine.includes("regiment") || lowerLine.includes("renown")) {
+          if (currentReg) listData.regiments.push(currentReg);
+          currentReg = { hero: null, isGeneral: lowerLine.includes("general"), heroOptions: [], units: [] };
+          isFirstInReg = true;
           return;
         }
 
-        // Unités / Héros (avec nettoyage Legion)
-        const unitMatch = line.match(/^(.+?)\s\((\d+)\)$/);
-        if (unitMatch && currentRegiment) {
-          let name = unitMatch[1].replace(/^[•\d+x\s]+/, "").trim();
-          if (name.startsWith("Legion of the First Prince ")) {
-            name = name.replace("Legion of the First Prince ", "").trim();
-          }
+        if (!currentReg) return;
 
-          if (!currentRegiment.hero) {
-            currentRegiment.hero = name;
+        if (line.startsWith("•") || line.startsWith("-") || lowerLine.includes("reinforced")) {
+          if (lowerLine.includes("reinforced")) {
+            if (currentReg.units.length > 0) currentReg.units[currentReg.units.length - 1].reinforced = true;
           } else {
-            currentRegiment.units.push(name);
+            const opt = [...lexicon.traits, ...lexicon.artefacts].find(o => clean(line).includes(clean(o)));
+            if (opt) currentReg.heroOptions.push(opt);
           }
           return;
         }
 
-        // OPTIMISATIONS (Scan via enhancements_detailed.json)
-        // Si la ligne commence par un point, c'est potentiellement un trait ou artefact
-        if (line.startsWith("•") && currentRegiment && currentRegiment.hero) {
-          const checkText = line.replace("•", "").trim().toUpperCase();
-          
-          Object.values(enhancementsData).forEach(fData => {
-            ["heroic_traits", "artefacts"].forEach(cat => {
-              if (fData[cat]) {
-                fData[cat].forEach(enh => {
-                  if (checkText.includes(enh.name.toUpperCase())) {
-                    currentRegiment.heroOptions.push(enh.name);
-                  }
-                });
-              }
-            });
-          });
+        const allPossibleUnits = [...lexicon.heroes, ...lexicon.units];
+        const match = allPossibleUnits.filter(e => cleanLine.includes(clean(e))).sort((a, b) => b.length - a.length)[0];
+
+        if (match) {
+          const isHero = lexicon.heroes.some(h => clean(h) === clean(match));
+          if (isFirstInReg) {
+            currentReg.hero = match;
+            isFirstInReg = false;
+          } else {
+            currentReg.units.push({ name: match, reinforced: lowerLine.includes("reinforced"), type: isHero ? "HERO" : "UNIT" });
+          }
         }
       });
 
-      if (currentRegiment) listData.regiments.push(currentRegiment);
-
-      // --- 5. SAUVEGARDE ---
-      const newId = Date.now().toString();
-      const newList = {
-        id: newId,
-        title: lines[0]?.split("---")[0]?.trim() || "Ma Liste",
-        ...listData,
-        listData: listData // Doublon pour compatibilité avec ton ListDetail
-      };
-
+      if (currentReg) listData.regiments.push(currentReg);
+      const id = Date.now().toString();
       const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
-      localStorage.setItem("warhammer_saved_lists", JSON.stringify([newList, ...saved]));
-      navigate(`/my-lists/${newId}`);
-
-    } catch (err) {
-      console.error(err);
-      alert("Erreur lors de l'analyse Database.");
-    }
+      localStorage.setItem("warhammer_saved_lists", JSON.stringify([{ id, ...listData }, ...saved]));
+      navigate(`/my-lists/${id}`);
+    } catch (e) { alert("Erreur lors de l'analyse."); }
   };
 
   return (
-    <div className="container mt-4 pb-5 font-monospace">
-      <div className="card bg-black border-secondary border-opacity-25 shadow-lg">
-        <div className="card-header bg-black py-3 text-center border-bottom border-secondary border-opacity-25">
-          <h5 className="mb-0 fw-bold text-info text-uppercase">Data-Scanner Intégral</h5>
+    <div className="container mt-4 font-monospace">
+      <div className="card bg-black border-secondary overflow-hidden shadow-lg">
+        <div className="position-relative" style={{ height: '180px', backgroundColor: '#111' }}>
+          {detectedFaction ? (
+            <img src={`/img/banner_${detectedFaction.toLowerCase().replace(/\s+/g, '')}.webp`} className="w-100 h-100 object-fit-cover opacity-75" />
+          ) : (
+            <div className="w-100 h-100 d-flex align-items-center justify-content-center border-bottom border-secondary opacity-25">
+              <h1 className="text-secondary fw-900 m-0" style={{ letterSpacing: '10px' }}>SCANNER</h1>
+            </div>
+          )}
         </div>
         <div className="card-body p-4">
-          <textarea
-            className="form-control bg-black text-white border-secondary border-opacity-25 mb-4 shadow-none"
-            rows="14"
-            placeholder="Collez votre export ici..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          ></textarea>
-          <button className="btn btn-info fw-bold w-100 py-3 rounded-0 text-uppercase" onClick={handleImport}>
-            <i className="bi bi-database-fill-check me-2"></i> Lancer l'analyse croisée
-          </button>
+          <textarea className="form-control bg-dark text-white border-secondary mb-3 shadow-none font-monospace" rows="10" value={text} onChange={e => setText(e.target.value)} placeholder="Collez votre export ici..." />
+          <button className="btn btn-info w-100 fw-bold py-3" onClick={handleImport}>ANALYSER LA LISTE</button>
         </div>
       </div>
     </div>

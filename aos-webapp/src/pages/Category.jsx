@@ -65,7 +65,7 @@ export default function Category() {
           const imagePath = `/factions/images/${imageName}.png`;
 
           return (
-            <div key={faction} className="col-6 col-lg-4">
+            <div key={faction} className="col-6 col-lg-3">
               <Link
                 to={`/category/${categoryKey}/faction/${cleanForUrl(faction)}`}
                 className="card border shadow-lg overflow-hidden position-relative faction-card"

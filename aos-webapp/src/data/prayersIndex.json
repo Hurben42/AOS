@@ -1,0 +1,236 @@
+{
+  "factions": {
+    "helsmiths": {
+      "Prayers of the Scorched Sect": [
+        {
+          "name": "BLACK FLAMES OF HASHUT",
+          "chantingValue": "4"
+        },
+        {
+          "name": "FURNACE BLESSING",
+          "chantingValue": "4"
+        },
+        {
+          "name": "STORM OF OBSIDIAN SHARDS",
+          "chantingValue": "5"
+        }
+      ]
+    },
+    "khorne": {
+      "Blood Blesssings of Khorne": [
+        {
+          "name": "UNCONTROLLABLE RAGE",
+          "chantingValue": "4"
+        },
+        {
+          "name": "BLOOD BOIL",
+          "chantingValue": "4"
+        },
+        {
+          "name": "FINAL ACT OF VIOLENCE",
+          "chantingValue": "4"
+        }
+      ],
+      "Gifts of the Blood God": [
+        {
+          "name": "GOREFLESH",
+          "chantingValue": "3"
+        },
+        {
+          "name": "RUNES OF LOATHING",
+          "chantingValue": "3"
+        },
+        {
+          "name": "GIFT OF APOPLEXY",
+          "chantingValue": "3"
+        }
+      ]
+    },
+    "nurgle": {
+      "Lore of Virulence": [
+        {
+          "name": "GIFT OF DISEASE",
+          "chantingValue": "3"
+        },
+        {
+          "name": "FAVOURED POXES",
+          "chantingValue": "4"
+        },
+        {
+          "name": "BLOATED WITH SICKNESS",
+          "chantingValue": "4"
+        }
+      ],
+      "Bendictions of Sickness": [
+        {
+          "name": "INFECTIOUS SURGE",
+          "chantingValue": "3"
+        },
+        {
+          "name": "AGONISING VOMITING",
+          "chantingValue": "3"
+        },
+        {
+          "name": "FROTHING MUCUS",
+          "chantingValue": "3"
+        }
+      ]
+    },
+    "skaven": {
+      "Noxious Prayers": [
+        {
+          "name": "FILTH-CRUST",
+          "chantingValue": "4"
+        },
+        {
+          "name": "BILE-TORRENT",
+          "chantingValue": "4"
+        },
+        {
+          "name": "RABID-TOUGH",
+          "chantingValue": "5"
+        }
+      ]
+    },
+    "flesheater": {
+      "Rites of Delusion": [
+        {
+          "name": "EXCOMMUNICATION!",
+          "chantingValue": "4"
+        },
+        {
+          "name": "CHARNEL CONVICTION",
+          "chantingValue": "4"
+        },
+        {
+          "name": "THE SUMMERKING’S FAVOUR",
+          "chantingValue": "5"
+        }
+      ]
+    },
+    "ironjawz": {
+      "Warbeats": [
+        {
+          "name": "GET ’EM BEAT",
+          "chantingValue": "4"
+        },
+        {
+          "name": "FIXIN’ BEAT",
+          "chantingValue": "4"
+        },
+        {
+          "name": "KILLA BEAT",
+          "chantingValue": "5"
+        }
+      ]
+    },
+    "ogor": {
+      "Everwinter Prayers": [
+        {
+          "name": "CALL OF THE BLIZZARD",
+          "chantingValue": "4"
+        },
+        {
+          "name": "PULVERISING HAILSTORM",
+          "chantingValue": "5"
+        },
+        {
+          "name": "KEENING GALE",
+          "chantingValue": "4"
+        }
+      ]
+    },
+    "citiesofsigmar": {
+      "Scriptures of Sigmar": [
+        {
+          "name": "WRATH AND RUIN",
+          "chantingValue": "4"
+        },
+        {
+          "name": "UNFALTERING AIM",
+          "chantingValue": "4"
+        },
+        {
+          "name": "OATH AND STEEL",
+          "chantingValue": "5"
+        }
+      ]
+    },
+    "daughtersofkhaine": {
+      "Prayers of the Khainite Cult": [
+        {
+          "name": "SACRAMENT OF BLOOD",
+          "chantingValue": "5"
+        },
+        {
+          "name": "MARTYR’S SACRIFICE",
+          "chantingValue": "4"
+        },
+        {
+          "name": "COVENANT OF THE IRON HEART",
+          "chantingValue": "4"
+        }
+      ],
+      "Bloodshadow Rites": [
+        {
+          "name": "SHADOWSTEP",
+          "chantingValue": "3"
+        },
+        {
+          "name": "SCÁTHSCALE",
+          "chantingValue": "3"
+        },
+        {
+          "name": "EXULTATION OF MURDER",
+          "chantingValue": "4"
+        }
+      ]
+    },
+    "fyreslayers": {
+      "Zharrgrim Blessings": [
+        {
+          "name": "PRAYER OF ASH",
+          "chantingValue": "4"
+        },
+        {
+          "name": "PRAYER OF GRIMNIR’S FURY",
+          "chantingValue": "4"
+        },
+        {
+          "name": "WRATH OF VULCATRIX",
+          "chantingValue": "4"
+        }
+      ],
+      "Vulkyn Gifts": [
+        {
+          "name": "ICHOR OF THE UR-SALAMANDER",
+          "chantingValue": "3"
+        },
+        {
+          "name": "FURY OF VULCATRIX",
+          "chantingValue": "4"
+        },
+        {
+          "name": "BLAZING IMPETUS",
+          "chantingValue": "5"
+        }
+      ]
+    },
+    "stormcast": {
+      "Prayers of the Stormhosts": [
+        {
+          "name": "HEALING STORM",
+          "chantingValue": "4"
+        },
+        {
+          "name": "BLESS WEAPONS",
+          "chantingValue": "6"
+        },
+        {
+          "name": "TRANSLOCATION",
+          "chantingValue": "4"
+        }
+      ]
+    }
+  }
+}
