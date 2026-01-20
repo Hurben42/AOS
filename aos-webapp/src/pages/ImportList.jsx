@@ -27,7 +27,7 @@ export default function ImportList() {
       const lines = text.split("\n").map(l => l.trim()).filter(l => l !== "");
       const fullClean = clean(text);
       
-      // CORRECTION BATTLE TACTICS (Gestion des virgules)
+      // Extraction des Battle Tactics
       const tacticsMatch = text.match(/Battle Tactic Cards:\s*(.*)/i);
       let extractedTactics = [];
       if (tacticsMatch && tacticsMatch[1]) {
@@ -46,8 +46,9 @@ export default function ImportList() {
         faction: lexicon.factions.find(f => fullClean.includes(clean(f))) || "Inconnue",
         subFaction: lexicon.sub_factions.find(sf => fullClean.includes(clean(sf))) || "Non définie",
         spellLore: lexicon.spell_lores.find(sl => fullClean.includes(clean(sl))) || "Non défini",
+        // AJOUT : Extraction du Prayer Lore
+        prayerLore: lexicon.prayer.find(p => fullClean.includes(clean(p))) || "Non défini",
         manifestationLore: allPossibleManifestations.find(m => fullClean.includes(clean(m))) || "Non défini",
-        // CORRECTION TERRAIN (Ignore les points entre parenthèses)
         factionTerrain: lexicon.terrains.find(t => fullClean.includes(clean(t))) || "Non défini",
         battletactics: extractedTactics,
         regiments: [],
