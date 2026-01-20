@@ -27,13 +27,13 @@ export default function ImportList() {
       const lines = text.split("\n").map(l => l.trim()).filter(l => l !== "");
       const fullClean = clean(text);
       
-      // Extraction intelligente des Battle Tactics via le lexique
-      const tacticsMatch = text.match(/Battle Tactics Cards:\s*(.*)/i);
+      // CORRECTION BATTLE TACTICS (Gestion des virgules)
+      const tacticsMatch = text.match(/Battle Tactic Cards:\s*(.*)/i);
       let extractedTactics = [];
       if (tacticsMatch && tacticsMatch[1]) {
-        const rawLine = tacticsMatch[1].toLowerCase();
+        const tacticsLine = tacticsMatch[1].split(",");
         extractedTactics = (lexicon.battletactics || []).filter(t => 
-          rawLine.includes(t.toLowerCase())
+          tacticsLine.some(part => clean(part).includes(clean(t)))
         );
       }
 
@@ -47,10 +47,11 @@ export default function ImportList() {
         subFaction: lexicon.sub_factions.find(sf => fullClean.includes(clean(sf))) || "Non définie",
         spellLore: lexicon.spell_lores.find(sl => fullClean.includes(clean(sl))) || "Non défini",
         manifestationLore: allPossibleManifestations.find(m => fullClean.includes(clean(m))) || "Non défini",
+        // CORRECTION TERRAIN (Ignore les points entre parenthèses)
         factionTerrain: lexicon.terrains.find(t => fullClean.includes(clean(t))) || "Non défini",
         battletactics: extractedTactics,
         regiments: [],
-        points: text.match(/(\d+)\s*\/\s*2000/)?.[1] || "0"
+        points: text.match(/(\d+)\s*\/\s*\d+/)?.[1] || "0"
       };
 
       let currentReg = null;
@@ -97,6 +98,7 @@ export default function ImportList() {
       const id = Date.now().toString();
       const saved = JSON.parse(localStorage.getItem("warhammer_saved_lists") || "[]");
       localStorage.setItem("warhammer_saved_lists", JSON.stringify([{ id, ...listData }, ...saved]));
+      
       navigate(`/my-lists/${id}`);
     } catch (e) { alert("Erreur lors de l'analyse."); }
   };
@@ -113,7 +115,7 @@ export default function ImportList() {
             </div>
           )}
         </div>
-        <div className="card-body p-4">
+        <div className="card-body p-4 text-start">
           <textarea className="form-control bg-dark text-white border-secondary mb-3 shadow-none font-monospace" rows="10" value={text} onChange={e => setText(e.target.value)} placeholder="Collez votre export ici..." />
           <button className="btn btn-info w-100 fw-bold py-3" onClick={handleImport}>ANALYSER LA LISTE</button>
         </div>

@@ -1456,5 +1456,22 @@
     "Wrathful Cycles",
     "Scouting Force",
     "Attuned to Ghyran"
+  ],
+  "prayer": [
+      "Prayers of the Scorched Sect",
+      "Blood Blesssings of Khorne",
+      "Gifts of the Blood God",
+      "Lore of Virulence",
+      "Bendictions of Sickness",
+      "Noxious Prayers",
+      "Rites of Delusion",
+      "Warbeats",
+      "Everwinter Prayers",
+      "Scriptures of Sigmar",
+      "Prayers of the Khainite Cult",
+      "Bloodshadow Rites",
+      "Zharrgrim Blessings",
+      "Vulkyn Gifts",
+      "Prayers of the Stormhosts"
   ]
 }
